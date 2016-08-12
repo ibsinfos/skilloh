@@ -1,0 +1,1 @@
+{if $o.price2 GT "0"}<br /><b>{$langs14}</b>{/if}

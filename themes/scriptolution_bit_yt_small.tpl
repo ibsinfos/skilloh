@@ -1,0 +1,1 @@
+<a class="play" href="#"><img alt="scriptolution" src="{$imageurl}/scriptolution_play.png"></a>

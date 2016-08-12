@@ -1,0 +1,1 @@
+<div class='scriptolution-express'>{$langi0}</div>

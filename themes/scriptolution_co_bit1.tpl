@@ -1,0 +1,1 @@
+<li><a href="{$baseurl}/mycustomorders">{$langcus4}</a></li>
