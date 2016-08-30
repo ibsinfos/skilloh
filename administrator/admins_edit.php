@@ -6,7 +6,7 @@
 |
 |**************************************************************************************************
 |
-| By using this software you agree that you have read and acknowledged our End-User License 
+| By using this software you agree that you have read and acknowledged our End-User License
 | Agreement available at http://www.fiverrscript.com/eula.html and to be bound by it.
 |
 | Copyright (c) FiverrScript.com. All rights reserved.
@@ -16,21 +16,21 @@ include("../include/config.php");
 include_once("../include/functions/import.php");
 verify_login_admin();
 
-$ADMINID = intval(cleanit($_REQUEST['ADMINID']));
+$ADMINID = intval(scriptolution_dotcom_data($_REQUEST['ADMINID']));
 Stemplate::assign('ADMINID',$ADMINID);
 if($_POST['submitform'] == "1")
 {
 	//
 	if($_POST['scriptolutiontoken'] != $_SESSION['scriptolutiontoken'])
 	{
-		$error = "Error: Invalid security token";	
+		$error = "Error: Invalid security token";
 	}
 	else
 	{
-			$username = cleanit($_POST['username']);
-			$password = cleanit($_POST['password']);
-			$email = cleanit($_POST['email']);
-			
+			$username = scriptolution_dotcom_data($_POST['username']);
+			$password = scriptolution_dotcom_data($_POST['password']);
+			$email = scriptolution_dotcom_data($_POST['email']);
+
 			if($ADMINID > 0)
 			{
 				if($username == "")
@@ -43,41 +43,40 @@ if($_POST['submitform'] == "1")
 				}
 				else
 				{
-					$sql="select count(*) as total from administrators WHERE username='".mysql_real_escape_string($username)."' AND ADMINID!='".mysql_real_escape_string($ADMINID)."'";
+					$sql="select count(*) as total from administrators WHERE username='".mysqli_real_escape_string($conn->_connectionID, $username)."' AND ADMINID!='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."'";
 					$executequery = $conn->Execute($sql);
 					$tadmins = $executequery->fields['total'];
-								
+
 					if($tadmins == "0")
-					{ 
-						$sql="select count(*) as total from administrators WHERE email='".mysql_real_escape_string($email)."' AND ADMINID!='".mysql_real_escape_string($ADMINID)."'";
+					{
+						$sql="select count(*) as total from administrators WHERE email='".mysqli_real_escape_string($conn->_connectionID, $email)."' AND ADMINID!='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."'";
 						$executequery = $conn->Execute($sql);
 						$tadmins = $executequery->fields['total'];
-						
+
 						if($tadmins == "0")
 						{
 							$addtosql = "";
 							if ($password != "")
 							{
-								$newpassword = escape($password);
-								$newpassword = md5($newpassword);
-								$addtosql = ", password = '".mysql_real_escape_string($newpassword)."'"; 
+								$newpassword = md5($password);
+								$addtosql = ", password = '".mysqli_real_escape_string($conn->_connectionID, $newpassword)."'";
 							}
-			
-							$sql = "UPDATE administrators set username='".mysql_real_escape_string($username)."', email='".mysql_real_escape_string($email)."' $addtosql WHERE ADMINID='".mysql_real_escape_string($ADMINID)."'";
+
+							$sql = "UPDATE administrators set username='".mysqli_real_escape_string($conn->_connectionID, $username)."', email='".mysqli_real_escape_string($conn->_connectionID, $email)."' $addtosql WHERE ADMINID='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."'";
 							$conn->execute($sql);
 							$message = "Administrator Successfully Edited.";
 							Stemplate::assign('message',$message);
-							
+
 							if($_SESSION['ADMINID'] == $ADMINID)
 							{
 								$_SESSION['ADMINUSERNAME'] = $username;
-								
+
 								if ($password != "")
 								{
 									$_SESSION['ADMINPASSWORD'] = $newpassword;
 								}
 							}
-							
+
 						}
 						else
 						{
@@ -96,7 +95,7 @@ if($_POST['submitform'] == "1")
 
 if($ADMINID > 0)
 {
-	$query = $conn->execute("select * from administrators where ADMINID='".mysql_real_escape_string($ADMINID)."' limit 1");
+	$query = $conn->execute("select * from administrators where ADMINID='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."' limit 1");
 	$admin = $query->getrows();
 	Stemplate::assign('admin', $admin[0]);
 }

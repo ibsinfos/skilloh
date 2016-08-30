@@ -35,7 +35,7 @@
     font-style: normal;
 }
 *{margin:0; padding:0;}
-html,body{float:left;width:100%;height:100%;min-height:100%;position:relative;margin:0px; padding:0px; background:#daf7ff; min-width:1144px;}
+html,body{float:left;width:100%;height:100%;min-height:100%;position:relative;margin:0px; padding:0px; min-width:1144px;}
 a,input{text-decoration:none; outline:none;}
 img{border:none;}
 h1,h2,h3,h4,h5,h6,p,ul,input{padding:0px; margin:0px;}
@@ -82,12 +82,7 @@ h1,h2,h3,h4,h5,h6,p,ul,input{padding:0px; margin:0px;}
 .bannertext p{font-size:12px; text-align:center; font-family:'latolight'; padding-top:8px;}
 .bannertext p a{color:#025b79;}
 .bannertext p a:hover{color:#000;}
-.topnavbg{position:absolute; left:-61px; background:url(../images/scriptolution_topnavbg.png) no-repeat; width:1144px; height:72px; top:308px; }
-.topnavbg ul{list-style:none; padding-left:65px}
-.topnavbg ul li{float:left; font-family:"Myriad Pro", Arial, Helvetica, sans-serif; font-size:16px; color:#4b4b4b; line-height:55px; padding:0 5px;}
-.topnavbg ul li a{color:#4b4b4b; text-transform:uppercase}
-.topnavbg ul li a:hover{color:#38B0D9;}
-.topnavbg.gray { background:url(../images/scriptolution_topnavbg_gray.png) no-repeat; }
+
 .whitebody{width:1010px; margin:auto; margin-top:-22px; background-color:#fff; position:relative}
 .whitebody.gray{background-color:#f7f7f7;}
 .customsongs{padding:25px 17px 35px; position:relative; z-index:5}
@@ -99,7 +94,7 @@ h1,h2,h3,h4,h5,h6,p,ul,input{padding:0px; margin:0px;}
 .songlinks ul li a{color:#4b4b4b; background-color:#fff; width:235px; height:37px; display:block; text-align:center; line-height:37px;}
 .songlinks ul li a:hover{background-color:#38b0d9; color:#fff;}
 .cusongs{padding-left:15px; padding-right:17px; position:relative; z-index:5}
-.cusongtitle{height:39px; background-color:#4b4b4b; -webkit-border-radius:5px; border-radius:5px; padding-left:12px;}
+.cusongtitle{background-color:#333;}
 .cusongtitle h3{color:#fff; font-family:'latoregular'; font-size:22px; line-height:38px; font-weight:normal; float:left}
 .cusongtitle h3 span{color:#4dd0fd;}
 .cusongtitle p{font-family:'latoregular'; font-size:13px; color:#fff; float:left; padding-left:32px; padding-top:6px;}
@@ -197,8 +192,6 @@ span.rated{background-color:#d8a965; position:absolute; left:0px; top:29px; line
 .subdroparrow{position:absolute; right:-9px; top:70px; margin-top:-7px;}
 
 .bodybg{float:left;width:100%;background:url(../images/scriptolution_bodybg.jpg) repeat-x left top; position:relative; }
-.bodyshadow{background:url(../images/scriptolution_shadow.png) repeat-y; width:1306px; position:absolute; left:0px; left:-148px; z-index:0}
-
 .inner-wrapper { display:inline-block; width:970px; margin-top:22px; margin-left:20px; font-family:"Myriad Pro", Arial, Helvetica, sans-serif; position:relative; z-index:999; }
 .whiteBox { float:left; border:1px solid #ddd; background:#fff; padding:10px; border-radius:5px; z-index:90; position:relative; }
 .whiteBox.fullWidth { width:948px; }

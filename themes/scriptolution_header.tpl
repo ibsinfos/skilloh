@@ -7,20 +7,25 @@
 	<meta name="description" content="{if $mdesc ne ""}{$mdesc}{else}{if $pagetitle ne ""}{$pagetitle} - {/if}{if $metadescription ne ""}{$metadescription} - {/if}{$site_name}{/if}">
 	<meta name="keywords" content="{if $mtags ne ""}{$mtags}{else}{if $pagetitle ne ""}{$pagetitle},{/if}{if $metakeywords ne ""}{$metakeywords},{/if}{$site_name}{/if}">   
     <link href="{$baseurl}/css/scriptolution_style_v7.css" media="screen" rel="stylesheet" type="text/css" />  
-    <link href="{$baseurl}/css/scriptolution_countries.php" media="screen" rel="stylesheet" type="text/css" />  
-    <script type="text/javascript">
+    <link href="{$baseurl}/css/scriptolution_countries.php" media="screen" rel="stylesheet" type="text/css" />     
+    <link href="{$baseurl}/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" /> <script type="text/javascript">
     var base_url = "{$baseurl}";
 	</script>
     <link rel="icon" href="{$baseurl}/favicon.ico" />
     <link rel="shortcut icon" href="{$baseurl}/favicon.ico" />
     <meta http-equiv="X-UA-Compatible" content="IE=8" />
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>    
+    
 	<script>
         sQuery = jQuery.noConflict(true);
-    </script>
+    </script>	    
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+    
+    
     <script src="{$baseurl}/js/jquery.customSelect.js"></script>
+    
 	<script src="{$baseurl}/js/scriptolution.js"></script>
     <script src="{$baseurl}/js/scriptolution_notifications.js"></script>
     {if $rtl eq "1"}{include file='scriptolution_rtl.tpl'}{/if}
@@ -55,10 +60,11 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 {/literal}
 {/if}
 <div class="header">
-	<div class="centerwrap relative">
+	<div class="container">
     	<div class="headertop">
         	<div class="scriptolutionmenubutton"><a href="javascript:void();" onclick="scriptolution_newtoggle('scriptolutionmobilenav');"><i class="fa fa-bars"></i></a></div>
-        	<div class="logo"><a href="{$baseurl}/"><img src="{$imageurl}/scriptolution_logo.png" alt="{$site_name}" /></a></div>
+        	<div class="logo"><a href="{$baseurl}/"><img src="{$imageurl}/skillop_logo.png" alt="{$site_name}" /></a></div>
+			
             <div class="search">                
                 <form action="{$baseurl}/search" id="search_form" method="get">
                 <input name="query" type="text" class="textbox scriptolutiontextbox20"/>
@@ -124,8 +130,8 @@ $(""+elementSelector+"").load(""+sourceURL+"");
             {else}
         	<div class="headeright">
             	<ul>
-                	<li><a href="{$baseurl}/">{$lang0}</a></li>
-                    <li><a href="{$baseurl}/login">{$lang2}</a></li>
+                	<!--<li><a href="{$baseurl}/">{$lang0}</a></li>-->
+                    <li><a href="{$baseurl}/login" class="signin">{$lang2}</a></li>
                     <li><a href="{$baseurl}/signup" class="join">{$lang1}</a></li>
                 </ul>
             </div>
@@ -134,7 +140,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
         </div>
     </div>
 	<div class="subnav">
-    	<div class="centerwrap">
+    	<div class="container">
         	<ul>
             	{insert name=get_categories assign=c}
                 {section name=i loop=$c max=10}
@@ -196,7 +202,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
         <a class="scriptolutionfiverrscriptitem" href="{$baseurl}/settings">{$lang31}</a>
         <a class="scriptolutionfiverrscriptitem" href="javascript:loadContent('#loadme', '{$baseurl}/log_out');">{$lang27}</a>
         {else}
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}/">{$lang0}</a>
+        <!--<a class="scriptolutionfiverrscriptitem" href="{$baseurl}/">{$lang0}</a>-->
         <hr>
         <a class="scriptolutionfiverrscriptitem" href="{$baseurl}/login">{$lang2}</a>
         <hr>
@@ -207,19 +213,20 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 {if $scriptolutionhome eq "1"}
 {if $smarty.session.USERID eq ""}
 <div class="banner">
-    <div class="centerwrap relative">
+    <div class="container">
     	<div class="bannertext">
-        	<h3>{$lang21} {$site_name}</h3>
-            <h2>{$lang102}<br />{$lang103}</h2>
+        	<h3>{$lang21}</h3>
+            <h2>{$lang102}</h2>
+            <h4>{$lang103}</h2>
             <div class="find-service">                
                 <form action="{$baseurl}/search" method="get">
-                <input name="query" type="text" class="findbox"/>
+                <input name="query" type="text" class="findbox" placeholder="Find a service: eg. 'Logo Design'"/>
                 <input type="submit" value="{$lang556}" class="findbtn"/>
                 </form>
                 <div class="clear"></div>
             </div>
             <p><a class='inline' href="#inline1" title="{$lang419}">{$lang419}</a></p>
-            <div class="topnavbg"></div>
+           
         </div>
         <div class="scriptolutionmobilecats">
             <div class="btn-list-space">
@@ -262,3 +269,67 @@ $(""+elementSelector+"").load(""+sourceURL+"");
         </div>
 {/if}
 {/if}
+
+<script src="{$baseurl}js/mainmenu.js"></script>
+    
+    <script>
+
+        var $menu = $(".dropdown-menu");
+
+        // jQuery-menu-aim: <meaningful part of the example>
+        // Hook up events to be fired on menu row activation.
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu
+        });
+        // jQuery-menu-aim: </meaningful part of the example>
+
+        // jQuery-menu-aim: the following JS is used to show and hide the submenu
+        // contents. Again, this can be done in any number of ways. jQuery-menu-aim
+        // doesn't care how you do this, it just fires the activate and deactivate
+        // events at the right times so you know when to show and hide your submenus.
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = $menu.outerHeight(),
+                width = $menu.outerWidth();
+
+            // Show the submenu
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            // Keep the currently activated row's highlighted look
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+
+        // Bootstrap's dropdown menus immediately close on document click.
+        // Don't let this event close the menu if a submenu is being clicked.
+        // This event propagation control doesn't belong in the menu-aim plugin
+        // itself because the plugin is agnostic to bootstrap.
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+
+        $(document).click(function() {
+            // Simply hide the submenu on any click. Again, this is just a hacked
+            // together menu/submenu structure to show the use of jQuery-menu-aim.
+            $(".popover").css("display", "none");
+            $("a.maintainHover").removeClass("maintainHover");
+        });
+
+    </script>

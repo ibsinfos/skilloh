@@ -1,8 +1,8 @@
 						{section name=i loop=$posts}
                         {insert name=seo_clean_titles assign=title value=a title=$posts[i].gtitle}                        
                         <div class="newscriptolution {if $smarty.section.i.iteration is even}newscriptolutionnewcolor{/if}">
-                            <div class="newscriptolutionimg">
-                            	<a href="{$baseurl}/{$posts[i].seo|stripslashes}/{$posts[i].PID|stripslashes}/{$title}"><img src="{$purl}/t3/{$posts[i].p1}" alt="{$posts[i].gtitle|stripslashes}" width="162" height="100" />{if $posts[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}</a>
+                            <div class="newscriptolutionimg">                            
+                            	<a href="{$baseurl}/{$posts[i].seo|stripslashes}/{$posts[i].PID|stripslashes}/{$title}"><img src="{$purl}/t3/{$posts[i].p1}" alt="{$posts[i].gtitle|stripslashes}" class="img-responsive" />{if $posts[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}</a>
                             	{if $posts[i].feat eq "1"}<span class="featured">{$lang526}</span>{/if}
                                 {if $posts[i].toprated eq "1"}<span class="rated">{$lang525}</span>{/if}
                                 {if $posts[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}

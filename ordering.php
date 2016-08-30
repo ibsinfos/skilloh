@@ -15,44 +15,30 @@
 include("include/config.php");
 include("include/functions/import.php");
 
-if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSION['USERID']))
-{	
-	$PID = intval(cleanit($_REQUEST['id']));
-	$multi = intval(cleanit($_REQUEST['multi']));
-	if($PID > 0)
-	{
-		$query="INSERT INTO order_items SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($PID)."'";
-		$result=$conn->execute($query);
-		$IID = mysql_insert_id();
-		if($IID > 0)
-		{			
-			$query = "select price, ctp from posts where PID='".mysql_real_escape_string($PID)."'"; 
-			$executequery=$conn->execute($query);
-			$price = $executequery->fields['price'];
-			$ctp = $executequery->fields['ctp'];
-			$total = $price;
-			$totacom = $ctp;
-			
-			if($multi > 1)
-			{
-				$total = $price * $multi;
-				//$totacom = $ctp * $multi;
-				$addmulti = ", multi='".mysql_real_escape_string($multi)."'";
-			}
-			
-			$query="UPDATE order_items SET totalprice='".mysql_real_escape_string($total)."', ctp='".mysql_real_escape_string($totacom)."' $addmulti WHERE IID='".mysql_real_escape_string($IID)."'";
-			$result=$conn->execute($query);
-			
-			header("Location:$config[baseurl]/order?item=".$IID);exit;
-		}
-	}
-	else
-	{
-		header("Location:$config[baseurl]/");exit;
-	}
-}
-else
+scriptolution_dotcom_software("");	
+$PID = intval(scriptolution_dotcom_data($_REQUEST['id']));
+$multi = intval(scriptolution_dotcom_data($_REQUEST['multi']));
+if($PID > 0)
 {
-	header("Location:$config[baseurl]/");exit;
+	$query="INSERT INTO order_items SET USERID='".mysqli_real_escape_string($conn->_connectionID, $SCRIPTOLUTION_ID)."', PID='".mysqli_real_escape_string($conn->_connectionID, $PID)."'";
+	$result=$conn->execute($query);
+	$IID = mysqli_insert_id($conn->_connectionID);
+	if($IID > 0)
+	{					
+		$price = scriptolution_pdb("price", $PID);
+		$ctp = scriptolution_pdb("ctp", $PID);
+		$total = $price;
+		$totacom = $ctp;
+		if($multi > 1)
+		{
+			$total = $price * $multi;
+			$addmulti = ", multi='".mysqli_real_escape_string($conn->_connectionID, $multi)."'";
+		}
+		
+		$query="UPDATE order_items SET totalprice='".mysqli_real_escape_string($conn->_connectionID, $total)."', ctp='".mysqli_real_escape_string($conn->_connectionID, $totacom)."' $addmulti WHERE IID='".mysqli_real_escape_string($conn->_connectionID, $IID)."'";
+		$result=$conn->execute($query);
+		
+		header("Location:$config[baseurl]/order?item=".$IID);exit;
+	}
 }
 ?>

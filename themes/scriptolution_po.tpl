@@ -1,1 +1,1 @@
-<p>Copyright &copy; 2016 {$site_name}<br /></p>
+Copyright &copy; 2015 - 2016 {$site_name}. All Rights Reserved.

@@ -36,6 +36,7 @@
     <script src="{$baseurl}/js/jquery.customSelect.js"></script>
 	<script src="{$baseurl}/js/scriptolution.js"></script>
     <script src="{$baseurl}/js/scriptolution_notifications.js"></script>
+    
     {if $rtl eq "1"}{include file='scriptolution_rtl2.tpl'}{/if}
 </head>
 <body class="inner">

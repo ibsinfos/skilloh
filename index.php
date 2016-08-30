@@ -12,8 +12,8 @@
 | Copyright (c) FiverrScript.com. All rights reserved.
 |**************************************************************************************************/
 $SCRIPTOLUTIONADMINPANEL = "1";
-include("include/config.php");
 include("include/functions/import.php");
+include("include/config.php");
 $thebaseurl = $config['baseurl'];
 
 $skiplaunch = "0";

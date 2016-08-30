@@ -1,9 +1,9 @@
 <div class="bodybg {if $smarty.session.USERID GT "0"}topspace{/if}">
-	<div class="{if $smarty.session.USERID eq ""}bodyshadow{else}inshadow{/if}">
-        <div class="whitebody {if $smarty.session.USERID GT "0"}scriptolutionpaddingtop55{/if}">
+	<div class="{if $smarty.session.USERID eq ""}row bodyshadow {else}inshadow{/if}">
+        <div class="container {if $smarty.session.USERID GT "0"}scriptolutionpaddingtop55{/if}">
             {include file="scriptolution_feat_cats.tpl"}
-            <div class="cusongs" style="padding-top:10px;">
-                <div class="cusongtitle">
+            <div class="cusongs">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cusongtitle">
                     <h3>{$lang109}:</h3>
                     <p>
                         {if $s eq "d" OR $s eq ""}
@@ -40,7 +40,7 @@
                         </script> 
                         &nbsp;&nbsp;&nbsp;
                         {insert name=get_packs value=a assign=packs}
-                        <select onChange="Scriptolution_jumpMenu('parent',this,0)" style="font-size:16px; margin-top:1px; margin-left:2px;border: 1px;padding: 3px;">
+                        <select onChange="Scriptolution_jumpMenu('parent',this,0)" class="filterbyselect">
                         <option value="{$baseurl}">{$lang495}</option>
                         {section name=p loop=$packs}
                         <option value="{$baseurl}?s=o&p={$packs[p].pprice|stripslashes}{if $sdisplay eq "list"}&sdisplay=list{/if}" {if $p eq $packs[p].pprice|stripslashes}selected="selected"{/if}>{if $scriptolution_cur_pos eq "1"}{$packs[p].pprice|stripslashes}{$lang197}{else}{$lang197}{$packs[p].pprice|stripslashes}{/if}</option>
@@ -49,7 +49,7 @@
                         {/if}             
                     </p>
                     
-                    <div class="topright">
+                    <div class="topright pull-right" style="display:none;">
                         {if $sdisplay eq "list"}
                         <a href="{$baseurl}/?page={$currentpage}{$adds}"><img src="{$imageurl}/leftbox_hover.png" /></a>
                         <a href="{$baseurl}/?page={$currentpage}{$adds}&sdisplay=list"><img src="{$imageurl}/rightbox.png" /></a>
@@ -61,16 +61,16 @@
                 
                     <div class="clear"></div>
                 </div>
-                <div class="cusongslist">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cusongslist">
                     {if $sdisplay eq "list"}
                     {include file="scriptolution_bit_list.tpl"}
-                    <div style="padding-bottom:10px;"></div> 
+                     
                     {else}
                     {include file="scriptolution_bit.tpl"}                
                     {/if}
                     <div class="clear"></div>
                 </div>
-                <div align="center">
+                <div align="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">                
                     {if $tpp ne ""}
                     <a href="{$baseurl}/?page={$tpp}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}" class="agreenbutton"><i class="fa fa-chevron-left"></i></a>
                     {/if}
@@ -82,15 +82,20 @@
                 
             </div>
             
-            {include file='index_scriptolutionreq.tpl'}
+            <!--{include file='index_scriptolutionreq.tpl'}-->
             
-            <div class="noteworthy">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 noteworthy">
                 <h2>{$lang529}</h2>
                 {section name=i loop=$scriptolutionrand}
                 {insert name=seo_clean_titles assign=title value=a title=$scriptolutionrand[i].gtitle}
-                <div class="newgirl">
-                    <div class="newgirlimg"><a href="{$baseurl}/{$scriptolutionrand[i].seo|stripslashes}/{$scriptolutionrand[i].PID|stripslashes}/{$title}"><img class="scriptolutionradius3" src="{$purl}/t4/{$scriptolutionrand[i].p1}?{$smarty.now}" alt="{$scriptolutionrand[i].gtitle|stripslashes}" width="134" height="82" />{if $scriptolutionrand[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}</a></div>
-                    <div class="newdetails">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 newgirl">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 newgirlimg z_padding0">
+                    	<a href="{$baseurl}/{$scriptolutionrand[i].seo|stripslashes}/{$scriptolutionrand[i].PID|stripslashes}/{$title}">
+                    		<img class="scriptolutionradius3 img-responsive" src="{$purl}/t4/{$scriptolutionrand[i].p1}?{$smarty.now}" alt="{$scriptolutionrand[i].gtitle|stripslashes}" />
+                    		{if $scriptolutionrand[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}
+                    	</a>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 newdetails">
                         <h3><a href="{$baseurl}/{$scriptolutionrand[i].seo|stripslashes}/{$scriptolutionrand[i].PID|stripslashes}/{$title}">{$lang62} {$scriptolutionrand[i].gtitle|stripslashes|mb_truncate:30:"...":'UTF-8'} {if $scriptolution_cur_pos eq "1"}{$lang589} {$scriptolutionrand[i].price|stripslashes}{$lang197}{else}{$lang63}{$scriptolutionrand[i].price|stripslashes}{/if}</a></h3>
                         <p>{$scriptolutionrand[i].gdesc|stripslashes|html_entity_decode:$smarty.const.ENT_QUOTES:'utf-8'|strip_tags|mb_truncate:100:"...":'UTF-8'} <a href="{$baseurl}/{$scriptolutionrand[i].seo|stripslashes}/{$scriptolutionrand[i].PID|stripslashes}/{$title}">{$lang105}</a></p>
                         <h5>{$lang414} <a href="{$baseurl}/{insert name=get_seo_profile value=a username=$scriptolutionrand[i].username|stripslashes}">{$scriptolutionrand[i].username|stripslashes|truncate:20:"...":true}</a>&nbsp;<span class="country {$scriptolutionrand[i].country}" title="{insert name=country_code_to_country value=a assign=userc code=$scriptolutionrand[i].country}{$userc}"></span></h5>
@@ -99,13 +104,18 @@
                 </div>
                 {/section}
             </div>
-            <div class="noteworthy">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 noteworthy">
                 <h2>{$lang530}</h2>
                 {section name=i loop=$scriptolutionrating}
                 {insert name=seo_clean_titles assign=title value=a title=$scriptolutionrating[i].gtitle}
-                <div class="newgirl">
-                    <div class="newgirlimg"><a href="{$baseurl}/{$scriptolutionrating[i].seo|stripslashes}/{$scriptolutionrating[i].PID|stripslashes}/{$title}"><img class="scriptolutionradius3" src="{$purl}/t4/{$scriptolutionrating[i].p1}?{$smarty.now}" alt="{$scriptolutionrating[i].gtitle|stripslashes}" width="134" height="82" />{if $scriptolutionrating[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}</a></div>
-                    <div class="newdetails">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 newgirl ">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12newgirlimg z_padding0">
+                    	<a href="{$baseurl}/{$scriptolutionrating[i].seo|stripslashes}/{$scriptolutionrating[i].PID|stripslashes}/{$title}">
+                    		<img class="scriptolutionradius3 img-responsive" src="{$purl}/t4/{$scriptolutionrating[i].p1}?{$smarty.now}" alt="{$scriptolutionrating[i].gtitle|stripslashes}"  />
+                    		{if $scriptolutionrating[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if}
+                    	</a>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 newdetails">
                         <h3><a href="{$baseurl}/{$scriptolutionrating[i].seo|stripslashes}/{$scriptolutionrating[i].PID|stripslashes}/{$title}">{$lang62} {$scriptolutionrating[i].gtitle|stripslashes|mb_truncate:30:"...":'UTF-8'} {if $scriptolution_cur_pos eq "1"}{$lang589} {$scriptolutionrating[i].price|stripslashes}{$lang197}{else}{$lang63}{$scriptolutionrating[i].price|stripslashes}{/if}</a></h3>
                         <p>{$scriptolutionrating[i].gdesc|stripslashes|html_entity_decode:$smarty.const.ENT_QUOTES:'utf-8'|strip_tags|mb_truncate:100:"...":'UTF-8'} <a href="{$baseurl}/{$scriptolutionrating[i].seo|stripslashes}/{$scriptolutionrating[i].PID|stripslashes}/{$title}">{$lang105}</a></p>
                         <h5>{$lang414} <a href="{$baseurl}/{insert name=get_seo_profile value=a username=$scriptolutionrating[i].username|stripslashes}">{$scriptolutionrating[i].username|stripslashes|truncate:20:"...":true}</a>&nbsp;<span class="country {$scriptolutionrating[i].country}" title="{insert name=country_code_to_country value=a assign=userc code=$scriptolutionrating[i].country}{$userc}"></span></h5>

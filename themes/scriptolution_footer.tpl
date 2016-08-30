@@ -1,8 +1,12 @@
+<script>
+jQuery('.mega-dropdown').click( function(e) {
+  e.stopPropagation()
+})
+</script>
 <div class="footer">
 	<div class="centerwrap footertop">
-    	<div class="footerbg"></div>
-    	<div class="flogo"><a href="{$baseurl}/"><img src="{$imageurl}/scriptolution_footer_logo.png" alt="scriptolution" /></a></div>
-      	{include file='scriptolution_po.tpl'}
+    	<div class="flogo"><a href="{$baseurl}/"><img src="{$imageurl}/skillop_logo.png" alt="scriptolution" /></a></div>
+      	<!-- {include file='scriptolution_po.tpl'} -->
         <div class="bottomlink">
         	<ul>
             	<li><a href="{$baseurl}/terms_of_service">{$lang253}</a></li>
@@ -17,8 +21,33 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="scriptolutionfooterlang">
+    <!--<div class="scriptolutionfooterlang">
     <center>{include file='lang.tpl'}</center>
+    </div>-->
+	<div class="copyright-engine-footer">
+    	<div class="centerwrap">
+            <div class="row">
+            	<div class="col-md-7">
+					<h5 class="copyright-text">
+					{include file='scriptolution_po.tpl'} 
+					</h5>
+                </div>
+                <div class="bottomlink">
+                    <ul class="socials-link">
+                        <li class="fb">
+                            <a rel="nofollow" href="#">
+                                <i class="fa fa-facebook"></i><span>Our Facebook</span>
+                            </a>
+                        </li>
+                        <li class="tw">
+                            <a rel="nofollow" href="#">
+                                <i class="fa fa-twitter"></i><span>Our Twitter</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

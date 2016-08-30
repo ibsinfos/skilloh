@@ -1,39 +1,29 @@
 {literal}
 <style>
 #inline1 {
-	font-family:"Merriweather Sans", sans-serif;
+	font-family: sans-serif;
 }
 </style>
 {/literal}
 <div class="scriptolutionhowitworks" style='display:none'>
     <div id="inline1" style="padding:10px;">
-        <center><h1>{$lang420}</h1></center>
-        <br />
-        <p>{$lang421}</p>
-        <br />
-        <p>{$lang422}</p>
-        <br />
-        <p>{$lang423}</p>
-        <br />
-        <p>{$lang424}</p>
-        <br />
-        <p>{$lang425}</p>
-        <br />
-        <p>{$lang426}</p>
-        <br /><br />
-        
-        <center><h1>{$lang427}</h1></center>
-        <br />
-        <p>{$lang428}</p>
-        <br />
-        <p>{$lang429}</p>
-        <br />
-        <p>{$lang430}</p>
-        <br />
-        <p>{$lang431}</p>
-        <br />
-        <p>{$lang432}</p>
-        <br />
-        <p>{$lang433}</p>
+        <center><h1 class="how_it_works_heading">{$lang420}</h1></center>
+        <ul class="how_it_works_para">
+			<li>{$lang421}</li>
+			<li>{$lang422}</li>
+			<li>{$lang423}</li>
+			<li>{$lang424}</</li>
+			<li>{$lang425}</li>
+			<li>{$lang426}</li>
+		</ul>
+		<center><h1 class="how_it_works_heading">{$lang427}</h1></center>        
+		<ul class="how_it_works_para">
+			<li>{$lang428}</li>
+			<li>{$lang429}</li>
+			<li>{$lang430}</li>
+			<li>{$lang431}</</li>
+			<li>{$lang432}</li>
+			<li>{$lang433}</li>
+		</ul>
     </div>
 </div>

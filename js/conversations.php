@@ -1,4 +1,4 @@
-<?
+<?php
 include("../include/config.php");
 header('Content-Type: text/javascript');
 ?>

@@ -1,6 +1,6 @@
 {include file="scriptolution_error7.tpl"}
 <div class="bodybg topspace">
-	<div class="tagcloud" style="background:url({$scriptolutioncaturl}/{$scriptolution_bigimage}) no-repeat;">
+	<div class="container tagcloud" style="background:url({$scriptolutioncaturl}/{$scriptolution_bigimage}) no-repeat;">
         <h2>{$cname|stripslashes}</h2>
         <ul>
         	{section name=i loop=$tags max=10}
@@ -8,12 +8,12 @@
             {/section}
         </ul>
     </div>
-	<div class="inshadow">
-		<div class="whitebox">
+	<div class="row bodyshadow  inshadow">
+		<div class="container">
         	
             {include file="cat_scriptolution_responsive.tpl"}
             
-            <div class="leftbar" id="options-by-scriptolution-dotcom">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leftbar" id="options-by-scriptolution-dotcom">
                 <div class="allmusic">
                     <h3>{$lang66}</h3>
                     <ul id="scriptolutiondontshowcats" class="scriptolutionhide">                        
@@ -55,8 +55,8 @@
                 <div class="border"></div>
                 <center>{insert name=get_advertisement AID=2}</center>
             </div>
-            <div class="songslist">
-                <div class="cusongtitle">
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 cusongtitle">
                 	<h3>{$lang109}:</h3>
                     <p>
                         {if $s eq "d" OR $s eq ""}
@@ -93,7 +93,7 @@
                         </script> 
                         &nbsp;&nbsp;&nbsp;
                         {insert name=get_packs value=a assign=packs}
-                        <select onChange="Scriptolution_jumpMenu('parent',this,0)" style="font-size:16px; margin-top:1px; margin-left:2px;border: 1px;padding: 3px;">
+                        <select onChange="Scriptolution_jumpMenu('parent',this,0)" class="filterbyselect">
                         <option value="{$baseurl}">{$lang495}</option>
                         {section name=p loop=$packs}
                         <option value="{$baseurl}/categories/{$cid}?s=o&p={$packs[p].pprice|stripslashes}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}" {if $p eq $packs[p].pprice|stripslashes}selected="selected"{/if}>{if $scriptolution_cur_pos eq "1"}{$packs[p].pprice|stripslashes}{$lang197}{else}{$lang197}{$packs[p].pprice|stripslashes}{/if}</option>
@@ -101,7 +101,7 @@
                         </select>
                         {/if}             
                     </p>
-                    <div class="topright">
+                    <div class="topright pull-right" style="display:none;">
                         {if $sdisplay eq "list"}
                         <a href="{$baseurl}/categories/{$cid}?page={$currentpage}{$adds}"><img src="{$imageurl}/leftbox_hover.png" /></a>
                         <a href="{$baseurl}/categories/{$cid}?page={$currentpage}{$adds}&sdisplay=list"><img src="{$imageurl}/rightbox.png" /></a>
@@ -163,7 +163,7 @@
                 </div>
                 
                 
-                <div class="cusongslist">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cusongslist">
                     {if $sdisplay eq "list"}
                     {include file="scriptolution_bit_list_last3.tpl"}
                     <div style="padding-bottom:10px;"></div> 
@@ -172,7 +172,7 @@
                     {/if}
                     <div class="clear"></div>
                 </div>
-                <div align="center">
+                <div align="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
                     <div class="paging">
                         <div class="p1">
                             <ul>
