@@ -1,1 +1,1 @@
-<a class="scriptolutionfiverrscriptitem" href="{$baseurl}/mycustomorders">{$langcus4}</a>
+<a class="scriptolutionfiverrscriptitem" href="{$baseurl}mycustomorders">{$langcus4}</a>

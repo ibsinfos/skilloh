@@ -1,4 +1,6 @@
+<div class="bodybg topspace">
 <div class='scriptolution_error'>
-<p>{$lang180}</p>
+    <p>{$lang180}</p>
 </div>
 <div style="padding-bottom:500px;"></div>
+</div>

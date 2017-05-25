@@ -23,7 +23,7 @@ if($_REQUEST[delete]=="1")
 	$DRID = intval(cleanit($_REQUEST['RID']));
 	if($DRID > 0)
 	{
-		$sql="DELETE FROM referrals WHERE RID='".mysql_real_escape_string($DRID)."'";
+		$sql="DELETE FROM referrals WHERE RID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DRID)."'";
 		$conn->Execute($sql);
 		$message = "Referral Successfully Deleted.";
 		Stemplate::assign('message',$message);
@@ -96,31 +96,31 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $refd!=
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.RID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.RID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.RID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.RID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.RID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.RID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($refd != "")
 	{
-		$addtosql .= "AND C.username like'%".mysql_real_escape_string($refd)."%'";
+		$addtosql .= "AND C.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $refd)."%'";
 		Stemplate::assign('refd',$refd);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	if($ip != "")
 	{
-		$addtosql .= "AND A.ip like'%".mysql_real_escape_string($ip)."%'";
+		$addtosql .= "AND A.ip like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ip)."%'";
 		Stemplate::assign('ip',$ip);
 	}
 	Stemplate::assign('search',"1");

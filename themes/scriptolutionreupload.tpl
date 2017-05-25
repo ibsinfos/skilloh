@@ -2,7 +2,7 @@
                     $(document).ready(function()
                     {
                         sQuery("#fileuploader").uploadFile({
-                        url:"{$baseurl}/scriptolutionupload.php",
+                        url:"{$baseurl}scriptolutionupload.php",
                         fileName:"fileInput",
                         maxFileCount:1,
                         showDelete: true,					

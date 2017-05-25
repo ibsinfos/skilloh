@@ -155,13 +155,13 @@ if($_REQUEST['jsub'] == "1" && $scriptolution_proceed == "1")
 		{
 			$def_country = "US";	
 		}
-		$query="INSERT INTO members SET email='".mysql_real_escape_string($user_email)."',username='".mysql_real_escape_string($user_username)."', password='".mysql_real_escape_string($md5pass)."', pwd='".mysql_real_escape_string($user_password)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', country='".mysql_real_escape_string($def_country)."'";
+		$query="INSERT INTO members SET email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_email)."',username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."', password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $md5pass)."', pwd='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_password)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', country='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $def_country)."'";
 		$result=$conn->execute($query);
-		$userid = mysql_insert_id();
+		$userid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		
 		if($userid != "" && is_numeric($userid) && $userid > 0)
 		{
-			$query="SELECT USERID,email,username,verified from members WHERE USERID='".mysql_real_escape_string($userid)."'";
+			$query="SELECT USERID,email,username,verified from members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid)."'";
 			$result=$conn->execute($query);
 			
 			$SUSERID = $result->fields['USERID'];
@@ -175,9 +175,9 @@ if($_REQUEST['jsub'] == "1" && $scriptolution_proceed == "1")
 			
 			// Generate Verify Code Begin
 			$verifycode = generateCode(5).time();
-			$query = "INSERT INTO members_verifycode SET USERID='".mysql_real_escape_string($SUSERID)."', code='$verifycode'";
+			$query = "INSERT INTO members_verifycode SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SUSERID)."', code='$verifycode'";
             $conn->execute($query);
-			if(mysql_affected_rows()>=1)
+			if(mysqli_affected_rows($GLOBALS["___mysqli_ston"])>=1)
 			{
 				$proceedtoemail = true;
 			}
@@ -193,11 +193,65 @@ if($_REQUEST['jsub'] == "1" && $scriptolution_proceed == "1")
                 $sendto = $SEMAIL;
                 $sendername = $config['site_name'];
                 $from = $config['site_email'];
-                $subject = $lang['21']." ".$sendername;
-                $sendmailbody = stripslashes($_SESSION['USERNAME']).",<br><br>";
+                $subject = "Activate account: ".$sendername;
+                
+                $url = $config['baseurl']."/confirmemail?c=".$verifycode;
+                
+                $sendmailbody = "<div style='width:100%; background: #f2f2f2; line-height: 1.5;'>
+    <table style='width: 80%; margin: 0 auto; border: 0; padding: 5% 0;'>
+        <tbody>
+            <tr style='background-color: #000; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;'>
+                <td style='text-align: center; padding: 10px; padding-bottom: 10px;' align='center' valign='top '>
+                    <a target='_blank' href='http://skilop.com'><img src='http://skilop.com/themes/skilOp/images/logo-white.png' alt='SkilOp'></a>
+                </td>
+            </tr>
+            <tr style='background:#fafafa; text-align: left;'>
+                <td style='padding: 15px 30px; text-align: left; font-size: 17px; line-height:1.5;'>
+                    <h4 style='color: #666; font-size: 19px; line-height: 1.5; font-weight: 700; margin:15px 0; padding: 0;'>Hello ".$_SESSION['USERNAME'].",</h4>
+                    <p style='color: #888; font-size: 17px; line-height: 1.5; margin: 15px 0 20px; padding: 0;'>We are so thrilled and can't wait to have you on board in our digital marketplace!!!
+                    </p>
+                    <p style='color: #888; font-size: 17px; line-height: 1.5; margin: 0px; padding: 0;'>To activate your account please click on the below button. </p>
+					<p style='color: #888; font-size: 17px; line-height: 1.5; margin: 15px 0 20px; padding: 0;text-align:center'><a href='".$url."' style='font-size: 14px;text-transform: uppercase;  border-radius: 3px;padding: 7px 15px;border: none;background: #10a2ef;color: #fff;box-shadow: 1px 0px 5px rgba(16, 162, 239, 0.4);text-decoration:none;'>Activate your account</a></p>
+                    <p style='color: #888; font-size: 17px; line-height: 1.5; margin: 15px 0 20px; padding: 0;'>If the button does not work, copy & paste the below link into your web browser. </p>
+					
+					
+					<p style='color: #888; font-size: 17px; line-height: 1.5; margin: 0px; padding: 0;'><a href='".$url."'>".$url."</a></p>
+                    <p style='color: #888; font-size:17px; line-height:1.5;text-align: left; padding: 0;'>
+                        <strong style='color: #000; font-weight:bold; font-size:17px; line-height:1.5; '>Thanks,</strong>
+                        <br>
+                        <small style='color: #888; font-weight: 400; font-size: 17px; line-height: 1.5;'>Team Skilop</small>
+                    </p>
+                </td>
+            </tr>
+            <tr style='background:#fff; text-align: left;border-top:2px solid;'>
+                <td style='color: #888; text-align: left; padding: 16px;'>
+                    <p style='width:50%; float:left;'>
+                        <strong style='color: #000; font-weight:bold;font-size: 16px;line-height: 1.5;'>Skilop</strong>
+                        <br>
+                        <small style='color: #888; font-size: 16px; font-weight: 400; line-height: 1.5;'>No.3, 7th Cross Rd, 19th Cross,<br/>NS Palya, BTM Layout Stage 2,<br/>Bengaluru, Karnataka 560076.</small>
+                    </p>
+                    <p style='width:50%; float:left; text-align: right'>
+                        <a target=' _blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/fb_logo.png' alt='Facebook ' title='Follow us on Facebook '></a>
+
+                        <a target='_blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/instagram_logo.png' alt='Instagram ' title='Follow us on Instagram '></a>
+
+                        <a target='_blank ' href='#'><img style='padding:4px ' src='http://skilop.com/email_images/linkedin_logo.png' alt='linkedin ' title='Follow us on linkedin '></a>
+
+                        <a target='_blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/Twitter_Logo.png' alt='Twitter ' title='Follow us on Twitter '></a>
+
+                        <a target='_blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/gplus.png' alt='Google+ ' title='Follow us on Google+ '></a>
+                    </p>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>";
+                
+              /*  $sendmailbody = stripslashes($_SESSION['USERNAME']).",<br><br>";
 				$sendmailbody .= $lang['22']."<br>";
 				$sendmailbody .= "<a href=".$config['baseurl']."/confirmemail?c=$verifycode>".$config['baseurl']."/confirmemail?c=$verifycode</a><br><br>";
-				$sendmailbody .= $lang['23'].",<br>".stripslashes($sendername);
+				$sendmailbody .= $lang['23'].",<br>".stripslashes($sendername);*/
                 mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="");
 			}
 			// Send Welcome E-Mail End
@@ -207,7 +261,7 @@ if($_REQUEST['jsub'] == "1" && $scriptolution_proceed == "1")
 				$ref_price = cleanit($config['ref_price']);
 				if($ref > 0)
 				{
-					$query = "INSERT INTO referrals SET USERID='".mysql_real_escape_string($ref)."', REFERRED='".mysql_real_escape_string($SUSERID)."', money='".mysql_real_escape_string($ref_price)."', time_added='".time()."', ip='".$_SERVER['REMOTE_ADDR']."'";
+					$query = "INSERT INTO referrals SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ref)."', REFERRED='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SUSERID)."', money='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ref_price)."', time_added='".time()."', ip='".$_SERVER['REMOTE_ADDR']."'";
             		$conn->execute($query);	
 				}
 			}

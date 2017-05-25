@@ -32,9 +32,10 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			STemplate::assign('aboutid',$aboutid);
 		}
 		$u = cleanit($_REQUEST['u']);
+		STemplate::assign('username',$u);
 		if($u != "")
 		{
-			$query="SELECT username, USERID FROM members WHERE username='".mysql_real_escape_string($u)."' limit 1";
+			$query="SELECT username, USERID FROM members WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $u)."' limit 1";
 			$results=$conn->execute($query);
 			$u = $results->getrows();
 			STemplate::assign('u',$u[0]);
@@ -46,7 +47,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				$pagetitle = $lang['235']." ".$u[0]['username'];
 				STemplate::assign('pagetitle',$pagetitle);
 				
-				$query="SELECT DISTINCT A.username AS mto, C.username AS mfrom, B.* FROM members A, inbox B, members C WHERE A.USERID=B.MSGTO AND C.USERID=B.MSGFROM AND ((B.MSGTO='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.MSGFROM='".mysql_real_escape_string($UID)."') OR (B.MSGTO='".mysql_real_escape_string($UID)."' AND B.MSGFROM='".mysql_real_escape_string($_SESSION['USERID'])."')) order by B.MID asc";
+				$query="SELECT DISTINCT A.username AS mto, C.username AS mfrom, B.* FROM members A, inbox B, members C WHERE A.USERID=B.MSGTO AND C.USERID=B.MSGFROM AND ((B.MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."') OR (B.MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' AND B.MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."')) order by B.MID asc";
 				$results=$conn->execute($query);
 				$m = $results->getrows();
 				STemplate::assign('m',$m);

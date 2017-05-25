@@ -18,7 +18,7 @@ sQuery(document).ready(function() {
 			sQuery(".dropdown dd ul").hide();
 	});		
 	sQuery('.customDropdown').customSelect();
-	sQuery('.order-extras').hide();
+/*	sQuery('.order-extras').hide();
 	sQuery(".hoverMe").on('mouseenter',function() {
 		sQuery('.order-extras').show();
 		sQuery('.order-extras').addClass('open');
@@ -34,7 +34,7 @@ sQuery(document).ready(function() {
 	sQuery(".order-extras").on('mouseleave',function() {
 		sQuery('.order-extras').hide();
 		sQuery('.order-extras').removeClass('open');
-	});
+	});*/
 	sQuery('.contactUser').hide();
 	sQuery(".contactPopup").on('click',function() {
 		sQuery('.contactUser').fadeIn();

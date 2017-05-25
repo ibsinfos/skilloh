@@ -24,12 +24,12 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 	{
 		if($do == "add")
 		{
-			$query="INSERT INTO bookmarks SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($BID)."', time_added='".time()."'";
+			$query="INSERT INTO bookmarks SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BID)."', time_added='".time()."'";
 			$result=$conn->execute($query);
 		}
 		elseif($do == "rem")
 		{
-			$query="DELETE FROM bookmarks WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND PID='".mysql_real_escape_string($BID)."'";
+			$query="DELETE FROM bookmarks WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BID)."'";
 			$result=$conn->execute($query);
 		}
 	}

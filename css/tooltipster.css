@@ -5,7 +5,6 @@
 	color: #666666;
 }
 .tooltipster-light .tooltipster-content {
-	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 16px;
 	padding: 8px 10px;
@@ -18,7 +17,6 @@
 	color: #ffffff;
 }
 .tooltipster-scriptolution .tooltipster-content {
-	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 16px;
 	padding: 8px 10px;
@@ -34,7 +32,6 @@
 
 /* Use this next selector to style things like font-size and line-height: */
 .tooltipster-default .tooltipster-content {
-	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 16px;
 	padding: 8px 10px;

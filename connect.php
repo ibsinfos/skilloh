@@ -46,7 +46,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		if($error == "")
 		{
 			$SID = intval($_SESSION['USERID']);
-			$query="UPDATE members SET username='".mysql_real_escape_string($user_username)."' WHERE USERID='".mysql_real_escape_string($SID)."' and status='1'";
+			$query="UPDATE members SET username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' and status='1'";
 			$result=$conn->execute($query);
 			$_SESSION['USERNAME']=$user_username;
 			header("Location:$config[baseurl]/");exit;

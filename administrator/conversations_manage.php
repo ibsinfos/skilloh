@@ -22,7 +22,7 @@ if($_REQUEST['delete']=="1")
 	$DMID = intval(cleanit($_REQUEST['DMID']));
 	if($DMID > 0)
 	{
-		$sql="DELETE FROM inbox WHERE MID='".mysql_real_escape_string($DMID)."'";
+		$sql="DELETE FROM inbox WHERE MID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DMID)."'";
 		$conn->Execute($sql);
 	}
 	$message = "Message Successfully Deleted.";
@@ -75,31 +75,31 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $msgfro
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.MID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.MID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.MID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.MID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.MID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.MID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($msgfrom != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($msgfrom)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msgfrom)."%'";
 		Stemplate::assign('msgfrom',$msgfrom);
 	}
 	if($msgto != "")
 	{
-		$addtosql .= "AND C.username like'%".mysql_real_escape_string($msgto)."%'";
+		$addtosql .= "AND C.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msgto)."%'";
 		Stemplate::assign('msgfrom',$msgfrom);
 	}
 	if($msg != "")
 	{
-		$addtosql .= "AND A.message like'%".mysql_real_escape_string($msg)."%'";
+		$addtosql .= "AND A.message like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msg)."%'";
 		Stemplate::assign('msg',$msg);
 	}
 	Stemplate::assign('search',"1");

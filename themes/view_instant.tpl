@@ -1,4 +1,4 @@
-					<li>
-						<i class="icon-clock"></i>
-						<span class="big">{$langi0|upper}</span>
-					</li>
+<li>
+    <span><i class="fa fa-calendar"></i>{$langi3}</span>
+    <div class="total-number time-delivery-label">0 day(s)</div>
+ </li>

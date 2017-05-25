@@ -1,75 +1,55 @@
-{include file="scriptolution_error7.tpl"}                                
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop30 scriptolutionwidth842">
-		<div class="inner-wrapper scriptolutionwidth842 scriptolutioneditpages">
-			<div class="left-side scriptolutionwidth842" style="margin-top: 10px !important;">
+<div class="bodybg topspace">
+{include file="scriptolution_error7.tpl"} 
+	<div class="container scriptolutionpaddingtop30">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 scriptolutioneditpages">
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             	
-				<div class="whiteBox twoHalfs padding0 noborder scriptolutionwidth800">
                     <div id="scriptolutionPostForm"> 
-                        <form action="{$baseurl}/settings" enctype="multipart/form-data" method="post">
-
-                            <div class="scriptolutionpadding20">
-                            	<h1>{$lang31}</h1>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 card_design">
+                        <form action="{$baseurl}settings" enctype="multipart/form-data" method="post">
+                            
+                            	<h1 class="setting_title">{$lang31}</h1>
                                 <div class="form-entry">
                                 	{if $enable_levels eq "1"}
-                                    <a href="{$baseurl}/levels" style="font-size:18px; color: #45b5dc;">{$lang499} {$p.level|stripslashes}</a>
-                                    <div class="scriptolutionclear"></div>
+                                    	<a href="{$baseurl}levels" style="font-size:18px; color: #45b5dc;">{$lang499} {$p.level|stripslashes}</a>
+                                    	<div class="scriptolutionclear"></div>
                                     {/if}
                                     
-                            		{$smarty.session.USERNAME|stripslashes}: {$lang160}: 
-                                	<a style="color: #45b5dc;" href="{$baseurl}/{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}">{$baseurl}/{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}</a>
+                            		<strong>{$smarty.session.USERNAME|stripslashes}</strong>: {$lang160}: 
+                                	<a style="color: #45b5dc;" href="{$baseurl}{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}">{$baseurl}{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}</a>
                                 </div>
                                 <div class="scriptolutionclear"></div>
                                 
-                                
-                                
-                                 <div class="form-entry">
-                                  	<div class="column-l">
-                                      <label class="editgigformtitle" for="fname">{$lang161}</label>
-                                    </div>
-                                    <div class="column-r">
-                                    	<input class="text" id="fname" name="fname" size="30" type="text" value="{$p.fullname|stripslashes}" />
-                                    </div>
+                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+	                                 {insert name=get_member_profilepicture assign=profilepicture value=var USERID=$smarty.session.USERID}
+	                                  <div class="form-entry col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	                                  		<div class="column-l">
+	                                          <label class="editgigformtitle">{$lang164}</label>
+	                                          <br />
+	                                          <img src="{$membersprofilepicurl}/{$profilepicture}?{$smarty.now}" />
+	                                        </div>
+	                                        <div class="column-r">
+	                                          <div class="image-info">
+	                                            <input id="gphoto" name="gphoto" size="30" type="file" class="text" />
+	                                            <ul class="image-tip">
+	                                              <li>{$lang86}</li>
+	                                            </ul>
+	                                          </div>
+	                                        </div>
+	                                  </div>	                                  
                                   </div>
-                              	  <div class="scriptolutionclear"></div>
                                   
-                                  <div class="form-entry">
-                                  	<div class="column-l">
-                                      <label class="editgigformtitle" for="email">{$lang4}</label>
-                                    </div>
-                                    <div class="column-r">
-                                    	<input class="text" id="email" name="email" size="30" type="text" value="{$p.email|stripslashes}" />
-                                    	{if $smarty.session.VERIFIED eq "0"}<div style="clear:both"></div> <label>&nbsp;</label><a style="color: #45b5dc;" href="{$baseurl}/resendconfirmation.php">{$lang480}</a>{/if}
-                                    </div>
-                                  </div>
-                              	  <div class="scriptolutionclear"></div>
-                                  
-                                  
-                                  {if $enable_paypal eq "1"}
-                                  <div class="form-entry">
-                                  	<div class="column-l">
-                                      <label class="editgigformtitle" for="paypal">{$lang162}</label>
-                                    </div>
-                                    <div class="column-r">
-                                    	<input class="text" id="paypal" name="paypal" size="30" type="text" value="{$p.pemail|stripslashes}" />
-                                    </div>
-                                  </div>
-                              	  <div class="scriptolutionclear"></div>
-                                  {/if}
-                                  {if $enable_alertpay eq "1"}
-                                  <div class="form-entry">
-                                  	<div class="column-l">
-                                      <label class="editgigformtitle" for="alertpay">{$lang452}</label>
-                                    </div>
-                                    <div class="column-r">
-                                    	<input class="text" id="alertpay" name="alertpay" size="30" type="text" value="{$p.aemail|stripslashes}" />
-                                    </div>
-                                  </div>
-                              	  <div class="scriptolutionclear"></div>
-                                  {/if}
-
-                                <div class="form-entry">
-                                    <div class="column-l">
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+	                                 <div class="form-entry col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                                  	<div class="column-l">
+	                                      <label class="editgigformtitle" for="fname">{$lang161}</label>
+	                                    </div>
+	                                    <div class="column-r">
+	                                    	<input class="text" id="fname" name="fname" size="30" type="text" value="{$p.fullname|stripslashes}" />
+	                                    </div>
+	                                  </div>
+	                                  <div class="form-entry col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                                  	<div class="column-l">
                                       <label class="editgigformtitle" for="country">{$lang467}</label>
                                     </div>
                                     <div class="column-r">
@@ -320,116 +300,237 @@
                                     <option  {if $p.country eq "ZW"}selected{/if} value="ZW">Zimbabwe</option>
                                     </select>
                                     </div>
+	                                  </div>
+	                                  
                                   </div>
-                              	  <div class="scriptolutionclear"></div>
+                                  
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+	                                 <div class="form-entry col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                                  	<div class="column-l">
+	                                      <label class="editgigformtitle" for="email">{$lang4}</label>
+	                                    </div>
+	                                    <div class="column-r">
+	                                    	<input class="text" id="email" name="email" size="30" type="text" value="{$p.email|stripslashes}" />
+	                                    	{if $smarty.session.VERIFIED eq "0"}<div style="clear:both"></div> <label>&nbsp;</label><a style="color: #45b5dc;" href="{$baseurl}resendconfirmation.php">{$lang480}</a>{/if}
+	                                    </div>
+	                                  </div>
+	                                  
+	                                  <div class="form-entry col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                                  	<div class="column-l">
+	                                      <label class="editgigformtitle" for="phone">{$lang668}</label>
+	                                    </div>
+	                                    <div class="column-r">
+	                                    	<input class="text" id="phone" name="phone" size="10" type="text" value="{$p.phone|stripslashes}" />
+	                                     </div>
+	                                  </div>
+	                                  
+	                                <!--  {if $enable_paypal eq "1"}
+		                                  <div class="form-entry col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		                                  	<div class="column-l">
+		                                      <label class="editgigformtitle" for="paypal">{$lang162}</label>
+		                                    </div>
+		                                    <div class="column-r">
+		                                    	<input class="text" id="paypal" name="paypal" size="30" type="text" value="{$p.pemail|stripslashes}" />
+		                                    </div>
+		                                  </div>
+		                              	  <div class="scriptolutionclear"></div>
+		                               {/if}-->
+		                                  {if $enable_alertpay eq "1"}
+		                                  <div class="form-entry col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		                                  	<div class="column-l">
+		                                      <label class="editgigformtitle" for="alertpay">{$lang452}</label>
+		                                    </div>
+		                                    <div class="column-r">
+		                                    	<input class="text" id="alertpay" name="alertpay" size="30" type="text" value="{$p.aemail|stripslashes}" />
+		                                    </div>
+		                                  </div>
+		                              	  <div class="scriptolutionclear"></div>
+		                               {/if}
+                                  </div>
+                                  
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+                                  	<div class="form-entry col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	                                    <div class="column-l">
+	                                      <label class="editgigformtitle" for="scriptolutionuserslogan">{$lang592}</label>
+	                                    </div>
+	                                    <div class="column-r">
+	                                      <input class="text" id="scriptolutionuserslogan" name="scriptolutionuserslogan" size="30" type="text" value="{$p.scriptolutionuserslogan|stripslashes}" />
+	                                    </div>
+	                                  </div>
+                                  </div>
+                                  
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+                              		<div class="form-entry col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	                                    <div class="column-l">
+	                                      <label class="editgigformtitle" for="details">{$lang163}</label>
+	                                    </div>
+	                                    <div class="column-r">
+	                                      <textarea class="text" cols="74" id="details" name="details" rows="6">{$p.description|stripslashes}</textarea>
+	                                    </div>
+	                                  </div>
+                                  </div>
+                                  
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+                                  	<div class="form-entry col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	                                    <div class="column-l">
+	                                      <label class="editgigformtitle" for="scriptolutionbankinfo">{$langl17}</label>
+	                                    </div>
+	                                    <div class="column-r">
+	                                      <textarea class="text" cols="74" id="scriptolutionbankinfo" name="scriptolutionbankinfo" rows="6">{$p.scriptolutionbankinfo|stripslashes}</textarea>
+	                                    </div>
+	                                  </div>
+                                  </div>                            
+                              
 
-                                  <div class="form-entry">
-                                    <div class="column-l">
-                                      <label class="editgigformtitle" for="details">{$lang163}</label>
-                                    </div>
-                                    <div class="column-r">
-                                      <textarea class="text" cols="74" id="details" name="details" rows="6">{$p.description|stripslashes}</textarea>
-                                    </div>
-                                  </div>
-                              	  <div class="scriptolutionclear"></div>
-
-                                  <div class="form-entry">
-                                    <div class="column-l">
-                                      <label class="editgigformtitle" for="scriptolutionuserslogan">{$lang592}</label>
-                                    </div>
-                                    <div class="column-r">
-                                      <input class="text" id="scriptolutionuserslogan" name="scriptolutionuserslogan" size="30" type="text" value="{$p.scriptolutionuserslogan|stripslashes}" />
-                                    </div>
-                                  </div>
-                                  <div class="scriptolutionclear"></div>
-                                  
-                                  
-                                  <div class="form-entry">
-                                    <div class="column-l">
-                                      <label class="editgigformtitle" for="scriptolutionbankinfo">{$langl17}</label>
-                                    </div>
-                                    <div class="column-r">
-                                      <textarea class="text" cols="74" id="scriptolutionbankinfo" name="scriptolutionbankinfo" rows="6">{$p.scriptolutionbankinfo|stripslashes}</textarea>
-                                    </div>
-                                  </div>
-                              	  <div class="scriptolutionclear"></div>
-                                  
-                                  
-                                  {insert name=get_member_profilepicture assign=profilepicture value=var USERID=$smarty.session.USERID}
-                                  <div class="form-entry">
-                                  		<div class="column-l">
-                                          <label class="editgigformtitle">{$lang164}</label>
-                                          <br />
-                                          <img src="{$membersprofilepicurl}/{$profilepicture}?{$smarty.now}" />
-                                        </div>
-                                        <div class="column-r">
-                                          <div class="image-info">
-                                            <input id="gphoto" name="gphoto" size="30" type="file" class="text" />
-                                            <ul class="image-tip">
-                                              <li>{$lang86}</li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                  </div>
-                              	  <div class="scriptolutionclear"></div>                                
-                              </div>
-
-                            <div class="row form-entry scriptolutionpadding20" align="center">
+                            <div class="row form-entry" align="center">
                                 <input type="submit" value="{$lang169}" class="scriptolutionbluebutton" />
                                 <input type="hidden" name="subform" value="1" />
                                 <input type="hidden" name="scriptolutiontoken" value="{$scriptolutiontoken}" />
                             </div>
                         </form>
+                        </div>
+                      </div> 
+                      </div>      
                             
-                            
-                            
-                            
-                            <form action="{$baseurl}/settings" class="reset-form" id="edit_pass_{$smarty.session.USERID}" method="post">
-                            <div class="scriptolutionpadding20">
-                            	<h1>{$lang165}</h1>
-                				<div class="scriptolutionclear"></div>
-                                <div class="form-entry1">
-                                    
-                                </div>
-                                
-                                <div class="form-entry">
-                                    <div class="column-l">
-                                      <label class="editgigformtitle" for="pass">{$lang166}</label>
-                                    </div>
-                                    <div class="column-r">
-                                      <input class="text" id="pass" name="pass" size="30" type="password" />
-                                    </div>
-                                  </div>
-                                  <div class="scriptolutionclear"></div>
-                                  
-                                  <div class="form-entry">
-                                    <div class="column-l">
-                                      <label class="editgigformtitle" for="password">{$lang167}</label>
-                                    </div>
-                                    <div class="column-r">
-                                      <input class="text" id="pass2" name="pass2" size="30" type="password" />
-                                    </div>
-                                  </div>
-                                  <div class="scriptolutionclear"></div>
-                                
-                            </div>
-                            <div class="row form-entry scriptolutionpadding20" align="center">
-                                <input type="submit" value="{$lang168}" class="scriptolutionbluebutton" />
-                            </div>
-                            <input type="hidden" name="subpass" value="1" />
-                            <input type="hidden" name="scriptolutiontoken" value="{$scriptolutiontoken}" />
-                        	</form>   
-                    </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            	
+                    		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 card_design" id="scriptolutionPostForm"> 
+									<form action="{$baseurl}settings" class="reset-form" id="edit_pass_{$smarty.session.USERID}" method="post">
+									
+										<h1 class="setting_title">{$lang165}</h1>
+										<div class="scriptolutionclear"></div>
+										<div class="form-entry1">
+											
+										</div>
+										
+										<div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="pass">{$lang166}</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass" name="pass" size="30" type="password" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">{$lang167}</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="password" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+									
+										<div class="row form-entry" align="center">
+											<input type="submit" value="{$lang168}" class="scriptolutionbluebutton" />
+										</div>
+										<input type="hidden" name="subpass" value="1" />
+										<input type="hidden" name="scriptolutiontoken" value="{$scriptolutiontoken}" />
+									</form>  
+								</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="margin:20px auto;"></div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 card_design" id="scriptolutionPostForm">
+									<form action="{$baseurl}settings" class="reset-form" id="edit_pass_{$smarty.session.USERID}" method="post">
+									
+										<h1 class="setting_title">Bank Detail</h1>
+										<div class="scriptolutionclear"></div>
+										<div class="form-entry1">
+											
+										</div>
+										
+										<div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="pass">Payee Name</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass" name="pass" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Payee Account #</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Confirm Payee Account #</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Payee Bank IFSC Code</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Payee Bank Name</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Payee Branch Name</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Payee Bank State</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+										  
+										  <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="password">Payee Bank City</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											</div>
+										  </div>
+										  <div class="scriptolutionclear"></div>
+									
+										<div class="row form-entry" align="center">
+											<input type="submit" value="{$lang168}" class="scriptolutionbluebutton" />
+										</div>
+										<input type="hidden" name="subpass" value="1" />
+										<input type="hidden" name="scriptolutiontoken" value="{$scriptolutiontoken}" />
+									</form>
+								</div>
 					<div class="clear"></div>
-				</div>
 			</div>			
 			<div class="clear"></div>
 		</div>   
 	</div>
-</div>
-<div id="scriptolutionnobottom">
-    <div class="centerwrap footertop">
-        <div class="footerbg scriptolutionfooter842"></div>
-    </div>
 </div>
  

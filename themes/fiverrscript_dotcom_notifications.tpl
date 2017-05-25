@@ -12,5 +12,5 @@ $("#scriptolution-notifications-popup").click(function(e){
 });
 </script>
 {/literal}
-<link href="{$baseurl}/css/scriptolution_notifications.css" media="screen" rel="stylesheet" type="text/css" />  
+<link href="{$baseurl}css/scriptolution_notifications.css" media="screen" rel="stylesheet" type="text/css" />  
 {/if}

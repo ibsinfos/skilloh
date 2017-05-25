@@ -32,7 +32,7 @@ if($_POST['submitform'] == "1")
 	}
 	else
 	{
-		$sql = "insert advertisements set description='".mysql_real_escape_string($details)."', code='".mysql_real_escape_string($code)."', active='".mysql_real_escape_string($active)."'";
+		$sql = "insert advertisements set description='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $details)."', code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $code)."', active='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $active)."'";
 		$conn->execute($sql);
 		$message = "Advertisement Successfully Added.";
 		Stemplate::assign('message',$message);

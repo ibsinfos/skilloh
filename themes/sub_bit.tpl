@@ -1,4 +1,4 @@
-					<form action="{$baseurl}/new" id="submit_new_gig" method="get">
+					<form action="{$baseurl}new" id="submit_new_gig" method="get">
                     <div class="iwill">
                         <p>{$lang113}</p>
                         <div class="iwill-holder">

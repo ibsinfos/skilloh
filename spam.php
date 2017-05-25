@@ -15,12 +15,10 @@
 include("include/config.php");
 include("include/functions/import.php");
 
-scriptolution_dotcom_software("");
-
-$spamid = intval(scriptolution_dotcom_data($_REQUEST['id']));
+$spamid = intval($_REQUEST['id']);
 if($spamid > 0)
 {
-	$query="INSERT INTO inbox_reports SET USERID='".mysqli_real_escape_string($conn->_connectionID, $_SESSION['USERID'])."', time='".time()."', MID='".mysqli_real_escape_string($conn->_connectionID, $spamid)."'";
+	$query="INSERT INTO inbox_reports SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', time='".time()."', MID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $spamid)."'";
 	$result=$conn->execute($query);
 	echo "document.getElementById('spam_message' + ".$spamid.").innerHTML = '&nbsp;".$lang['247']."';";
 }

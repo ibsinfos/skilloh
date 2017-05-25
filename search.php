@@ -35,33 +35,37 @@ if($search_in != "scriptolution_all")
 	$search_in = "scriptolution_category";
 	if($c > 0)
 	{
-		$query="SELECT name,parent FROM categories WHERE CATID='".mysql_real_escape_string($c)."'";
+		$query="SELECT name,parent FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."'";
 		$executequery=$conn->execute($query);
 		$cname = $executequery->fields['name'];
 		STemplate::assign('cname',$cname);
 		$parent = intval(cleanit($executequery->fields['parent']));
 		if($parent == "0")
 		{
-			$query="SELECT CATID FROM categories WHERE parent='".mysql_real_escape_string($c)."'";
+			$query="SELECT CATID FROM categories WHERE parent='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."'";
 			$results=$conn->execute($query);
 			$searchsc = $results->getrows();
 			if(count($searchsc) > 0)
 			{
 				for($i=0; $i<count($searchsc);$i++)
 				{
-					$ssc .= " OR A.category='".mysql_real_escape_string($searchsc[$i][0])."'";
-					$ssd .= " OR category='".mysql_real_escape_string($searchsc[$i][0])."'";
+					$ssc .= " OR A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $searchsc[$i][0])."'";
+					$ssd .= " OR category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $searchsc[$i][0])."'";
 				}
-				$scriptolution_addcats = "AND (A.category='".mysql_real_escape_string($c)."' $ssc)";
+				$scriptolution_addcats = "AND (A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."' $ssc)";
 			}
 			else
 			{
-				$scriptolution_addcats = " AND A.category='".mysql_real_escape_string($c)."'";
+				$scriptolution_addcats = " AND A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."'";
 			}
 		}
 		else
 		{
-			$scriptolution_addcats = " AND A.category='".mysql_real_escape_string($c)."'";
+			$scriptolution_addcats = " AND A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."'";
+			$query="SELECT name FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $parent)."'";
+			$executequery=$conn->execute($query);
+			$parentname = $executequery->fields['name'];
+			STemplate::assign('parentname',$parentname);
 		}
 	}
 }
@@ -132,7 +136,7 @@ elseif($s == "e")
 $p = intval(cleanit($_REQUEST['p']));
 if($p > 0)
 {
-	$scriptolution_addprice = " AND A.price='".mysql_real_escape_string($p)."'";
+	$scriptolution_addprice = " AND A.price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $p)."'";
 	STemplate::assign('p',$p);
 	$addp = "&p=$p";
 }
@@ -140,7 +144,7 @@ if($p > 0)
 $sdeliverytime = intval(cleanit($_REQUEST['sdeliverytime']));
 if($sdeliverytime > 0)
 {
-	$scriptolution_adddelivery = " AND A.days<='".mysql_real_escape_string($sdeliverytime)."'";
+	$scriptolution_adddelivery = " AND A.days<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $sdeliverytime)."'";
 }
 STemplate::assign('sdeliverytime',$sdeliverytime);
 
@@ -167,8 +171,8 @@ if($config['enablescriptolutionlocations'] == "1")
 
 
 
-$query1 = "SELECT count(*) as total from posts A, categories B, members C where A.active='1' AND (gtitle like'%".mysql_real_escape_string($tag)."%' OR gdesc like'%".mysql_real_escape_string($tag)."%' OR gtags like'%".mysql_real_escape_string($tag)."%') $addsqlb AND A.category=B.CATID AND A.USERID=C.USERID $scriptolution_addprice $scriptolution_addcats $scriptolution_adddelivery $scriptolution_addtoprated $addjoblocation order by A.PID desc limit $config[maximum_results]";
-$query2 = "SELECT A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND (gtitle like'%".mysql_real_escape_string($tag)."%' OR gdesc like'%".mysql_real_escape_string($tag)."%' OR gtags like'%".mysql_real_escape_string($tag)."%') $addsqlb AND A.category=B.CATID AND A.USERID=C.USERID $scriptolution_addprice $scriptolution_addcats $scriptolution_adddelivery $scriptolution_addtoprated $addjoblocation order by A.feat desc, $dby limit $pagingstart, $config[items_per_page_new]";
+$query1 = "SELECT count(*) as total from posts A, categories B, members C where A.active='1' AND (gtitle like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%' OR gdesc like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%' OR gtags like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%') $addsqlb AND A.category=B.CATID AND A.USERID=C.USERID $scriptolution_addprice $scriptolution_addcats $scriptolution_adddelivery $scriptolution_addtoprated $addjoblocation order by A.PID desc limit $config[maximum_results]";
+$query2 = "SELECT A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND (gtitle like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%' OR gdesc like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%' OR gtags like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%') $addsqlb AND A.category=B.CATID AND A.USERID=C.USERID $scriptolution_addprice $scriptolution_addcats $scriptolution_adddelivery $scriptolution_addtoprated $addjoblocation order by A.feat desc, $dby limit $pagingstart, $config[items_per_page_new]";
 $executequery1 = $conn->Execute($query1);
 $scriptolution = $executequery1->fields['total'];
 if ($scriptolution > 0)
@@ -210,7 +214,7 @@ if ($scriptolution > 0)
 		}
 		else
 		{
-			$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+			$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 		}
 		$counter=0;
 		$lowercount = $currentpage-5;
@@ -234,7 +238,7 @@ if ($scriptolution > 0)
 		}
 		else
 		{
-			$pagelinks.="<li><span class='next'>next page</span></li>";
+			$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 		}
 	}
 }

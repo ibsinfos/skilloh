@@ -1,85 +1,234 @@
-{include file="scriptolution_error7.tpl"}
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop30 gray">
-		<div class="inner-wrapper">
-			<div class="clear"></div>
-			<div class="left-side">
-				<div class="whiteBox twoHalfs padding15 scriptolutionshop">
-					<h1>{$lang544}</h1>
-					<div class="db-main-table">
-                        <div id="allscriptolutionNotifBox" class="allscriptolutionNotifBox">                        
-                            {if $posts|@count eq "0"}
-                            <div id="scriptolutionNotifBox_none">
-                              {$lang543}
-                            </div>
-                            {else}
-                            {section name=i loop=$posts}
-                            {if $posts[i].scriptolution_type eq "scriptolution_buyer_requirements"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang531} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_neworder"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang532} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderupdate"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang533} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderdelivered"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang534} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderdeliveryreject"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang535} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderfeedback"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang536} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "mutual_cancellation_request"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang537} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "seller_cancellation"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang538} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "scriptolution_abort_cancellation"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang539} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "scriptolution_accept_cancellation"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang540} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {elseif $posts[i].scriptolution_type eq "scriptolution_reject_cancellation"}
-                            <div class="scriptolution-notification-all-view">
-                            <a {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold"{/if} href="{$baseurl}/track?id={$posts[i].scriptolution_OID}">&middot; {$lang541} ({$lang140} #{$posts[i].scriptolution_OID})</a>
-                            </div>
-                            {/if}
-                            {/section}
-                            {/if}
-        				</div> 
-					</div>
-					<div class="clear"></div>	
+<script src="{$baseurl}js/jquery.qtip-1.0.0-rc3.js" type="text/javascript"></script>
+<script src="{$baseurl}js/jquery.corner.js" type="text/javascript"></script>
+<script src="{$baseurl}js/mainscriptolution.js" type="text/javascript"></script>
+
+{literal}
+<style>
+    .unread-message {
+        background: #fe0;
+        padding: 5px;
+        margin: 0 10px 0 0;
+    }   
+    .list-group {
+    	margin-bottom: 0px;
+    }
+</style>
+{/literal}
+<div class="bodybg topspace">
+    {include file="scriptolution_error7.tpl"}
+    <div class="container scriptolutionpaddingtop30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="clear"></div>            
+            <div class="col-lg-12 col-md-8 col-sm-8 col-xs-12 margin30">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
+                	<h1 class="myshoppingheading">{$lang544}</h1>
+                	<h4 class="myshoppingheading2" style="visibility:hidden;">{$lang153}</h4>
                     
-                    <div align="center">
-                        <div class="paging">
-                            <div class="p1">
-                                <ul>
-                                    {$pagelinks}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    			
-				</div>
-                
-			</div>
-			{include file='scriptolution_newside.tpl'}            	
-		</div>    
+                    <div class="chat_list row">
+                    	{if $posts|@count eq "0"}
+                            <tr>
+                            	<td>
+                            		<div id="scriptolutionNotifBox_none">
+	                               	 {$lang543}
+	                            	</div>
+	                            </td>	
+                            </tr>
+                            {else} 
+					    <ul class="list-group">
+					    {section name=i loop=$posts} 
+					    {if $posts[i].scriptolution_type eq "scriptolution_buyer_requirements"}
+					        <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang531}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+					       {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_neworder"}
+					       <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang532} from <strong class="notification_by_user">{$posts[i].username}</strong>
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderupdate"}
+                           <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang533}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderdelivered"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang534}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderdeliveryreject"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang535}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "fiverrscript_dotcom_orderfeedback"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    <strong class="notification_by_user">{$posts[i].username}</strong> {$lang536}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "mutual_cancellation_request"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang537}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "seller_cancellation"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang538}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "scriptolution_abort_cancellation"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang539}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "scriptolution_accept_cancellation"}
+                           <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang540}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+                           {elseif $posts[i].scriptolution_type eq "scriptolution_reject_cancellation"}
+                            <li class="list-group-item">
+					            <a class="noti_link" {if $posts[i].scriptolution_unread eq "1"}style="font-weight:bold" {/if} href="{$baseurl}track?id={$posts[i].scriptolution_OID}" >
+						            <div class="col-md-1">
+						            	<img class="img-responsive" title="{$posts[i].gtitle|stripslashes}" alt="{$posts[i].gtitle|stripslashes}" src="{$purl}/t3/{$posts[i].p1}">                    
+						            </div>            
+						            <div class="col-md-11">
+						            	<p>
+						            		<strong>Order #{$posts[i].scriptolution_OID}</strong>
+						            		<small class="pull-right text-muted">{insert name=get_time_to_date value=a time=$posts[i].time_added}</small>               		
+						               	</p>
+						                <p class="list-group-item-text">
+						                    {$lang541}
+						                </p>
+						            </div>
+					            </a>
+					        </li>
+					        {/if} 
+                            {/section} 
+					    </ul>
+                            {/if}
+					</div>
+                </div>
+            </div>
 	</div>
 </div>

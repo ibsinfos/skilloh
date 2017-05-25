@@ -1,17 +1,25 @@
-<?
+<?php
 ini_set('display_errors', '0');
+//error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+//ini_set('display_errors', '1');
 $config = array();
 
 // Begin Configuration
-$config['basedir']     =  '/home/skilohx6/public_html/dev';
-$config['baseurl']     =  'http://dev.skilop.com';
+// $config['basedir']     =  '/home/skilohx6/public_html/dev';
+// $config['baseurl']     =  'http://dev.skilop.com/';
+
+$config['basedir']     =  'C:/wamp/www/GIT/skilloh';
+$config['baseurl']     =  'http://localhost/git/skilloh/';
 
 $DBTYPE = 'mysql';
 $DBHOST = 'localhost';
-$DBUSER = 'skilohx6_fs';
-$DBPASSWORD = 'Z28W@g[-p=1+';
-$DBNAME = 'skilohx6_fs';
+$DBUSER = 'root';
+$DBPASSWORD = '';
+$DBNAME = 'skillop';
 
+// $DBUSER = 'skilohx6_fs';
+// $DBPASSWORD = 'Z28W@g[-p=1+';
+// $DBNAME = 'skilohx6_fs';
 $default_language = "english"; //Valid choices are english, spanish,  french, portuguese, hebrew, arabic, german, chinese or russian
 // End Configuration
 
@@ -44,7 +52,7 @@ function strip_mq_gpc($arg)
 }
 $conn = &ADONewConnection($DBTYPE);
 $conn->PConnect($DBHOST, $DBUSER, $DBPASSWORD, $DBNAME);
-@mysql_query("SET NAMES 'UTF8'");
+@mysqli_query($GLOBALS["___mysqli_ston"], "SET NAMES 'UTF8'");
 $sql = "SELECT * from config";
 $rsc = $conn->Execute($sql);
 
@@ -166,7 +174,7 @@ STemplate::setTplDir($config['basedir']."/themes");
 
 if($sban != "1")
 {
-	$bquery = "SELECT count(*) as total from bans_ips WHERE ip='".mysql_real_escape_string($_SERVER['REMOTE_ADDR'])."'";
+	$bquery = "SELECT count(*) as total from bans_ips WHERE ip='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SERVER['REMOTE_ADDR'])."'";
 	$bresult = $conn->execute($bquery);
 	$bcount = $bresult->fields['total'];
 	if($bcount > "0")
@@ -188,7 +196,7 @@ if($config['scriptolution_proxy_block'] == "1")
 function create_slrememberme() {
         $key = md5(uniqid(rand(), true));
         global $conn;
-        $sql="update members set remember_me_time='".date('Y-m-d H:i:s')."', remember_me_key='".$key."' WHERE username='".mysql_real_escape_string($_SESSION[USERNAME])."'";
+        $sql="update members set remember_me_time='".date('Y-m-d H:i:s')."', remember_me_key='".$key."' WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERNAME])."'";
         $conn->execute($sql);
         setcookie('slrememberme', gzcompress(serialize(array($_SESSION[USERNAME], $key)), 9), time()+60*60*24*30);
 }
@@ -196,20 +204,20 @@ function create_slrememberme() {
 function destroy_slrememberme($username) {
         if (strlen($username) > 0) {
                 global $conn;
-                $sql="update members set remember_me_time=NULL, remember_me_key=NULL WHERE username='".mysql_real_escape_string($username)."'";
+                $sql="update members set remember_me_time=NULL, remember_me_key=NULL WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."'";
                 $conn->execute($sql);
         }
         setcookie ("slrememberme", "", time() - 3600);
 }
 
-if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme'])) 
+if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme']))
 {
         $sql="update members set remember_me_time=NULL and remember_me_key=NULL WHERE remember_me_time<'".date('Y-m-d H:i:s', mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")))."'";
         $conn->execute($sql);
         list($username, $key) = @unserialize(gzuncompress(stripslashes($_COOKIE['slrememberme'])));
         if (strlen($username) > 0 && strlen($key) > 0)
 		{
-        	$sql="SELECT status,USERID,email,username,verified from members WHERE username='".mysql_real_escape_string($username)."' and remember_me_key='".mysql_real_escape_string($key)."'";
+        	$sql="SELECT m.status,m.USERID,m.email,m.username,m.verified, (select count(1) from posts P where p.USERID = m.USERID) as postcount from members m WHERE m.username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."' and m.remember_me_key='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $key)."'";
           	$rs=$conn->execute($sql);
           	if($rs->recordcount()<1)
 			{
@@ -220,11 +228,12 @@ if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme']))
 				$error = "Error: Your account has been disabled by the administrator.";
 			}
     		if($error=="")
-			{				
+			{
 				$_SESSION['USERID']=$rs->fields['USERID'];
 				$_SESSION['EMAIL']=$rs->fields['email'];
 				$_SESSION['USERNAME']=$rs->fields['username'];
 				$_SESSION['VERIFIED']=$rs->fields['verified'];
+				$_SESSION['POSTCOUNT']=$rs->fields['postcount'];
       			create_slrememberme();
         	}
 			else
@@ -234,7 +243,7 @@ if (!isset($_SESSION["USERNAME"]) && isset($_COOKIE['slrememberme']))
         }
 }
 
-function generateCode($length) 
+function generateCode($length)
 {
 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
     $code = "";
@@ -309,7 +318,7 @@ function secondarysave( $url, $local )
 	if( filesize($local) > 10 ) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -325,18 +334,18 @@ function curlSaveToFile( $url, $local )
 	curl_setopt($ch, CURLOPT_NOPROGRESS, true);
 	curl_setopt($ch, CURLOPT_USERAGENT, '"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.11) Gecko/20071204 Ubuntu/7.10 (gutsy) Firefox/2.0.0.11');
 	curl_exec($ch);
-	
+
 	if( curl_errno($ch) ) {
 		return false;
 	}
-	
+
 	curl_close($ch);
 	fclose($fh);
-	
+
 	if( filesize($local) > 10 ) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -346,7 +355,7 @@ function do_resize_image_2($file, $width = 0, $height = 0, $proportional = false
 	{
 	  return false;
 	}
-	
+
 	$info = getimagesize($file);
 	$image = '';
 
@@ -354,15 +363,15 @@ function do_resize_image_2($file, $width = 0, $height = 0, $proportional = false
 	$final_height = 0;
 	list($width_old, $height_old) = $info;
 
-	if($proportional) 
+	if($proportional)
 	{
 	  if ($width == 0) $factor = $height/$height_old;
 	  elseif ($height == 0) $factor = $width/$width_old;
-	  else $factor = min ( $width / $width_old, $height / $height_old);   
-	  
+	  else $factor = min ( $width / $width_old, $height / $height_old);
+
 	  $final_width = round ($width_old * $factor);
 	  $final_height = round ($height_old * $factor);
-		  
+
 	  if($final_width > $width_old && $final_height > $height_old)
 	  {
 	  	  $final_width = $width_old;
@@ -370,13 +379,13 @@ function do_resize_image_2($file, $width = 0, $height = 0, $proportional = false
 
 	  }
 	}
-	else 
+	else
 	{
 	  $final_width = ( $width <= 0 ) ? $width_old : $width;
 	  $final_height = ( $height <= 0 ) ? $height_old : $height;
 	}
-	
-	switch($info[2]) 
+
+	switch($info[2])
 	{
 	  case IMAGETYPE_GIF:
 		$image = imagecreatefromgif($file);
@@ -396,15 +405,15 @@ function do_resize_image_2($file, $width = 0, $height = 0, $proportional = false
 	if(($info[2] == IMAGETYPE_GIF) || ($info[2] == IMAGETYPE_PNG))
 	{
 	  $trnprt_indx = imagecolortransparent($image);
-	
+
 	  if($trnprt_indx >= 0)
 	  {
 		$trnprt_color    = imagecolorsforindex($image, $trnprt_indx);
 		$trnprt_indx    = imagecolorallocate($image_resized, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
 		imagefill($image_resized, 0, 0, $trnprt_indx);
-		imagecolortransparent($image_resized, $trnprt_indx);	
-	  } 
-	  elseif($info[2] == IMAGETYPE_PNG) 
+		imagecolortransparent($image_resized, $trnprt_indx);
+	  }
+	  elseif($info[2] == IMAGETYPE_PNG)
 	  {
 		imagealphablending($image_resized, false);
 		$color = imagecolorallocatealpha($image_resized, 0, 0, 0, 127);
@@ -430,7 +439,7 @@ function do_resize_image_2($file, $width = 0, $height = 0, $proportional = false
 	  default:
 	  break;
 	}
-	
+
 	if(file_exists($output))
 	{
 		@unlink($output);
@@ -458,10 +467,10 @@ if($mobile == "1")
 }
 else
 {
-	include("scriptolution_facebook.php");	
+	include("scriptolution_facebook.php");
 }
 
-function NewScriptolutionToken() 
+function NewScriptolutionToken()
 {
 	$scriptolutionrandomtoken = md5(uniqid(rand(), true));
     return $scriptolutionrandomtoken;

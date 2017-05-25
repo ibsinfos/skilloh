@@ -29,7 +29,7 @@ if($config['scriptolution_launch_mode'] != "0")
 	}
 	else
 	{
-		$query = "select count(*) as total from invites_code where code='".mysql_real_escape_string($c)."'"; 
+		$query = "select count(*) as total from invites_code where code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."'"; 
 		$executequery = $conn->execute($query);
 		$totalc = intval($executequery->fields['total']);
 		if($totalc > 0)
@@ -181,13 +181,13 @@ if($config['scriptolution_launch_mode'] != "0")
 					{
 						$def_country = "US";	
 					}
-					$query="INSERT INTO members SET email='".mysql_real_escape_string($user_email)."',username='".mysql_real_escape_string($user_username)."', password='".mysql_real_escape_string($md5pass)."', pwd='".mysql_real_escape_string($user_password)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', country='".mysql_real_escape_string($def_country)."'";
+					$query="INSERT INTO members SET email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_email)."',username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."', password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $md5pass)."', pwd='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_password)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', country='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $def_country)."'";
 					$result=$conn->execute($query);
-					$userid = mysql_insert_id();
+					$userid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 					
 					if($userid != "" && is_numeric($userid) && $userid > 0)
 					{
-						$query="SELECT USERID,email,username,verified from members WHERE USERID='".mysql_real_escape_string($userid)."'";
+						$query="SELECT USERID,email,username,verified from members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid)."'";
 						$result=$conn->execute($query);
 						
 						$SUSERID = $result->fields['USERID'];
@@ -202,9 +202,9 @@ if($config['scriptolution_launch_mode'] != "0")
 						
 						// Generate Verify Code Begin
 						$verifycode = generateCode(5).time();
-						$query = "INSERT INTO members_verifycode SET USERID='".mysql_real_escape_string($SUSERID)."', code='$verifycode'";
+						$query = "INSERT INTO members_verifycode SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SUSERID)."', code='$verifycode'";
 						$conn->execute($query);
-						if(mysql_affected_rows()>=1)
+						if(mysqli_affected_rows($GLOBALS["___mysqli_ston"])>=1)
 						{
 							$proceedtoemail = true;
 						}
@@ -229,7 +229,7 @@ if($config['scriptolution_launch_mode'] != "0")
 						}
 						// Send Welcome E-Mail End
 						
-						$query = "DELETE FROM invites_code WHERE code='".mysql_real_escape_string($c)."'";
+						$query = "DELETE FROM invites_code WHERE code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $c)."'";
 						$conn->Execute($query);
 						
 						header("Location:$thebaseurl/index.php");exit;

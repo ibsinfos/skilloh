@@ -1,315 +1,581 @@
-<link type="text/css" rel="stylesheet" href="{$baseurl}/js/bxslider/jquery.bxslider.css" />
-<script src="{$baseurl}/js/jquery.customSelect.js"></script>
-<script src="{$baseurl}/js/bxslider/jquery.bxslider.js"></script>
-{literal}
-<script>
-	$(document).ready(function(){
-		sQuery('#carousel').bxSlider();
-		sQuery('.scriptolutionpopup').click(function(event) {
-			var width  = 575,
-				height = 450,
-				left   = (sQuery(window).width()  - width)  / 2,
-				top    = (sQuery(window).height() - height) / 2,
-				url    = this.href,
-				opts   = 'status=1' +
-						 ',width='  + width  +
-						 ',height=' + height +
-						 ',top='    + top    +
-						 ',left='   + left;
-			window.open(url, 'scriptolutionwindow', opts);
-			return false;
-		  });
-	});
+{literal} 
+<script language="javascript" type="text/javascript">
+    function togglemulti() 
+    {	
+        var etotal = {/literal}{$p.price}{literal};
+        etotal = etotal * $('#multi').val();
+        $('.newordmulti').html(etotal);
+    }
+
 </script>
-{/literal}
-{include file="scriptolution_error7.tpl"}
-{insert name=seo_clean_titles assign=title value=a title=$p.gtitle}
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop50">
-		<div class="inner-wrapper">
-			<div class="contentArea">
-				<h1>{$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}</h1>
-                {if $enablescriptolutionlocations eq "1"}{if $p.scriptolutionjoblocation ne ""}
-                <div class="gig-scriptolutionlocation"><i class="fa fa-map-marker"></i> {$p.scriptolutionjoblocation|stripslashes}</div>
-                {/if}{/if}
-				<div class="gig-meta">{$lang360|upper} {$p.time_added|date_format:"%A %B %e %Y"|upper}, {$lang119|upper} <a href="{$baseurl}/categories/{$p.seo|stripslashes}">{$p.name|stripslashes|upper}</a></div>
-				<div class="gig-social">
-					<div class="left">
-						<ul class="social">
-                        	{insert name=get_short_url value=a assign=takento PID=$p.PID seo=$p.seo short=$posts[i].short title=$title}
-							<li><a href="https://www.facebook.com/dialog/feed?app_id={$FACEBOOK_APP_ID}&display=popup&link={$baseurl}/{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&picture={$purl}/t/{$p.p1}&name={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&redirect_uri={$baseurl}/{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}" class="facebook scriptolutionpopup"><span class="hide">Facebook</span></a></li>
-							<li><a href="https://twitter.com/share?url={$baseurl}/{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&amp;text={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="twitter scriptolutionpopup"><span class="hide">Twitter</span></a></li>
-							<li><a href="https://pinterest.com/pin/create/button/?url={$baseurl}/{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}&media={$purl}/t2/{$p.p1}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="pinterest scriptolutionpopup"><span class="hide">Pinterest</span></a></li>
-							<li><a href="mailto:?subject={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&amp;body={$baseurl}/{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}" class="scriptolutionemail"><span class="hide">E-Mail</span></a></li>
-                            <li><g:plusone size="medium" count="false" href="{$takento}"></g:plusone></li>
-                            <li>
-                                <a class="addthis_button" addthis:url="{$baseurl}/{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}" addthis:title="{$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" href="https://www.addthis.com/bookmark.php?v=250&amp;pub="><img src="https://s7.addthis.com/static/btn/sm-share-en.gif" width="83" height="16" alt="Bookmark and Share"></a>
-                                {literal}
-                                <script type="text/javascript">
-                                var addthis_config = {
-                                    services_exclude: 'email, facebook, twitter, print'
-                                }
-                                </script>
-                                <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pub="></script>
-                                {/literal}
-                            </li>
-                        </ul>
-					</div>
+{/literal} {insert name=seo_clean_titles assign=title value=a title=$p.gtitle}
+<div class="bodybg topspace">
+    {include file="scriptolution_error7.tpl"}
+    <div class="banner1">
+        <!-- <div class="row">
+         <div class="search-slider float-center job-items-title">
+            <h2 class="banner-title">Get your stuffs done faster</h2>
+            <a href="#" class="btn-post hvr-sweep-to-left waves-effect waves-light">
+               <p class="name-button-post">Create Service</p>
+               <span class="cirlce-plus"><i class="fa fa-plus"></i></span>
+            </a>
+         </div>
+      </div> -->
+        <div class="row">
+            <div class="search-slider float-center job-items-title tagcloud">
+                <h2 class="banner-title">{$p.name|stripslashes}</h2>
+                <ul>
+                    {section name=i loop=$tags max=10} {if $tags[i] != ""}
+                    <li>
+                        <a href="{$baseurl}tags/{$cid}/{$tags[i]|stripslashes}" class="tag">&nbsp;{$tags[i]|stripslashes}&nbsp;</a> {/if} {/section}
+                </ul>
+            </div>
+        </div>
+        <div class="header-images">
+            <img class="img-responsive" src="{$scriptolutioncaturl}/{$p.scriptolution_bigimage}" alt="Create service banner">
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t60 m-b60">
+            <!-- Left hand side starts -->
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <h1 class="job_detail_title">
+               {$lang62}{$p.gtitle|stripslashes} 
+            </h1>
+
+                <!-- created Block starts -->
+                <div class="gig-meta">
+                    <a href="{$baseurl}categories/{$p.seo|stripslashes}">{$p.name|stripslashes|upper}</a>
                     {if $smarty.session.USERID ne ""}                     
-                    {literal}
-                    <script language="javascript" type="text/javascript">
-                    sQuery(document).ready(function() {
-                        sQuery('#scriptolution_heart_{/literal}{$p.PID}{literal}').click(function() {
-                        	sQuery.post('{/literal}{$baseurl}/bookmark?id={$p.PID|stripslashes}&do=add{literal}', sQuery(this).serialize(),function(data){
-								sQuery('#sbookmark1').hide();
-								sQuery('#sbookmark2').show();
-                        	});
-                        	return false;
-                        });
-						
-						sQuery('#scriptolution_unheart_{/literal}{$p.PID}{literal}').click(function() {
-                        	sQuery.post('{/literal}{$baseurl}/bookmark?id={$p.PID|stripslashes}&do=rem{literal}', sQuery(this).serialize(),function(data){
-								sQuery('#sbookmark2').hide();
-								sQuery('#sbookmark1').show();
-                        	});
-                        	return false;
-                        });
-                    });
-                    </script>
-                    {/literal}
+                        {literal}
+	                        <script language="javascript" type="text/javascript">
+	                        sQuery(document).ready(function() {
+	                            sQuery('#scriptolution_heart_{/literal}{$p.PID}{literal}').click(function() {
+	                            	sQuery.post('{/literal}{$baseurl}bookmark?id={$p.PID|stripslashes}&do=add{literal}', sQuery(this).serialize(),function(data){
+	         							sQuery('#sbookmark1').hide();
+	         							sQuery('#sbookmark2').show();
+	         							var number = +(sQuery('.bookmarkcount').text());
+	         							sQuery('.bookmarkcount').html(number+1);
+	                            	});
+	                            	return false;
+	                            });
+	
+	         				sQuery('#scriptolution_unheart_{/literal}{$p.PID}{literal}').click(function() {
+	                            	sQuery.post('{/literal}{$baseurl}bookmark?id={$p.PID|stripslashes}&do=rem{literal}', sQuery(this).serialize(),function(data){
+	         							sQuery('#sbookmark2').hide();
+	         							sQuery('#sbookmark1').show();
+	         							var number = +(sQuery('.bookmarkcount').text());
+	         							sQuery('.bookmarkcount').html(number-1);
+	                            	});
+	                            	return false;
+	                            });
+	                        });
+	                        </script>
+                        {/literal}
                     {insert name=like_cnt value=var assign=liked pid=$p.PID}
-                    <div class="right">
-						<dl id="bookmark" class="dropdown cleanStyle">
-							<dt id="sbookmark1" {if $liked eq "1"}style="display:none;"{/if}><a class="tooltip" title="{$lang574}" href="javascript(void);" id="scriptolution_heart_{$p.PID}"><span><i class="icon-red-heart"></i></span></a></dt>
-                            <dt id="sbookmark2" {if $liked ne "1"}style="display:none;"{/if}><a class="tooltip" title="{$lang574}" href="javascript(void);" id="scriptolution_unheart_{$p.PID}"><span><i class="icon-white-heart"></i></span></a></dt>
-						</dl>
-					</div>
-                    {else}
-                    <div class="right scriptolutionbookmark">
-                    	<a class="tooltip" title="{$lang574}" href="{$baseurl}/login"><span><i class="icon-white-heart"></i></span></a>
+                    <div class="pull-right created_detail gig-collect js-gig-collect" data-coll-id="2760174">
+                        <span class="hint--bottom" id="sbookmark1" data-hint="Add to Favorites" {if $liked eq "1"}style="display:none;"{/if}>
+				            <a class="icn-heart js-open-popup-join" href="" id="scriptolution_heart_{$p.PID}"><i class="fa fa-heart-o"></i></a>
+				         </span>
+				        <span class="hint--bottom" id="sbookmark2" data-hint="Remove from Favorites" {if $liked ne "1"}style="display:none;"{/if}>
+				            <a class="icn-heart js-open-popup-join" href="" id="scriptolution_unheart_{$p.PID}"><i class="fa fa-heart red_icon_like"></i></a>
+				        </span>
+                        <div class="gig-collect-count js-gig-collect-count bookmarkcount" >{$ftot}</div>
                     </div>
-                    {/if}
-				</div>
-				<div class="clear"></div>
+                     {else}
+                        <div class="pull-right created_detail gig-collect js-gig-collect" data-coll-id="2760174">
+                        	 <span class="hint--bottom" data-hint="Add to Favorites">
+				            <a class="icn-heart js-open-popup-join" href="{$baseurl}login"><i class="fa fa-heart-o"></i></a>
+				         </span>
+				         <div class="gig-collect-count js-gig-collect-count bookmarkcount">{$ftot}</div>
+                        </div>
+                     {/if}
+                </div>
+                <!-- created Block ends -->
+                <div class="clear"></div>
+
+                <!-- Job image banner slider starts -->
                 {include file='view_image_box.tpl'}
-				<div class="gig-description" {if $rtl ne "1"}align="left"{/if}>
-					<p {if $rtl eq "1"}class="scriptolutionrtl"{else}align="left"{/if} style="overflow: hidden;">{$p.gdesc|stripslashes|html_entity_decode:$smarty.const.ENT_QUOTES:'utf-8'}</p>
-                    {if $p.youtube ne ""}{include file='view_yt.tpl'}{/if}
-				</div>
-                {include file='view_extra.tpl'} 
-                <div id="scriptolutionbarnreviews">
-                    <div class="scriptolutionbar">
-                        <div class="whiteBox inside">
-                            <div class="block inside">
-                                <span class="number">{$grat}</span>
-                                <span class="descr">{$lang476}</span>
-                            </div>
-                            <div class="block inside">
-                                <span class="number">{$brat}</span>
-                                <span class="descr">{$lang477}</span>
-                            </div>
-                            <div class="block inside last">
-                                <span class="number">{$ftot}</span>
-                                <span class="descr">{$lang478}</span>
-                            </div>
+                <!-- Job image banner slider ends -->
+
+                <!-- Job description starts -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space">
+                    <div class="gig-description" {if $rtl ne "1"} {/if}>
+                        <p class="title">Description</p>
+                        <p class="scriptolutionrtl">
+                            {$p.gdesc|stripslashes|html_entity_decode:$smarty.const.ENT_QUOTES:'utf-8'}
+                        </p>
+                    </div>
+                    <!--<div class="gig-description" {if $rtl ne "1"} {/if}>
+                        {if $p.youtube ne ""}{include file='view_yt.tpl'}{/if}
+                    </div> -->
+
+                    <div class="gig-description col-md-12">
+                        <b>
+	                    <div class="outer-function-group">
+	                             {include file='scriptolution_order_selection.tpl'}
+	                        <div class="sharing">
+	                            <span>Share</span>
+	                            <ul class="link-social list-share-social addthis_toolbox addthis_default_style">
+	                                <li><a href="https://www.facebook.com/dialog/feed?app_id={$FACEBOOK_APP_ID}&display=popup&link={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&picture={$purl}/t/{$p.p1}&name={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&redirect_uri={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}" class="addthis_button_facebook face at300b" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+	                                <li><a href="https://twitter.com/share?url={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&amp;text={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="addthis_button_twitter twitter at300b" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+	                                <li><a href="#" class=" google" title="Google" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+	                            <div class="atclear"></div></ul>
+	                        </div>
+	                    </div>
+	                </b>
+                    </div>
+
+                </div>
+                <!-- Job description ends -->
+
+                <!-- Service Location starts -->
+                {if $enablescriptolutionlocations eq "1"} {if $p.scriptolutionjoblocation ne ""}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space">
+                    <div class="gig-description tag_style" {if $rtl ne "1"} {/if}>
+                        <p class="title">Service Location</p>
+                        <div class="gig-scriptolutionlocation">
+                            <i class="fa fa-map-marker"></i> {$p.scriptolutionjoblocation|stripslashes}
                         </div>
                     </div>
-                    <div class="gig-reviews">
-                        <div class="left">
-                            <h2>{$lang143}</h2>
-                        </div>
+                </div>
+                {/if} {/if}
+                <!-- Service Location ends -->
+
+                <!-- Job tag starts -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space">
+                    <div class="gig-description tag_style" {if $rtl ne "1"} {/if}>
+                        <p class="title">{$lang76}</p>
+                        <p class="scriptolutionrtl ">
+                            {section name=i loop=$tags}
+                            <a href="{$baseurl}tags/{$p.seo|stripslashes}/{$tags[i]|stripslashes}">
+                                <span class="label label-default">{$tags[i]|stripslashes}</span>
+                            </a>
+                            {/section}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Job tag ends -->
+
+                <!-- Social Block starts -->
+                <!--<div class="gig-social">
+         <div class="left">
+         	<ul class="social">
+                {insert name=get_short_url value=a assign=takento PID=$p.PID seo=$p.seo short=$posts[i].short title=$title}
+         		<li><a href="https://www.facebook.com/dialog/feed?app_id={$FACEBOOK_APP_ID}&display=popup&link={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&picture={$purl}/t/{$p.p1}&name={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&redirect_uri={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}" class="facebook scriptolutionpopup"><span class="hide">Facebook</span></a></li>
+         		<li><a href="https://twitter.com/share?url={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&amp;text={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="twitter scriptolutionpopup"><span class="hide">Twitter</span></a></li>
+         		<li><a href="https://pinterest.com/pin/create/button/?url={$baseurl}{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}&media={$purl}/t2/{$p.p1}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="pinterest scriptolutionpopup"><span class="hide">Pinterest</span></a></li>
+         		<li><a href="mailto:?subject={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&amp;body={$baseurl}{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}" class="scriptolutionemail"><span class="hide">E-Mail</span></a></li>
+                <li><g:plusone size="medium" count="false" href="{$takento}"></g:plusone></li>
+                <li>
+                    <a class="addthis_button" addthis:url="{$baseurl}{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}" addthis:title="{$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" href="https://www.addthis.com/bookmark.php?v=250&amp;pub="><img src="https://s7.addthis.com/static/btn/sm-share-en.gif" width="83" height="16" alt="Bookmark and Share"></a>
+                    {literal}
+                    <script type="text/javascript">
+                    var addthis_config = {
+                        services_exclude: 'email, facebook, twitter, print'
+                    }
+                    </script>
+                    <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pub="></script>
+                    {/literal}
+                </li>
+            </ul>
+         </div>
+                        {if $smarty.session.USERID ne ""}                     
+                        {literal}
+                        <script language="javascript" type="text/javascript">
+                        sQuery(document).ready(function() {
+                            sQuery('#scriptolution_heart_{/literal}{$p.PID}{literal}').click(function() {
+                            	sQuery.post('{/literal}{$baseurl}bookmark?id={$p.PID|stripslashes}&do=add{literal}', sQuery(this).serialize(),function(data){
+         			sQuery('#sbookmark1').hide();
+         			sQuery('#sbookmark2').show();
+                            	});
+                            	return false;
+                            });
+
+         	sQuery('#scriptolution_unheart_{/literal}{$p.PID}{literal}').click(function() {
+                            	sQuery.post('{/literal}{$baseurl}bookmark?id={$p.PID|stripslashes}&do=rem{literal}', sQuery(this).serialize(),function(data){
+         			sQuery('#sbookmark2').hide();
+         			sQuery('#sbookmark1').show();
+                            	});
+                            	return false;
+                            });
+                        });
+                        </script>
+                        {/literal}
+                        {insert name=like_cnt value=var assign=liked pid=$p.PID}
                         <div class="right">
+         	<dl id="bookmark" class="dropdown cleanStyle">
+         		<dt id="sbookmark1" {if $liked eq "1"}style="display:none;"{/if}><a class="tooltip" title="{$lang574}" href="javascript(void);" id="scriptolution_heart_{$p.PID}"><span><i class="icon-red-heart"></i></span></a></dt>
+                                <dt id="sbookmark2" {if $liked ne "1"}style="display:none;"{/if}><a class="tooltip" title="{$lang574}" href="javascript(void);" id="scriptolution_unheart_{$p.PID}"><span><i class="icon-white-heart"></i></span></a></dt>
+         	</dl>
+         </div>
+                        {else}
+                        <div class="right scriptolutionbookmark">
+                        	<a class="tooltip" title="{$lang574}" href="{$baseurl}login"><span><i class="icon-white-heart"></i></span></a>
                         </div>
-                        <div class="clear"></div>
-                        <ul class="gig-reviews-list">
-                            {if $f|@count GT 0}
+                        {/if}
+         </div>-->
+                <!-- Social Block ends -->
+
+                <!-- Review section starts -->
+                {if $f|@count GT 0}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="title"><span class="total-review">{$scriptolutiontotalvotes}</span> {$lang143} </p>
+                    <div class="review-job">
+                        <ul>
                             {section name=i loop=$f}
-                            <li>
-                                {if $f[i].good eq "1"}
-                                <span class="thumbsUp"></span>
-                                {else}
-                                <span class="thumbsDown"></span>
-                                {/if}
-                                {insert name=get_member_profilepicture assign=fprofilepicture value=var USERID=$f[i].USERID}
-                                <span class="review-avatar"><img src="{$membersprofilepicurl}/thumbs/{$fprofilepicture}" /></span>
-                                <span class="comment">
-                                    <span class="comment-meta"><a href="{$baseurl}/{insert name=get_seo_profile value=a username=$f[i].username|stripslashes}">{$f[i].username|stripslashes}</a></span>
-                                    <span class="comment-comment">
-                                        {$f[i].comment|stripslashes}								
-                                    </span>
-                                </span>
+                            <li class="review-item clearfix">
+                                <div class="image-avatar">
+                                    {insert name=get_member_profilepicture assign=fprofilepicture value=var USERID=$f[i].USERID}
+                                    <img class="avatar" alt="" src="{$membersprofilepicurl}/thumbs/{$fprofilepicture}" />
+                                </div>
+                                <div class="profile-viewer">
+                                    <a class="name-author" href="{$baseurl}{insert name=get_seo_profile value=a username=$f[i].username|stripslashes}">{$f[i].username|stripslashes}</a>
+                                    <p class="review-time">March 11, 2016</p>
+                                    <div class="rate-it star" data-score="4">
+                                        {if $f[i].good eq "1"}
+                                        	<i class="fa fa-thumbs-up rating_punch_up" aria-hidden="true" title="good"></i> 
+                                        {else}
+                                        	<span class="thumbsDown"></span>
+                                        	<i class="fa fa-thumbs-down rating_punch_down" aria-hidden="true" title="Average"></i> 
+                                        {/if}
+                                        <input name="score" type="hidden" value="4" readonly="">
+                                    </div>
+                                    <div class="commnet-content">
+                                        <p>{$f[i].comment|stripslashes}</p>
+                                    </div>
+                                </div>
                             </li>
                             {/section}
-                            {/if}
                         </ul>
-                        <!-- <p class="centerMe"><a href="#" class="whiteBtn"><span></span></a></p> -->
-                    </div>	                
-                	{include file='scriptolution_bit_related.tpl'}
+                        <div class="paginations-wrapper"></div>
+                    </div>
                 </div>
-			</div>
-			
-			<div class="sidebarArea">
-				{include file='scriptolution_order_selection.tpl'}				
-				<ul class="gig-details">
-					<li class="gig-rating">
-                    	{insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$p.PID}{$scriptolutionstars}
-					</li>
-					<li>
-						<span class="rating-positive">
-							{if $f|@count eq "0"}{$lang471}{else}{insert name=get_rating value=a assign=percent b=$brat g=$grat}{$percent}&#37;{/if}
-							<span class="label">{$lang568|upper}</span>
-						</span>
-						<span class="rating-middle">
-							{$lang414}
-						</span>
-						<span class="rating-votes">
-							{$scriptolutiontotalvotes}
-							<span class="label">{$lang569|upper}</span>
-						</span>
-					</li>
-                    {if $p.days eq "0"}
-                    {include file='view_instant.tpl'}
-                    {else}
-					<li>
-						<i class="icon-clock"></i>
-						<span class="big">{$p.days|stripslashes}</span>
-						<span class="small">{$lang131|upper}<br/>{$lang474|upper}</span>
-					</li>
-                    {/if}
-					<li>
-						<i class="icon-queue"></i>
-						<span class="big">{$quecount}</span>
-						<span class="small">{$lang475|upper}<br/>{$lang473|upper}</span>
-					</li>
-					<li class="small">{$lang576|upper}</li>
-				</ul>
-				<div class="clear"></div>				
-				<div class="profile-info">
-					{insert name=get_member_profilepicture assign=profilepicture value=var USERID=$p.USERID}
-					<div class="profile-avatar"><img src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" width="50px" height="50px" /></div>
-					<div class="user-info">
-						<h3>{$lang414} <a href="{$baseurl}/{insert name=get_seo_profile value=a username=$p.username|stripslashes}">{$p.username|stripslashes}</a></h3>
-						<h4>
-							{$lang573|upper}: {insert name=country_code_to_country value=a assign=userc code=$p.country}{$userc|upper}
-							<br/>
-							{$lang572|upper}: {$p.addtime|date_format:"%B %e %Y"|upper}
-							<span class="countryflag"><span class="country {$p.country}"></span></span>
-						</h4>
-					</div>
-					<div class="user-language">
-                    	{if $smarty.session.USERID ne $p.USERID}
-                        {if $smarty.session.USERID GT "0"}
-						<strong><a href="{$baseurl}/{insert name=get_seo_convo value=a assign=cvseo username=$p.username|stripslashes}{$cvseo}?id={$p.PID}">{$lang142}</a></strong>
-                        {else}
-                        <strong><a href="{$baseurl}/login?r={insert name=get_redirect2 value=a assign=rurl2 uname=$p.username pid=$p.PID}{$rurl2|stripslashes}">{$lang142}</a></strong>
-                        {/if}
-                        {/if}
-					</div>
-                    {insert name=get_percent value=a assign=mpercent userid=$p.USERID}
-                    <div style="clear:both; padding-top:15px;"></div>
-					<div class="user-level">
-                    	{if $enable_levels eq "1"}
-                        	{if $p.level eq "1"}
-							<img src="{$imageurl}/scriptolution_level1.png" />
-                            {elseif $p.level eq "2"}
-							<img src="{$imageurl}/scriptolution_level2.png" />
-                            {elseif $p.level eq "3"}
-							<img src="{$imageurl}/scriptolution_level3.png" />
-                            {/if}
-                        {/if}
-						<span class="big">{if $mpercent ne ""}{$mpercent}&#37;{else}{$lang471}{/if}</span>
-						<span class="small">{$lang570|upper}<br/>{$lang571|upper}</span>
-					</div>
-				</div>
-				<div class="clear"></div>
-				<div class="relatedTopics">
-					<h3>{$lang76}</h3>
-					<ul class="tags">
-                    	{section name=i loop=$tags}
-                        <li><a href="{$baseurl}/tags/{$p.seo|stripslashes}/{$tags[i]|stripslashes}">{$tags[i]|stripslashes}</a></li>
-                        {/section}
-					</ul>
-				</div>				
-				<div class="sidebarAds">
-					<center>{insert name=get_advertisement AID=5}</center>
-				</div>
-			</div>
-            
-            
-            
-            
-            <div id="scriptolutionbarnreviewsmobile">
-            	<div class="contentArea">
-                	<div>
-                        <div class="scriptolutionbar">
-                            <div class="whiteBox inside">
-                                <div class="block inside">
-                                    <span class="number">{$grat}</span>
-                                    <span class="descr">{$lang476}</span>
-                                </div>
-                                <div class="block inside">
-                                    <span class="number">{$brat}</span>
-                                    <span class="descr">{$lang477}</span>
-                                </div>
-                                <div class="block inside last">
-                                    <span class="number">{$ftot}</span>
-                                    <span class="descr">{$lang478}</span>
-                                </div>
-                            </div>
+                {/if}
+                <!-- Review section ends -->
+            </div>
+
+            <!-- Left hand side ends -->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+                <div class="box-aside blog-detail">
+                    <div class="package-statistic">
+                        <span class="price"><span title=""><sup>{$lang197}</sup>{$p.price}</span></span>
+                        <div class="vote ratingvote">
+                            {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$p.PID}{$scriptolutionstars}
+                            <span>({$scriptolutiontotalvotes})</span>
+                            <!--<span class="total-review"></span>-->
                         </div>
-                        <div class="gig-reviews">
-                            <div class="left">
-                                <h2>{$lang143}</h2>
-                            </div>
-                            <div class="right">
-                            </div>
-                            <div class="clear"></div>
-                            <ul class="gig-reviews-list">
-                                {if $f|@count GT 0}
-                                {section name=i loop=$f}
+                        <div class="text-content">
+                            <ul>
                                 <li>
-                                    {if $f[i].good eq "1"}
-                                    <span class="thumbsUp"></span>
-                                    {else}
-                                    <span class="thumbsDown"></span>
-                                    {/if}
-                                    {insert name=get_member_profilepicture assign=fprofilepicture value=var USERID=$f[i].USERID}
-                                    <span class="review-avatar"><img src="{$membersprofilepicurl}/thumbs/{$fprofilepicture}" /></span>
-                                    <span class="comment">
-                                        <span class="comment-meta"><a href="{$baseurl}/{insert name=get_seo_profile value=a username=$f[i].username|stripslashes}">{$f[i].username|stripslashes}</a></span>
-                                        <span class="comment-comment">
-                                            {$f[i].comment|stripslashes}								
-                                        </span>
-                                    </span>
+                                    <div class="total-number">
+                                        {insert name=get_rating2 value=a assign=mpercent pid=$p.PID}
+                                        <p class="lang-item">
+                                            {if $enable_levels eq "1"} {if $p.level eq "1"}
+                                            <img src="{$imageurl}/scriptolution_level1.png" /> {elseif $p.level eq "2"}
+                                            <img src="{$imageurl}/scriptolution_level2.png" /> {elseif $p.level eq "3"}
+                                            <img src="{$imageurl}/scriptolution_level3.png" /> {/if} {/if}
+                                            <span class="big">{if $mpercent ne ""}{$mpercent}&#37;{else}{$lang471}{/if}</span>
+                                        </p>
+                                    </div>
                                 </li>
-                                {/section}
+                                <li>
+                                    <span><i class="fa fa-commenting"></i>Reviews</span>
+                                    <!--<div class="total-number">{$scriptolutiontotalvotes}</div>-->
+                                </li>
+                                <li>
+                                    <span><i class="fa fa-shopping-bag"></i>Sales</span>
+                                    <div class="total-number">0</div>
+                                </li>
+                                {if $p.days eq "0"} {include file="view_instant.tpl"} {else}
+                                <li>
+                                    <span><i class="fa fa-calendar"></i>{$lang474}</span>
+                                    <div class="total-number time-delivery-label">{$p.days|stripslashes} day<span style="text-transform: lowercase;">(s)</span></div>
+                                </li>
                                 {/if}
+                                <li>
+                                    <span><i class="fa fa-shopping-cart"></i>{$lang475} {$lang473}</span>
+                                    <div class="total-number">{$quecount}</div>
+                                </li>
+                                <li>
+                                    <span><i class="fa fa-thumbs-up"></i>{$lang476}</span>
+                                    <div class="total-number">{$grat}</div>
+                                </li>
+                                <li>
+                                    <span><i class="fa fa-thumbs-down"></i>{$lang477}</span>
+                                    <div class="total-number">{$brat}</div>
+                                </li>
+                                <li>
+                                    <span><i class="fa fa-calendar"></i>{$lang360}</span>
+                                    <div class="total-number time-delivery-label">{$p.time_added|date_format:"%B %e"}</div>
+                                </li>
                             </ul>
-                            <!-- <p class="centerMe"><a href="#" class="whiteBtn"><span></span></a></p> -->
-                        </div>	                
-                        {include file='scriptolution_bit_related.tpl'}
+                        </div>
+                    </div>
+                    <div>
+                    	
+                    </div>
+                    
+                    <div class="add-extra skilop-add-extra">
+                        <div class="extra-container col-md-12">
+                            {if $smarty.session.USERID GT "0"  and $smarty.session.USERID ne $p.USERID}
+						    {if $p.scriptolution_add_multiple GT "0"}
+						        {if $smarty.session.USERID ne $p.USERID} 
+						        <div class="order-extras"> 
+						            <form name="ordermulti" id="ordermulti" action="{$baseurl}ordering.php" method="post">
+						            <span class="quantity">
+						                {$lang575}:
+						                <select class="customDropdown" id="multi" name="multi" onchange="togglemulti();">
+						                    {section name=i start=1 loop=$p.scriptolution_add_multiple+1}
+						                    <option value="{$smarty.section.i.index}">{$smarty.section.i.index}</option>
+						                    {/section}
+						                </select>
+						            </span>
+						            <input type="hidden" name="id" value="{$p.PID}" />
+						            </form>
+						        </div>
+						        {/if}
+						    {else}
+						    <form name="ordermulti" id="ordermulti" action="{$baseurl}ordering.php" method="post">
+						    <input type="hidden" name="id" value="{$p.PID}" />
+						    </form>
+						    {/if}
+						{/if}
+                        </div>
+                    </div>
+                    
+                    <div class="action">
+                        {include file='scriptolution_order_selection.tpl'}
+                    </div>
+                    <div class="add-extra skilop-add-extra">
+                        <span class="extra">Extra Services</span>
+                        <div class="extra-container col-md-12">
+                            {if $p.scriptolutionhasextras eq "1"} {insert name=get_extras value=a assign=extras PID=$p.PID} {if $extras|@count GT 0}
+                            <!-- View Extra starts -->
+                            {include file='view_extra.tpl'}
+                            <!-- View Extra ends -->
+                            {/if} {else}
+                            <p class="no-extra col-md-12">There are no extra services</p>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="custom-order-link">
+                        <div>
+                            <a style="visibility:hidden;" style="cursor: pointer">Send custom order <i class="fa fa-paper-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear clearfix"></div>
+                <div class="box-aside">
+                    <div class="personal-profile">
+                        <div class="float-center">
+                            <a class="profile-link" href="{$baseurl}{insert name=get_seo_profile value=a username=$p.username|stripslashes}">
+                            	<img class="avatar img-circle" alt="{$uname|stripslashes}" src="{$membersprofilepicurl}/{$p.profilepicture}?{$smarty.now}" />
+                            </a>	
+                        </div>
+                        <h4 class="float-center">
+                        	<a class="profile-link" href="{$baseurl}{insert name=get_seo_profile value=a username=$p.username|stripslashes}">{$p.username}</a>
+                        </h4>
+                        <div class="line">
+                            <span class="line-distance"></span>
+                        </div>
+                        <ul class="profile">
+                            <li class="location clearfix">
+                                <div class="pull-left">
+                                    <span><i class="fa fa-map-marker"></i>From </span>
+                                </div>
+                                <div class="pull-right">
+                                    {insert name=country_code_to_country value=a assign=userc code=$p.country}{$userc|upper}
+                                    <span class="countryflag"><span class="country {$p.country}"></span></span>
+                                </div>
+                            </li>
+                           
+                            <li class="location clearfix">
+                                <div class="pull-left">
+                                    <span><i class="fa fa-calendar"></i>{$lang572} </span>
+                                </div>
+                                <div class="pull-right">
+                                    <p class="lang-item">{$p.addtime|date_format:"%B %e %Y"|upper}</p>
+                                </div>
+                            </li>
+                            <li class="location clearfix">
+                                <div class="pull-left">
+                                    <span><i class="fa fa-star"></i>{$lang570} {$lang571} </span>
+                                </div>
+                                <div class="pull-right">
+                                    {insert name=get_percent value=a assign=mpercent userid=$p.USERID}
+                                    <p class="lang-item">
+                                        {if $enable_levels eq "1"} {if $p.level eq "1"}
+                                        <img src="{$imageurl}/scriptolution_level1.png" /> {elseif $p.level eq "2"}
+                                        <img src="{$imageurl}/scriptolution_level2.png" /> {elseif $p.level eq "3"}
+                                        <img src="{$imageurl}/scriptolution_level3.png" /> {/if} {/if}
+                                        <span class="big">{if $mpercent ne ""}{$mpercent}&#37;{else}{$lang471}{/if}</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="bio clearfix">
+                                <span> <i class="fa fa-info-circle"></i>Bio</span>
+                                <div class="content-bio">
+                                    Hola! I love all kinds of writing! And I want to take this hobby to help you with: Business writing, Creative writing, Academic papers, social media articles,. And I can help you with translation from Spanish to English.
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="link-personal">
+                            <ul>
+                                <li>
+                                    {if $smarty.session.USERID ne $p.USERID} {if $smarty.session.USERID GT "0"}
+                                    <a class="contact-link do-contact" href="{$baseurl}{insert name=get_seo_convo value=a assign=cvseo username=$p.username|stripslashes}{$cvseo}?id={$p.PID}">Contact me <i class="fa fa-comment"></i></a> {else}
+                                    <a class="contact-link do-contact" href="{$baseurl}login?r={insert name=get_redirect2 value=a assign=rurl2 uname=$p.username pid=$p.PID}{$rurl2|stripslashes}">{$lang142} <i class="fa fa-comment"></i></a> {/if} {/if}
+                                </li>
+                                <li>
+                                    <a class="profile-link" href="{$baseurl}{insert name=get_seo_profile value=a username=$p.username|stripslashes}">View my profile<i class="fa fa-user"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            
-            
-            
-            
-            			
-			<div class="clear"></div>
-			<div class="more-user-gigs">
-				<h3>{$lang137} {$p.username|stripslashes}</h3>
-				{section name=i loop=$u}
-				<div class="user-gig {if $smarty.section.i.iteration % 5 == 0}last{/if}">
-					<div class="gig-thumb">
-						<a href="{$baseurl}/{$u[i].seo|stripslashes}/{$u[i].PID|stripslashes}/{$utitle}"><img src="{$purl}/t/{$u[i].p1}" width="180" height="112" /></a>
-					</div>
-					<span class="user-gig-excerpt"><a href="{$baseurl}/{$u[i].seo|stripslashes}/{$u[i].PID|stripslashes}/{$utitle}">{$lang62} {$u[i].gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$u[i].price|stripslashes}{$lang197}{else}{$lang63}{$u[i].price|stripslashes}{/if}</a></span>
-                    <br />
-                    <span class="user-cat"><a href="{$baseurl}/categories/{$u[i].seo|stripslashes}">{$u[i].name|stripslashes}</a></span>
-				</div>
-				{/section}				
-			</div>
-		</div>    
-	</div>
+
+        </div>
+    </div>
+    <!-- Review Block ends -->
+
+    <!-- Related job starts -->
+    {if $r|@count GT 0}
+    <div class="container-fluid category_block">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                {include file='scriptolution_bit_related.tpl'}
+            </div>
+        </div>
+    </div>
+    {/if}
+    <!-- Related job ends -->
+
+    <!-- Other similar products of the same seller starts-->
+    {if $u|@count GT 0}
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="container">
+                    <h6 class="job_cat_name">{$lang137} <span> {if $smarty.session.USERID eq $p.USERID}  You {else} {$p.username|stripslashes} {/if}</span></h6>
+                    <header class="carousel slide">
+                        <div id="sellermorejobs"  {if $u|@count GT 4}class="carousel slide" data-ride="carousel"{/if}>
+                         {if $u|@count GT 4}
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <!--<h3 class="related_jobs_scroll">
+			                 {$lang137} <span>{$p.username|stripslashes}</span>
+			              </h3>-->
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="controls pull-right hidden-xs">
+                                        <a class="left fa fa-chevron-left btn btn-info" href="#sellermorejobs" data-slide="prev"></a>
+                                        <a class="right fa fa-chevron-right btn btn-info" href="#sellermorejobs" data-slide="next"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {/if}
+                            {$count=1}
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <div class="row">
+                                        {section name=i loop=$u} 
+                                        {if $count le 4} {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                            		<ul class="vote ratingvote">
+                                            	    	{insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$u[i].PID}{$scriptolutionstars}
+                                            			<span>({$u[i].rcount})</span>
+                                            		</ul>
+                                            		{if $u[i].days eq "0"}{include file='scriptolution_bit_instant.tpl'}{elseif $u[i].days eq "1"}{include file='scriptolution_bit_express.tpl'}{/if}
+                                            		{if $u[i].toprated eq "1"}<span class="rated">{$lang525}</span>{/if} 
+                                            		{if $u[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if} 
+                                            		{if $u[i].feat eq "1"}<span class="featured ">{$lang526}</span>{/if} 
+                                        		</div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+                                                    <a href="{$baseurl}{$u[i].seo|stripslashes}/{$u[i].PID|stripslashes}/{$utitle}">
+                                                        <img src="{$purl}/t/{$u[i].p1}" class="img-responsive" />
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 name_job">
+                                                    <p>
+                                                        <a href="{$baseurl}{$u[i].seo|stripslashes}/{$u[i].PID|stripslashes}/{$utitle}">{$lang62} {$u[i].gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$u[i].price|stripslashes}{$lang197}{else}{$lang63}{$u[i].price|stripslashes}{/if}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdata">
+                                                    <p class="username">
+                                                        <span>In</span> <a href="{$baseurl}categories/{$u[i].seo|stripslashes}">{$u[i].name|stripslashes}</a>
+                                                    </p>
+                                                    <div class="otherdetails">
+                                                        <span class="usercount"></span>
+                                                        <div class="price">
+                                                            {if $scriptolution_cur_pos eq "1"}{$u[i].price|stripslashes}<sup>{$lang197}</sup>{else}<sup>{$lang197}</sup>{$u[i].price|stripslashes}{/if}
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/if} {$count=$count+1} {/section}
+                                    </div>
+                                </div>
+                                {$count=1}
+                                <div class="item">
+                                    <div class="row">
+                                        {section name=i loop=$u} 
+                                        {if $count gt 4} {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
+                                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
+                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                            		<ul class="vote ratingvote">
+                                            	    	{insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$u[i].PID}{$scriptolutionstars}
+                                            			<span>({$u[i].rcount})</span>
+                                            		</ul>
+                                            		{if $u[i].days eq "0"}{include file='scriptolution_bit_instant.tpl'}{elseif $u[i].days eq "1"}{include file='scriptolution_bit_express.tpl'}{/if}
+                                            		{if $u[i].toprated eq "1"}<span class="rated">{$lang525}</span>{/if} 
+                                            		{if $u[i].youtube ne ""}{include file="scriptolution_bit_yt_small.tpl"}{/if} 
+                                            		{if $u[i].feat eq "1"}<span class="featured ">{$lang526}</span>{/if} 
+                                        		</div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+                                                    <a href="{$baseurl}{$u[i].seo|stripslashes}/{$u[i].PID|stripslashes}/{$utitle}">
+                                                        <img src="{$purl}/t/{$u[i].p1}" class="img-responsive" />
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 name_job">
+                                                    <p>
+                                                        <a href="{$baseurl}{$u[i].seo|stripslashes}/{$u[i].PID|stripslashes}/{$utitle}">{$lang62} {$u[i].gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$u[i].price|stripslashes}{$lang197}{else}{$lang63}{$u[i].price|stripslashes}{/if}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userdata">
+                                                    <p class="username">
+                                                        <span>In</span> <a href="{$baseurl}categories/{$u[i].seo|stripslashes}">{$u[i].name|stripslashes}</a>
+                                                    </p>
+                                                    <div class="otherdetails">
+                                                        <span class="usercount"></span>
+                                                        <div class="price">
+                                                            {if $scriptolution_cur_pos eq "1"}{$u[i].price|stripslashes}<sup>{$lang197}</sup>{else}<sup>{$lang197}</sup>{$u[i].price|stripslashes}{/if}
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/if} {$count=$count+1} {/section}
+                                    </div>
+                                </div>
+                            </div>
+                    </header>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/if}
+        <!-- Other similar products of the same seller ends-->
+
+    </div>
+</div>
 </div>

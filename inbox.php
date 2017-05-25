@@ -22,7 +22,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		$auid = intval(cleanit($_REQUEST['auid']));
 		if($auid > 0)
 		{
-			$query="INSERT INTO archive SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', AID='".mysql_real_escape_string($auid)."'";
+			$query="INSERT INTO archive SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $auid)."'";
 			$results=$conn->execute($query);	
 			$message = $lang['244'];
 		}
@@ -83,16 +83,16 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$u = intval(cleanit($_REQUEST['u']));
 	if($u > 0)
 	{
-		$addsql3 = "AND B.USERID='".mysql_real_escape_string($u)."'";	
+		$addsql3 = "AND B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $u)."'";	
 	}
 	STemplate::assign('u',$u);
 	
-	$query="SELECT AID FROM archive WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."'";
+	$query="SELECT AID FROM archive WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'";
 	$results=$conn->execute($query);
 	$arc = $results->getrows();
 	STemplate::assign('arc',$arc);
 	
-	$query = "select max(A.time) as time, max(A.unread) as unread, B.username, B.USERID from inbox A, members B where ((A.MSGFROM='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.MSGTO=B.USERID) OR (A.MSGTO='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.MSGFROM=B.USERID)) $addsql3 GROUP BY B.username order by $addsql2";
+	$query = "select max(A.time) as time, max(A.unread) as unread, B.username, B.USERID, if(B.profilepicture = '', 'noprofilepicture.png', B.profilepicture) as profilepicture from inbox A, members B where ((A.MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.MSGTO=B.USERID) OR (A.MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.MSGFROM=B.USERID)) $addsql3 GROUP BY B.username,B.USERID, B.profilepicture order by $addsql2";
 	$results=$conn->execute($query);
 	$m = $results->getrows();
 	STemplate::assign('m',$m);

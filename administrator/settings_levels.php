@@ -21,7 +21,7 @@ if($_POST['submitform'] == "1")
 	$arr = array("enable_levels", "level1job", "level2job", "level3job", "level2num", "level2rate", "level3num", "level3rate");
 	foreach ($arr as $value)
 	{
-		$sql = "update config set value='".mysql_real_escape_string(cleanit($_POST[$value]))."' where setting='$value'";
+		$sql = "update config set value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], cleanit($_POST[$value]))."' where setting='$value'";
 		$conn->execute($sql);
 		Stemplate::assign($value,cleanit($_POST[$value]));
 	}

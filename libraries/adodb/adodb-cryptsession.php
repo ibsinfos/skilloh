@@ -31,7 +31,7 @@ wrapper library.
  
  Installation
  ============
- 1. Create a new database in MySQL or Access "sessions" like
+ 1. Create a new database in mysql or Access "sessions" like
 so:
  
   create table sessions (

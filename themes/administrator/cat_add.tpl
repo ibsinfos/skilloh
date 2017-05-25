@@ -150,7 +150,7 @@
                                                         <td class="value">
                                                             <input type="file" id="bigimage" name="bigimage">
                                                         </td>
-                                                        <td class="scope-label">[IMAGE SHOWN ON THE INDIVIDUAL CATEGORY PAGE]</td>
+                                                        <td class="scope-label">[IMAGE SHOWN ON THE INDIVIDUAL CATEGORY PAGE] (Image size: 1920px * 300px)</td>
                                                         <td><small></small></td>
                                                     </tr>
                                                     

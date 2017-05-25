@@ -29,7 +29,7 @@ if($_REQUEST['delete']=="1")
 		
 		if($tadmins > 1)
 		{ 
-			$sql="DELETE FROM administrators WHERE ADMINID='".mysql_real_escape_string($DADMINID)."'";
+			$sql="DELETE FROM administrators WHERE ADMINID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DADMINID)."'";
 			$conn->Execute($sql);
 			$message = "Administrator Successfully Deleted.";
 			Stemplate::assign('message',$message);
@@ -82,26 +82,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $email!
 {
 	if($fromid > 0)
 	{
-		$addtosql = "WHERE ADMINID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE ADMINID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "WHERE ADMINID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE ADMINID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND ADMINID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND ADMINID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($email != "")
 	{
-		$addtosql .= "AND email like'%".mysql_real_escape_string($email)."%'";
+		$addtosql .= "AND email like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email)."%'";
 		Stemplate::assign('email',$email);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	Stemplate::assign('search',"1");

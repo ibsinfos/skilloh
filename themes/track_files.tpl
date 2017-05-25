@@ -5,7 +5,7 @@
 <div class="padding5"></div>
 <div class="files">
   <ul>
-    <li><a href="{$baseurl}/files/{$fd[x].FID|md5}{$fd[x].s}/{$fd[x].fname}" target="_blank">{$fd[x].fname} <b>[{$afs}]</b></a></li>
+    <li><a href="{$baseurl}files/{$fd[x].FID|md5}{$fd[x].s}/{$fd[x].fname}" target="_blank">{$fd[x].fname} <b>[{$afs}]</b></a></li>
   </ul>
 </div>
 {/section}

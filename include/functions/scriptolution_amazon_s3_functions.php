@@ -6,7 +6,7 @@ function scriptolution_delete_file($DFID)
 	$DFID = intval($DFID);
 	if($DFID > 0)
 	{		
-		$query = "select fname,s from files where FID='".mysql_real_escape_string($DFID)."' limit 1"; 
+		$query = "select fname,s from files where FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DFID)."' limit 1"; 
 		$executequery=$conn->execute($query);
 		$s = $executequery->fields['s'];
 		$fname = $executequery->fields['fname'];
@@ -18,9 +18,9 @@ function scriptolution_delete_file($DFID)
 		{
 			@unlink($file_loc);
 		}
-		$sql="DELETE FROM files WHERE FID='".mysql_real_escape_string($DFID)."'";
+		$sql="DELETE FROM files WHERE FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DFID)."'";
 		$conn->Execute($sql);
-		$sql="UPDATE inbox2 SET FID='0' WHERE FID='".mysql_real_escape_string($DFID)."'";
+		$sql="UPDATE inbox2 SET FID='0' WHERE FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DFID)."'";
 		$conn->Execute($sql);	
 	}
 }

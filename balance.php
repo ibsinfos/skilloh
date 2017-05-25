@@ -34,7 +34,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$wdfunds3 = intval(cleanit($_POST['wdfunds3']));
 	if($wdfunds == "1")
 	{	
-		$query = "select pemail from members where USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+		$query = "select pemail from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 		$executequery=$conn->execute($query);
 		$pemail = $executequery->fields['pemail'];
 		if($pemail == "")
@@ -43,14 +43,14 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		}
 		else
 		{
-			$query="INSERT INTO withdraw_requests SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', time_added='".time()."', ap='0'";
+			$query="INSERT INTO withdraw_requests SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', time_added='".time()."', ap='0'";
 			$conn->execute($query);
 			$message = $lang['395'];
 		}
 	}
 	elseif($wdfunds2 == "1")
 	{
-		$query = "select aemail from members where USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+		$query = "select aemail from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 		$executequery=$conn->execute($query);
 		$aemail = $executequery->fields['aemail'];
 		if($aemail == "")
@@ -59,24 +59,24 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		}
 		else
 		{	
-			$query="INSERT INTO withdraw_requests SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', time_added='".time()."', ap='1'";
+			$query="INSERT INTO withdraw_requests SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', time_added='".time()."', ap='1'";
 			$conn->execute($query);
 			$message = $lang['395'];
 		}
 	}
 	elseif($wdfunds3 == "1")
 	{	
-		$query="INSERT INTO withdraw_requests SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', time_added='".time()."', bank='1'";
+		$query="INSERT INTO withdraw_requests SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', time_added='".time()."', bank='1'";
 		$conn->execute($query);
 		$message = $lang['395'];
 	}
 	
-	$query="SELECT OID, time, t, price FROM payments WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."' order by ID desc";
+	$query="SELECT P.OID, P.time, P.t, P.price, C.p1 FROM payments P, orders B, posts C WHERE P.OID=B.OID AND B.PID=C.PID AND P.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' order by P.ID desc";
 	$results=$conn->execute($query);
 	$o = $results->getrows();
 	STemplate::assign('o',$o);
 	
-	$query = "select funds, afunds, withdrawn, used from members where USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+	$query = "select funds, afunds, withdrawn, used from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 	$executequery=$conn->execute($query);
 	$funds = $executequery->fields['funds'];
 	STemplate::assign('funds',$funds);
@@ -87,7 +87,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$used = $executequery->fields['used'];
 	STemplate::assign('used',$used);
 	
-	$query="SELECT A.OID, A.time, A.price, A.cancel, A.wd, B.status, B.cltime, B.IID, C.ctp FROM payments A, orders B, posts C WHERE A.OID=B.OID AND B.PID=C.PID AND C.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.t='1' AND B.status>'0' order by A.ID desc";
+	$query="SELECT A.OID, A.time, A.price, A.t, A.cancel, A.wd, B.status, B.cltime, B.IID, C.p1, C.ctp, (SELECT O.IID FROM order_items O WHERE O.PID=C.PID AND O.USERID=B.USERID AND O.totalprice=B.price order by O.IID DESC LIMIT 1) FROM payments A, orders B, posts C WHERE A.OID=B.OID AND B.PID=C.PID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.t='1' AND B.status>'0' order by A.ID desc";
 	$results=$conn->execute($query);
 	$p = $results->getrows();
 	STemplate::assign('p',$p);

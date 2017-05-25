@@ -43,19 +43,19 @@ if($_POST['submitform'] == "1")
 			}
 			else
 			{
-				$sql="select count(*) as total from administrators WHERE username='".mysql_real_escape_string($username)."'";
+				$sql="select count(*) as total from administrators WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."'";
 				$executequery = $conn->Execute($sql);
 				$tadmins = $executequery->fields['total'];
 				
 				if($tadmins == "0")
 				{ 
-					$sql="select count(*) as total from administrators WHERE email='".mysql_real_escape_string($email)."'";
+					$sql="select count(*) as total from administrators WHERE email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email)."'";
 					$executequery = $conn->Execute($sql);
 					$tadmins = $executequery->fields['total'];
 					
 					if($tadmins == "0")
 					{
-						$sql = "insert administrators set username='".mysql_real_escape_string($username)."', password='".md5($password)."', email='".mysql_real_escape_string($email)."'";
+						$sql = "insert administrators set username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."', password='".md5($password)."', email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email)."'";
 						$conn->execute($sql);
 						$message = "Administrator Successfully Added.";
 						Stemplate::assign('message',$message);

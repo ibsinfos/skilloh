@@ -19,15 +19,20 @@ $adminurl = $config['adminurl'];
 
 if($_POST['submitform'] == "1")
 {
-	$pprice = cleanit($_POST['pprice']);
+	$pminprice = cleanit($_POST['pminprice']);
+	$pmaxprice = cleanit($_POST['pmaxprice']);
 	$pcom = cleanit($_POST['pcom']);
 	$l1 = intval(cleanit($_POST['l1']));
 	$l2 = intval(cleanit($_POST['l2']));
 	$l3 = intval(cleanit($_POST['l3']));
 	
-	if($pprice == "")
+	if($pminprice == "")
 	{
-		$error = "Error: Please enter a price.";
+		$error = "Error: Please enter min price.";
+	}
+	elseif($pmaxprice == "")
+	{
+		$error = "Error: Please enter max price.";
 	}
 	elseif($pcom == "")
 	{
@@ -36,7 +41,7 @@ if($_POST['submitform'] == "1")
 	else
 	{
 
-		$sql = "insert into packs set pprice='".mysql_real_escape_string($pprice)."', pcom='".mysql_real_escape_string($pcom)."', l1='".mysql_real_escape_string($l1)."', l2='".mysql_real_escape_string($l2)."', l3='".mysql_real_escape_string($l3)."'";
+		$sql = "insert into packs set pminprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pminprice)."', pmaxprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pmaxprice)."', pcom='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pcom)."', l1='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $l1)."', l2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $l2)."', l3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $l3)."'";
 		$conn->execute($sql);
 		$message = "Price Pack Successfully Added.";
 		Stemplate::assign('message',$message);

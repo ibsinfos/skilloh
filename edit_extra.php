@@ -17,6 +17,7 @@ include("include/functions/import.php");
 
 $SID = $_SESSION['USERID'];
 $EID = intval(cleanit($_REQUEST['id']));
+$PID = intval(cleanit($_REQUEST['PID']));
 if($EID > 0)
 {
 	if ($SID != "" && $SID >= 0 && is_numeric($SID))
@@ -32,7 +33,7 @@ if($EID > 0)
 					
 			if($error == "")
 			{			
-				$query = "select B.USERID, B.price from extras A, posts B where A.PID=B.PID AND A.EID='".mysql_real_escape_string($EID)."'"; 				
+				$query = "select B.USERID, B.price from extras A, posts B where A.PID=B.PID AND A.EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'"; 				
 				$executequery=$conn->execute($query);
 				$BUSERID = $executequery->fields['USERID'];
 				$price = $executequery->fields['price'];
@@ -47,8 +48,8 @@ if($EID > 0)
 					}
 					elseif($config['price_mode'] == "3")
 					{
-						$PACID = intval(cleanit($price));
-						$query = "select pprice,pcom from packs where pprice='".mysql_real_escape_string($PACID)."'"; 
+						$price = intval(cleanit($price));
+						$query = "select pcom from packs where pminprice<'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."' and pmaxprice >='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 						$executequery=$conn->execute($query);
 						$comper = intval(cleanit($executequery->fields['pcom']));
 						$count1 = $comper / 100;
@@ -94,22 +95,47 @@ if($EID > 0)
 								$emysetc = 0;
 								$ectp = number_format($emysetc, 2, '.', '');
 							}
-							$query="UPDATE extras SET etitle='".mysql_real_escape_string($gtitle)."', eprice='".mysql_real_escape_string($extraprice1)."', ctp='".mysql_real_escape_string($ectp)."' WHERE EID='".mysql_real_escape_string($EID)."'";
+							$query="UPDATE extras SET etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtitle)."', eprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extraprice1)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ectp)."' WHERE EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'";
 							$result=$conn->execute($query);	
 						}						
 						$message = $lange['9'];
 					}
 				}
 			}
+			$query="SELECT * FROM posts WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
+			$results=$conn->execute($query);
+			$g = $results->getrows();
+			STemplate::assign('g',$g[0]);
+			
+			$pagetitle = $lang['141'];
+			STemplate::assign('pagetitle',$pagetitle);
+			//TEMPLATES BEGIN
+			STemplate::assign('sm1',"1");
+			STemplate::assign('error',$error);
+			STemplate::assign('message',$message);
+			STemplate::display('scriptolution_header.tpl');
+			STemplate::display('edit.tpl');
+			STemplate::display('scriptolution_footer_nobottom.tpl');
+			//TEMPLATES END
 		}
-		
-		$query="SELECT A.* FROM extras A, posts B WHERE B.USERID='".mysql_real_escape_string($SID)."' AND A.PID=B.PID AND A.EID='".mysql_real_escape_string($EID)."'";
+		else {
+		$query="SELECT A.* FROM extras A, posts B WHERE B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND A.PID=B.PID AND A.EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'";
 		$results=$conn->execute($query);
 		$g = $results->getrows();
 		STemplate::assign('g',$g[0]);
 		
 		$pagetitle = $lange['7'];
 		STemplate::assign('pagetitle',$pagetitle);
+		//TEMPLATES BEGIN
+		STemplate::assign('sm1',"1");
+		STemplate::assign('error',$error);
+		STemplate::assign('message',$message);
+		STemplate::display('scriptolution_header.tpl');
+		STemplate::display('edit_extra.tpl');
+		STemplate::display('scriptolution_footer_nobottom.tpl');
+		//TEMPLATES END
+		}
+		
 	}
 	else
 	{
@@ -120,13 +146,4 @@ else
 {
 	header("Location:$config[baseurl]/");exit;
 }
-
-//TEMPLATES BEGIN
-STemplate::assign('sm1',"1");
-STemplate::assign('error',$error);
-STemplate::assign('message',$message);
-STemplate::display('scriptolution_header.tpl');
-STemplate::display('edit_extra.tpl');
-STemplate::display('scriptolution_footer_nobottom.tpl');
-//TEMPLATES END
 ?>

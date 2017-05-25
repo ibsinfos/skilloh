@@ -45,8 +45,10 @@ else
 	$dby = "A.REQUESTID desc";	
 }
 
-$query1 = "SELECT count(*) as total from scriptolutionrequests where active='1' $addsql order by REQUESTID desc limit $config[maximum_results]";
-$query2 = "SELECT A.*, C.username, C.country, C.toprated from scriptolutionrequests A, members C where A.active='1' AND A.USERID=C.USERID order by $dby limit $pagingstart, $config[items_per_page]";
+$userId = $_SESSION['USERID'];
+
+$query1 = "SELECT count(DISTINCT A.REQUESTID) as total from scriptolutionrequests A, posts P where A.active='1' AND A.scriptolutioncategory = P.category AND P.USERID = $userId order by REQUESTID desc limit $config[maximum_results]";
+$query2 = "SELECT DISTINCT A.*, C.username, C.country, C.toprated, if(C.profilepicture = '', 'noprofilepicture.png', C.profilepicture) as profilepicture, (select count(*) from offerscriptolution offers WHERE offers.REQUESTID = A.REQUESTID AND offers.USERID=$userId) as reqMade from scriptolutionrequests A, members C, posts P where A.active='1' AND A.USERID=C.USERID AND A.scriptolutioncategory = P.category AND P.USERID = $userId order by $dby limit $pagingstart, $config[items_per_page]";
 $executequery1 = $conn->Execute($query1);
 $scriptolution = $executequery1->fields['total'];
 if ($scriptolution > 0)
@@ -88,7 +90,7 @@ if ($scriptolution > 0)
 		}
 		else
 		{
-			$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+			$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 		}
 		$counter=0;
 		$lowercount = $currentpage-5;
@@ -112,7 +114,7 @@ if ($scriptolution > 0)
 		}
 		else
 		{
-			$pagelinks.="<li><span class='next'>next page</span></li>";
+			$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 		}
 	}
 }

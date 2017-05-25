@@ -20,7 +20,7 @@ $adminurl = $config['adminurl'];
 function insert_get_trans_id($a)
 {
     global $conn;
-	$query = "select txn_id, memo from paypal_table2 where id='".mysql_real_escape_string($a[id])."'"; 
+	$query = "select txn_id, memo from paypal_table2 where id='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[id])."'"; 
 	$executequery=$conn->execute($query);
 	$results = $conn->execute($query);
 	$returnthis = $results->getrows();
@@ -79,26 +79,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $OID!="
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.ID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.ID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.ID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.ID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.ID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.ID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($OID != "")
 	{
-		$addtosql .= "AND A.PID='".mysql_real_escape_string($OID)."'";
+		$addtosql .= "AND A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."'";
 		Stemplate::assign('OID',$OID);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	Stemplate::assign('search',"1");

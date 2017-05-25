@@ -33,15 +33,15 @@ if($_REQUEST['invite'] == "everyone")
 			$ILID = intval(cleanit($g[$i]['LID']));
 			if($ILID > 0)
 			{
-				$query = "select scriptolutionemail from scriptolution_launch WHERE LID='".mysql_real_escape_string($ILID)."'"; 
+				$query = "select scriptolutionemail from scriptolution_launch WHERE LID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ILID)."'"; 
 				$executequery=$conn->execute($query);
 				$sendto = $executequery->fields['scriptolutionemail'];
 				if($sendto != "")
 				{
 					$verifycode = generateCode(5).time();
-					$query = "INSERT INTO invites_code SET code='".mysql_real_escape_string($verifycode)."'";
+					$query = "INSERT INTO invites_code SET code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $verifycode)."'";
 					$conn->execute($query);
-					if(mysql_affected_rows()>=1)
+					if(mysqli_affected_rows($GLOBALS["___mysqli_ston"])>=1)
 					{
 						$sendername = $config['site_name'];
 						$from = $config['site_email'];
@@ -52,7 +52,7 @@ if($_REQUEST['invite'] == "everyone")
 						$sendmailbody .= $lang['23'].",<br>".stripslashes($sendername);
 						mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="");
 						
-						$query = "UPDATE scriptolution_launch SET invited='1' WHERE LID='".mysql_real_escape_string($ILID)."'";
+						$query = "UPDATE scriptolution_launch SET invited='1' WHERE LID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ILID)."'";
 						$conn->Execute($query);
 					}			
 				}
@@ -70,7 +70,7 @@ if($_REQUEST['delete']=="1")
 	if($DPID > 0)
 	{
 		$deleteme = $DPID;
-		$query = "DELETE FROM scriptolution_launch WHERE LID='".mysql_real_escape_string($deleteme)."'";
+		$query = "DELETE FROM scriptolution_launch WHERE LID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $deleteme)."'";
 		$conn->Execute($query);
 		
 		$message = "Invitation Request Successfully Deleted.";
@@ -88,15 +88,15 @@ elseif($_REQUEST['go']=="1")
 		}
 		else
 		{
-			$query = "select scriptolutionemail from scriptolution_launch WHERE LID='".mysql_real_escape_string($IID)."'"; 
+			$query = "select scriptolutionemail from scriptolution_launch WHERE LID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'"; 
 			$executequery=$conn->execute($query);
 			$sendto = $executequery->fields['scriptolutionemail'];
 			if($sendto != "")
 			{
 				$verifycode = generateCode(5).time();
-				$query = "INSERT INTO invites_code SET code='".mysql_real_escape_string($verifycode)."'";
+				$query = "INSERT INTO invites_code SET code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $verifycode)."'";
 				$conn->execute($query);
-				if(mysql_affected_rows()>=1)
+				if(mysqli_affected_rows($GLOBALS["___mysqli_ston"])>=1)
 				{
 					$sendername = $config['site_name'];
 					$from = $config['site_email'];
@@ -107,7 +107,7 @@ elseif($_REQUEST['go']=="1")
 					$sendmailbody .= $lang['23'].",<br>".stripslashes($sendername);
 					mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="");
 					
-					$query = "UPDATE scriptolution_launch SET invited='1' WHERE LID='".mysql_real_escape_string($IID)."'";
+					$query = "UPDATE scriptolution_launch SET invited='1' WHERE LID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 					$conn->Execute($query);
 					
 					$message = "Invitation Request Successfully Sent.";
@@ -138,7 +138,7 @@ $scriptolutionemail = htmlentities(strip_tags($_REQUEST['scriptolutionemail']), 
 $add1 .= "&scriptolutionemail=$scriptolutionemail";
 if($scriptolutionemail!="")
 {
-	$addtosql .= "AND scriptolutionemail like'%".mysql_real_escape_string($scriptolutionemail)."%'";
+	$addtosql .= "AND scriptolutionemail like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionemail)."%'";
 	Stemplate::assign('scriptolutionemail',$scriptolutionemail);
 	Stemplate::assign('search',"1");
 }

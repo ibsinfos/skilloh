@@ -19,7 +19,7 @@ verify_login_admin();
 $USERID = intval(cleanit($_REQUEST['USERID']));
 if($USERID > 0)
 {
-	$query="SELECT status,USERID,email,username,verified from members WHERE USERID='".mysql_real_escape_string($USERID)."'";
+	$query="SELECT status,USERID,email,username,verified from members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."'";
 	$result=$conn->execute($query);
 	
 	if($result->recordcount()<1)

@@ -14,7 +14,7 @@
 	padding:7px 8px;
 }
 .scriptolutionsblock:hover{
-	border:2px solid #38b0d9;
+	border:2px solid #10a2ef;
 }
 .scriptolutionsblock p{ 
     font-weight: 700;
@@ -29,23 +29,13 @@
     transition: color 0.2s;
     font-size:15px;
   }
-.scriptolutionsblock p a{color:#222222;}
-.scriptolutionsblock p a:hover{color:#38B0D9;}
-.scriptolution-h-header{
-    font-size: 22px;
-    line-height: 33px;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight:bold;
-    color:#333333; 
-     padding-bottom:0px;
- }
-.scriptolution-s-small{	
-    font-size: 18px;
-    text-align: center;
-    color: #333333;    
-    line-height: 27px;
+.scriptolutionsblock p a{
+	color:#222222;
 }
+.scriptolutionsblock p a:hover{
+	color:#10a2ef;
+}
+
 .scriptolution-t-tags li{
 	background-color:#f9f9f9; 
 	color:#b2b2b2; 

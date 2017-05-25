@@ -105,12 +105,11 @@
 }
 .scriptolution-response-sidebar {
 	padding:15px;
-	font-family:'latobold';
 	font-size:20px;
 	display:none;
 }
 .cuscriptolutionongtitle {
-	background-color:#38B0D9;
+	background-color:#10a2ef;
 	-webkit-border-radius:5px;
 	border-radius:5px;
 	padding-left:8px;
@@ -121,7 +120,6 @@
 }
 .cuscriptolutionongtitle p a {
 	color:#fff;
-	line-height:26px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
 	display:block;

@@ -24,7 +24,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		$pagetitle = $lang['512'];
 		STemplate::assign('pagetitle',$pagetitle);	
 		
-		$query="SELECT A.REFERRED, A.time_added, A.money, B.username, A.status from referrals A, members B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.REFERRED=B.USERID order by A.RID desc";
+		$query="SELECT A.REFERRED, A.time_added, A.money, B.username, A.status from referrals A, members B WHERE A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.REFERRED=B.USERID order by A.RID desc";
 		$results=$conn->execute($query);
 		$o = $results->getrows();
 		STemplate::assign('o',$o);	

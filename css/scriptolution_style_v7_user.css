@@ -1,17 +1,348 @@
-.scriptolution-jobsbyuser{font-size:30px;font-weight:700;color:#333;font-family:Arial,Helvetica,sans-serif;padding-bottom:0}
-.userbanner{background:url(../images/scriptolution_user_banner.jpg) no-repeat center top;height:350px}
-.usertopnavbg{background-color:#fff;border-radius:5px 5px 0 0;height:55px;left:0;position:absolute;top:302px;width:1010px}
-.userbannertext{padding-top:68px}
-.userbannertext h3{font-size:50px;font-weight:400;text-align:center;letter-spacing:-.5px;color:#fff;text-shadow:1px 1px #817F80;font-family:'latobold'}
-.userbannertext h2{font-size:26px;line-height:38px;font-family:'Arial, Helvetica, sans-serif';text-shadow:1px 1px #817F80;font-weight:400;text-align:center;color:#fff;padding-bottom:18px}
-.find-userrating{padding:5px;border-radius:5px;-webkit-border-radius:5px;width:502px;margin:auto;text-align:center}
-.profile-image {margin-top:-120px !important;}
-.profile-image img{border-radius:50%;}
-.paddinguser20{padding:20px}
-.pfloatleft{float:left;width:60%;font-size:14px;font:400 16px/24px 'Helvetica Neue',Helvetica,Arial,sans-serif}
-.otherinfo{color:#666;font-size:14px;font:400 16px/24px 'Helvetica Neue',Helvetica,Arial,sans-serif;width:35%;float:right}
-.scriptolutionuserreviews{width:650px;float:left}
-.scriptolutionuserreviews>a{border:1px #e5e5e5 solid;display:inline-block;width:600px;padding:20px;margin:0 0 20px 30px;border-radius:5px;background-color:#f7f7f7}
-.review-image img{border-radius:50%;float:left;margin-right:20px;padding-bottom:25px}
-.reviewinfo{color:#383838;font-size:14px;font:400 18px/24px 'Helvetica Neue',Helvetica,Arial,sans-serif}
-.reviewinfo .usercolorit{color:#13A0BA;font-size:14px;font:400 14px/24px 'Helvetica Neue',Helvetica,Arial,sans-serif}
+.skilop-profile-page {
+    margin-top: 20px;
+}
+.title-top-pages {
+    margin: 20px 0 35px 0;
+}
+body.archive .username-title {
+    margin-bottom: 20px !important;
+}
+.skilop-profile-page .username-title {
+    border-bottom: 1px solid #ebebe8;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+	color:#000;
+}
+.username-title {
+    font-size: 22px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+	line-height:1.5;
+}
+.user-public-profile .rate-it {
+    width: auto;
+    margin: 0 auto;
+    padding-top: 10px;
+	padding-right: 15px;
+}
+.user-public-profile .link-personal {
+    margin-top: 10px;
+    border-top: 1px solid #ebebe8;
+}
+.user-public-profile .list-job ul {
+    margin-top: 0;
+}
+.user-public-profile .list-job ul li {
+    background: #fff;
+    border: none;
+    box-shadow: 2px 5px 43px rgba(188, 207, 219, 0.65);
+    padding-bottom: 0;
+    margin-bottom: 30px;
+}
+.list-job ul li {
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ebebe8;
+    padding-bottom: 20px;
+    position: relative;
+}
+.user_profile li {
+    border-bottom: none;
+}
+.list-job ul li .image-avatar {
+    /* float: left; */
+    /* margin-right: 15px; */
+	padding:0;
+}
+.user-public-profile .list-job ul li .image-avatar img {
+    width: 255px;
+    height: 160px;
+    border-radius: 4px 0 0 4px;
+}
+.list-job ul li .image-avatar img {
+    width: 116px;
+    height: 73px;
+}
+.user-public-profile .list-job ul li .info-items {
+    /* padding-top: 15px; */
+    /* bottom: 0; */
+    padding-bottom: 0;
+    padding: 0 0 0 15px;
+}
+.list-job ul li .info-items h2 {
+    font-size: 14px;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+    color: #2a394e;
+    text-transform: initial;
+    padding-right: 15px;
+    padding-top: 10px;
+	line-height: 1.5;
+	cursor: default
+}
+.list-job ul li .info-items a {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+	line-height: 1.5;
+}
+.list-job ul li .info-items .group-function {
+    position: relative;
+}
+.list-job ul li .info-items .vote {
+    margin-top: 0px;
+}
+.group-function .rate-it {
+    display: block;
+}
+.rate-it {
+    display: inline-block;
+}
+.user-public-profile .list-job ul li .info-items .price {
+    right: 15px;
+}
+.group-function .scriptolution-express, .group-function .featured, .group-function .rated {
+	background-color: #ffa800;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    text-transform: capitalize;
+    position: initial;
+    float: right;
+    right: 0px;
+    /* bottom: 0; */
+    padding: 2px 10px;
+    border-radius: 45px 0 0 45px;
+    width: 94px;
+    text-align: center;
+    border-radius: 45px 0 0 45px;
+	margin-right: 7px;
+}
+
+.seller_morders.user-public-profile .list-job ul li {
+    box-shadow: 2px 0px 10px rgba(188, 207, 219, 0.65);
+}
+.seller_morders.user-public-profile .list-job ul li:hover {
+    box-shadow: 2px 5px 20px rgba(188, 207, 219, 0.65);
+}
+.status.late_delivery, 
+.status.in_progress, 
+.status.buyer_cancelled, 
+.status.seller_cancelled, 
+.status.delivered, 
+.status.completed, 
+.status.dispute, 
+.status.withdrawn, 
+.status.withdrawal, 
+.status.cleared, 
+.status.clearing, 
+.status.cancelled,
+.status.waiting_for_reqs {
+	-webkit-border-radius: 45px 0 0 45px;	
+    border-radius: 45px 0 0 45px;
+    color: #fff;
+    font-size: 10px;
+    line-height: 1.5;
+    text-transform: capitalize;
+    float: right;
+    padding: 3px 15px;
+    width: auto;
+    text-align: center;
+    margin: 2px 0 5px;
+	cursor: default;
+	
+}
+.status.delivered.detele_offers{
+	background: #CF0404;
+    border: 1px solid #CF0404;
+	color: #fff !important;
+    -border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 6px;
+    cursor: pointer;
+    text-transform: capitalize;
+    margin-left: 3px;
+    box-shadow: none;
+	
+}
+.newclass{
+	font-size: 12px;
+    line-height: 1.5;
+    color: #aaafb3;
+    padding-right: 15px;
+    padding-top: 10px;
+    cursor: default;
+}
+.status.withdrawal a, .status.withdrawal a:hover {
+	color: #fff !important;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.custom_order_buyer_pic{
+	padding-top:15px;
+}
+.newclass span strong{
+	color:#6c6b6b;
+}
+.black_order_right{
+	color:#000;
+}
+.status.late_delivery, 
+.status.dispute, 
+.status.buyer_cancelled, 
+.status.seller_cancelled, 
+.status.cleared, 
+.status.withdrawn,
+.status.cancelled {
+	background-color: #f44;
+}
+.status.withdrawn a{
+	color:#fff !important;
+}
+.status.in_progress,
+.status.withdrawal{
+	background-color: #10a2ef;
+}
+.status.completed  {
+	background-color: #35b982;    
+}
+.status.delivered  {
+	background-color: #ff8300;    
+}
+.status.waiting_for_reqs {
+	background-color: #ffa800;    
+}
+.viewcustomjoblink{
+	margin:0px;
+}
+.total-review.right_orders{
+	font-size:14px;
+	line-height: 1.5;
+	font-weight: 600;
+}
+.revenue_netprice{
+	position: absolute;
+    margin-top: 20px;
+    font-weight: 600;
+	font-size: 14px;
+    line-height: 1.5;
+}
+
+.order_to_whom option {
+    font-weight: normal;
+    display: block;
+    white-space: pre !important;
+    min-height: 1.2em !important;
+    padding: 0px 2px 1px !important;
+}
+.form-group label{
+	margin: 10px 30px 15px 0;
+    color: rgba(137, 138, 144, 0.6);
+    font-size: 16px;
+}
+textarea {
+	padding: 7px;
+    border: 0;
+    border: 1px solid rgba(137, 138, 144, 0.2);
+    box-shadow: none;
+    outline: none;
+	width:100%;
+}
+.btn_action.status.withdrawal,
+.btn_action.status.late_delivery,
+.btn_action .status.delivered{
+	width:auto;	
+}
+.status.delivered.feature, 
+.status.delivered.edit,
+.status.in_progress.viewcustomorders {
+	-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 6px;
+    cursor: pointer;
+    text-transform: capitalize;
+    margin-left: 3px;
+    background: #10a2ef;
+    border: #10a2ef;
+    box-shadow: none;
+    color: #fff !important;
+}
+.status.delivered.feature, 
+.status.delivered.edit,
+.status.in_progress.viewcustomorders {
+	background: #10a2ef;
+    border: #10a2ef;
+}
+.status.delivered.featured {
+    color: #fff !important;
+    -border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 6px;
+    cursor: pointer;
+    text-transform: capitalize;
+    margin-left: 3px;
+    background: #6abb17;
+    border: 0px solid #6abb17;
+	box-shadow:none;
+}
+.status.delivered.pending {
+    -border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 6px;
+    cursor: pointer;
+    text-transform: capitalize;
+    margin-left: 3px;
+	box-shadow:none;
+}
+.vline_seperator{
+	color:#ccc;
+	font-size: 14px;
+    font-weight: 700;
+}
+.count_viewed{
+	font-size:16px;
+	color:#10a2ef;
+	line-height: 1.5;
+    padding-right: 10px;
+}
+.status.delivered.feature span{
+	color: #000;
+}
+
+.status.late_delivery, 
+.status.in_progress, 
+.status.buyer_cancelled, 
+.status.seller_cancelled, 
+.status.delivered, 
+.status.completed, 
+.status.dispute, 
+.status.withdrawn, 
+.status.withdrawal, 
+.status.cleared, 
+.status.clearing, 
+.status.cancelled, 
+.status.waiting_for_reqs,
+span.featured, 
+span.rated, 
+.scriptolution-express {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    padding: 3px 10px;
+    margin: 0px 0 5px;
+	position: inherit;
+}
+.personal-profile .link-personal ul li .contact-link,
+.personal-profile .link-personal ul li .contact-link i {
+    color: #10a2ef !important;
+}

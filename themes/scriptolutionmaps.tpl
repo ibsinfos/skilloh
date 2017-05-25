@@ -1,9 +1,10 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$scriptolution_map_key}&libraries=places&callback=initAutocomplete" async defer></script>
 {literal}
 <script type="text/javascript">                        
   $(document).ready(function(){
-	var input = document.getElementById('scriptolutionjoblocation');
-	var options = {types: ['(cities)']};
-	new google.maps.places.Autocomplete(input, options);
+		//var input = document.getElementById('scriptolutionjoblocation');
+		//var options = {types: ['(cities)']};
+		//new google.maps.places.Autocomplete(input, options);
   });
   
   var placeSearch, autocomplete;
@@ -65,4 +66,3 @@
       }
 </script>
 {/literal}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$scriptolution_map_key}&libraries=places&signed_in=true&callback=initAutocomplete" async defer></script>

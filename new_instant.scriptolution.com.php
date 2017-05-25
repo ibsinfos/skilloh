@@ -14,7 +14,7 @@
 
 if($instanturl!="")
 {
-	$scriptolution_add_instant = ", iurl='".mysql_real_escape_string($instanturl)."'";
+	$scriptolution_add_instant = ", iurl='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $instanturl)."'";
 }
 elseif($_FILES['instantfile']['tmp_name']!="")
 {
@@ -26,18 +26,18 @@ elseif($_FILES['instantfile']['tmp_name']!="")
 		if($ext2 == "zip" || $ext2 == "rar")
 		{
 			$path = $config['basedir'].'/files/';
-			$query="INSERT INTO files SET fname='".mysql_real_escape_string($instantfilename)."', time='".time()."', ip='".$_SERVER['REMOTE_ADDR']."'";
+			$query="INSERT INTO files SET fname='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $instantfilename)."', time='".time()."', ip='".$_SERVER['REMOTE_ADDR']."'";
 			$result=$conn->execute($query);		
-			$fid = mysql_insert_id();		
+			$fid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);		
 			$s = generateCode(5).time();		
 			$cf = md5($fid).$s;		
 			$saveme = $path.$cf;		
 			exec("mkdir ".$saveme);							
 			$file_loc = $saveme."/".$_FILES["instantfile"]["name"]; 		
 			move_uploaded_file($_FILES["instantfile"]["tmp_name"], $file_loc); 		
-			$query="UPDATE files SET s='".mysql_real_escape_string($s)."' WHERE FID='".mysql_real_escape_string($fid)."'";		
+			$query="UPDATE files SET s='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $s)."' WHERE FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fid)."'";		
 			$conn->execute($query);		
-			$scriptolution_add_instant = ", ifile='".mysql_real_escape_string($fid)."'";			
+			$scriptolution_add_instant = ", ifile='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fid)."'";			
 		}
 		else
 		{

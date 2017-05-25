@@ -1,5 +1,5 @@
-	<link rel="stylesheet" href="{$baseurl}/colorbox/colorbox.css" />
-	<script src="{$baseurl}/colorbox/jquery.colorbox.js"></script>
+	<link rel="stylesheet" href="{$baseurl}colorbox/colorbox.css" />
+	<script src="{$baseurl}colorbox/jquery.colorbox.js"></script>
     {literal}
     <script>
 		$(document).ready(function(){

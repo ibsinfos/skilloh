@@ -18,7 +18,7 @@ $thebaseurl = $config['baseurl'];
 $pid = stripslashes(strip_tags($_REQUEST['id']));
 if($pid != "")
 {
-	$query="SELECT A.*, B.name, B.seo, C.username, C.rating, C.ratingcount, C.toprated, C.country, C.addtime, C.level FROM posts A, categories B, members C WHERE A.PID='".mysql_real_escape_string($pid)."' AND A.category=B.CATID AND A.USERID=C.USERID AND A.active='1'";
+	$query="SELECT A.*, B.name, B.seo, B.scriptolution_bigimage, C.username, C.rating, C.ratingcount, C.toprated, C.country, C.addtime, C.level, if(C.profilepicture = '', 'noprofilepicture.png', C.profilepicture) as profilepicture FROM posts A, categories B, members C WHERE A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."' AND A.category=B.CATID AND A.USERID=C.USERID AND (A.active='1' OR (A.active='2' AND A.USERID='".$_SESSION['USERID']."'))";
 	$executequery = $conn->Execute($query);
 	$p = $executequery->getrows();
 	$fnd = count($p);
@@ -38,19 +38,19 @@ if($pid != "")
 		STemplate::assign('tags',$tags);
 		for($i=0;$i<count($tags);$i++)
 		{
-			$addme .= " OR A.gtags like '%".mysql_real_escape_string($tags[$i])."%'";	
+			$addme .= " OR A.gtags like '%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tags[$i])."%'";	
 		}
-		$query="SELECT A.PID, A.gtitle, A.p1, A.price, B.name, B.seo, C.username, C.country, C.toprated FROM posts A, categories B, members C WHERE A.PID!='".mysql_real_escape_string($pid)."' AND A.category=B.CATID AND A.USERID=C.USERID and A.active='1' AND (A.gtags like '%".mysql_real_escape_string($gtags)."%' $addme) order by rand() limit 6";
+		$query="SELECT A.PID, A.gtitle, A.p1, A.price, A.feat, A.youtube, A.days, A.rcount, B.name, B.seo, C.username, C.country, C.toprated FROM posts A, categories B, members C WHERE A.PID!='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."' AND A.category=B.CATID AND A.USERID=C.USERID and A.active='1' AND (A.gtags like '%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtags)."%' $addme) order by rand() limit 8";
 		$results=$conn->execute($query);
 		$r = $results->getrows();
 		STemplate::assign('r',$r);
 		
-		$query="SELECT A.PID, A.gtitle, A.p1, A.price, B.name, B.seo FROM posts A, categories B WHERE A.PID!='".mysql_real_escape_string($pid)."' AND A.category=B.CATID and A.active='1' AND A.USERID='".mysql_real_escape_string($uid)."' order by rand() limit 5";
+		$query="SELECT A.PID, A.gtitle, A.p1, A.price, A.feat, A.youtube, A.days, A.rcount, B.name, B.seo FROM posts A, categories B WHERE A.PID!='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."' AND A.category=B.CATID and A.active='1' AND A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $uid)."' order by rand() limit 8";
 		$results=$conn->execute($query);
 		$u = $results->getrows();
 		STemplate::assign('u',$u);
 		
-		$query="SELECT A.comment, A.good, A.bad, B.username, B.USERID FROM ratings A, members B WHERE A.PID='".mysql_real_escape_string($PD)."' AND A.RATER=B.USERID and B.status='1' order by A.RID desc";
+		$query="SELECT A.comment, A.good, A.bad, B.username, B.USERID FROM ratings A, members B WHERE A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PD)."' AND A.RATER=B.USERID and B.status='1' order by A.RID desc";
 		$results=$conn->execute($query);
 		$f = $results->getrows();
 		STemplate::assign('f',$f);
@@ -74,7 +74,7 @@ if($pid != "")
 		$scriptolutiontotalvotes = $grat + $brat + 0;
 		STemplate::assign('scriptolutiontotalvotes',$scriptolutiontotalvotes);
 
-		$queryb = "select count(*) as total from orders where PID='".mysql_real_escape_string($PD)."' AND (status='1' OR status='6')"; 
+		$queryb = "select count(*) as total from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PD)."' AND (status='1' OR status='6')"; 
 		$executequeryb=$conn->execute($queryb);
 		$quecount = $executequeryb->fields['total']+0;
 		STemplate::assign('quecount',$quecount);

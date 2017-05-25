@@ -23,7 +23,7 @@ if($_REQUEST['delete']=="1")
 	$DAID = intval(cleanit($_REQUEST['AID']));
 	if($DAID > 0)
 	{
-		$sql="DELETE FROM advertisements WHERE AID='".mysql_real_escape_string($DAID)."'";
+		$sql="DELETE FROM advertisements WHERE AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DAID)."'";
 		$conn->Execute($sql);
 		$message = "Advertisement Successfully Deleted.";
 		Stemplate::assign('message',$message);
@@ -44,7 +44,7 @@ if($_POST['asub']=="1")
 	{
 		$aval2 = "0";
 	}
-	$sql="UPDATE advertisements SET active='".intval($aval2)."' WHERE AID='".mysql_real_escape_string($AAID)."'";
+	$sql="UPDATE advertisements SET active='".intval($aval2)."' WHERE AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AAID)."'";
 	$conn->Execute($sql);
 }
 //ACTIVE
@@ -89,21 +89,21 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $detail
 {
 	if($fromid > 0)
 	{
-		$addtosql = "WHERE AID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE AID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "WHERE AID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE AID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND AID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND AID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($details != "")
 	{
-		$addtosql .= "AND description like'%".mysql_real_escape_string($details)."%'";
+		$addtosql .= "AND description like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $details)."%'";
 		Stemplate::assign('details',$details);
 	}
 	if($active != "")

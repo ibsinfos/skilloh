@@ -61,8 +61,8 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		$dby = "A.REQUESTID desc";	
 	}
 	
-	$query1 = "SELECT count(*) as total from scriptolutionrequests where active='1' AND USERID='".mysql_real_escape_string($UID)."' $addsql order by REQUESTID desc limit $config[maximum_results]";
-	$query2 = "SELECT A.*, C.username from scriptolutionrequests A, members C where A.active='1' AND A.USERID='".mysql_real_escape_string($UID)."' AND A.USERID=C.USERID order by $dby limit $pagingstart, $config[items_per_page]";
+	$query1 = "SELECT count(*) as total from scriptolutionrequests where active='1' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' $addsql order by REQUESTID desc limit $config[maximum_results]";
+	$query2 = "SELECT A.*, C.username from scriptolutionrequests A, members C where A.active='1' AND A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' AND A.USERID=C.USERID order by $dby limit $pagingstart, $config[items_per_page]";
 	$executequery1 = $conn->Execute($query1);
 	$scriptolution = $executequery1->fields['total'];
 	if ($scriptolution > 0)
@@ -104,7 +104,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			}
 			else
 			{
-				$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+				$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 			}
 			$counter=0;
 			$lowercount = $currentpage-5;
@@ -128,7 +128,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			}
 			else
 			{
-				$pagelinks.="<li><span class='next'>next page</span></li>";
+				$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 			}
 		}
 	}

@@ -23,7 +23,7 @@ if($id > 0)
 	
 	if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSION['USERID']))
 	{
-		$query = "SELECT A.*, B.seo, C.username from posts A, categories B, members C where A.category=B.CATID AND A.USERID=C.USERID AND C.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.PID='".mysql_real_escape_string($id)."'";
+		$query = "SELECT A.*, B.seo, C.username from posts A, categories B, members C where A.category=B.CATID AND A.USERID=C.USERID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'";
 		$results=$conn->execute($query);
 		$p = $results->getrows();
 		STemplate::assign('p',$p[0]);
@@ -34,12 +34,31 @@ if($id > 0)
 		{
 			$templateselect = "feature.tpl";
 			
-			$query = "select funds, email from members where USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+			$query = "select funds, email, phone, username from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 			$executequery=$conn->execute($query);
 			$funds = $executequery->fields['funds'];
 			STemplate::assign('funds',$funds);
 			$scriptolutionuemail = $executequery->fields['email']; //
 			STemplate::assign('scriptolutionuemail',$scriptolutionuemail); //
+			
+			$username = $executequery->fields['username']; //
+			STemplate::assign('username',$username); //
+			$uemail = $executequery->fields['email'];
+			STemplate::assign('uemail',$uemail); //
+			$uphone = $executequery->fields['phone'];
+			STemplate::assign('uphone',$uphone); //
+			
+			
+			$payukey = 'sqfaiO';
+			$payusalt = 'b68bDAfB';
+			$amount = number_format($p[0]['price'],2,'.','');
+			$productinfo = $p[0]['PID'].' - '.$p[0]['gtitle'];
+			$hashSequence = "$payukey|$iid|$amount|$productinfo|$username|$uemail|||||||||||$payusalt";
+			$payuhash = strtolower(hash('sha512', $hashSequence));
+			STemplate::assign('payukey',$payukey); //
+			STemplate::assign('payuhash',$payuhash); //
+			STemplate::assign('payuamount',$amount); //
+			STemplate::assign('payuproductinfo',$productinfo); //
 			
 			$scriptolutionencoded = hash('md5', $p[0]['PID'].$p[0]['USERID']); //
 			STemplate::assign('scriptolutionencoded',$scriptolutionencoded); //
@@ -49,13 +68,13 @@ if($id > 0)
 				$price = $config['fprice'];
 				if($funds >= $price)
 				{
-					$query1 = "UPDATE members SET funds=funds-$price WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+					$query1 = "UPDATE members SET funds=funds-$price WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 					$executequery1=$conn->execute($query1);
 										
-					$query = "INSERT INTO featured SET PID='".mysql_real_escape_string($PID)."', time='".time()."', price='".mysql_real_escape_string($price)."'"; 
+					$query = "INSERT INTO featured SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 					$executequery=$conn->execute($query);
 					
-					$query = "UPDATE posts SET feat='1' WHERE PID='".mysql_real_escape_string($PID)."'"; 
+					$query = "UPDATE posts SET feat='1' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 					$executequery=$conn->execute($query);
 				
 					header("Location:$config[baseurl]/feature_success?g=".$eid);exit;
@@ -101,10 +120,10 @@ if($id > 0)
 				}
 				elseif($price > 0 && isset($_GET['token']) && $token != "" && $scriptolutionencoded == $checkscriptolutionencoded && $scriptolutionprocessedstripe == "1")
 				{										
-					$query = "INSERT INTO featured SET PID='".mysql_real_escape_string($PID)."', time='".time()."', price='".mysql_real_escape_string($price)."', fiverrscriptdotcom_fstripe='1', fiverrscriptdotcom_fstripe_user='".mysql_real_escape_string($scriptolutionstripeuserid)."'"; 
+					$query = "INSERT INTO featured SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', fiverrscriptdotcom_fstripe='1', fiverrscriptdotcom_fstripe_user='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionstripeuserid)."'"; 
 					$executequery=$conn->execute($query);
 					
-					$query = "UPDATE posts SET feat='1' WHERE PID='".mysql_real_escape_string($PID)."'"; 
+					$query = "UPDATE posts SET feat='1' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 					$executequery=$conn->execute($query);
 				
 					header("Location:$config[baseurl]/feature_success?g=".$eid);exit;	

@@ -90,11 +90,19 @@
                                             	<table cellspacing="0" class="form-list">
                                                 <tbody>
                                                 	<tr class="hidden">
-                                                        <td class="label"><label for="name">Price </label></td>
+                                                        <td class="label"><label for="name">Min Price </label></td>
                                                         <td class="value">
-                                                        	<input id="pprice" name="pprice" value="" class=" required-entry required-entry input-text" type="text"/>
+                                                        	<input id="pminprice" name="pminprice" value="" class=" required-entry required-entry input-text" type="text"/>
                                                         </td>
-                                                        <td class="scope-label">[PRICE TO CHARGE]</td>
+                                                        <td class="scope-label">[MIN PRICE TO CHARGE]</td>
+                                                            <td><small></small></td>
+                                                    </tr>
+                                                    <tr class="hidden">
+                                                        <td class="label"><label for="name">Max Price </label></td>
+                                                        <td class="value">
+                                                        	<input id="pmaxprice" name="pmaxprice" value="" class=" required-entry required-entry input-text" type="text"/>
+                                                        </td>
+                                                        <td class="scope-label">[MAX PRICE TO CHARGE]</td>
                                                             <td><small></small></td>
                                                     </tr>
                                                 	<tr class="hidden">

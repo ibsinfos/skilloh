@@ -18,20 +18,6 @@
                                 
                                 
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <div id="isoft_group_1_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">

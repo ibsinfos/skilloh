@@ -21,12 +21,12 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$scriptolutionbuy = intval(cleanit($_REQUEST['scriptolutionbuy']));
 	if($PID > 0)
 	{
-		$query="INSERT INTO order_items SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($PID)."'";
+		$query="INSERT INTO order_items SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$result=$conn->execute($query);
-		$IID = mysql_insert_id();
+		$IID = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		if($IID > 0)
 		{			
-			$query = "select price2, price3, ctp2, ctp3 from posts where PID='".mysql_real_escape_string($PID)."'"; 
+			$query = "select price2, price3, ctp2, ctp3 from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 			$executequery=$conn->execute($query);
 			$price2 = $executequery->fields['price2'];
 			$ctp2 = $executequery->fields['ctp2'];
@@ -46,7 +46,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				$addmulti = ", scriptolutionbuy='2'";
 			}
 			
-			$query="UPDATE order_items SET totalprice='".mysql_real_escape_string($total)."', ctp='".mysql_real_escape_string($totacom)."' $addmulti WHERE IID='".mysql_real_escape_string($IID)."'";
+			$query="UPDATE order_items SET totalprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $total)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $totacom)."' $addmulti WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 			$result=$conn->execute($query);
 			
 			header("Location:$config[baseurl]/order?item=".$IID);exit;

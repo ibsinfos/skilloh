@@ -36,7 +36,7 @@ if($_POST['submitform'] == "1")
 		}
 		else
 		{
-			$sql = "UPDATE advertisements set description='".mysql_real_escape_string($details)."', code='".mysql_real_escape_string($code)."', active='".mysql_real_escape_string($active)."' WHERE AID='".mysql_real_escape_string($AID)."'";
+			$sql = "UPDATE advertisements set description='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $details)."', code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $code)."', active='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $active)."' WHERE AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AID)."'";
 			$conn->execute($sql);
 			$message = "Advertisement Successfully Edited.";
 			Stemplate::assign('message',$message);
@@ -46,7 +46,7 @@ if($_POST['submitform'] == "1")
 
 if($AID > 0)
 {
-	$query = $conn->execute("select * from advertisements where AID='".mysql_real_escape_string($AID)."' limit 1");
+	$query = $conn->execute("select * from advertisements where AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AID)."' limit 1");
 	$ad = $query->getrows();
 	Stemplate::assign('ad', $ad[0]);
 }

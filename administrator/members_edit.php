@@ -32,18 +32,18 @@ if($_POST['submitform'] == "1")
 				$arr = array("username", "email", "pemail", "fullname", "verified", "status", "funds", "level", "scriptolutionuserslogan");
 				foreach ($arr as $value)
 				{
-					$sql = "update members set $value='".mysql_real_escape_string(cleanit($_POST[$value]))."' where USERID='".mysql_real_escape_string($USERID)."'";
+					$sql = "update members set $value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], cleanit($_POST[$value]))."' where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."'";
 					$conn->execute($sql);
 				}
 				
-				$sql = "update members set description='".mysql_real_escape_string(cleanit($_POST['vdescription']))."' where USERID='".mysql_real_escape_string($USERID)."'";
+				$sql = "update members set description='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], cleanit($_POST['vdescription']))."' where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."'";
 				$conn->execute($sql);
 				
 				$newpass2 = cleanit($_POST['newpass2']);
 				if($newpass2 != "")
 				{
 					$newpass = md5($newpass2);
-					$sql = "update members set password='".mysql_real_escape_string($newpass)."', pwd='".mysql_real_escape_string($newpass2)."' where USERID='".mysql_real_escape_string($USERID)."'";
+					$sql = "update members set password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $newpass)."', pwd='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $newpass2)."' where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."'";
 					$conn->execute($sql);
 				}
 				
@@ -56,7 +56,7 @@ if($_POST['submitform'] == "1")
 
 if($USERID > 0)
 {
-	$query = $conn->execute("select * from members where USERID='".mysql_real_escape_string($USERID)."' limit 1");
+	$query = $conn->execute("select * from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."' limit 1");
 	$member = $query->getrows();
 	Stemplate::assign('member', $member[0]);
 }

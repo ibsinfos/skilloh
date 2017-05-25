@@ -1,37 +1,33 @@
-{include file="scriptolution_error7.tpl"}
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop50">
-		<div class="inner-wrapper">
-			<div class="left-side scriptolutionwidth558">
-				<div class="whiteBox twoHalfs padding15 scriptolutionwidth516">
-					<h1>{$lang39}</h1>
-                    <div id="scriptolutionForm">
-                        <form action="{$baseurl}/forgotpassword" method="post">  
-                            <div class="form-entry">
-                                <label for="email">{$lang4}</label>
-                                <input class="text" id="email" name="email" tabindex="1" type="text" value="" />
+<div class="bodybg topspace">
+    {include file="scriptolution_error7.tpl"}
+    <!-- BEGIN MODAL Forgot password -->
+    <div class="" id="forgotPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabelForgot">Forgot password</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="forgotPasswordForm">
+                        <form class="form-authentication et-form" action="{$baseurl}forgotpassword" method="post">
+                            <div class="inner-form">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter your email here">
+                                    </div>
+                                </div>
+                                <div class="form-group ml-35 reset-pass">
+                                    <button class="btn-save waves-effect waves-light btn-submit">SUBMIT</button>
+                                </div>
+                                <input type="hidden" name="fpsub" id="fpsub" value="1" />
                             </div>
-                            <div class="row">
-                                <input type="submit" value="{$lang46}" class="scriptolutionbluebutton" />
-                            </div>
-                            <input type="hidden" name="fpsub" id="fpsub" value="1" />
-                        </form>
                     </div>
-
-					<div class="clear"></div>
-
-				</div>
-			</div>			
-			<div class="right-side scriptolutionwidth390">
-				<center>{insert name=get_advertisement AID=4}</center>
-			</div>
-			<div class="clear"></div>
-
-		</div>   
-	</div>
-</div>
-<div id="scriptolutionnobottom">
-    <div class="centerwrap footertop">
-        <div class="footerbg"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<!-- END MODAL Forgot password -->
 </div>

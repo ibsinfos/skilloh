@@ -23,7 +23,7 @@ if($_REQUEST[delete]=="1")
 	$DID = intval(cleanit($_REQUEST['ID']));
 	if($DID > 0)
 	{
-		$sql="DELETE FROM packs WHERE ID='".mysql_real_escape_string($DID)."'";
+		$sql="DELETE FROM packs WHERE ID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DID)."'";
 		$conn->Execute($sql);
 		$message = "Payment Pack Successfully Deleted.";
 		Stemplate::assign('message',$message);
@@ -31,11 +31,17 @@ if($_REQUEST[delete]=="1")
 }
 // DELETE END
 
-if($_REQUEST['sortby']=="pprice")
+if($_REQUEST['sortby']=="pminprice")
 {
-	$sortby = "pprice";
-	$sort =" order by pprice";
-	$add1 = "&sortby=pprice";
+	$sortby = "pminprice";
+	$sort =" order by pminprice";
+	$add1 = "&sortby=pminprice";
+}
+if($_REQUEST['sortby']=="pmaxprice")
+{
+	$sortby = "pmaxprice";
+	$sort =" order by pmaxprice";
+	$add1 = "&sortby=pmaxprice";
 }
 elseif($_REQUEST['sortby']=="pcom")
 {
@@ -64,33 +70,39 @@ else
 //Search
 $fromid = intval(cleanit($_REQUEST['fromid']));
 $toid = intval(cleanit($_REQUEST['toid']));
-$pprice = cleanit($_REQUEST['pprice']);
+$pminprice = cleanit($_REQUEST['pminprice']);
+$pmaxprice = cleanit($_REQUEST['pmaxprice']);
 $pcom = cleanit($_REQUEST['pcom']);
-$add1 .= "&fromid=$fromid&toid=$toid&pprice=$pprice&pcom=$pcom";
-if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $pprice!="" || $pcom!=""))
+$add1 .= "&fromid=$fromid&toid=$toid&pminprice=$pminprice&pmaxprice=$pmaxprice&pcom=$pcom";
+if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $pminprice!="" || $pmaxprice!="" ||$pcom!=""))
 {
 	if($fromid > 0)
 	{
-		$addtosql = "WHERE ID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE ID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "WHERE ID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE ID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND ID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND ID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
-	if($pprice != "")
+	if($pminprice != "")
 	{
-		$addtosql .= "AND pprice='".mysql_real_escape_string($pprice)."'";
-		Stemplate::assign('pprice',$pprice);
+		$addtosql .= "AND pminprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pminprice)."'";
+		Stemplate::assign('pminprice',$pminprice);
+	}
+	if($pmaxprice != "")
+	{
+		$addtosql .= "AND pmaxprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pmaxprice)."'";
+		Stemplate::assign('pmaxprice',$pmaxprice);
 	}
 	if($pcom != "")
 	{
-		$addtosql .= "AND pcom='".mysql_real_escape_string($pcom)."'";
+		$addtosql .= "AND pcom='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pcom)."'";
 		Stemplate::assign('pcom',$pcom);
 	}
 	Stemplate::assign('search',"1");

@@ -22,6 +22,8 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 }
 
 $r = cleanit(stripslashes($_REQUEST['r']));
+if(empty($r))
+	$r = cleanit(stripslashes($_REQUEST['redirect_url']));
 STemplate::assign('r',$r);
 
 if($_REQUEST['jlog'] == "1")
@@ -43,7 +45,7 @@ if($_REQUEST['jlog'] == "1")
 	if($error == "")
 	{
 		$encryptedpassword = md5($user_password);
-		$query="SELECT status,USERID,email,username,verified from members WHERE username='".mysql_real_escape_string($user_username)."' and password='".mysql_real_escape_string($encryptedpassword)."'";
+		$query="SELECT M.status,M.USERID,M.email,M.username,M.verified, (select count(1) from posts P where P.USERID = M.USERID) as postcount from members M WHERE M.username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."' and M.password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $encryptedpassword)."'";
 		$result=$conn->execute($query);
 		
 		if($result->recordcount()<1)
@@ -57,12 +59,13 @@ if($_REQUEST['jlog'] == "1")
 
 		if($error=="")
 		{
-			$query="update members set lastlogin='".time()."', lip='".$_SERVER['REMOTE_ADDR']."' WHERE username='".mysql_real_escape_string($user_username)."'";
+			$query="update members set lastlogin='".time()."', lip='".$_SERVER['REMOTE_ADDR']."' WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."'";
 			$conn->execute($query);
 	    	$_SESSION['USERID']=$result->fields['USERID'];
 			$_SESSION['EMAIL']=$result->fields['email'];
 			$_SESSION['USERNAME']=$result->fields['username'];
 			$_SESSION['VERIFIED']=$result->fields['verified'];
+			$_SESSION['POSTCOUNT']=$result->fields['postcount'];
 			if($l_remember_me == "1")
 			{
 				create_slrememberme();
@@ -81,7 +84,7 @@ if($_REQUEST['jlog'] == "1")
 	}
 }
 
-$templateselect = "login.tpl";
+$templateselect = "login.tpl"; // this is the page to which redirect will happen if login fail.
 $pagetitle = $lang['40'];
 STemplate::assign('pagetitle',$pagetitle);
 

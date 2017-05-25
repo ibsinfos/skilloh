@@ -43,11 +43,11 @@ if($_POST['submitform'] == "1")
 		$arr = array("USERID", "gtitle", "gtags", "ginst", "days", "youtube", "category", "active", "feat", "rating", "viewcount", "price");
 		foreach ($arr as $value)
 		{
-			$sql = "update posts set $value='".mysql_real_escape_string($_POST[$value])."' where PID='".mysql_real_escape_string($PID)."'";
+			$sql = "update posts set $value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST[$value])."' where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 			$conn->execute($sql);
 		}
 		$gdesc = htmlentities(strip_tags(stripslashes($_REQUEST['gdesc']), '<p><i><strong><br><font><span><em><ol><li>'), ENT_COMPAT, "UTF-8");	
-		$sql = "update posts set gdesc='".mysql_real_escape_string($gdesc)."' where PID='".mysql_real_escape_string($PID)."'";
+		$sql = "update posts set gdesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdesc)."' where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$conn->execute($sql);
 		$message = "Gig Successfully Edited.";
 		Stemplate::assign('message',$message);
@@ -56,7 +56,7 @@ if($_POST['submitform'] == "1")
 
 if($PID > 0)
 {
-	$query = $conn->execute("select * from posts where PID='".mysql_real_escape_string($PID)."' limit 1");
+	$query = $conn->execute("select * from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' limit 1");
 	$gig = $query->getrows();
 	Stemplate::assign('gig', $gig[0]);
 }

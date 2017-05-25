@@ -31,7 +31,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				$tgig = intval($gig[$i]);
 				if ($tgig > 0)
 				{
-					$query="UPDATE posts SET active='2' WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND active='1' AND PID='".mysql_real_escape_string($tgig)."'";
+					$query="UPDATE posts SET active='2' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND active='1' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tgig)."'";
 					$result=$conn->execute($query);
 					$message = $lang['177'];
 				}
@@ -55,9 +55,9 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 					{
 						$active = "1";
 					}
-					$query="UPDATE posts SET active='".mysql_real_escape_string($active)."' WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND PID='".mysql_real_escape_string($tgig)."' AND active!='2'";
+					$query="UPDATE posts SET active='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $active)."' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tgig)."' AND active!='2'";
 					$result=$conn->execute($query);
-					$query="UPDATE posts SET active='1' WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND PID='".mysql_real_escape_string($tgig)."' AND active='2'";
+					$query="UPDATE posts SET active='1' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tgig)."' AND active='2'";
 					$result=$conn->execute($query);
 					$message = $lang['178'];
 				}
@@ -72,7 +72,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				$tgig = intval($gig[$i]);
 				if ($tgig > 0)
 				{
-					$query="UPDATE posts SET active='3' WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND PID='".mysql_real_escape_string($tgig)."'";
+					$query="UPDATE posts SET active='3' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tgig)."'";
 					$result=$conn->execute($query);
 					$message = $lang['179'];
 				}
@@ -101,8 +101,8 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$pagingstart = "0";
 		}
 		
-		$query1 = "SELECT count(*) as total from posts A, members B where B.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.USERID=B.USERID AND A.active!='3' AND A.active!='5' order by A.PID desc limit $config[maximum_results]";
-		$query2 = "SELECT A.*, B.seo, C.username from posts A, categories B, members C where A.category=B.CATID AND A.USERID=C.USERID AND C.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.active!='3' AND A.active!='5' order by A.PID desc limit $pagingstart, $config[items_per_page]";
+		$query1 = "SELECT count(*) as total from posts A, members B where B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.USERID=B.USERID AND A.active!='3' AND A.active!='5' order by A.PID desc limit $config[maximum_results]";
+		$query2 = "SELECT A.*, B.seo, C.username, (SELECT count(*) FROM bookmarks book WHERE book.PID=A.PID) as likes, (select count(*) from scriptolution_local2 local WHERE local.PID=A.PID) as pendingApproval from posts A, categories B, members C where A.category=B.CATID AND A.USERID=C.USERID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.active!='3' AND A.active!='5' order by A.PID desc limit $pagingstart, $config[items_per_page]";
 		$executequery1 = $conn->Execute($query1);
 		$scriptolution = $executequery1->fields['total'];
 		if ($scriptolution > 0)
@@ -140,7 +140,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+					$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 				}
 				$counter=0;
 				$lowercount = $currentpage-5;
@@ -164,7 +164,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$pagelinks.="<li><span class='next'>next page</span></li>";
+					$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 				}
 			}
 		}

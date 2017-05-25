@@ -26,16 +26,16 @@ if($_POST['asub']=="1")
 	if($BID > 0 && $BIID > 0 && $BUSERID > 0)
 	{
 		$price = $config['fprice'];
-		$query1 = "UPDATE members SET funds=funds-$price WHERE USERID='".mysql_real_escape_string($BUSERID)."'"; 
+		$query1 = "UPDATE members SET funds=funds-$price WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BUSERID)."'"; 
 		$executequery1=$conn->execute($query1);
 					
-		$query = "INSERT INTO featured SET PID='".mysql_real_escape_string($BIID)."', time='".time()."', price='".mysql_real_escape_string($price)."'"; 
+		$query = "INSERT INTO featured SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BIID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 		$executequery=$conn->execute($query);
 		
-		$query = "UPDATE posts SET feat='1' WHERE PID='".mysql_real_escape_string($BIID)."'"; 
+		$query = "UPDATE posts SET feat='1' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BIID)."'"; 
 		$executequery=$conn->execute($query);
 		
-		$cquery="UPDATE scriptolution_local2 SET processed='1' WHERE BID='".mysql_real_escape_string($BID)."'";
+		$cquery="UPDATE scriptolution_local2 SET processed='1' WHERE BID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BID)."'";
 		$conn->execute($cquery);
 		
 		$message = "Success: The gig has been featured.";
@@ -47,7 +47,7 @@ elseif($_REQUEST['delete']=="1")
 	$DBID = intval(cleanit($_REQUEST['DBID']));
 	if($DBID > 0)
 	{
-		$cquery="DELETE FROM scriptolution_local2 WHERE BID='".mysql_real_escape_string($DBID)."' LIMIT 1";
+		$cquery="DELETE FROM scriptolution_local2 WHERE BID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DBID)."' LIMIT 1";
 		$conn->execute($cquery);
 		$message = "Success: It has been deleted.";
 		Stemplate::assign('message',$message);
@@ -95,26 +95,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $IID!="
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.BID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.BID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.BID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.BID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.BID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.BID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($IID != "")
 	{
-		$addtosql .= "AND A.IID='".mysql_real_escape_string($IID)."'";
+		$addtosql .= "AND A.IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 		Stemplate::assign('IID',$IID);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	Stemplate::assign('search',"1");

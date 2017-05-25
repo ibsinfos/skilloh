@@ -1,7 +1,7 @@
 options -multiviews
 <IfModule mod_rewrite.c>
 RewriteEngine On 
-RewriteBase /
+RewriteBase /GIT/skilloh/
 RewriteRule ^users$ users.php
 RewriteRule ^login$ login.php
 RewriteRule ^logout$ logout.php
@@ -25,6 +25,8 @@ RewriteRule ^upload$ upload.php
 RewriteRule ^check_new$ check_new.php
 RewriteRule ^spam$ spam.php
 RewriteRule ^thank_you$ thank_you.php
+RewriteRule ^payusuccess$ payusuccess.php
+RewriteRule ^payufailure$ payufailure.php
 RewriteRule ^track$ track.php
 RewriteRule ^send_track$ send_track.php
 RewriteRule ^confirmemail$ confirmemail.php

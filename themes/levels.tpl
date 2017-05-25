@@ -14,8 +14,3 @@
 		</div>   
 	</div>
 </div>
-<div id="scriptolutionnobottom">
-    <div class="centerwrap footertop">
-        <div class="footerbg scriptolutionfooter842"></div>
-    </div>
-</div>

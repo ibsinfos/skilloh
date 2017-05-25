@@ -28,7 +28,7 @@ if($_POST['submitform'] == "1")
 			$arr = array("enable_paypal", "paypal_email", "notify_email", "currency", "scriptolution_paypal_confirm");
 			foreach ($arr as $value)
 			{
-				$sql = "update config set value='".mysql_real_escape_string(cleanit($_POST[$value]))."' where setting='$value'";
+				$sql = "update config set value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], cleanit($_POST[$value]))."' where setting='$value'";
 				$conn->execute($sql);
 				Stemplate::assign($value,strip_mq_gpc($_POST[$value]));
 			}

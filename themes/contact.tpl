@@ -6,16 +6,12 @@
 
                     <h1>{insert name=get_static value=var sel=title ID=5}</h1>
 					{insert name=get_static value=var sel=value ID=5}
-                           
+                           hello how are u 
+						   
 					<div class="clear"></div>
 				</div>
 			</div>			
 			<div class="clear"></div>
 		</div>   
 	</div>
-</div>
-<div id="scriptolutionnobottom">
-    <div class="centerwrap footertop">
-        <div class="footerbg scriptolutionfooter842"></div>
-    </div>
 </div>

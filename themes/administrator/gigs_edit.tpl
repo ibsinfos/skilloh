@@ -2,10 +2,10 @@
 <script>
 	sQuery = jQuery.noConflict(true);
 </script>
-<script src="{$baseurl}/trumbowyg/trumbowyg.min.js"></script>
-<link rel="stylesheet" href="{$baseurl}/trumbowyg/ui/trumbowyg.min.css">
-<script src="{$baseurl}/trumbowyg/plugins/colors/trumbowyg.colors.min.js"></script>
-<link rel="stylesheet" href="{$baseurl}/trumbowyg/plugins/colors/ui/trumbowyg.colors.min.css">
+<script src="{$baseurl}trumbowyg/trumbowyg.min.js"></script>
+<link rel="stylesheet" href="{$baseurl}trumbowyg/ui/trumbowyg.min.css">
+<script src="{$baseurl}trumbowyg/plugins/colors/trumbowyg.colors.min.js"></script>
+<link rel="stylesheet" href="{$baseurl}trumbowyg/plugins/colors/ui/trumbowyg.colors.min.css">
 {literal}
 <script type="text/javascript">                        
   sQuery(document).ready(function(){

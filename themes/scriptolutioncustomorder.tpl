@@ -1,4 +1,3 @@
-{include file="scriptolution_error7.tpl"}
 {literal}
 <script type="text/javascript">                        
   $(document).ready(function(){
@@ -11,85 +10,104 @@
   });
 </script>
 {/literal}
-
-<script src="{$baseurl}/js/mainscriptolution.js" type="text/javascript"></script>
-                                
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop30 scriptolutionwidth842">
-		<div class="inner-wrapper scriptolutionwidth842">
-			<div class="left-side scriptolutionwidth842">
-				<div class="whiteBox twoHalfs padding0 noborder scriptolutionwidth800">
-                    <div id="scriptolutionPostForm"> 
-                        <form action="{$baseurl}/customorder" enctype="multipart/form-data" id="new_gig" method="post">
+<style>
+.create_custom_service_active a{
+   color: #10a2ef;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 700;
+   text-decoration: none;
+}
+</style>
+<script src="{$baseurl}js/mainscriptolution.js" type="text/javascript"></script>
+<div class="bodybg topspace">
+   {include file="scriptolution_error7.tpl"}
+   <div class="container scriptolutionpaddingtop30">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+         <div class="clear"></div>
+         <!-- {include file='scriptolution_newside.tpl'} --> 
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+            {include file='skilop_sellmenu.tpl'}            
+         </div>
+         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">               
+                              
+               <div id="scriptolutionPostForm" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                    <h1 class="myshoppingheading">{$langcus5}</h1>
+               		<h4 class="myshoppingheading2" style="visibility:hidden;">{$lang206}</h4>
+                        <form action="{$baseurl}customorder" enctype="multipart/form-data" id="new_gig" method="post">
                         
-                            <div class="postgigtop scriptolutionpadding20">
-                            	
-                                <h1 style="color:#FFF">{$langcus0}</h1>
-                                
-                                <div class="form-entry1">
-                                    <div class="spartone">{$lang62}</div>
-                                    <div class="sparttwo">
-                                        <div class="spartthree">
-                                        <input class="texta" id="gig_title" maxlength="200" name="gtitle" type="text" value="{$gtitle|stripslashes}" />
-                                        </div>
-                                        <div class="spartfour">
-                                            {if $scriptolution_cur_pos eq "1"}{$lang589} <input class="textb" id="gprice" maxlength="3" name="gprice" size="3" type="text" value="{$gprice|stripslashes}" />{$lang197}{else}{$lang63}<input class="textb" id="gprice" maxlength="3" name="gprice" size="3" type="text" value="{$gprice|stripslashes}" />{/if}
-                                        </div>
-                                    </div>
-                                </div>
-                                {if $price_mode eq "0" OR $price_mode eq "2"}
-                                <div style="clear:both"></div>
-                                {/if}
-                                <div class="form-entry" align="center">
-                                    <p class="max-chars-top">{$lang64}: <span class="gigtitlemax">200</span> ({$lang65}: <span class="gigtitleused">0</span>)</p>
-                                </div>
-                            </div>
-                            <div class="scriptolutionclear"></div>
-
-                            <div class="postgigbottom scriptolutionpadding20">
-                                                              
-                                  <div class="form-entry">
+                            <div class="whiteBox col-lg-12 col-md-12 col-sm-12 col-xs-12 z_padding0">
+                                <div class="form-entry col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="column-l">
-                                      <label class="editgigformtitle" for="gig_description">{$lang69}</label>
-                                      <p class="tip-text-static">{$lang70}</p>
+                                      <label class="editgigformtitle">{$lang662}</label>
                                     </div>
                                     <div class="column-r">
-                                      <textarea class="text" cols="74" id="gig_description" maxlength="450" name="gdesc" rows="6">{$gdesc|stripslashes}</textarea>
+                                      <input class="texta" id="gig_title" maxlength="200" name="gtitle" type="text" value="{$gtitle|stripslashes}" placeholder=""  />
                                     </div>
-                                  </div>
-                                  
-                              	  <div class="scriptolutionclear"></div>
-                                  
-                                  <div class="estimate">
+                                    <p class="max-chars-top pull-right">{$lang64}: <span class="gigtitlemax">200</span> ({$lang65}: <span class="gigtitleused">0</span>)</p>
+                                
+                                </div>
+                                
+                                <div class="scriptolutionclear"></div>
+                                    
+                                <div class="iscriptolution">
+                                    <div class="scriptolution-irequest-holder">
+                                        <div class="scriptolutiontxt">
+                                        	<label class="editgigformtitle">{$lang69}</label>
+                                        </div>
+                                        <div class="scriptolutionf">
+                                        	<textarea class="text" cols="74" id="gig_description" maxlength="450" name="gdesc" rows="6" placeholder="{$lang70}">{$gdesc|stripslashes}</textarea>
+                                    	</div>
+                                        <div style="clear:both; padding-top:5px;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="scriptolutionclear"></div>
+                                
+                                <div class="estimate col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="column-l">
-                                      <label class="editgigformtitle" for="gig_expected_duration">{$lang79}</label>
+                                      <label class="editgigformtitle">{$lang655}</label>
                                     </div>
                                     <div class="column-r">
-                                      <input class="text" id="gig_expected_duration" name="gdays" size="2" type="text" value="{$gdays|stripslashes}" />
-                                      <div>{$lang80}</div>
+                                      {if $scriptolution_cur_pos eq "1"}
+                                      	<input class="textb" id="gprice" name="gprice" type="number" value="{$gprice|stripslashes}" placeholder=""  min="0" />
+                                      {else}
+                                      	<input class="textb" id="gprice" name="gprice" type="number" value="{$gprice|stripslashes}" placeholder=""  min="0" />
+                                      {/if}
                                     </div>
-                                  </div>
-                                  
-                                  <div class="scriptolutionclear"></div>
+                                    {if $price_mode eq "0" OR $price_mode eq "2"}
+	                                <div style="clear:both"></div>
+	                                {/if}
+                                </div>
+                                <div class="estimate col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="column-l">
+                                      <label class="editgigformtitle">{$lang79}</label>
+                                    </div>
+                                    <div class="column-r">
+                                      <input class="text" id="gig_expected_duration" name="gdays" size="2" type="number" value="{$gdays|stripslashes}" placeholder=""  min="0"/>                                      
+                                    </div>
+                                </div>
+                                <!--<div class="estimate col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                	<div class="space_topping">{$lang80}</div>
+                                </div>-->
                                 
-                                  {include file='new_js.tpl'}
-                              </div>
+                                <div class="scriptolutionclear"></div>
+                                    
+                                {include file='new_js.tpl'}
+                                
+                             </div>  
+                             		<div style="clear:both"></div>                    
+                            		<div class="scriptolutionclear"></div>                            
 
-                            <div class="row form-entry scriptolutionpadding20" align="center">
+                            <div class="row form-entry scriptolutionpadding20">
                                 <input type="submit" value="{$lang46}" class="scriptolutionbluebutton" />
                                 <input type="hidden" name="subform" value="1" />
-                            </div>
+                            </div>                            
                         </form>   
                     </div>
-					<div class="clear"></div>
-				</div>
-			</div>			
-			<div class="clear"></div>
-		</div>   
-	</div>
-</div>
-<div id="scriptolutionnobottom">
-    <div class="centerwrap footertop">
-        <div class="footerbg scriptolutionfooter842"></div>
-    </div>
+               
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

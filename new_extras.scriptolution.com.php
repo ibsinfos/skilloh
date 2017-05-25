@@ -38,7 +38,7 @@
 							$emysetc = 0;
 							$ectp = number_format($emysetc, 2, '.', '');
 						}
-						$query="INSERT INTO extras SET PID='".mysql_real_escape_string($pid)."', etitle='".mysql_real_escape_string($extra1)."', eprice='".mysql_real_escape_string($extraprice1)."', ctp='".mysql_real_escape_string($ectp)."'";
+						$query="INSERT INTO extras SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."', etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extra1)."', eprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extraprice1)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ectp)."'";
 						$result=$conn->execute($query);	
 						$hasextras = "1";
 					}
@@ -70,7 +70,7 @@
 							$emysetc = 0;
 							$ectp = number_format($emysetc, 2, '.', '');
 						}
-						$query="INSERT INTO extras SET PID='".mysql_real_escape_string($pid)."', etitle='".mysql_real_escape_string($extra2)."', eprice='".mysql_real_escape_string($extraprice2)."', ctp='".mysql_real_escape_string($ectp)."'";
+						$query="INSERT INTO extras SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."', etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extra2)."', eprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extraprice2)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ectp)."'";
 						$result=$conn->execute($query);	
 						$hasextras = "1";
 					}
@@ -102,8 +102,74 @@
 							$emysetc = 0;
 							$ectp = number_format($emysetc, 2, '.', '');
 						}
-						$query="INSERT INTO extras SET PID='".mysql_real_escape_string($pid)."', etitle='".mysql_real_escape_string($extra3)."', eprice='".mysql_real_escape_string($extraprice3)."', ctp='".mysql_real_escape_string($ectp)."'";
+						$query="INSERT INTO extras SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."', etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extra3)."', eprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extraprice3)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ectp)."'";
 						$result=$conn->execute($query);	
+						$hasextras = "1";
+					}
+				}
+				
+				$extra4 = cleanit($_REQUEST['extra4']);
+				if($extra4 != "")
+				{
+					$extraprice4 = intval(cleanit($_REQUEST['extraprice4']));
+					if($extraprice4 > 0)
+					{
+						if($config['price_mode'] == "1")
+						{
+							$extracount2 = $count1 * $extraprice4;
+							$ectp = number_format($extracount2, 2, '.', '');
+						}
+						elseif($config['price_mode'] == "3")
+						{
+							$extracount2 = $count1 * $extraprice4;
+							$ectp = number_format($extracount2, 2, '.', '');
+								
+						}
+						elseif($config['price_mode'] == "2")
+						{
+							$extracount2 = $count1 * $extraprice4;
+							$ectp = number_format($extracount2, 2, '.', '');
+						}
+						else
+						{
+							$emysetc = 0;
+							$ectp = number_format($emysetc, 2, '.', '');
+						}
+						$query="INSERT INTO extras SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."', etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extra4)."', eprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extraprice4)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ectp)."'";
+						$result=$conn->execute($query);
+						$hasextras = "1";
+					}
+				}
+				
+				$extra5 = cleanit($_REQUEST['extra5']);
+				if($extra5 != "")
+				{
+					$extraprice5 = intval(cleanit($_REQUEST['extraprice5']));
+					if($extraprice5 > 0)
+					{
+						if($config['price_mode'] == "1")
+						{
+							$extracount2 = $count1 * $extraprice5;
+							$ectp = number_format($extracount2, 2, '.', '');
+						}
+						elseif($config['price_mode'] == "3")
+						{
+							$extracount2 = $count1 * $extraprice5;
+							$ectp = number_format($extracount2, 2, '.', '');
+								
+						}
+						elseif($config['price_mode'] == "2")
+						{
+							$extracount2 = $count1 * $extraprice5;
+							$ectp = number_format($extracount2, 2, '.', '');
+						}
+						else
+						{
+							$emysetc = 0;
+							$ectp = number_format($emysetc, 2, '.', '');
+						}
+						$query="INSERT INTO extras SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."', etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extra5)."', eprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $extraprice5)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ectp)."'";
+						$result=$conn->execute($query);
 						$hasextras = "1";
 					}
 				}
@@ -112,7 +178,7 @@
 				{
 					if($pid > 0)
 					{
-						$querySSS="UPDATE posts SET scriptolutionhasextras='1' WHERE PID='".mysql_real_escape_string($pid)."'";
+						$querySSS="UPDATE posts SET scriptolutionhasextras='1' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."'";
 						$conn->execute($querySSS);	
 					}
 				}

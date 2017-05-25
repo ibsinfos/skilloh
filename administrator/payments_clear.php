@@ -25,9 +25,9 @@ if($_POST['asub']=="1")
 	$apay = number_format($_POST['apay'], 2);
 	if($AID > 0 && $aseller > 0 && $apay > 0)
 	{
-		$sql="UPDATE payments SET wd='1' WHERE ID='".mysql_real_escape_string($AID)."'";
+		$sql="UPDATE payments SET wd='1' WHERE ID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AID)."'";
 		$conn->Execute($sql);
-		$sql="UPDATE members SET afunds=afunds+$apay WHERE USERID='".mysql_real_escape_string($aseller)."'";
+		$sql="UPDATE members SET afunds=afunds+$apay WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $aseller)."'";
 		$conn->Execute($sql);
 		$message = "Payment successfully cleared.";
 		Stemplate::assign('message',$message);
@@ -38,7 +38,7 @@ if($_POST['asub']=="1")
 function insert_get_trans_id($a)
 {
     global $conn;
-	$query = "select txn_id, memo from paypal_table where id='".mysql_real_escape_string($a[id])."'"; 
+	$query = "select txn_id, memo from paypal_table where id='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[id])."'"; 
 	$executequery=$conn->execute($query);
 	$results = $conn->execute($query);
 	$returnthis = $results->getrows();
@@ -97,26 +97,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $OID!="
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.ID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.ID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.ID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.ID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.ID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.ID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($OID != "")
 	{
-		$addtosql .= "AND A.OID='".mysql_real_escape_string($OID)."'";
+		$addtosql .= "AND A.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."'";
 		Stemplate::assign('OID',$OID);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	Stemplate::assign('search',"1");

@@ -23,7 +23,7 @@ if($_REQUEST['delete']=="1")
 	$DPID = intval(cleanit($_REQUEST['PID']));
 	if($DPID > 0)
 	{
-		$sql="UPDATE posts SET active='3' WHERE PID='".mysql_real_escape_string($DPID)."'";
+		$sql="UPDATE posts SET active='3' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DPID)."'";
 		$conn->Execute($sql);
 		$message = "Gig Successfully Marked As Deleted.";
 		Stemplate::assign('message',$message);
@@ -84,26 +84,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $gtitle
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.PID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.PID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.PID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.PID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.PID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.PID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($gtitle != "")
 	{
-		$addtosql .= "AND A.gtitle like'%".mysql_real_escape_string($gtitle)."%'";
+		$addtosql .= "AND A.gtitle like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtitle)."%'";
 		Stemplate::assign('gtitle',$gtitle);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	if($active != "")

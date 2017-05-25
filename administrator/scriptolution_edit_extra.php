@@ -28,14 +28,14 @@ if($EID > 0)
 		}
 		else
 		{
-			$sql = "update extras set etitle='".mysql_real_escape_string($etitle)."' where EID='".mysql_real_escape_string($EID)."'";
+			$sql = "update extras set etitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $etitle)."' where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'";
 			$conn->execute($sql);
 			$message = "Extra Successfully Edited.";
 			Stemplate::assign('message',$message);
 		}
 	}
 
-	$query = $conn->execute("select * from extras where EID='".mysql_real_escape_string($EID)."' limit 1");
+	$query = $conn->execute("select * from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' limit 1");
 	$extras = $query->getrows();
 	Stemplate::assign('extras', $extras[0]);
 }

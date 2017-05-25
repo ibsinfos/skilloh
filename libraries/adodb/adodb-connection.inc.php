@@ -738,9 +738,9 @@
 	
 	/**
 	* Will select, getting rows from $offset (1-based), for $nrows. 
-	* This simulates the MySQL "select * from table limit $offset,$nrows" , and
+	* This simulates the mysql "select * from table limit $offset,$nrows" , and
 	* the PostgreSQL "select * from table limit $nrows offset $offset". Note that
-	* MySQL and PostgreSQL parameter ordering is the opposite of the other.
+	* mysql and PostgreSQL parameter ordering is the opposite of the other.
 	* eg. 
 	*  SelectLimit('select * from table',3); will return rows 1 to 3 (1-based)
 	*  SelectLimit('select * from table',3,2); will return rows 3 to 5 (1-based)
@@ -1031,8 +1031,8 @@
 	}
 	
 	/**
-	* Insert or replace a single record. Note: this is not the same as MySQL's replace. 
-	*  ADOdb's Replace() uses update-insert semantics, not insert-delete-duplicates of MySQL.
+	* Insert or replace a single record. Note: this is not the same as mysql's replace. 
+	*  ADOdb's Replace() uses update-insert semantics, not insert-delete-duplicates of mysql.
 	*
 	* $this->Replace('products', array('prodname' =>"'Nails'","price" => 3.99), 'prodname');
 	*
@@ -1125,9 +1125,9 @@
 	
 	/**
 	* Will select, getting rows from $offset (1-based), for $nrows. 
-	* This simulates the MySQL "select * from table limit $offset,$nrows" , and
+	* This simulates the mysql "select * from table limit $offset,$nrows" , and
 	* the PostgreSQL "select * from table limit $nrows offset $offset". Note that
-	* MySQL and PostgreSQL parameter ordering is the opposite of the other.
+	* mysql and PostgreSQL parameter ordering is the opposite of the other.
 	* eg. 
 	*  CacheSelectLimit(15,'select * from table',3); will return rows 1 to 3 (1-based)
 	*  CacheSelectLimit(15,'select * from table',3,2); will return rows 3 to 5 (1-based)

@@ -44,13 +44,13 @@ if($REQUESTID > 0)
 		$category = intval(cleanit($_REQUEST['category']));
 		$USERID = intval(cleanit($_REQUEST['USERID']));
 		$active = intval(cleanit($_REQUEST['active']));
-		$sql = "update scriptolutionrequests set USERID='".mysql_real_escape_string($USERID)."', scriptolutiondesc='".mysql_real_escape_string($scriptolutiondesc)."', scriptolutioncategory='".mysql_real_escape_string($category)."', active='".mysql_real_escape_string($active)."' where REQUESTID='".mysql_real_escape_string($REQUESTID)."'";
+		$sql = "update scriptolutionrequests set USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."', scriptolutiondesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutiondesc)."', scriptolutioncategory='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $category)."', active='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $active)."' where REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."'";
 		$conn->execute($sql);
 		$message = "Request Successfully Edited.";
 		Stemplate::assign('message',$message);
 	}
 
-	$query = $conn->execute("select * from scriptolutionrequests where REQUESTID='".mysql_real_escape_string($REQUESTID)."' limit 1");
+	$query = $conn->execute("select * from scriptolutionrequests where REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."' limit 1");
 	$req = $query->getrows();
 	Stemplate::assign('req', $req[0]);
 }

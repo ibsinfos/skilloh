@@ -20,7 +20,7 @@ $showmax = "25";
 $CATID = intval($_REQUEST['c']);
 if($CATID > 0)
 {
-	$addcat = " AND A.category='".mysql_real_escape_string($CATID)."'";
+	$addcat = " AND A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 }
 
 $query = "SELECT A.*, B.seo, B.name, C.username from posts A, categories B, members C where A.active='1' $addcat AND A.category=B.CATID AND A.USERID=C.USERID order by A.feat desc, A.PID desc limit $showmax";
@@ -36,11 +36,11 @@ print "<title>".$showtitle." - ".$config['site_name']."</title>\n";
 print "<link>$link</link>\n"; 
 print "<description>".$showtitle."</description>\n"; 
 
-$db=mysql_connect ($DBHOST,$DBUSER,$DBPASSWORD) or die ('I cannot connect to the database because: ' . mysql_error());
-mysql_select_db ($DBNAME); 
-@mysql_query("SET NAMES 'UTF8'");
-$result = mysql_query($query) or die ('Query Error: ' . mysql_error()); 
-while ($results = mysql_fetch_array($result)) 
+$db=($GLOBALS["___mysqli_ston"] = mysqli_connect($DBHOST, $DBUSER, $DBPASSWORD)) or die ('I cannot connect to the database because: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
+mysqli_select_db($GLOBALS["___mysqli_ston"], $DBNAME); 
+@mysqli_query($GLOBALS["___mysqli_ston"], "SET NAMES 'UTF8'");
+$result = mysqli_query($GLOBALS["___mysqli_ston"], $query) or die ('Query Error: ' . mysqli_error($GLOBALS["___mysqli_ston"])); 
+while ($results = mysqli_fetch_array($result)) 
 { 
   $description = htmlspecialchars($results['gdesc'], ENT_QUOTES);
   $gtitle = htmlspecialchars($results['gtitle'], ENT_QUOTES);
@@ -68,7 +68,7 @@ while ($results = mysql_fetch_array($result))
 	print "  <author>".$getusername."</author>\n"; 
 	print "</item>\n"; 
 } 
-mysql_close(); 
+((is_null($___mysqli_res = mysqli_close($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res); 
 print "</channel>\n"; 
 print "</rss>"; 
 ?> 

@@ -19,7 +19,7 @@ verify_login_admin();
 $AID = intval(cleanit($_REQUEST['AID']));
 if($AID > 0)
 {
-	$query = $conn->execute("select code from advertisements where AID='".mysql_real_escape_string($AID)."' limit 1");
+	$query = $conn->execute("select code from advertisements where AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AID)."' limit 1");
 	$ad = $query->getrows();
 	Stemplate::assign('ad', $ad[0]);
 }

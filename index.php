@@ -50,7 +50,7 @@ if($skiplaunch == "0")
 			}
 			else
 			{
-				$query="INSERT INTO scriptolution_launch SET scriptolutionemail='".mysql_real_escape_string($scriptolutionemail)."', time_added='".time()."', invited='0'";
+				$query="INSERT INTO scriptolution_launch SET scriptolutionemail='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionemail)."', time_added='".time()."', invited='0'";
 				$result=$conn->execute($query);
 				$message = $lang['602'];
 			}
@@ -81,7 +81,7 @@ if($skiplaunch == "0")
 			}
 			else
 			{
-				$query="INSERT INTO scriptolution_launch SET scriptolutionemail='".mysql_real_escape_string($scriptolutionemail)."', time_added='".time()."', invited='0'";
+				$query="INSERT INTO scriptolution_launch SET scriptolutionemail='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionemail)."', time_added='".time()."', invited='0'";
 				$result=$conn->execute($query);
 				$message = $lang['602'];
 			}
@@ -101,7 +101,7 @@ if($skiplaunch == "0")
 			if($error == "")
 			{
 				$encryptedpassword = md5($user_password);
-				$query="SELECT status,USERID,email,username,verified from members WHERE username='".mysql_real_escape_string($user_username)."' and password='".mysql_real_escape_string($encryptedpassword)."'";
+				$query="SELECT status,USERID,email,username,verified from members WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."' and password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $encryptedpassword)."'";
 				$result=$conn->execute($query);
 				if($result->recordcount()<1)
 				{
@@ -113,7 +113,7 @@ if($skiplaunch == "0")
 				}
 				if($error=="")
 				{
-					$query="update members set lastlogin='".time()."', lip='".$_SERVER['REMOTE_ADDR']."' WHERE username='".mysql_real_escape_string($user_username)."'";
+					$query="update members set lastlogin='".time()."', lip='".$_SERVER['REMOTE_ADDR']."' WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_username)."'";
 					$conn->execute($query);
 					$_SESSION['USERID']=$result->fields['USERID'];
 					$_SESSION['EMAIL']=$result->fields['email'];
@@ -214,8 +214,8 @@ else
 	$p = intval(cleanit($_REQUEST['p']));
 	if($p > 0)
 	{
-		$scriptolution_addprice = " AND A.price='".mysql_real_escape_string($p)."'";
-		$scriptolution_addpriced = " AND price='".mysql_real_escape_string($p)."'";
+		$scriptolution_addprice = " AND A.price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $p)."'";
+		$scriptolution_addpriced = " AND price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $p)."'";
 		STemplate::assign('p',$p);
 		$addp = "&p=$p";
 	}
@@ -282,12 +282,12 @@ else
 		}
 	}
 	
-	$query = "select A.*, B.seo, C.username, C.country from posts A, categories B, members C where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID order by rand() limit 5"; 
+	$query = "select A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID order by rand() limit 8"; 
 	$results = $conn->execute($query);
 	$scriptolutionrand = $results->getrows();
 	STemplate::assign('scriptolutionrand',$scriptolutionrand);
 	
-	$query = "select A.*, B.seo, C.username, C.country from posts A, categories B, members C where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID order by rating desc, rand() limit 5"; 
+	$query = "select A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID order by rating desc, rand() limit 8"; 
 	$results = $conn->execute($query);
 	$scriptolutionrating = $results->getrows();
 	STemplate::assign('scriptolutionrating',$scriptolutionrating);

@@ -1,1 +1,1 @@
-<li><a href="{$baseurl}/mycustomorders">{$langcus4}</a></li>
+<li><a href="{$baseurl}mycustomorders">{$langcus4}</a></li>

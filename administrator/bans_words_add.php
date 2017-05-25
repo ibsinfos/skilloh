@@ -18,7 +18,7 @@ verify_login_admin();
 
 if($_POST['submitform'] == "1")
 {
-	$sql = "insert bans_words set word='".mysql_real_escape_string(cleanit($_POST['add']))."'";
+	$sql = "insert bans_words set word='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], cleanit($_POST['add']))."'";
 	$conn->execute($sql);
 	$message = "Word Successfully Banned.";
 	Stemplate::assign('message',$message);

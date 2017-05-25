@@ -24,7 +24,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$pid = intval(cleanit($_REQUEST['id']));
 	if($pid > 0)
 	{
-		$query="SELECT * FROM posts WHERE PID='".mysql_real_escape_string($pid)."' and active='5'";
+		$query="SELECT * FROM posts WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."' and active='5'";
 		$results=$conn->execute($query);
 		$p = $results->getrows();
 		STemplate::assign('p',$p[0]);

@@ -45,7 +45,7 @@ if($_POST['asub']=="1")
 		$aval2 = "0";
 		$message = "Request Successfully Deactivated.";
 	}
-	$sql="UPDATE scriptolutionrequests SET active='".intval($aval2)."' WHERE REQUESTID='".mysql_real_escape_string($AREQUESTID)."'";
+	$sql="UPDATE scriptolutionrequests SET active='".intval($aval2)."' WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AREQUESTID)."'";
 	$conn->Execute($sql);
 	Stemplate::assign('message',$message);
 }
@@ -91,26 +91,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $script
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.REQUESTID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.REQUESTID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.REQUESTID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.REQUESTID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.REQUESTID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.REQUESTID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($want != "")
 	{
-		$addtosql .= "AND A.scriptolutiondesc like'%".mysql_real_escape_string($scriptolutiondesc)."%'";
+		$addtosql .= "AND A.scriptolutiondesc like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutiondesc)."%'";
 		Stemplate::assign('scriptolutiondesc',$scriptolutiondesc);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	Stemplate::assign('search',"1");

@@ -23,7 +23,7 @@ if($_REQUEST['delete']=="1")
 	$DRID = intval(cleanit($_REQUEST['DRID']));	
 	if($DRID > 0)
 	{
-		$sql="DELETE FROM inbox_reports WHERE RID='".mysql_real_escape_string($DRID)."'";
+		$sql="DELETE FROM inbox_reports WHERE RID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DRID)."'";
 		$conn->Execute($sql);
 	}
 	$message = "Report Successfully Deleted.";
@@ -37,13 +37,13 @@ if($_REQUEST['delete']=="2")
 	$DMID = intval(cleanit($_REQUEST['DMID']));	
 	if($DMID > 0)
 	{
-		$sql="DELETE FROM inbox WHERE MID='".mysql_real_escape_string($DMID)."'";
+		$sql="DELETE FROM inbox WHERE MID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DMID)."'";
 		$conn->Execute($sql);
 	}
 	$DRID = intval(cleanit($_REQUEST['DRID']));	
 	if($DRID > 0)
 	{
-		$sql="DELETE FROM inbox_reports WHERE RID='".mysql_real_escape_string($DRID)."'";
+		$sql="DELETE FROM inbox_reports WHERE RID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DRID)."'";
 		$conn->Execute($sql);
 	}
 	$message = "Message Successfully Deleted.";
@@ -91,26 +91,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $userna
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.MID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.MID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.MID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.MID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.MID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.MID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND C.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND C.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	if($msg != "")
 	{
-		$addtosql .= "AND B.message like'%".mysql_real_escape_string($msg)."%'";
+		$addtosql .= "AND B.message like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msg)."%'";
 		Stemplate::assign('msg',$msg);
 	}
 	Stemplate::assign('search',"1");

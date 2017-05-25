@@ -71,7 +71,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$pagetitle = $lang['157'];
 	STemplate::assign('pagetitle',$pagetitle);
 	
-	$query="SELECT A.OID, A.time_added, A.status, A.stime, B.gtitle, B.days FROM orders A, posts B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.PID=A.PID $addme order by $addme2 $addme3";
+	$query="SELECT A.OID, A.time_added, A.time_added+(((B.days * 24) * 60) * 60) AS deadline, A.status, A.stime, B.gtitle, B.days, M.username, B.p1 FROM orders A, posts B, members M WHERE B.USERID = M.USERID AND A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.PID=A.PID $addme order by $addme2 $addme3";
 	$results=$conn->execute($query);
 	$o = $results->getrows();
 	STemplate::assign('o',$o);
@@ -82,19 +82,19 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$addc2 = " AND A.status='5'";
 	$addc3 = " AND A.status='4'";
 	$addc4 = " AND (A.status='0' OR A.status='1' OR A.status='6')";
-	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.PID=A.PID $addc1 order by $addme2 $addme3";
+	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.PID=A.PID $addc1 order by $addme2 $addme3";
 	$results=$conn->execute($query);
 	$counta = $results->fields['total'];
 	STemplate::assign('counta',$counta);
-	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.PID=A.PID $addc2 order by $addme2 $addme3";
+	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.PID=A.PID $addc2 order by $addme2 $addme3";
 	$results=$conn->execute($query);
 	$countb = $results->fields['total'];
 	STemplate::assign('countb',$countb);
-	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.PID=A.PID $addc3 order by $addme2 $addme3";
+	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.PID=A.PID $addc3 order by $addme2 $addme3";
 	$results=$conn->execute($query);
 	$countc = $results->fields['total'];
 	STemplate::assign('countc',$countc);
-	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.PID=A.PID $addc4 order by $addme2 $addme3";
+	$query="SELECT count(*) as total FROM orders A, posts B WHERE A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.PID=A.PID $addc4 order by $addme2 $addme3";
 	$results=$conn->execute($query);
 	$countd = $results->fields['total'];
 	STemplate::assign('countd',$countd);	

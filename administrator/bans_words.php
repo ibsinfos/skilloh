@@ -20,11 +20,11 @@ $adminurl = $config['adminurl'];
 // DELETE 
 if($_REQUEST['delete']=="1")
 {
-	$DPID = scriptolution_dotcom_data($_REQUEST['DW']);
+	$DPID = $_REQUEST['DW'];
 	if($DPID != "")
 	{
 		$deleteme = $DPID;
-		$query = "DELETE FROM bans_words WHERE word='".mysqli_real_escape_string($conn->_connectionID, $deleteme)."'";
+		$query = "DELETE FROM bans_words WHERE word='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $deleteme)."'";
 		$conn->Execute($query);
 		
 		$message = "Word Successfully Deleted.";
@@ -53,13 +53,13 @@ $word = htmlentities(strip_tags($_REQUEST['word']), ENT_COMPAT, "UTF-8");
 $add1 .= "&word=$word";
 if($word!="")
 {
-	$addtosql .= "WHERE word like'%".mysqli_real_escape_string($conn->_connectionID, $word)."%'";
+	$addtosql .= "WHERE word like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $word)."%'";
 	Stemplate::assign('word',$word);
 	Stemplate::assign('search',"1");
 }
 //Search End
 
-$page = intval(scriptolution_dotcom_data($_REQUEST['page']));
+$page = intval($_REQUEST['page']);
 if($page=="")
 {
 	$page = "1";

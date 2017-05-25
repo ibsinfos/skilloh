@@ -109,9 +109,10 @@
                                 <col   />
 	    	    	        	<thead>
 	            	                <tr class="headings">
-                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=ID&sorthow={if $sortby eq "ID"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&pprice={$pprice}&pcom={$pcom}{/if}" name="id" class="{if $sortby eq "ID"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">ID</span></a></span></th>
-                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=pprice&sorthow={if $sortby eq "pprice"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&pprice={$pprice}&pcom={$pcom}{/if}" name="pprice" class="{if $sortby eq "pprice"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Price</span></a></span></th>
-                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=pcom&sorthow={if $sortby eq "pcom"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&pprice={$pprice}&pcom={$pcom}{/if}" name="pcom" class="{if $sortby eq "pcom"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Commission</span></a></span></th>
+                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=ID&sorthow={if $sortby eq "ID"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&pminprice={$pminprice}&pmaxprice={$pmaxprice}&pcom={$pcom}{/if}" name="id" class="{if $sortby eq "ID"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">ID</span></a></span></th>
+                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=pminprice&sorthow={if $sortby eq "pminprice"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&pminprice={$pminprice}&pmaxprice={$pmaxprice}&pcom={$pcom}{/if}" name="pminprice" class="{if $sortby eq "pminprice"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Min Price</span></a></span></th>
+                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=pmaxprice&sorthow={if $sortby eq "pmaxprice"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&pminprice={$pminprice}&pmaxprice={$pmaxprice}&pcom={$pcom}{/if}" name="pmaxprice" class="{if $sortby eq "pmaxprice"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Max Price</span></a></span></th>
+                                        <th ><span class="nobr"><a href="settings_packs.php?page={$currentpage}&sortby=pcom&sorthow={if $sortby eq "pcom"}{if $sorthow eq "desc"}asc{else}desc{/if}{else}{$sorthow}{/if}{if $search eq "1"}&fromid={$fromid}&$toid={$toid}&pminprice={$pminprice}&pmaxprice={$pmaxprice}&pcom={$pcom}{/if}" name="pcom" class="{if $sortby eq "pcom"}sort-arrow-{if $sorthow eq "desc"}desc{else}asc{/if}{else}not-sort{/if}"><span class="sort-title">Commission</span></a></span></th>
                                         <th  class=" no-link last"><span class="nobr">Action</span></th>
 	                	            </tr>
 	            	            	<tr class="filter">
@@ -127,7 +128,8 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <th ><input type="text" name="pprice" id="pprice" value="{$pprice|stripslashes}" class="input-text no-changes"/></th>
+                                        <th ><input type="text" name="pminprice" id="pminprice" value="{$pminprice|stripslashes}" class="input-text no-changes"/></th>
+                                        <th ><input type="text" name="pmaxprice" id="pmaxprice" value="{$pmaxprice|stripslashes}" class="input-text no-changes"/></th>
                                         <th ><input type="text" name="pcom" id="pcom" value="{$pcom|stripslashes}" class="input-text no-changes"/></th>
                                         <th  class=" no-link last">
                                             <div style="width: 100%;">&nbsp;</div>
@@ -138,11 +140,12 @@
                                 	{section name=i loop=$results}
                                     <tr id="" >
                                         <td align="center">{$results[i].ID}</td>
-                                        <td align="center">${$results[i].pprice|stripslashes}</td>
+                                        <td align="center">${$results[i].pminprice|stripslashes}</td>
+                                        <td align="center">${$results[i].pmaxprice|stripslashes}</td>
                                         <td align="center">{$results[i].pcom|stripslashes}%</td>
                                         <td class=" last">
                                         	<a href="settings_editpack.php?ID={$results[i].ID}">Edit</a>&nbsp;|&nbsp;
-                                            <a href="settings_packs.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&pprice={$pprice}&pcom={$pcom}{/if}&delete=1&ID={$results[i].ID}">Delete</a>
+                                            <a href="settings_packs.php?page={$currentpage}&sortby={$sortby}&sorthow={$sorthow}{if $search eq "1"}&fromid={$fromid}&toid={$toid}&pminprice={$pminprice}&pmaxprice={$pmaxprice}&pcom={$pcom}{/if}&delete=1&ID={$results[i].ID}">Delete</a>
                                         </td>
                                 	</tr>
                                     {/section}

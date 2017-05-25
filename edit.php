@@ -23,7 +23,7 @@ if($EID > 0)
 	{	
 		if($_POST['subform'] == "1")
 		{
-			$query="SELECT iurl, ifile FROM posts WHERE USERID='".mysql_real_escape_string($SID)."' AND PID='".mysql_real_escape_string($EID)."'";
+			$query="SELECT iurl, ifile FROM posts WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'";
 			$results=$conn->execute($query);
 			$g = $results->getrows();
 			$iurl = $g[0]['iurl'];
@@ -38,12 +38,15 @@ if($EID > 0)
 			$gtags = cleanit($_REQUEST['gtags']);	
 			$gdays = intval(cleanit($_REQUEST['gdays']));
 			$gyoutube = cleanit($_REQUEST['gyoutube']);
+			$gprice = cleanit($_REQUEST['gprice']);
 			
 			if($gtitle == "")
 			{
 				$error = "<li>".$lang['92']."</li>";
 			}
-			
+			if($gprice == ""){
+				$error = "Price cannot be empty.";
+			}
 			if($gcat == "0")
 			{
 				$error .= "<li>".$lang['93']."</li>";
@@ -122,10 +125,10 @@ if($EID > 0)
 					{
 						$multiplemax = "0";
 					}
-					$scriptolution_add_multiple = ", scriptolution_add_multiple='".mysql_real_escape_string($multiplemax)."'";	
+					$scriptolution_add_multiple = ", scriptolution_add_multiple='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $multiplemax)."'";	
 				}
 				
-				$query="UPDATE posts SET gtitle='".mysql_real_escape_string($gtitle)."',gtags='".mysql_real_escape_string($gtags)."', gdesc='".mysql_real_escape_string($gdesc)."', ginst='".mysql_real_escape_string($ginst)."', days='".mysql_real_escape_string($gdays)."', youtube='".mysql_real_escape_string($gyoutube)."', category='".mysql_real_escape_string($gcat)."', pip='".$_SERVER['REMOTE_ADDR']."', active='$active'  $scriptolution_add_multiple WHERE USERID='".mysql_real_escape_string($SID)."' AND PID='".mysql_real_escape_string($EID)."'";
+				$query="UPDATE posts SET gtitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtitle)."',gtags='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtags)."',price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gprice)."', gdesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdesc)."', ginst='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ginst)."', days='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdays)."', youtube='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gyoutube)."', category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gcat)."', pip='".$_SERVER['REMOTE_ADDR']."', active='$active'  $scriptolution_add_multiple WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'";
 				$result=$conn->execute($query);
 				$pid = $EID;
 				$gstop = "1";
@@ -176,7 +179,7 @@ if($EID > 0)
 						do_resize_image($myvideoimgnew, "214", "132", false, $config['pdir']."/t4/".$thepp);
 						if(file_exists($config['pdir']."/".$thepp))
 						{
-							$query = "UPDATE posts SET p1='$thepp' WHERE PID='".mysql_real_escape_string($pid)."'";
+							$query = "UPDATE posts SET p1='$thepp' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."'";
 							$conn->execute($query);
 						}
 					}
@@ -227,7 +230,7 @@ if($EID > 0)
 						do_resize_image($myvideoimgnew, "214", "132", false, $config['pdir']."/t4/".$thepp);
 						if(file_exists($config['pdir']."/".$thepp))
 						{
-							$query = "UPDATE posts SET p2='$thepp' WHERE PID='".mysql_real_escape_string($pid)."'";
+							$query = "UPDATE posts SET p2='$thepp' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."'";
 							$conn->execute($query);
 						}
 					}
@@ -278,7 +281,107 @@ if($EID > 0)
 						do_resize_image($myvideoimgnew, "214", "132", false, $config['pdir']."/t4/".$thepp);
 						if(file_exists($config['pdir']."/".$thepp))
 						{
-							$query = "UPDATE posts SET p3='$thepp' WHERE PID='".mysql_real_escape_string($pid)."'";
+							$query = "UPDATE posts SET p3='$thepp' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."'";
+							$conn->execute($query);
+						}
+					}
+				}
+				$gphoto4 = $_FILES['gphoto4']['tmp_name'];
+				if($gphoto4 != "")
+				{
+					$ext = substr(strrchr($_FILES['gphoto4']['name'], '.'), 1);
+					$ext2 = strtolower($ext);
+					if($ext2 == "jpeg" || $ext2 == "jpg" || $ext2 == "gif" || $ext2 == "png")
+					{
+						$theimageinfo = getimagesize($gphoto4);
+						if($theimageinfo[2] != 1 && $theimageinfo[2] != 2 && $theimageinfo[2] != 3)
+						{
+							$gstop = "1";
+						}
+						else
+						{
+							$gstop = "0";
+						}
+					}
+					if($gstop == "0")
+					{
+						$thepp = $pid."-4";
+						if($theimageinfo[2] == 1)
+						{
+							$thepp .= ".gif";
+						}
+						elseif($theimageinfo[2] == 2)
+						{
+							$thepp .= ".jpg";
+						}
+						elseif($theimageinfo[2] == 3)
+						{
+							$thepp .= ".png";
+						}
+				
+						$myvideoimgnew=$config['pdir']."/".$thepp;
+						if(file_exists($myvideoimgnew))
+						{
+							unlink($myvideoimgnew);
+						}
+						move_uploaded_file($gphoto3, $myvideoimgnew);
+						do_resize_image($myvideoimgnew, "380", "265", false, $config['pdir']."/t/".$thepp);
+						do_resize_image($myvideoimgnew, "102", "72", false, $config['pdir']."/t2/".$thepp);
+						do_resize_image($myvideoimgnew, "678", "458", false, $config['pdir']."/t3/".$thepp);
+						do_resize_image($myvideoimgnew, "214", "132", false, $config['pdir']."/t4/".$thepp);
+						if(file_exists($config['pdir']."/".$thepp))
+						{
+							$query = "UPDATE posts SET p4='$thepp' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."'";
+							$conn->execute($query);
+						}
+					}
+				}
+				$gphoto5 = $_FILES['gphoto5']['tmp_name'];
+				if($gphoto5 != "")
+				{
+					$ext = substr(strrchr($_FILES['gphoto5']['name'], '.'), 1);
+					$ext2 = strtolower($ext);
+					if($ext2 == "jpeg" || $ext2 == "jpg" || $ext2 == "gif" || $ext2 == "png")
+					{
+						$theimageinfo = getimagesize($gphoto5);
+						if($theimageinfo[2] != 1 && $theimageinfo[2] != 2 && $theimageinfo[2] != 3)
+						{
+							$gstop = "1";
+						}
+						else
+						{
+							$gstop = "0";
+						}
+					}
+					if($gstop == "0")
+					{
+						$thepp = $pid."-5";
+						if($theimageinfo[2] == 1)
+						{
+							$thepp .= ".gif";
+						}
+						elseif($theimageinfo[2] == 2)
+						{
+							$thepp .= ".jpg";
+						}
+						elseif($theimageinfo[2] == 3)
+						{
+							$thepp .= ".png";
+						}
+				
+						$myvideoimgnew=$config['pdir']."/".$thepp;
+						if(file_exists($myvideoimgnew))
+						{
+							unlink($myvideoimgnew);
+						}
+						move_uploaded_file($gphoto3, $myvideoimgnew);
+						do_resize_image($myvideoimgnew, "380", "265", false, $config['pdir']."/t/".$thepp);
+						do_resize_image($myvideoimgnew, "102", "72", false, $config['pdir']."/t2/".$thepp);
+						do_resize_image($myvideoimgnew, "678", "458", false, $config['pdir']."/t3/".$thepp);
+						do_resize_image($myvideoimgnew, "214", "132", false, $config['pdir']."/t4/".$thepp);
+						if(file_exists($config['pdir']."/".$thepp))
+						{
+							$query = "UPDATE posts SET p5='$thepp' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pid)."'";
 							$conn->execute($query);
 						}
 					}
@@ -294,7 +397,7 @@ if($EID > 0)
 			}
 		}
 		
-		$query="SELECT * FROM posts WHERE USERID='".mysql_real_escape_string($SID)."' AND PID='".mysql_real_escape_string($EID)."'";
+		$query="SELECT * FROM posts WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."'";
 		$results=$conn->execute($query);
 		$g = $results->getrows();
 		STemplate::assign('g',$g[0]);

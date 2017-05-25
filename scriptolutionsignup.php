@@ -153,7 +153,7 @@ if($_REQUEST['jsub'] == "1" && $scriptolution_proceed == "1")
 		}
 		$query="INSERT INTO members SET email='".mysqli_real_escape_string($conn->_connectionID, $user_email)."',username='".mysqli_real_escape_string($conn->_connectionID, $user_username)."', password='".mysqli_real_escape_string($conn->_connectionID, $md5pass)."', pwd='".mysqli_real_escape_string($conn->_connectionID, $user_password)."', addtime='".time()."', lastlogin='".time()."', ip='".$_SERVER['REMOTE_ADDR']."', lip='".$_SERVER['REMOTE_ADDR']."', country='".mysqli_real_escape_string($conn->_connectionID, $def_country)."'";
 		$result=$conn->execute($query);
-		$userid = mysqli_insert_id($conn->_connectionID);
+		$userid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 
 		if(scriptolution_dotcom_script($userid))
 		{

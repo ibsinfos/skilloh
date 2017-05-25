@@ -24,7 +24,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$iid = intval(cleanit($_REQUEST['item']));
 	if($iid > 0)
 	{
-		$query="SELECT * FROM posts WHERE PID='".mysql_real_escape_string($iid)."'";
+		$query="SELECT P.*, M.fullname FROM posts P, members M WHERE P.USERID = M.USERID AND P.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."'";
 		$results=$conn->execute($query);
 		$p = $results->getrows();
 		STemplate::assign('p',$p[0]);
@@ -47,7 +47,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			}
 			else
 			{
-				$query = "INSERT INTO scriptolution_local2 SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($id)."', time_added='".time()."', pprice='".mysql_real_escape_string($pprice)."', pname='".mysql_real_escape_string($pname)."', pdate='".mysql_real_escape_string($pdate)."', padditional='".mysql_real_escape_string($padditional)."'"; 
+				$query = "INSERT INTO scriptolution_local2 SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', time_added='".time()."', pprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pprice)."', pname='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pname)."', pdate='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pdate)."', padditional='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $padditional)."'"; 
 				$executequery=$conn->execute($query);
 				$message = $langl['15'];	
 			}

@@ -12,8 +12,9 @@
 | Copyright (c) FiverrScript.com. All rights reserved.
 |**************************************************************************************************/
 
-include("include/config.php");
-include("include/functions/import.php");
+include("/home/skilohx6/public_html/dev/include/config.php");
+include("/home/skilohx6/public_html/dev/include/functions/import.php");
+
 
 $query = "SELECT A.OID, B.MID, B.time from orders A, inbox2 B where A.status='4' AND A.OID=B.OID AND B.reject='0' AND B.action='delivery' order by B.MID desc";
 $executequery = $conn->Execute($query);
@@ -27,8 +28,9 @@ for($i=0; $i<count($g);$i++)
 	$d = count_days($atime, $time);
 	if($d >= 3)
 	{
-		$query="UPDATE orders SET status='5', cltime='".time()."' WHERE OID='".mysql_real_escape_string($OID)."' limit 1";
+		$query="UPDATE orders SET status='5', cltime='".time()."' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' limit 1";
 		$results=$conn->execute($query);
+		echo "Order status set to 5 for order no: ".$OID.PHP_EOL;
 	}
 }
 
@@ -49,16 +51,18 @@ for($i=0; $i<count($h);$i++)
 		$AMID = $MID;
 		if($AMID > 0)
 		{
-			$query="UPDATE inbox2 SET cancel='2', ctime='".time()."', CID='".mysql_real_escape_string($MSGTO)."' WHERE MID='".mysql_real_escape_string($AMID)."' AND cancel='0' AND MSGTO='".mysql_real_escape_string($MSGTO)."' limit 1";
+			$query="UPDATE inbox2 SET cancel='2', ctime='".time()."', CID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $MSGTO)."' WHERE MID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AMID)."' AND cancel='0' AND MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $MSGTO)."' limit 1";
 			$results=$conn->execute($query);
-			$query = "select USERID, price from orders where OID='".mysql_real_escape_string($OID)."'"; 
+			$query = "select USERID, price from orders where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."'"; 
 			$executequery=$conn->execute($query);
 			$RUSERID = $executequery->fields['USERID'];
 			$rprice = $executequery->fields['price'];
 			issue_refund($RUSERID,$OID,$rprice);
-			$query="UPDATE orders SET status='2' WHERE OID='".mysql_real_escape_string($OID)."' limit 1";
+			$query="UPDATE orders SET status='2' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' limit 1";
 			$results=$conn->execute($query);
 			cancel_revenue($OID);
+			
+			echo "Cancel request autoapproved for order: ".$OID.PHP_EOL;
 		}
 	}
 }
@@ -77,10 +81,12 @@ for($i=0; $i<count($f);$i++)
 	$time = time();
 	if($time >= $fdexp)
 	{
-		$query="UPDATE featured SET exp='1' WHERE ID='".mysql_real_escape_string($ID)."'";
+		$query="UPDATE featured SET exp='1' WHERE ID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ID)."'";
 		$results=$conn->execute($query);
-		$query="UPDATE posts SET feat='0' WHERE PID='".mysql_real_escape_string($PID)."'";
+		$query="UPDATE posts SET feat='0' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$results=$conn->execute($query);
+		
+		echo "Featured expired for service: ".$ID.PHP_EOL;
 	}
 }
 
@@ -105,7 +111,7 @@ function cron_get_percent($userid)
 {
 	global $conn;
 	$userid = intval($userid);
-	$query = "select good, bad from ratings where USERID='".mysql_real_escape_string($userid)."'"; 
+	$query = "select good, bad from ratings where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid)."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -148,8 +154,10 @@ for($i=0; $i<count($z);$i++)
 	$islate = cron_late($days, $stime);
 	if($islate == "1")
 	{
-		$query="UPDATE orders SET late='1' WHERE OID='".mysql_real_escape_string($OID)."'";
+		$query="UPDATE orders SET late='1' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."'";
 		$results=$conn->execute($query);
+		
+		echo "Delivery delayed for order: ".$OID.PHP_EOL;
 	}
 }
 
@@ -168,7 +176,7 @@ for($i=0; $i<count($m);$i++)
 	update_scriptolution_top_rated($USERID, $toprated);
 	if($config['enable_levels'] == "1" && $config['price_mode'] == "3" && $level != "3")
 	{
-		$query = "select A.OID FROM orders A, posts B where B.USERID='".mysql_real_escape_string($USERID)."' AND A.PID=B.PID AND A.status='5' AND A.late='0'"; 
+		$query = "select A.OID FROM orders A, posts B where B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."' AND A.PID=B.PID AND A.status='5' AND A.late='0'"; 
 		$results = $conn->execute($query);
 		$gords = $results->getrows();
 		$gort = count($gords);
@@ -179,8 +187,10 @@ for($i=0; $i<count($m);$i++)
 				$uper = cron_get_percent($USERID);
 				if($uper >= $level2rate)
 				{
-					$query="UPDATE members SET level='2' WHERE USERID='".mysql_real_escape_string($USERID)."'";
+					$query="UPDATE members SET level='2' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."'";
 					$results=$conn->execute($query);
+					
+					echo "Member upgraded to level 2; Member Id: ".$USERID.PHP_EOL;
 				}
 			}
 		}
@@ -191,8 +201,10 @@ for($i=0; $i<count($m);$i++)
 				$uper = cron_get_percent($USERID);
 				if($uper >= $level3rate)
 				{
-					$query="UPDATE members SET level='3' WHERE USERID='".mysql_real_escape_string($USERID)."'";
+					$query="UPDATE members SET level='3' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."'";
 					$results=$conn->execute($query);
+					
+					echo "Member upgraded to level 3; Member Id: ".$USERID.PHP_EOL;
 				}
 			}
 		}

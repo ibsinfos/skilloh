@@ -40,7 +40,7 @@ if($CATID > 0)
 		
 		$parent = intval(cleanit($_POST['parent']));
 		
-		$sql = "update categories set parent='".mysql_real_escape_string($parent)."', name='".mysql_real_escape_string($name)."', seo='".mysql_real_escape_string($seo)."', scriptolution_featuredcat='".mysql_real_escape_string($scriptolution_featuredcat)."', scriptolution_cattag1='".mysql_real_escape_string($scriptolution_cattag1)."', scriptolution_cattag2='".mysql_real_escape_string($scriptolution_cattag2)."', scriptolution_cattag3='".mysql_real_escape_string($scriptolution_cattag3)."', details='".mysql_real_escape_string($details)."', mtitle='".mysql_real_escape_string($mtitle)."', mdesc='".mysql_real_escape_string($mdesc)."', mtags='".mysql_real_escape_string($mtags)."' where CATID='".mysql_real_escape_string($CATID)."'";
+		$sql = "update categories set parent='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $parent)."', name='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $name)."', seo='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $seo)."', scriptolution_featuredcat='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_featuredcat)."', scriptolution_cattag1='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_cattag1)."', scriptolution_cattag2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_cattag2)."', scriptolution_cattag3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_cattag3)."', details='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $details)."', mtitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mtitle)."', mdesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mdesc)."', mtags='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mtags)."' where CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 		$conn->execute($sql);
 		
 		
@@ -88,7 +88,7 @@ if($CATID > 0)
 				do_resize_image($myvideoimgnew, "285", "145", false, $config['scriptolutioncatdir']."/".$thepp);
 				if(file_exists($config['scriptolutioncatdir']."/".$thepp))
 				{
-					$query = "UPDATE categories SET scriptolution_catimage='".mysql_real_escape_string($thepp)."' WHERE CATID='".mysql_real_escape_string($CATID)."'";
+					$query = "UPDATE categories SET scriptolution_catimage='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $thepp)."' WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 					$conn->execute($query);
 				}
 			}
@@ -135,10 +135,10 @@ if($CATID > 0)
 					unlink($myvideoimgnew);
 				}
 				move_uploaded_file($bigimage, $myvideoimgnew);
-				do_resize_image($myvideoimgnew, "1010", "298", false, $config['scriptolutioncatdir']."/big-".$thenewpp);
+				//do_resize_image($myvideoimgnew, "1010", "298", false, $config['scriptolutioncatdir']."/big-".$thenewpp);
 				if(file_exists($config['scriptolutioncatdir']."/bigo-".$thenewpp))
 				{
-					$query = "UPDATE categories SET scriptolution_bigimage='big-".mysql_real_escape_string($thenewpp)."' WHERE CATID='".mysql_real_escape_string($CATID)."'";
+					$query = "UPDATE categories SET scriptolution_bigimage='bigo-".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $thenewpp)."' WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 					$conn->execute($query);
 				}
 			}
@@ -150,7 +150,7 @@ if($CATID > 0)
 		Stemplate::assign('message',$message);
 	}
 
-	$query = $conn->execute("select * from categories where CATID='".mysql_real_escape_string($CATID)."' limit 1");
+	$query = $conn->execute("select * from categories where CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."' limit 1");
 	$category = $query->getrows();
 	Stemplate::assign('category', $category[0]);
 }

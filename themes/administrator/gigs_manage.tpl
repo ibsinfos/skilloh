@@ -15,22 +15,6 @@
                                     </span>
         						</a>
                                 
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <div id="isoft_group_1_content" style="display:none;">
                                 	<div class="entry-edit">
                                         <div class="entry-edit-head">
@@ -42,7 +26,7 @@
 
                                         <div>
         			<div id="customerGrid">
-        				<table cellspacing="0" class="actions">
+        				<table cellspacing="0" class="actions table">
         				<tr>
                     		<td class="pager">
                             	Showing {if $total gt 0}{$beginning} - {$ending} of {/if}{$total} Gigs
@@ -119,33 +103,7 @@
 				</div>
 									</div>
 								</div>
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                               
-                                
-                                
-                                
-    						</li>
+                                </li>
                             
                             <li >
                                 <a href="gigs_validate.php" id="isoft_group_2" name="group_2" title="Validate Gigs" class="tab-item-link">

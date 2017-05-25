@@ -30,16 +30,16 @@ if (isset($_FILES["fileInput"]))
 		$ext2 = strtolower($ext); 
 		if($ext2 == "jpeg" || $ext2 == "jpg" || $ext2 == "gif" || $ext2 == "png" || $ext2 == "tif" || $ext2 == "bmp" || $ext2 == "avi" || $ext2 == "mpeg" || $ext2 == "mpg" || $ext2 == "mov" || $ext2 == "rm" || $ext2 == "3gp" || $ext2 == "flv" || $ext2 == "mp4" || $ext2 == "zip" || $ext2 == "rar" || $ext2 == "mp3" || $ext2 == "wav" || $ext2 == "wma" || $ext2 == "ogg" || $ext2 == "doc" || $ext2 == "docx" || $ext2 == "rtf" || $ext2 == "ppt" || $ext2 == "xls" || $ext2 == "pdf")
 		{
-			$query="INSERT INTO files SET fname='".mysql_real_escape_string($clean_file)."', time='".time()."', ip='".$_SERVER['REMOTE_ADDR']."'";
+			$query="INSERT INTO files SET fname='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $clean_file)."', time='".time()."', ip='".$_SERVER['REMOTE_ADDR']."'";
 			$result=$conn->execute($query);
-			$fid = mysql_insert_id();
+			$fid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 			$s = generateCode(5).time();
 			$cf = md5($fid).$s;
 			$saveme = $path.$cf;
 			exec("mkdir ".$saveme);
 			$file_loc = $saveme."/".$_FILES["fileInput"]["name"]; 
 			move_uploaded_file($_FILES["fileInput"]["tmp_name"], $file_loc); 
-			$query="UPDATE files SET s='".mysql_real_escape_string($s)."' WHERE FID='".mysql_real_escape_string($fid)."'";
+			$query="UPDATE files SET s='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $s)."' WHERE FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fid)."'";
 			$conn->execute($query);
 			$clean_file = cleanit($clean_file);
 			$clean_file = str_replace("'", "", $clean_file);

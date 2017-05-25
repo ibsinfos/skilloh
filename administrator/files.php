@@ -63,21 +63,21 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $fname!
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND FID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND FID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND FID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND FID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND FID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND FID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($fname != "")
 	{
-		$addtosql .= "AND fname like'%".mysql_real_escape_string($fname)."%'";
+		$addtosql .= "AND fname like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fname)."%'";
 		Stemplate::assign('fname',$fname);
 	}
 	Stemplate::assign('search',"1");

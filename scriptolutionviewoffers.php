@@ -23,21 +23,36 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		$pagetitle = $lang['641'];
 		STemplate::assign('pagetitle',$pagetitle);
 		
-		$query = "select * from scriptolutionrequests where REQUESTID='".mysql_real_escape_string($REQUESTID)."' AND active='1' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."' limit 1"; 
+		$query = "select * from scriptolutionrequests where REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."' AND active='1' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' limit 1"; 
 		$executequery=$conn->execute($query);
 		$scriptolutionz = $executequery->getrows();
 		STemplate::assign('scriptolutionz',$scriptolutionz);
 		
 		if(count($scriptolutionz) > 0)
 		{
+			STemplate::assign('role','buyer');
+			
 			$REQUESTID = $scriptolutionz[0]['REQUESTID'];
 			STemplate::assign('REQUESTID',$REQUESTID);
 			
-			$query = "select A.scriptolutionmsg, B.gtitle, B.p1, B.price, B.days, B.category, B.PID, C.USERID, C.username from offerscriptolution A, posts B, members C WHERE A.PID=B.PID AND B.USERID=C.USERID AND A.REQUESTID='".mysql_real_escape_string($REQUESTID)."' order by A.SCRIPTOLUTIONOFID desc"; 
+			$query = "select A.scriptolutionmsg, B.gtitle, B.p1, B.price, B.days, B.category, B.PID, C.USERID, C.username, if(C.profilepicture = '', 'noprofilepicture.png', C.profilepicture) as profilepicture from offerscriptolution A, posts B, members C WHERE A.PID=B.PID AND B.USERID=C.USERID AND A.REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."' order by A.SCRIPTOLUTIONOFID desc"; 
 			$results = $conn->execute($query);
 			$offers = $results->getrows();
 			STemplate::assign('offers',$offers);
 		}		
+		else {
+			STemplate::assign('role','seller');
+			
+			$query = "select R.*, C.username from scriptolutionrequests R, members C where R.USERID = C.USERID AND R.REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."' AND R.active='1' limit 1";
+			$executequery=$conn->execute($query);
+			$scriptolutionz = $executequery->getrows();
+			STemplate::assign('scriptolutionz',$scriptolutionz);
+			
+			$query = "select A.scriptolutionmsg, B.gtitle, B.p1, B.price, B.days, B.category, B.PID from offerscriptolution A, posts B WHERE A.PID=B.PID AND B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."' order by A.SCRIPTOLUTIONOFID desc";
+			$results = $conn->execute($query);
+			$offers = $results->getrows();
+			STemplate::assign('offers',$offers);
+		}
 	}
 	else
 	{

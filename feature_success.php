@@ -23,7 +23,7 @@ if($PID > 0)
 	
 	if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSION['USERID']))
 	{
-		$query = "SELECT A.*, B.seo, C.username from posts A, categories B, members C where A.category=B.CATID AND A.USERID=C.USERID AND C.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.PID='".mysql_real_escape_string($PID)."'";
+		$query = "SELECT A.*, B.seo, C.username from posts A, categories B, members C where A.category=B.CATID AND A.USERID=C.USERID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$results=$conn->execute($query);
 		$p = $results->getrows();
 		STemplate::assign('p',$p[0]);

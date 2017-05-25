@@ -27,7 +27,7 @@ if($_POST['submitform'] == "1")
 	}
 	else
 	{
-		$sql = "insert bans_ips set ip='".mysql_real_escape_string($toaddip)."'";
+		$sql = "insert bans_ips set ip='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toaddip)."'";
 		$conn->execute($sql);
 		$message = "IP Successfully Banned.";
 		Stemplate::assign('message',$message);

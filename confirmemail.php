@@ -24,7 +24,7 @@ if ($_REQUEST['c'] != "")
 	else
 	{
 		$code = htmlentities(strip_tags($_REQUEST['c']), ENT_COMPAT, "UTF-8");
-		$query="SELECT * from members_verifycode WHERE code='".mysql_real_escape_string($code)."'";
+		$query="SELECT * from members_verifycode WHERE code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $code)."'";
 		$result=$conn->execute($query);
 		
 		if($result->recordcount()>=1)

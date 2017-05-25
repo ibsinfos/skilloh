@@ -38,8 +38,8 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$pagingstart = "0";
 		}
 		
-		$query1 = "SELECT count(*) as total from posts A, members B where B.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.USERID=B.USERID AND A.active='5' order by A.PID desc limit $config[maximum_results]";
-		$query2 = "SELECT A.*, C.username from posts A, members C where A.USERID=C.USERID AND C.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.active='5' order by A.PID desc limit $pagingstart, $config[items_per_page]";
+		$query1 = "SELECT count(*) as total from posts A, members B where B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.USERID=B.USERID AND A.active='5' order by A.PID desc limit $config[maximum_results]";
+		$query2 = "SELECT A.*, C.username from posts A, members C where A.USERID=C.USERID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND C.USERID=A.USERID AND A.active='5' order by A.PID desc limit $pagingstart, $config[items_per_page]";
 		$executequery1 = $conn->Execute($query1);
 		$scriptolution = $executequery1->fields['total'];
 		if ($scriptolution > 0)
@@ -77,7 +77,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+					$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 				}
 				$counter=0;
 				$lowercount = $currentpage-5;
@@ -101,7 +101,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$pagelinks.="<li><span class='next'>next page</span></li>";
+					$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 				}
 			}
 		}

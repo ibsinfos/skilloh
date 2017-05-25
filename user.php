@@ -20,7 +20,7 @@ $uname = cleanit($_REQUEST['uname']);
 if($uname != "")
 {
 	STemplate::assign('uname',$uname);
-	$query = "select USERID, addtime, description, toprated, level, country, scriptolutionuserslogan from members where username='".mysql_real_escape_string($uname)."' AND status='1'"; 
+	$query = "select USERID, addtime, description, toprated, level, country, scriptolutionuserslogan, if(profilepicture = '', 'noprofilepicture.png', profilepicture) as profilepicture from members where username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $uname)."' AND status='1'"; 
 	$executequery=$conn->execute($query);
 	$USERID = $executequery->fields['USERID'];
 	$addtime = $executequery->fields['addtime'];
@@ -33,18 +33,19 @@ if($uname != "")
 	STemplate::assign('level',$level);
 	$ucountry = $executequery->fields['country'];
 	STemplate::assign('ucountry',$ucountry);
+	STemplate::assign('profilepicture',$executequery->fields['profilepicture']);
 	$scriptolutionuserslogan = $executequery->fields['scriptolutionuserslogan'];
 	STemplate::assign('scriptolutionuserslogan',$scriptolutionuserslogan);
 	if($USERID > 0)
 	{
 		STemplate::assign('USERID',$USERID);
-		$query = "SELECT A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID AND A.USERID='".mysql_real_escape_string($USERID)."' order by A.PID desc";
+		$query = "SELECT A.*, B.seo, C.username, C.country, C.toprated, (select sum(R.good) from ratings R where R.PID=A.PID) AS good, (select sum(R.bad) from ratings R where R.PID=A.PID) as bad, (SELECT count(*) FROM bookmarks book WHERE book.PID=A.PID) as likes from posts A, categories B, members C where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID AND A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."' order by A.PID desc";
 		$results=$conn->execute($query);
 		$posts = $results->getrows();
 		STemplate::assign('posts',$posts);
 		STemplate::assign('pagetitle',$uname);
 
-		$query="SELECT A.comment, B.username, B.USERID, C.PID, C.gtitle FROM ratings A, members B, posts C WHERE C.USERID='".mysql_real_escape_string($USERID)."' AND A.RATER=B.USERID AND A.PID=C.PID and B.status='1' order by A.RID desc limit 50";
+		$query="SELECT A.comment, A.good, A.bad, A.time_added, B.username, B.USERID, C.PID, C.gtitle FROM ratings A, members B, posts C WHERE C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."' AND A.RATER=B.USERID AND A.PID=C.PID and B.status='1' order by A.RID desc limit 50";
 		$results=$conn->execute($query);
 		$f = $results->getrows();
 		STemplate::assign('f',$f);

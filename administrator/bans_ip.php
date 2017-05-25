@@ -24,7 +24,7 @@ if($_REQUEST[delete]=="1")
 	if($DPID > 0)
 	{
 		$deleteme = $DPID;
-		$query = "DELETE FROM bans_ips WHERE ip='".mysql_real_escape_string($deleteme)."'";
+		$query = "DELETE FROM bans_ips WHERE ip='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $deleteme)."'";
 		$conn->Execute($query);
 		
 		$message = "IP Successfully Deleted.";
@@ -53,7 +53,7 @@ $ip = htmlentities(strip_tags($_REQUEST['ip']), ENT_COMPAT, "UTF-8");
 $add1 .= "&ip=$ip";
 if($ip!="")
 {
-	$addtosql .= "WHERE ip like'%".mysql_real_escape_string($ip)."%'";
+	$addtosql .= "WHERE ip like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ip)."%'";
 	Stemplate::assign('ip',$ip);
 	Stemplate::assign('search',"1");
 }

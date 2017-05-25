@@ -51,7 +51,7 @@ if($_POST['submitform'] == "1")
 	}
 	else
 	{
-		$query = "select USERID from posts where PID='".mysql_real_escape_string($PID)."'"; 
+		$query = "select USERID from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 		$executequery=$conn->execute($query);
 		$USERID = intval($executequery->fields['USERID']);
 		if($USERID == "0")
@@ -72,7 +72,7 @@ if($_POST['submitform'] == "1")
 			{
 				$addme = ", good='0', bad='1'";	
 			}
-			$sql = "insert ratings set USERID='".mysql_real_escape_string($USERID)."', PID='".mysql_real_escape_string($PID)."', RATER='".mysql_real_escape_string($RATER)."', comment='".mysql_real_escape_string($comment)."', time_added='".time()."' $addme";
+			$sql = "insert ratings set USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."', RATER='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $RATER)."', comment='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $comment)."', time_added='".time()."' $addme";
 			$conn->execute($sql);
 			$message = "Feedback Successfully Added.";
 			Stemplate::assign('message',$message);

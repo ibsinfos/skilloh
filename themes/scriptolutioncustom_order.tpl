@@ -1,46 +1,65 @@
-{include file="scriptolution_error7.tpl"}                                
-<div class="bodybg scriptolutionpaddingtop15">
-	<div class="whitebody scriptolutionpaddingtop30 scriptolutionwidth842">
-		<div class="inner-wrapper scriptolutionwidth842">
-			<div class="left-side scriptolutionwidth842">
-				<div class="whiteBox twoHalfs padding0 noborder scriptolutionwidth800">
+<style>
+.custom_order_active a{
+   color: #10a2ef;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 700;
+   text-decoration: none;
+}
+</style>
+<div class="bodybg topspace">
+{include file="scriptolution_error7.tpl"}
+	<div class="container scriptolutionpaddingtop30">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+			<div class="clear"></div>
+			<!-- {include file='scriptolution_newside.tpl'} --> 
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+            {include file='skilop_sellmenu.tpl'}            
+         </div>
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <div id="scriptolutionPostForm"> 
                         
-                            <h1><strong>{$langcus1}</strong></h1>
+                            <h1 class="myshoppingheading">{$langcus1}</h1>
                             <div class="scriptolutionclear"></div>
                             							
-                            <div align="center" class="newfeaturegig" style="font-size:24px">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 newfeaturegig">
                                   
-                                {$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}
+                                <p class="custom_jobtitle">
+                                	{$lang62} {$p.gtitle|stripslashes} 
+                                	{if $scriptolution_cur_pos eq "1"}
+                                		{$lang589} {$p.price|stripslashes}{$lang197}
+                                	{else}
+                                		{$lang63}{$p.price|stripslashes}
+                                	{/if}
+                                </p>
                                 <div class="scriptolutionclear"></div>
                                       
-                                <div style="color:#666">{$p.gdesc|stripslashes}</div>
+                                <p class="custom_order_note"><strong>Note: </strong>{$p.gdesc|stripslashes}</p>
                                 <div class="scriptolutionclear"></div>
                                   
-                                {$langcus2}: <input type="text" value="{$baseurl}/view/customorder/{$p.PID}" style="font-size:24px;  width: 70%;  border: 1px solid #ccc;  padding: 11px;" />
+                                <p><strong>{$langcus2}:</strong> 
+                                	<input type="text" value="{$baseurl}view/customorder/{$p.PID}" class="order_to_whom" style="background:#f5f5f5;" />
+                                </p>	
                                 <div class="scriptolutionclear"></div>
                                 
                                 <div style="padding-bottom:20px;"></div>
-                                <div style="color:#38b0d9; font-size:24px;">{$langcus3}</div>
+                                <p class="to_whom_order">{$langcus3}</p>
 								
-                                <center>
-                                <div style="background-color:#F9F6F6; padding: 20px;">
+                                <div class="customer_order_name_selection">
                                 	<form method="post">
-                                	<select name="msgto" style="font-size:24px;  width: 70%;  border: 1px solid #ccc;  padding: 11px;">
-                                    <option value="0">{$langcus13}</option>
-                                    {section name=i loop=$m}
-                                    <option value="{$m[i].USERID|stripslashes}">{$m[i].username|stripslashes}</option>
-                                    {/section}
-                                    </select>
-                                    <br />
-                                    <small>{$langcus14}</small>
-                                    <div style="padding-bottom:10px;"></div>
-                                    <input type="submit" value="{$langcus12}" class="scriptolutionbluebutton" />
-                                    <input type="hidden" name="submg" value="1" />
+	                                	<select name="msgto" class="order_to_whom">
+		                                    <option value="0">{$langcus13}</option>
+		                                    {section name=i loop=$m}
+		                                    <option value="{$m[i].USERID|stripslashes}">{$m[i].username|stripslashes}</option>
+		                                    {/section}
+	                                    </select>
+	                                    <br />
+	                                    <small>{$langcus14}</small>
+	                                    	<div style="padding-bottom:40px;"></div>
+                                    		<input type="submit" value="{$langcus12}" class="btn-save waves-effect waves-light btn-submit" />
+                                    		<input type="hidden" name="submg" value="1" />
                                     </form>
                                 </div>
-                                </center>
-                                
                                 <div style="padding-bottom:20px;"></div>
 							</div>
 
@@ -51,9 +70,4 @@
 			<div class="clear"></div>
 		</div>   
 	</div>
-</div>
-<div id="scriptolutionnobottom">
-    <div class="centerwrap footertop">
-        <div class="footerbg scriptolutionfooter842"></div>
-    </div>
 </div>

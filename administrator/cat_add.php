@@ -34,10 +34,10 @@ if($_POST['submitform'] == "1")
 	$scriptolution_cattag1 = cleanit($_POST['scriptolution_cattag1']);
 	$scriptolution_cattag2 = cleanit($_POST['scriptolution_cattag2']);
 	$scriptolution_cattag3 = cleanit($_POST['scriptolution_cattag3']);
-	$sql = "insert categories set name='".mysql_real_escape_string($name)."', seo='".mysql_real_escape_string($seo)."', scriptolution_featuredcat='".mysql_real_escape_string($scriptolution_featuredcat)."', scriptolution_cattag1='".mysql_real_escape_string($scriptolution_cattag1)."', scriptolution_cattag2='".mysql_real_escape_string($scriptolution_cattag2)."', scriptolution_cattag3='".mysql_real_escape_string($scriptolution_cattag3)."', parent='".mysql_real_escape_string($parent)."', details='".mysql_real_escape_string($details)."', mtitle='".mysql_real_escape_string($mtitle)."', mdesc='".mysql_real_escape_string($mdesc)."', mtags='".mysql_real_escape_string($mtags)."'";
+	$sql = "insert categories set name='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $name)."', seo='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $seo)."', scriptolution_featuredcat='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_featuredcat)."', scriptolution_cattag1='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_cattag1)."', scriptolution_cattag2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_cattag2)."', scriptolution_cattag3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution_cattag3)."', parent='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $parent)."', details='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $details)."', mtitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mtitle)."', mdesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mdesc)."', mtags='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mtags)."'";
 	$conn->execute($sql);
 	
-	$CATID = mysql_insert_id();
+	$CATID = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 	if($CATID > 0)
 	{
 		$cimage = $_FILES['cimage']['tmp_name'];
@@ -82,7 +82,7 @@ if($_POST['submitform'] == "1")
 				do_resize_image($myvideoimgnew, "285", "145", false, $config['scriptolutioncatdir']."/".$thepp);
 				if(file_exists($config['scriptolutioncatdir']."/".$thepp))
 				{
-					$query = "UPDATE categories SET scriptolution_catimage='".mysql_real_escape_string($thepp)."' WHERE CATID='".mysql_real_escape_string($CATID)."'";
+					$query = "UPDATE categories SET scriptolution_catimage='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $thepp)."' WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 					$conn->execute($query);
 				}
 			}
@@ -128,10 +128,10 @@ if($_POST['submitform'] == "1")
 					unlink($myvideoimgnew);
 				}
 				move_uploaded_file($bigimage, $myvideoimgnew);
-				do_resize_image($myvideoimgnew, "1010", "298", false, $config['scriptolutioncatdir']."/big-".$thenewpp);
+				//do_resize_image($myvideoimgnew, "1010", "298", false, $config['scriptolutioncatdir']."/big-".$thenewpp);
 				if(file_exists($config['scriptolutioncatdir']."/".$thenewpp))
 				{
-					$query = "UPDATE categories SET scriptolution_bigimage='big-".mysql_real_escape_string($thenewpp)."' WHERE CATID='".mysql_real_escape_string($CATID)."'";
+					$query = "UPDATE categories SET scriptolution_bigimage='bigo-".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $thenewpp)."' WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 					$conn->execute($query);
 				}
 			}

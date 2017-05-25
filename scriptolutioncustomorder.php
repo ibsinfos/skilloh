@@ -78,9 +78,9 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		{			
 			$active = "5";
 
-			$query="INSERT INTO posts SET scriptolutioncustomorder='1', USERID='".mysql_real_escape_string($_SESSION['USERID'])."', gtitle='".mysql_real_escape_string($gtitle)."',gtags='".mysql_real_escape_string($gtags)."', gdesc='".mysql_real_escape_string($gdesc)."', ginst='".mysql_real_escape_string($ginst)."', days='".mysql_real_escape_string($gdays)."', youtube='".mysql_real_escape_string($gyoutube)."', category='".mysql_real_escape_string($gcat)."', price='".mysql_real_escape_string($price)."', time_added='".time()."', date_added='".date("Y-m-d")."', pip='".$_SERVER['REMOTE_ADDR']."', active='$active', ctp='".mysql_real_escape_string($ctp)."' $scriptolution_add_multiple $addship $scriptolution_add_instant";
+			$query="INSERT INTO posts SET scriptolutioncustomorder='1', p1='no_image.jpg', USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', gtitle='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtitle)."',gtags='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtags)."', gdesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdesc)."', ginst='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ginst)."', days='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdays)."', youtube='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gyoutube)."', category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gcat)."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', time_added='".time()."', date_added='".date("Y-m-d")."', pip='".$_SERVER['REMOTE_ADDR']."', active='$active', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ctp)."' $scriptolution_add_multiple $addship $scriptolution_add_instant";
 			$result=$conn->execute($query);
-			$pid = mysql_insert_id();
+			$pid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 			
 			$feurl = $config['baseurl']."/custom_order?id=".$pid;
 			header("Location:$feurl");exit;

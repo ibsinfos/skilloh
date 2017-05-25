@@ -38,8 +38,8 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 		$pagingstart = "0";
 	}
 	
-	$query1 = "SELECT count(*) as total from posts A, bookmarks B where A.active='1' AND B.USERID='".mysql_real_escape_string($SID)."' AND A.PID=B.PID order by B.BID desc limit $config[maximum_results]";
-	$query2 = "SELECT A.*, B.seo, C.username, C.country from posts A, categories B, members C, bookmarks D where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID AND D.USERID='".mysql_real_escape_string($SID)."' AND A.PID=D.PID order by D.BID desc limit $pagingstart, $config[items_per_page]";
+	$query1 = "SELECT count(*) as total from posts A, bookmarks B where A.active='1' AND B.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND A.PID=B.PID order by B.BID desc limit $config[maximum_results]";
+	$query2 = "SELECT A.*, B.seo, C.username, C.country from posts A, categories B, members C, bookmarks D where A.active='1' AND A.category=B.CATID AND A.USERID=C.USERID AND D.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND A.PID=D.PID order by D.BID desc limit $pagingstart, $config[items_per_page]";
 	$executequery1 = $conn->Execute($query1);
 	$scriptolution = $executequery1->fields['total'];
 	if ($scriptolution > 0)
@@ -77,7 +77,7 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 			}
 			else
 			{
-				$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+				$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 			}
 			$counter=0;
 			$lowercount = $currentpage-5;
@@ -101,7 +101,7 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 			}
 			else
 			{
-				$pagelinks.="<li><span class='next'>next page</span></li>";
+				$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 			}
 		}
 	}

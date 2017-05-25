@@ -110,7 +110,7 @@
                                             {insert name=file_details value=a assign=fd fid=$results[i].FID}
                                             {section name=x loop=$fd}
                                             {insert name=gfs value=a assign=afs fid=$fd[x].FID}
-                                            <a href="{$baseurl}/files/{$fd[x].FID|md5}{$fd[x].s}/{$fd[x].fname}" target="_blank">{$fd[x].fname} <b>[{$afs}]</b></a>
+                                            <a href="{$baseurl}files/{$fd[x].FID|md5}{$fd[x].s}/{$fd[x].fname}" target="_blank">{$fd[x].fname} <b>[{$afs}]</b></a>
                                             {/section}
                                             {/if} 
                                         </td>

@@ -21,7 +21,7 @@ if($_POST['submitform'] == "1")
 	$arr = array("site_name", "site_slogan", "site_email", "items_per_page", "items_per_page_new", "approve_stories", "approve_suggests", "enable_fc", "FACEBOOK_APP_ID", "FACEBOOK_SECRET", "twitter", "short_urls", "vonly", "scriptolution_toprated_rating", "scriptolution_toprated_count", "verify_pm", "def_country", "scriptolution_proxy_block", "enable_captcha", "fiverrscript_dotcom_home_featcats", "scriptolution_notify_gigval", "scriptolution_notify_gigval_email", "scriptolution_solve_c", "scriptolution_solve_v", "scriptolution_solve_h", "recaptcha_pubkey", "recaptcha_privkey", "scriptolution_cur_pos", "scriptolution_launch_mode", "scriptolution_mail_from_name", "enablescriptolutionlocations", "scriptolution_map_key");
 	foreach ($arr as $value)
 	{
-		$sql = "update config set value='".mysql_real_escape_string(cleanit($_POST[$value]))."' where setting='$value'";
+		$sql = "update config set value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], cleanit($_POST[$value]))."' where setting='$value'";
 		$conn->execute($sql);
 		Stemplate::assign($value,cleanit($_POST[$value]));
 	}

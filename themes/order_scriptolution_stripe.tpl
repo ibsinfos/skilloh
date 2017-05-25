@@ -19,7 +19,7 @@
     token: function(token) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
-	  window.location.href = '{$baseurl}/order.php?item={$p.IID|stripslashes}&scriptolutionstripe=1&scriptolutionencoded={$scriptolutionencoded}&token='+token.id
+	  window.location.href = '{$baseurl}order.php?item={$p.IID|stripslashes}&scriptolutionstripe=1&scriptolutionencoded={$scriptolutionencoded}&token='+token.id
     }
   });
   sQuery('#customButton').on('click', function(e) {

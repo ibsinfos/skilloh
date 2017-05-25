@@ -21,7 +21,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$pagetitle = $lang['461'];
 	STemplate::assign('pagetitle',$pagetitle);	
 	
-	$query="SELECT A.gtitle, B.* FROM posts A, featured B WHERE A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.PID=B.PID order by B.ID desc";
+	$query="SELECT A.gtitle,A.p1, A.PID, C.seo, B.* FROM posts A, featured B, categories C WHERE A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.PID=B.PID AND A.category=C.CATID order by B.ID desc";
 	$results=$conn->execute($query);
 	$o = $results->getrows();
 	STemplate::assign('o',$o);	

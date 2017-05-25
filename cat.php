@@ -17,7 +17,7 @@ $thebaseurl = $config['baseurl'];
 $cid = cleanit($_REQUEST['cid']);
 if($cid != "")
 {
-	$query="SELECT name,seo,CATID,parent,mtitle,mdesc,mtags,scriptolution_bigimage FROM categories WHERE seo='".mysql_real_escape_string($cid)."'";
+	$query="SELECT name,seo,CATID,parent,mtitle,mdesc,mtags,scriptolution_bigimage FROM categories WHERE seo='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $cid)."'";
 	$executequery=$conn->execute($query);
 	$CATID = $executequery->fields['CATID'];
 	$parent = intval($executequery->fields['parent']);
@@ -39,7 +39,7 @@ if($cid != "")
 	{
 		if($parent > 0)
 		{
-			$query = "select seo, name from categories where CATID='".mysql_real_escape_string($parent)."'"; 
+			$query = "select seo, name from categories where CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $parent)."'"; 
 			$executequery=$conn->execute($query);
 			$parentname = $executequery->fields['name'];	
 			$parentseo = $executequery->fields['seo'];	
@@ -122,7 +122,7 @@ if($cid != "")
 		$sdeliverytime = intval(cleanit($_REQUEST['sdeliverytime']));
 		if($sdeliverytime > 0)
 		{
-			$scriptolution_adddelivery = " AND A.days<='".mysql_real_escape_string($sdeliverytime)."'";
+			$scriptolution_adddelivery = " AND A.days<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $sdeliverytime)."'";
 		}
 		STemplate::assign('sdeliverytime',$sdeliverytime);
 		
@@ -136,7 +136,7 @@ if($cid != "")
 		$p = intval(cleanit($_REQUEST['p']));
 		if($p > 0)
 		{
-			$scriptolution_addprice = " AND A.price='".mysql_real_escape_string($p)."'";
+			$scriptolution_addprice = " AND A.price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $p)."'";
 			STemplate::assign('p',$p);
 			$addp = "&p=$p";
 		}
@@ -144,26 +144,26 @@ if($cid != "")
 		if($parent == "0" && $CATID != "0")
 		{
 			
-			$query="SELECT CATID FROM categories WHERE parent='".mysql_real_escape_string($CATID)."'";
+			$query="SELECT CATID FROM categories WHERE parent='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 			$results=$conn->execute($query);
 			$searchsc = $results->getrows();
 			if(count($searchsc) > 0)
 			{
 				for($i=0; $i<count($searchsc);$i++)
 				{
-					$ssc .= " OR A.category='".mysql_real_escape_string($searchsc[$i][0])."'";
-					$ssd .= " OR category='".mysql_real_escape_string($searchsc[$i][0])."'";
+					$ssc .= " OR A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $searchsc[$i][0])."'";
+					$ssd .= " OR category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $searchsc[$i][0])."'";
 				}
-				$addtosearch = "AND (A.category='".mysql_real_escape_string($CATID)."' $ssc)";
+				$addtosearch = "AND (A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."' $ssc)";
 			}
 			else
 			{
-				$addtosearch = "AND A.category='".mysql_real_escape_string($CATID)."'";
+				$addtosearch = "AND A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 			}
 		}
 		else
 		{
-			$addtosearch = "AND A.category='".mysql_real_escape_string($CATID)."'";
+			$addtosearch = "AND A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 		}
 		
 		$query1 = "SELECT count(*) as total from posts A, members C where A.active='1' $addtosearch $addsqlb AND A.USERID=C.USERID $scriptolution_addprice $scriptolution_adddelivery $scriptolution_addtoprated order by A.PID desc limit $config[maximum_results]";
@@ -209,7 +209,7 @@ if($cid != "")
 				}
 				else
 				{
-					$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+					$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 				}
 				$counter=0;
 				$lowercount = $currentpage-5;
@@ -233,12 +233,12 @@ if($cid != "")
 				}
 				else
 				{
-					$pagelinks.="<li><span class='next'>next page</span></li>";
+					$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 				}
 			}
 		}
 		
-		$query="SELECT gtags FROM posts WHERE category='".mysql_real_escape_string($CATID)."' and active='1' order by rand() limit 20";
+		$query="SELECT gtags FROM posts WHERE category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."' and active='1' order by rand() limit 20";
 		$results=$conn->execute($query);
 		$gtags = $results->getrows();
 		for($i=0; $i<count($gtags);$i++)
@@ -252,7 +252,7 @@ if($cid != "")
 		$tags = explode(" ", implode(" ", array_unique(explode(" ", $tags))));
 		STemplate::assign('tags',$tags);
 		
-		$queryst = "SELECT name, seo from categories WHERE parent='".mysql_real_escape_string($CATID)."'";
+		$queryst = "SELECT name, seo from categories WHERE parent='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."'";
 		$resultst=$conn->execute($queryst);
 		$scats = $resultst->getrows();
 		STemplate::assign('scats',$scats);

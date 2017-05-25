@@ -16,7 +16,7 @@ include("../include/config.php");
 include_once("../include/functions/import.php");
 verify_login_admin();
 
-$ADMINID = intval(scriptolution_dotcom_data($_REQUEST['ADMINID']));
+$ADMINID = intval($_REQUEST['ADMINID']);
 Stemplate::assign('ADMINID',$ADMINID);
 if($_POST['submitform'] == "1")
 {
@@ -27,9 +27,9 @@ if($_POST['submitform'] == "1")
 	}
 	else
 	{
-			$username = scriptolution_dotcom_data($_POST['username']);
-			$password = scriptolution_dotcom_data($_POST['password']);
-			$email = scriptolution_dotcom_data($_POST['email']);
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$email = $_POST['email'];
 
 			if($ADMINID > 0)
 			{
@@ -43,13 +43,13 @@ if($_POST['submitform'] == "1")
 				}
 				else
 				{
-					$sql="select count(*) as total from administrators WHERE username='".mysqli_real_escape_string($conn->_connectionID, $username)."' AND ADMINID!='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."'";
+					$sql="select count(*) as total from administrators WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."' AND ADMINID!='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ADMINID)."'";
 					$executequery = $conn->Execute($sql);
 					$tadmins = $executequery->fields['total'];
 
 					if($tadmins == "0")
 					{
-						$sql="select count(*) as total from administrators WHERE email='".mysqli_real_escape_string($conn->_connectionID, $email)."' AND ADMINID!='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."'";
+						$sql="select count(*) as total from administrators WHERE email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email)."' AND ADMINID!='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ADMINID)."'";
 						$executequery = $conn->Execute($sql);
 						$tadmins = $executequery->fields['total'];
 
@@ -59,10 +59,10 @@ if($_POST['submitform'] == "1")
 							if ($password != "")
 							{
 								$newpassword = md5($password);
-								$addtosql = ", password = '".mysqli_real_escape_string($conn->_connectionID, $newpassword)."'";
+								$addtosql = ", password = '".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $newpassword)."'";
 							}
 
-							$sql = "UPDATE administrators set username='".mysqli_real_escape_string($conn->_connectionID, $username)."', email='".mysqli_real_escape_string($conn->_connectionID, $email)."' $addtosql WHERE ADMINID='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."'";
+							$sql = "UPDATE administrators set username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."', email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email)."' $addtosql WHERE ADMINID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ADMINID)."'";
 							$conn->execute($sql);
 							$message = "Administrator Successfully Edited.";
 							Stemplate::assign('message',$message);
@@ -95,7 +95,7 @@ if($_POST['submitform'] == "1")
 
 if($ADMINID > 0)
 {
-	$query = $conn->execute("select * from administrators where ADMINID='".mysqli_real_escape_string($conn->_connectionID, $ADMINID)."' limit 1");
+	$query = $conn->execute("select * from administrators where ADMINID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ADMINID)."' limit 1");
 	$admin = $query->getrows();
 	Stemplate::assign('admin', $admin[0]);
 }

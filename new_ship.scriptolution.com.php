@@ -36,10 +36,9 @@
 				}
 				elseif($config['price_mode'] == "3")
 				{
-					$PACID = intval(cleanit($_REQUEST['gprice']));
-					$query = "select pprice,pcom from packs where ID='".mysql_real_escape_string($PACID)."'"; 
+					$price = intval(cleanit($_REQUEST['gprice']));
+					$query = "select pcom from packs where pminprice<'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."' and pmaxprice >='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 					$executequery=$conn->execute($query);
-					$price = intval(cleanit($executequery->fields['pprice']));
 					$comper = intval(cleanit($executequery->fields['pcom']));
 					if($price == "0")
 					{
@@ -82,5 +81,5 @@
 					$ctp2 = $ctp;
 					$ctp3 = $ctp;
 				}
-				$addship = ", scriptolutionship1='".mysql_real_escape_string($scriptolutionship1)."', scriptolutionship1to='".mysql_real_escape_string($scriptolutionship1to)."', scriptolutionship2='".mysql_real_escape_string($scriptolutionship2)."', price2='".mysql_real_escape_string($price2)."', price3='".mysql_real_escape_string($price3)."', ctp2='".mysql_real_escape_string($ctp2)."', ctp3='".mysql_real_escape_string($ctp3)."'";
+				$addship = ", scriptolutionship1='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionship1)."', scriptolutionship1to='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionship1to)."', scriptolutionship2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionship2)."', price2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price2)."', price3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price3)."', ctp2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ctp2)."', ctp3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ctp3)."'";
 ?>

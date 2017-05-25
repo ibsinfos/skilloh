@@ -16,9 +16,8 @@ include("include/config.php");
 include("include/functions/import.php");
 $thebaseurl = $config['baseurl'];
 
-scriptolution_dotcom_software("");
-$UID = intval(scriptolution_dotcom_data($SCRIPTOLUTION_ID));
-$page = intval(scriptolution_dotcom_data($_REQUEST['page']));
+$UID = intval($_SESSION['USERID']);
+$page = intval($_REQUEST['page']);
 
 if($page=="")
 {
@@ -35,8 +34,8 @@ else
 	$pagingstart = "0";
 }
 
-$query1 = "SELECT count(*) as total from fiverrscript_dotcom_notity where USERID='".mysqli_real_escape_string($conn->_connectionID, $UID)."' order by NID desc limit $config[maximum_results]";
-$query2 = "SELECT * from fiverrscript_dotcom_notity where USERID='".mysqli_real_escape_string($conn->_connectionID, $UID)."' order by NID desc limit $pagingstart, $config[items_per_page]";
+$query1 = "SELECT count(*) as total from fiverrscript_dotcom_notity where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' order by NID desc limit $config[maximum_results]";
+$query2 = "SELECT n.*, m.USERID, m.username, m.profilepicture, p.p1, p.gtitle from fiverrscript_dotcom_notity n, orders o, members m, posts p where n.scriptolution_OID = o.OID AND o.USERID = m.USERID AND o.PID = p.PID AND n.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' order by n.NID desc limit $pagingstart, $config[items_per_page]";
 $executequery1 = $conn->Execute($query1);
 $scriptolution = $executequery1->fields['total'];
 if ($scriptolution > 0)
@@ -74,7 +73,7 @@ if ($scriptolution > 0)
 		}
 		else
 		{
-			$pagelinks.="<li><span class='prev'>previous page</span></li>&nbsp;";
+			$pagelinks.="<li><span class='prev'><i class='fa fa-angle-double-left'></i></span></li>&nbsp;";
 		}
 		$counter=0;
 		$lowercount = $currentpage-5;
@@ -98,7 +97,7 @@ if ($scriptolution > 0)
 		}
 		else
 		{
-			$pagelinks.="<li><span class='next'>next page</span></li>";
+			$pagelinks.="<li><span class='next'><i class='fa fa-angle-double-right'></i></span></li>";
 		}
 	}
 }

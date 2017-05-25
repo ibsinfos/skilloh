@@ -25,7 +25,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	STemplate::assign('pagetitle',$pagetitle);
 	
 	$IID = intval(base64_decode(cleanit($_REQUEST['g'])));
-	$query = "select PID, multi from order_items where IID='".mysql_real_escape_string($IID)."' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+	$query = "select PID, multi from order_items where IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 	$executequery=$conn->execute($query);
 	$PID = $executequery->fields['PID'];
 	$multi = $executequery->fields['multi'];
@@ -34,7 +34,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	{
 		if($multi > 1)
 		{
-			$query = "select OID from orders where PID='".mysql_real_escape_string($PID)."' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."' order by OID desc limit $multi"; 
+			$query = "select OID from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' order by OID desc limit $multi"; 
 			$results = $conn->execute($query);
 			$returnthis = $results->getrows();
 			STemplate::assign('OID',$returnthis);
@@ -47,7 +47,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		}
 		else
 		{
-			$query = "select OID from orders where PID='".mysql_real_escape_string($PID)."' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."' order by OID desc limit 1"; 
+			$query = "select OID from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' order by OID desc limit 1"; 
 			$executequery=$conn->execute($query);
 			$OID = $executequery->fields['OID'];
 			STemplate::assign('OID',$OID);

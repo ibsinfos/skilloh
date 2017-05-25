@@ -76,7 +76,7 @@ switch( $paypal_ipn->get_payment_status() )
 			$paypal_ipn->error_out("PayPal reversed an earlier transaction.", $em_headers);
 			if($user_id > 0 && $PID > 0)
 			{
-				$query = "UPDATE posts SET feat='0' WHERE USERID='".mysql_real_escape_string($user_id)."' AND PID='".mysql_real_escape_string($PID)."'"; 
+				$query = "UPDATE posts SET feat='0' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_id)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 				$executequery=$conn->execute($query);
 			}
 		}
@@ -90,16 +90,16 @@ switch( $paypal_ipn->get_payment_status() )
 				$qry="INSERT INTO paypal_table2 VALUES (0 , '$payer_id', '$payment_date', '$txn_id', '$first_name', '$last_name', '$payer_email', '$payer_status', '$payment_type', '$memo', '$item_name', '$item_number', $quantity, $mc_gross, '$mc_currency', '$address_name', '".nl2br($address_street)."', '$address_city', '$address_state', '$address_zip', '$address_country', '$address_status', '$payer_business_name', '$payment_status', '$pending_reason', '$reason_code', '$txn_type')";
 				
 				
-				if (mysql_query($qry)) 
+				if (mysqli_query($GLOBALS["___mysqli_ston"], $qry)) 
 				{
-					$transid = mysql_insert_id(); 
+					$transid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res); 
 					$paypal_ipn->error_out("This was a successful transaction", $em_headers);			
 					if($PID > 0)
 					{
-						$query = "INSERT INTO featured SET PID='".mysql_real_escape_string($PID)."', time='".time()."', price='".mysql_real_escape_string($gross)."', PAYPAL='".mysql_real_escape_string($transid)."'"; 
+						$query = "INSERT INTO featured SET PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gross)."', PAYPAL='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $transid)."'"; 
 						$executequery=$conn->execute($query);
 						
-						$query = "UPDATE posts SET feat='1' WHERE PID='".mysql_real_escape_string($PID)."'"; 
+						$query = "UPDATE posts SET feat='1' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 						$executequery=$conn->execute($query);
 					}
 

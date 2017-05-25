@@ -23,7 +23,7 @@ if($_REQUEST[delete]=="1")
 	$DUSERID = intval(cleanit($_REQUEST['USERID']));	
 	if($DUSERID > 0)
 	{
-		$query = "select A.FID, B.fname, B.s from inbox A, files B WHERE (A.MSGTO='".mysql_real_escape_string($DUSERID)."' OR A.MSGFROM='".mysql_real_escape_string($DUSERID)."') AND A.FID=B.FID"; 
+		$query = "select A.FID, B.fname, B.s from inbox A, files B WHERE (A.MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."' OR A.MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."') AND A.FID=B.FID"; 
 		$results = $conn->execute($query);
 		$dfiles = $results->getrows();
 		foreach ($dfiles as &$delme) 
@@ -34,7 +34,7 @@ if($_REQUEST[delete]=="1")
 				@unlink($dnow);
 			}
 		}
-		$query = "select A.FID, B.fname, B.s from inbox2 A, files B WHERE (A.MSGTO='".mysql_real_escape_string($DUSERID)."' OR A.MSGFROM='".mysql_real_escape_string($DUSERID)."') AND A.FID=B.FID"; 
+		$query = "select A.FID, B.fname, B.s from inbox2 A, files B WHERE (A.MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."' OR A.MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."') AND A.FID=B.FID"; 
 		$results = $conn->execute($query);
 		$dfiles = $results->getrows();
 		foreach ($dfiles as &$delme) 
@@ -45,21 +45,21 @@ if($_REQUEST[delete]=="1")
 				@unlink($dnow);
 			}
 		}
-		$sql="DELETE FROM archive WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM archive WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM bookmarks WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM bookmarks WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM inbox WHERE MSGTO='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM inbox WHERE MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM inbox WHERE MSGFROM='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM inbox WHERE MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM inbox2 WHERE MSGTO='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM inbox2 WHERE MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM inbox2 WHERE MSGFROM='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM inbox2 WHERE MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM inbox_reports WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM inbox_reports WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$query = "select profilepicture from members WHERE USERID='".mysql_real_escape_string($DUSERID)."' limit 1"; 
+		$query = "select profilepicture from members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."' limit 1"; 
 		$results = $conn->execute($query);
 		$profilepicture=$results->fields['profilepicture'];
 		if($profilepicture != "")
@@ -84,26 +84,26 @@ if($_REQUEST[delete]=="1")
 				@unlink($imageaaa);
 			}
 		}		
-		$sql="DELETE FROM members WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM members_passcode WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM members_passcode WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM members_verifycode WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM members_verifycode WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM orders WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM orders WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM payments WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
-		$conn->Execute($sql);
-		
-		$sql="DELETE FROM offerscriptolution WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM payments WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
 		
-		$sql="DELETE FROM posts WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
-		$conn->Execute($sql);
-		$sql="DELETE FROM ratings WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM offerscriptolution WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
 		
-		$query = "SELECT REQUESTID from scriptolutionrequests where USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM posts WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
+		$conn->Execute($sql);
+		$sql="DELETE FROM ratings WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
+		$conn->Execute($sql);
+		
+		$query = "SELECT REQUESTID from scriptolutionrequests where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$executequery = $conn->Execute($query);
 		$g = $executequery->getrows();
 		for($i=0; $i<count($g);$i++)
@@ -111,11 +111,11 @@ if($_REQUEST[delete]=="1")
 			$DREQUESTID = $g[$i]['REQUESTID'];
 			if($DREQUESTID > 0)
 			{
-				$sql="DELETE FROM offerscriptolution WHERE REQUESTID='".mysql_real_escape_string($DREQUESTID)."' ";
+				$sql="DELETE FROM offerscriptolution WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DREQUESTID)."' ";
 				$conn->Execute($sql);
 			}
 		}
-		$sql="DELETE FROM scriptolutionrequests WHERE USERID='".mysql_real_escape_string($DUSERID)."'";
+		$sql="DELETE FROM scriptolutionrequests WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DUSERID)."'";
 		$conn->Execute($sql);
 		
 		$message = "Member Successfully Deleted.";
@@ -137,7 +137,7 @@ if($_POST['asub']=="1")
 	{
 		$aval2 = "0";
 	}
-	$sql="UPDATE members SET status='".intval($aval2)."' WHERE USERID='".mysql_real_escape_string($AUSERID)."'";
+	$sql="UPDATE members SET status='".intval($aval2)."' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AUSERID)."'";
 	$conn->Execute($sql);
 }
 //ACTIVE
@@ -155,7 +155,7 @@ if($_POST['vsub']=="1")
 	{
 		$vval2 = "0";
 	}
-	$sql="UPDATE members SET verified='".intval($vval2)."' WHERE USERID='".mysql_real_escape_string($VUSERID)."'";
+	$sql="UPDATE members SET verified='".intval($vval2)."' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $VUSERID)."'";
 	$conn->Execute($sql);
 }
 //VERIFIED
@@ -220,26 +220,26 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $userna
 {
 	if($fromid > 0)
 	{
-		$addtosql = "WHERE USERID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE USERID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "WHERE USERID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE USERID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND USERID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND USERID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	if($email != "")
 	{
-		$addtosql .= "AND email like'%".mysql_real_escape_string($email)."%'";
+		$addtosql .= "AND email like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $email)."%'";
 		Stemplate::assign('email',$email);
 	}
 	if($verified != "")

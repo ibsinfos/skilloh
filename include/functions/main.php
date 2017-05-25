@@ -5,7 +5,7 @@ function issue_refund_admin($buyer,$OID,$rprice)
     global $conn;
 	if($buyer > 0 && $OID > 0 && $rprice > 0)
 	{
-		$query = "select status, price, PID from orders where OID='".mysql_real_escape_string($OID)."' AND USERID='".mysql_real_escape_string($buyer)."'"; 
+		$query = "select status, price, PID from orders where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $buyer)."'"; 
 		$executequery=$conn->execute($query);
 		$status = $executequery->fields['status'];
 		$price = $executequery->fields['price'];
@@ -15,15 +15,15 @@ function issue_refund_admin($buyer,$OID,$rprice)
 		{
 			if($status != "3" && $status != "7")
 			{
-				$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($buyer)."', OID='".mysql_real_escape_string($OID)."', time='".time()."', price='".mysql_real_escape_string($rprice)."', t='0'"; 
+				$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $buyer)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $rprice)."', t='0'"; 
 				$executequery=$conn->execute($query);
-				$transid = mysql_insert_id();
+				$transid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 				if($transid > 0)
 				{
-					$query = "UPDATE payments SET cancel='1' WHERE OID='".mysql_real_escape_string($OID)."' AND t='1' AND cancel='0' limit 1"; 
+					$query = "UPDATE payments SET cancel='1' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND t='1' AND cancel='0' limit 1"; 
 					$executequery=$conn->execute($query);
 					
-					$query = "UPDATE members SET funds=funds+$rprice WHERE USERID='".mysql_real_escape_string($buyer)."' limit 1"; 
+					$query = "UPDATE members SET funds=funds+$rprice WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $buyer)."' limit 1"; 
 					$executequery=$conn->execute($query);
 				}
 			}
@@ -32,19 +32,19 @@ function issue_refund_admin($buyer,$OID,$rprice)
 			{
 				if($THEPID > 0)
 				{
-					$query = "select wd FROM payments where OID='".mysql_real_escape_string($OID)."'"; 
+					$query = "select wd FROM payments where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."'"; 
 					$executequery=$conn->execute($query);
 					$wdx = $executequery->fields['wd'];
 					if($wdx == "1")
 					{
-						$query = "select USERID, ctp FROM posts where PID='".mysql_real_escape_string($THEPID)."'"; 
+						$query = "select USERID, ctp FROM posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $THEPID)."'"; 
 						$executequery=$conn->execute($query);
 						$ctp = $executequery->fields['ctp'];
 						$selleruserid = $executequery->fields['USERID'];
 						
 						$scriptolutioncalamount = $price - $ctp;
 						
-						$sql="UPDATE members SET afunds=afunds-$scriptolutioncalamount WHERE USERID='".mysql_real_escape_string($selleruserid)."'";
+						$sql="UPDATE members SET afunds=afunds-$scriptolutioncalamount WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $selleruserid)."'";
 						$conn->Execute($sql);
 					}
 				}
@@ -57,7 +57,7 @@ function issue_refund_admin($buyer,$OID,$rprice)
 function insert_get_extras($a)
 {
     global $config,$conn;
-	$query = "select * from extras where PID='".mysql_real_escape_string($a[PID])."' order by EID asc"; 
+	$query = "select * from extras where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[PID])."' order by EID asc"; 
 	$results = $conn->execute($query);
 	$returnthis = $results->getrows();
 	return $returnthis;
@@ -66,7 +66,7 @@ function insert_get_extras($a)
 function insert_get_extras_track($a)
 {
     global $config,$conn;
-	$query = "select A.EID, A.EID2, A.EID3 from order_items A, orders B where B.OID='".mysql_real_escape_string($a[OID])."' AND A.IID=B.IID"; 
+	$query = "select A.EID, A.EID2, A.EID3 from order_items A, orders B where B.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[OID])."' AND A.IID=B.IID"; 
 	$results = $conn->execute($query);
 	$returnthis = $results->getrows();
 	return $returnthis;
@@ -75,7 +75,7 @@ function insert_get_extras_track($a)
 function insert_get_extra($a)
 {
 	global $config,$conn;
-	$query = "select etitle from extras where EID='".mysql_real_escape_string($a[EID])."'"; 
+	$query = "select etitle from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[EID])."'"; 
 	$executequery=$conn->execute($query);
 	$etitle = $executequery->fields['etitle'];
 	return $etitle;
@@ -86,7 +86,7 @@ function push_scriptolution_instant_delivery($order_id, $iurl, $ifile, $PID)
 	global $config,$conn, $langi;
 	if($order_id > 0)
 	{
-		$query = "SELECT A.USERID, B.USERID AS seller from orders A, posts B where A.status='0' AND A.PID=B.PID AND A.OID='".mysql_real_escape_string($order_id)."' limit 1";
+		$query = "SELECT A.USERID, B.USERID AS seller from orders A, posts B where A.status='0' AND A.PID=B.PID AND A.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."' limit 1";
 		$executequery = $conn->Execute($query);
 		$g = $executequery->getrows();
 		$OID = $order_id;
@@ -98,28 +98,28 @@ function push_scriptolution_instant_delivery($order_id, $iurl, $ifile, $PID)
 		if($msgto > 0 && $message_body != "")
 		{
 			$asql = ", start='1'";
-			$query="INSERT INTO inbox2 SET MSGFROM='".mysql_real_escape_string($USERID)."', MSGTO='".mysql_real_escape_string($msgto)."',message='".mysql_real_escape_string($message_body)."', FID='0', OID='".mysql_real_escape_string($OID)."', time='".time()."' $asql $asql2";
+			$query="INSERT INTO inbox2 SET MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."', MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msgto)."',message='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $message_body)."', FID='0', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', time='".time()."' $asql $asql2";
 			$result=$conn->execute($query);
-			$mid = mysql_insert_id();
+			$mid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 			if($mid > 0)
 			{	
-				$query = "UPDATE orders SET status='1', stime='".time()."' WHERE OID='".mysql_real_escape_string($OID)."' AND USERID='".mysql_real_escape_string($USERID)."' limit 1"; 
+				$query = "UPDATE orders SET status='1', stime='".time()."' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."' limit 1"; 
 				$conn->execute($query);
 			}			
 			$scriptolution = "delivery";
-			$asql2 = ", action='".mysql_real_escape_string($scriptolution)."'";
-			$query="UPDATE orders SET status='4' WHERE OID='".mysql_real_escape_string($oid)."' AND PID='".mysql_real_escape_string($PID)."' limit 1";
+			$asql2 = ", action='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolution)."'";
+			$query="UPDATE orders SET status='4' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' limit 1";
 			$results=$conn->execute($query);
 			if($iurl != "")
 			{
 				$message_body = $langi['9']."<br /><a target='_blank' href='".stripslashes($iurl)."'>".stripslashes($iurl)."</a>";
-				$query="INSERT INTO inbox2 SET MSGFROM='".mysql_real_escape_string($msgto)."', MSGTO='".mysql_real_escape_string($USERID)."',message='".mysql_real_escape_string($message_body)."', FID='0', OID='".mysql_real_escape_string($oid)."', time='".time()."' $asql2";
+				$query="INSERT INTO inbox2 SET MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msgto)."', MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."',message='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $message_body)."', FID='0', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."', time='".time()."' $asql2";
 				$result=$conn->execute($query);
 			}
 			else
 			{
 				$message_body = $langi['8'];
-				$query="INSERT INTO inbox2 SET MSGFROM='".mysql_real_escape_string($msgto)."', MSGTO='".mysql_real_escape_string($USERID)."',message='".mysql_real_escape_string($message_body)."', FID='".mysql_real_escape_string($ifile)."', OID='".mysql_real_escape_string($oid)."', time='".time()."' $asql2";
+				$query="INSERT INTO inbox2 SET MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msgto)."', MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $USERID)."',message='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $message_body)."', FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ifile)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."', time='".time()."' $asql2";
 				$result=$conn->execute($query);
 			}
 		}	
@@ -199,7 +199,7 @@ function insert_get_packs($a)
 		$me = intval($_SESSION['USERID']);
 		if($me > "0")
 		{
-			$query = "select level from members where USERID='".mysql_real_escape_string($me)."'"; 
+			$query = "select level from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $me)."'"; 
 			$executequery=$conn->execute($query);
 			$mlevel = intval($executequery->fields['level']);
 			if($mlevel == "3")
@@ -216,7 +216,7 @@ function insert_get_packs($a)
 			}
 		}
 	}
-	$query = "select ID,pprice from packs $addl order by pprice asc"; 
+	$query = "select ID,pminprice, pmaxprice from packs $addl order by pminprice asc"; 
 	$results = $conn->execute($query);
 	$returnthis = $results->getrows();
 	return $returnthis;
@@ -251,7 +251,7 @@ function insert_add_plus($a)
 function insert_get_percent($a)
 {
 	global $conn;
-	$query = "select good, bad from ratings where USERID='".mysql_real_escape_string($a[userid])."'"; 
+	$query = "select good, bad from ratings where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[userid])."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -286,7 +286,7 @@ function insert_get_percent($a)
 function insert_get_percent2($a)
 {
     global $conn;
-	$query = "select good, bad from ratings where USERID='".mysql_real_escape_string($_SESSION[USERID])."'"; 
+	$query = "select good, bad from ratings where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERID])."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -337,7 +337,7 @@ function insert_get_rating($a)
 function insert_get_rating2($a)
 {
     global $conn;
-	$query = "select A.good, A.bad from ratings A, members B where A.PID='".mysql_real_escape_string($a[pid])."' AND A.RATER=B.USERID and B.status='1'"; 
+	$query = "select A.good, A.bad from ratings A, members B where A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[pid])."' AND A.RATER=B.USERID and B.status='1'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -372,7 +372,7 @@ function insert_get_rating2($a)
 function insert_get_gtitle($a)
 {
     global $conn;
-	$query = "select A.gtitle from posts A, orders B where B.OID='".mysql_real_escape_string($a[oid])."' AND B.PID=A.PID"; 
+	$query = "select A.gtitle from posts A, orders B where B.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[oid])."' AND B.PID=A.PID"; 
 	$executequery=$conn->execute($query);
 	$gtitle = $executequery->fields['gtitle'];
 	return $gtitle;
@@ -383,7 +383,7 @@ function insert_last_unread($a)
     global $conn;
 	$mto = intval($a['uid']);
 	$mfr = intval($_SESSION['USERID']);
-	$query = "select MSGTO, unread from inbox where ((MSGTO='".mysql_real_escape_string($mto)."' AND MSGFROM='".mysql_real_escape_string($mfr)."') OR (MSGTO='".mysql_real_escape_string($mfr)."' AND MSGFROM='".mysql_real_escape_string($mto)."')) order by MID desc limit 1"; 
+	$query = "select MSGTO, unread from inbox where ((MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mto)."' AND MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mfr)."') OR (MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mfr)."' AND MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mto)."')) order by MID desc limit 1"; 
 	$executequery=$conn->execute($query);
 	$unread = $executequery->fields['unread'];
 	$MSGTO = $executequery->fields['MSGTO'];
@@ -402,7 +402,7 @@ function insert_last_email($a)
     global $conn;
 	$mto = intval($a['uid']);
 	$mfr = intval($_SESSION['USERID']);
-	$query = "select message from inbox where ((MSGTO='".mysql_real_escape_string($mto)."' AND MSGFROM='".mysql_real_escape_string($mfr)."') OR (MSGTO='".mysql_real_escape_string($mfr)."' AND MSGFROM='".mysql_real_escape_string($mto)."')) order by MID desc limit 1"; 
+	$query = "select message from inbox where ((MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mto)."' AND MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mfr)."') OR (MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mfr)."' AND MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $mto)."')) order by MID desc limit 1"; 
 	$executequery=$conn->execute($query);
 	$message = $executequery->fields['message'];
 	return $message;
@@ -413,7 +413,7 @@ function insert_last_delivery($a)
 {
     global $conn;
 	$oid = intval($a['oid']);
-	$query = "select MID from inbox2 where OID='".mysql_real_escape_string($oid)."' AND action='delivery' order by MID desc limit 1"; 
+	$query = "select MID from inbox2 where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."' AND action='delivery' order by MID desc limit 1"; 
 	$executequery=$conn->execute($query);
 	$MID = $executequery->fields['MID'];
 	return $MID;
@@ -424,7 +424,7 @@ function insert_get_status($a)
 {
     global $conn;
 	$oid = intval($a['oid']);
-	$query = "select status from orders where OID='".mysql_real_escape_string($oid)."'"; 
+	$query = "select status from orders where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."'"; 
 	$executequery=$conn->execute($query);
 	$status = $executequery->fields['status'];
 	return $status;
@@ -435,7 +435,7 @@ function insert_fback($a)
 {
     global $conn;
 	$oid = intval($a['oid']);
-	$query = "select count(*) as total from ratings where OID='".mysql_real_escape_string($oid)."' AND RATER='".mysql_real_escape_string($_SESSION[USERID])."'"; 
+	$query = "select count(*) as total from ratings where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."' AND RATER='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERID])."'"; 
 	$executequery=$conn->execute($query);
 	$total = $executequery->fields['total']+0;
 	return $total;
@@ -446,7 +446,7 @@ function insert_wdreq($a)
 {
     global $conn;
 	$oid = intval($a['oid']);
-	$query = "select count(*) as total from withdraw_requests where USERID='".mysql_real_escape_string($_SESSION[USERID])."'"; 
+	$query = "select count(*) as total from withdraw_requests where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERID])."'"; 
 	$executequery=$conn->execute($query);
 	$total = $executequery->fields['total']+0;
 	return $total;
@@ -458,7 +458,7 @@ function insert_fback2($a)
     global $conn;
 	$oid = intval($a['oid']);
 	$sid = intval($a['sid']);
-	$query = "select count(*) as total from ratings where OID='".mysql_real_escape_string($oid)."' AND RATER='".mysql_real_escape_string($sid)."'"; 
+	$query = "select count(*) as total from ratings where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $oid)."' AND RATER='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $sid)."'"; 
 	$executequery=$conn->execute($query);
 	$total = $executequery->fields['total']+0;
 	return $total;
@@ -468,7 +468,7 @@ function insert_fback2($a)
 function insert_gig_details($a)
 {
     global $conn;
-	$query = "SELECT A.*, B.seo from posts A, categories B where A.active='1' AND A.category=B.CATID AND A.PID='".mysql_real_escape_string($a[pid])."' limit 1";
+	$query = "SELECT A.*, B.seo from posts A, categories B where A.active='1' AND A.category=B.CATID AND A.PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[pid])."' limit 1";
 	$results = $conn->execute($query);
 	$w = $results->getrows();
 	return $w;
@@ -477,7 +477,7 @@ function insert_gig_details($a)
 function insert_file_details($a)
 {
     global $conn;
-	$query = "SELECT FID, fname, s from files where FID='".mysql_real_escape_string($a[fid])."' limit 1";
+	$query = "SELECT FID, fname, s from files where FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[fid])."' limit 1";
 	$results = $conn->execute($query);
 	$w = $results->getrows();
 	return $w;
@@ -486,7 +486,7 @@ function insert_file_details($a)
 function insert_gfs($a)
 {
 	global $conn, $config;
-	$query = "select fname,s from files where FID='".mysql_real_escape_string($a[fid])."' limit 1"; 
+	$query = "select fname,s from files where FID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[fid])."' limit 1"; 
 	$executequery=$conn->execute($query);
 	$s = $executequery->fields['s'];
 	$fname = $executequery->fields['fname'];
@@ -510,7 +510,7 @@ function formatBytes($bytes, $precision = 2)
 function insert_mark_read($a)
 {
     global $conn;
-	$query = "UPDATE inbox SET unread='0' WHERE MID='".mysql_real_escape_string($a[mid])."'";
+	$query = "UPDATE inbox SET unread='0' WHERE MID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[mid])."'";
 	$conn->execute($query);
 }
 
@@ -520,7 +520,7 @@ function escape($data)
 	{
     	$data = stripslashes($data);
     }
-    return mysql_real_escape_string($data);
+    return mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $data);
 }
 
 function insert_get_wants($var)
@@ -544,7 +544,7 @@ function insert_get_categories($a)
 function insert_get_subcategories($a)
 {
     global $config,$conn;
-	$query = "select * from categories where parent='".mysql_real_escape_string($a['parent'])."' order by name asc"; 
+	$query = "select * from categories where parent='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a['parent'])."' order by name asc"; 
 	$results = $conn->execute($query);
 	$returnthis = $results->getrows();
 	return $returnthis;
@@ -553,7 +553,7 @@ function insert_get_subcategories($a)
 function insert_like_cnt($var)
 {
     global $conn;
-	$query = "select count(*) as total from bookmarks where USERID='".mysql_real_escape_string($_SESSION[USERID])."' AND PID='".mysql_real_escape_string($var[pid])."'"; 
+	$query = "select count(*) as total from bookmarks where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERID])."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[pid])."'"; 
 	$executequery=$conn->execute($query);
 	$cnt = $executequery->fields['total'];
 	if($cnt > 0)
@@ -569,7 +569,7 @@ function insert_like_cnt($var)
 function insert_active_orders($a)
 {
     global $conn;
-	$query = "select count(*) as total from orders where PID='".mysql_real_escape_string($a[PID])."' AND (status='0' OR status='1' OR status='6')"; 
+	$query = "select count(*) as total from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[PID])."' AND (status='0' OR status='1' OR status='6')"; 
 	$executequery=$conn->execute($query);
 	$cnt = $executequery->fields['total'];
 	return $cnt;
@@ -579,7 +579,7 @@ function insert_active_orders($a)
 function insert_done_orders($a)
 {
     global $conn;
-	$query = "select count(*) as total from orders where PID='".mysql_real_escape_string($a[PID])."' AND status='5'"; 
+	$query = "select count(*) as total from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[PID])."' AND status='5'"; 
 	$executequery=$conn->execute($query);
 	$cnt = $executequery->fields['total'];
 	return $cnt;
@@ -589,7 +589,7 @@ function insert_done_orders($a)
 function insert_gig_cnt($var)
 {
     global $conn;
-	$query = "select count(*) as total from posts where USERID='".mysql_real_escape_string($_SESSION[USERID])."'"; 
+	$query = "select count(*) as total from posts where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERID])."'"; 
 	$executequery=$conn->execute($query);
 	$cnt = $executequery->fields['total'];
 	if($cnt > 0)
@@ -605,7 +605,7 @@ function insert_gig_cnt($var)
 function insert_msg_cnt($var)
 {
     global $conn;
-	$query = "select count(*) as total from inbox where MSGTO='".mysql_real_escape_string($_SESSION[USERID])."' AND unread='1'"; 
+	$query = "select count(*) as total from inbox where MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION[USERID])."' AND unread='1'"; 
 	$executequery=$conn->execute($query);
 	$cnt = $executequery->fields['total'];
 	return $cnt;
@@ -614,7 +614,7 @@ function insert_msg_cnt($var)
 function insert_get_advertisement($var)
 {
         global $conn;
-        $query="SELECT code FROM advertisements WHERE AID='".mysql_real_escape_string($var[AID])."' AND active='1' limit 1";
+        $query="SELECT code FROM advertisements WHERE AID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[AID])."' AND active='1' limit 1";
         $executequery=$conn->execute($query);
         $getad = $executequery->fields[code];
 		echo strip_mq_gpc($getad);
@@ -625,10 +625,10 @@ function verify_login_admin()
         global $config,$conn;
         if($_SESSION['ADMINID'] != "" && is_numeric($_SESSION['ADMINID']) && $_SESSION['ADMINUSERNAME'] != "" && $_SESSION['ADMINPASSWORD'] != "")
         {
-			$query="SELECT * FROM administrators WHERE username='".mysql_real_escape_string($_SESSION['ADMINUSERNAME'])."' AND password='".mysql_real_escape_string($_SESSION['ADMINPASSWORD'])."' AND ADMINID='".mysql_real_escape_string($_SESSION['ADMINID'])."'";
+			$query="SELECT * FROM administrators WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['ADMINUSERNAME'])."' AND password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['ADMINPASSWORD'])."' AND ADMINID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['ADMINID'])."'";
         	$executequery=$conn->execute($query);
 			
-			if(mysql_affected_rows()==1)
+			if(mysqli_affected_rows($GLOBALS["___mysqli_ston"])==1)
 			{
 			
 			}
@@ -649,7 +649,7 @@ function verify_login_admin()
 function verify_email_username($usernametocheck)
 {
     global $config,$conn;
-	$query = "select count(*) as total from members where username='".mysql_real_escape_string($usernametocheck)."' limit 1"; 
+	$query = "select count(*) as total from members where username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $usernametocheck)."' limit 1"; 
 	$executequery = $conn->execute($query);
 	$totalu = $executequery->fields[total];
 	if ($totalu >= 1)
@@ -678,7 +678,7 @@ function verify_valid_email($emailtocheck)
 function verify_email_unique($emailtocheck)
 {
     global $config,$conn;
-	$query = "select count(*) as total from members where email='".mysql_real_escape_string($emailtocheck)."' limit 1"; 
+	$query = "select count(*) as total from members where email='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $emailtocheck)."' limit 1"; 
 	$executequery = $conn->execute($query);
 	$totalemails = $executequery->fields[total];
 	if ($totalemails >= 1)
@@ -694,7 +694,7 @@ function verify_email_unique($emailtocheck)
 function mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="")
 {
 	global $SERVER_NAME,$config;
-	$subject = nl2br($subject);
+	/*$subject = nl2br($subject);
 	$sendmailbody = nl2br($sendmailbody);
 	$sendto = $sendto;
 	if($bcc!="")
@@ -709,7 +709,41 @@ function mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="")
 	$scriptolutionfull_name = $config['scriptolution_mail_from_name'];
 	$headers .= "From: " .  $scriptolutionfull_name.'<'.$from.'>'. "\n";
 	$headers .= "Content-Type: text/html\n";
-	mail("$sendto","$subject","$sendmailbody","$headers","-f $from");
+	mail("$sendto","$subject","$sendmailbody","$headers","-f $from");*/
+	$PHPMailer = new PHPMailer(true);
+	$PHPMailer->SetLanguage("en", $config['basedir'].'/libraries/phpmailer/language/');
+	
+	$PHPMailer->IsSMTP(); // enable SMTP
+	$PHPMailer->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+	$PHPMailer->SMTPAuth = true; // authentication enabled
+	$PHPMailer->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
+	$PHPMailer->Host = "mail.skilop.com";
+	$PHPMailer->Port = 25; // or 587
+	$PHPMailer->IsHTML(true);
+	$PHPMailer->Username = "mail@skilop.com";
+	$PHPMailer->Password = "mail@demo123";
+	
+	
+	try{
+	$PHPMailer->From     = "mail@skilop.com";
+	$PHPMailer->FromName = 'SkillOp';
+	$PHPMailer->ClearAllRecipients();
+	$PHPMailer->AddAddress($sendto);
+	$PHPMailer->Subject  = $subject;
+	$PHPMailer->Body     = $sendmailbody;
+	
+	if(!$PHPMailer->Send()){
+		$query="INSERT INTO mailererrors SET errormsg='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PHPMailer->ErrorInfo)."'";
+		$result=$conn->execute($query);
+	}
+	$PHPMailer->ClearAddresses();
+
+	return $status;
+	} catch (phpmailerException $e) {
+		return $e->errorMessage(); //Pretty error messages from PHPMailer
+	} catch (Exception $e) {
+		return $e->getMessage(); //Boring error messages from anything else!
+	}
 }
 function insert_scriptolutionnotificationcounter($a)
 {
@@ -717,7 +751,7 @@ function insert_scriptolutionnotificationcounter($a)
 	$UID = intval(cleanit($_SESSION['USERID']));
 	if($UID > 0)
 	{
-		$query = "select count(*) as total from fiverrscript_dotcom_notity where USERID='".mysql_real_escape_string($UID)."' AND scriptolution_unread='1'"; 
+		$query = "select count(*) as total from fiverrscript_dotcom_notity where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' AND scriptolution_unread='1'"; 
 		$executequery=$conn->execute($query);
 		$returnthis = $executequery->fields['total']+0;
 	}
@@ -731,7 +765,7 @@ function insert_scriptolutionnotificationcounter($a)
 function get_cat_seo($cid)
 {
         global $conn;
-        $query="SELECT seo FROM categories WHERE CATID='".mysql_real_escape_string($cid)."' limit 1";
+        $query="SELECT seo FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $cid)."' limit 1";
         $executequery=$conn->execute($query);
         $seo = $executequery->fields['seo'];
 		return $seo;
@@ -740,7 +774,7 @@ function get_cat_seo($cid)
 function get_cat($cid)
 {
         global $conn;
-        $query="SELECT name FROM categories WHERE CATID='".mysql_real_escape_string($cid)."' limit 1";
+        $query="SELECT name FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $cid)."' limit 1";
         $executequery=$conn->execute($query);
         $name = $executequery->fields[name];
 		return $name;
@@ -749,7 +783,7 @@ function get_cat($cid)
 function insert_get_cat($var)
 {
         global $conn;
-        $query="SELECT name FROM categories WHERE CATID='".mysql_real_escape_string($var[CATID])."' limit 1";
+        $query="SELECT name FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[CATID])."' limit 1";
         $executequery=$conn->execute($query);
         $name = $executequery->fields[name];
 		echo $name;
@@ -842,11 +876,11 @@ function listcountries($selected)
 function insert_get_member_profilepicture($var)
 {
         global $conn;
-        $query="SELECT profilepicture FROM members WHERE USERID='".mysql_real_escape_string($var[USERID])."' limit 1";
+        $query="SELECT profilepicture FROM members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[USERID])."' limit 1";
         $executequery=$conn->execute($query);
 		$results = $executequery->fields[profilepicture];
 		if ($results == "")
-			return "noprofilepicture.gif";
+			return "noprofilepicture.png";
 		else
 			return $results;
 }
@@ -863,7 +897,7 @@ function insert_com_count($var)
 function does_post_exist($a)
 {
 	global $conn, $config;
-    $query="SELECT USERID FROM posts WHERE PID='".mysql_real_escape_string($a)."'";
+    $query="SELECT USERID FROM posts WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a)."'";
     $executequery=$conn->execute($query);
     if ($executequery->recordcount()>0)
         return true;
@@ -874,7 +908,7 @@ function does_post_exist($a)
 function update_last_viewed($a)
 {
         global $conn;
-		$query = "UPDATE posts SET last_viewed='".time()."' WHERE PID='".mysql_real_escape_string($a)."'";
+		$query = "UPDATE posts SET last_viewed='".time()."' WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a)."'";
         $executequery=$conn->execute($query);
 }
 
@@ -893,7 +927,7 @@ function session_verification()
 function insert_get_username_from_userid($var)
 {
         global $conn;
-        $query="SELECT username FROM members WHERE USERID='".mysql_real_escape_string($var[USERID])."'";
+        $query="SELECT username FROM members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[USERID])."'";
         $executequery=$conn->execute($query);
         $getusername = $executequery->fields[username];
 		return "$getusername";
@@ -903,7 +937,7 @@ function does_profile_exist($a)
 {
 	global $conn;
     global $config;
-    $query="SELECT username FROM members WHERE USERID='".mysql_real_escape_string($a)."'";
+    $query="SELECT username FROM members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a)."'";
     $executequery=$conn->execute($query);
     if ($executequery->recordcount()>0)
         return true;
@@ -914,21 +948,21 @@ function does_profile_exist($a)
 function update_viewcount_profile($a)
 {
         global $conn;
-		$query = "UPDATE members SET profileviews = profileviews + 1 WHERE USERID='".mysql_real_escape_string($a)."'";
+		$query = "UPDATE members SET profileviews = profileviews + 1 WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a)."'";
         $executequery=$conn->execute($query);
 }
 
 function update_viewcount($a)
 {
         global $conn;
-		$query = "UPDATE posts SET viewcount = viewcount + 1 WHERE PID='".mysql_real_escape_string($a)."'";
+		$query = "UPDATE posts SET viewcount = viewcount + 1 WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a)."'";
         $executequery=$conn->execute($query);
 }
 
 function insert_get_member_comments_count($var)
 {
         global $conn;
-        $query="SELECT count(*) as total FROM posts_comments WHERE USERID='".mysql_real_escape_string($var[USERID])."'";
+        $query="SELECT count(*) as total FROM posts_comments WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[USERID])."'";
         $executequery=$conn->execute($query);
         $results = $executequery->fields[total];
 		echo "$results";
@@ -937,7 +971,7 @@ function insert_get_member_comments_count($var)
 function insert_get_posts_count($var)
 {
         global $conn;
-        $query="SELECT count(*) as total FROM posts WHERE USERID='".mysql_real_escape_string($var[USERID])."'";
+        $query="SELECT count(*) as total FROM posts WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[USERID])."'";
         $executequery=$conn->execute($query);
         $results = $executequery->fields[total];
 		echo "$results";
@@ -946,7 +980,7 @@ function insert_get_posts_count($var)
 function insert_get_static($var)
 {
         global $conn;
-        $query="SELECT $var[sel] FROM static WHERE ID='".mysql_real_escape_string($var[ID])."'";
+        $query="SELECT $var[sel] FROM static WHERE ID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $var[ID])."'";
         $executequery=$conn->execute($query);
         $returnme = $executequery->fields[$var[sel]];
 		$returnme = strip_mq_gpc($returnme);
@@ -1161,7 +1195,7 @@ function delete_gig($PID)
 	$PID = intval($PID);
 	if($PID > 0)
 	{		
-		$query = "select p1,p2,p3 from posts WHERE PID='".mysql_real_escape_string($PID)."' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+		$query = "select p1,p2,p3 from posts WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 		$results = $conn->execute($query);
 		$p1=$results->fields['p1'];
 		$p2=$results->fields['p2'];
@@ -1266,7 +1300,7 @@ function delete_gig($PID)
 			}
 		}
 
-		$query = "DELETE FROM posts WHERE PID='".mysql_real_escape_string($PID)."' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."'";
+		$query = "DELETE FROM posts WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'";
 		$conn->Execute($query);		
 	}
 }
@@ -1277,7 +1311,7 @@ function delete_gig_admin($PID)
 	$PID = intval($PID);
 	if($PID > 0)
 	{		
-		$query = "select p1,p2,p3 from posts WHERE PID='".mysql_real_escape_string($PID)."'"; 
+		$query = "select p1,p2,p3 from posts WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 		$results = $conn->execute($query);
 		$p1=$results->fields['p1'];
 		$p2=$results->fields['p2'];
@@ -1383,13 +1417,13 @@ function delete_gig_admin($PID)
 		}
 		
 		//
-		$query = "DELETE FROM bookmarks WHERE PID='".mysql_real_escape_string($PID)."'";
+		$query = "DELETE FROM bookmarks WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$conn->Execute($query);
-		$query = "DELETE FROM offerscriptolution WHERE PID='".mysql_real_escape_string($PID)."'";
+		$query = "DELETE FROM offerscriptolution WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$conn->Execute($query);	
 		//
 
-		$query = "DELETE FROM posts WHERE PID='".mysql_real_escape_string($PID)."'";
+		$query = "DELETE FROM posts WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 		$conn->Execute($query);		
 	}
 }
@@ -1399,7 +1433,7 @@ function issue_refund($buyer,$OID,$rprice)
     global $conn;
 	if($buyer > 0 && $OID > 0 && $rprice > 0)
 	{
-		$query = "select status, price from orders where OID='".mysql_real_escape_string($OID)."' AND USERID='".mysql_real_escape_string($buyer)."'"; 
+		$query = "select status, price from orders where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $buyer)."'"; 
 		$executequery=$conn->execute($query);
 		$status = $executequery->fields['status'];
 		$price = $executequery->fields['price'];
@@ -1408,15 +1442,15 @@ function issue_refund($buyer,$OID,$rprice)
 		{
 			if($status != "3" && $status != "5" && $status != "7")
 			{
-				$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($buyer)."', OID='".mysql_real_escape_string($OID)."', time='".time()."', price='".mysql_real_escape_string($rprice)."', t='0'"; 
+				$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $buyer)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $rprice)."', t='0'"; 
 				$executequery=$conn->execute($query);
-				$transid = mysql_insert_id();
+				$transid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 				if($transid > 0)
 				{
-					$query = "UPDATE payments SET cancel='1' WHERE OID='".mysql_real_escape_string($OID)."' AND t='1' AND cancel='0' limit 1"; 
+					$query = "UPDATE payments SET cancel='1' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND t='1' AND cancel='0' limit 1"; 
 					$executequery=$conn->execute($query);
 					
-					$query = "UPDATE members SET funds=funds+$rprice WHERE USERID='".mysql_real_escape_string($buyer)."' limit 1"; 
+					$query = "UPDATE members SET funds=funds+$rprice WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $buyer)."' limit 1"; 
 					$executequery=$conn->execute($query);
 				}
 			}
@@ -1433,14 +1467,14 @@ function insert_get_time_to_days_ago($a)
 	//$oneday = 60 * 60 * 24;
 	//$dayspassed = floor($timediff/$oneday);
 	//if ($dayspassed == "0")
-	if($a[time] > $timestamp)
-	{
-		return date("g:i",$a[time]);
-	}
-	else
-	{
-		return date("M j",$a[time]);
-	}
+	return date("M j, Y",$a[time]);
+}
+
+function insert_get_time_to_date($a)
+{
+	$td = date("d-m-Y");
+	$timestamp = strtotime($td);
+	return date("M j, Y h:m",$a[time]);
 }
 
 function insert_get_deadline($a)
@@ -1449,7 +1483,7 @@ function insert_get_deadline($a)
 	$time = intval($a['time']);
 	$ctime = $days * 24 * 60 * 60;
 	$utime = $time + $ctime;
-	return date("M j, Y",$utime);
+	return date("M j",$utime);
 }
 
 function count_days($a, $b)
@@ -1634,12 +1668,12 @@ function insert_get_explode($a)
 	return $tags;
 }
 
-function send_update_email($msgto, $oid)
+function send_update_email($msgto, $oid, $messageBody)
 {
 	if($msgto > 0 && $oid > 0)
 	{
 		global $config, $conn, $lang;
-		$query = "select username,email from members where USERID='".mysql_real_escape_string($msgto)."'"; 
+		$query = "select username,email from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $msgto)."'"; 
 		$executequery=$conn->execute($query);
 		$sendto = $executequery->fields['email'];
 		$sendname = $executequery->fields['username'];
@@ -1648,10 +1682,57 @@ function send_update_email($msgto, $oid)
 			$sendername = $config['site_name'];
 			$from = $config['site_email'];
 			$subject = $lang['407'];
-			$sendmailbody = stripslashes($sendname).",<br><br>";
+			
+			$sendmailbody = "<div style='width:100%; background: #f2f2f2; line-height: 1.5;'>
+    <table style='width: 80%; margin: 0 auto; border: 0; padding: 5% 0;'>
+        <tbody>
+            <tr style='background-color: #000; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;'>
+                <td style='text-align: center; padding: 10px; padding-bottom: 10px;' align='center' valign='top '>
+                    <a target='_blank' href='http://skilop.com'><img src='http://skilop.com/themes/skilOp/images/logo-white.png' alt='SkilOp'></a>
+                </td>
+            </tr>
+            <tr style='background:#fafafa; text-align: left;'>
+                <td style='padding: 15px 30px; text-align: left; font-size: 17px; line-height:1.5;'>
+					<h4 style='color: #666; font-size: 19px; line-height: 1.5; font-weight: 700; margin:15px 0; padding: 0;'>Hello ".stripslashes($sendname).",</h4>";
+			
+			$sendmailbody .= $messageBody;
+			
+			$sendmailbody .= "<p style='color: #888; font-size:17px; line-height:1.5;text-align: left; padding: 0;'>
+			                        <strong style='color: #000; font-weight:bold; font-size:17px; line-height:1.5; '>Thanks,</strong>
+			                        <br>
+			                        <small style='color: #888; font-weight: 400; font-size: 17px; line-height: 1.5;'>Team Skilop</small>
+			                    </p>
+			                </td>
+			            </tr>
+			            <tr style='background:#fff; text-align: left;border-top:2px solid;'>
+			                <td style='color: #888; text-align: left; padding: 16px;'>
+			                    <p style='width:50%; float:left;'>
+			                        <strong style='color: #000; font-weight:bold;font-size: 16px;line-height: 1.5;'>Skilop</strong>
+			                        <br>
+			                        <small style='color: #888; font-size: 16px; font-weight: 400; line-height: 1.5;'>No.3, 7th Cross Rd, 19th Cross,<br/>NS Palya, BTM Layout Stage 2,<br/>Bengaluru, Karnataka 560076.</small>
+			                    </p>
+			                    <p style='width:50%; float:left; text-align: right'>
+			                        <a target=' _blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/fb_logo.png' alt='Facebook ' title='Follow us on Facebook '></a>
+			
+			                        <a target='_blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/instagram_logo.png' alt='Instagram ' title='Follow us on Instagram '></a>
+			
+			                        <a target='_blank ' href='#'><img style='padding:4px ' src='http://skilop.com/email_images/linkedin_logo.png' alt='linkedin ' title='Follow us on linkedin '></a>
+			
+			                        <a target='_blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/Twitter_Logo.png' alt='Twitter ' title='Follow us on Twitter '></a>
+			
+			                        <a target='_blank ' href='#'><img style='width:32px; height:30px; padding:4px ' src='http://skilop.com/email_images/gplus.png' alt='Google+ ' title='Follow us on Google+ '></a>
+			                    </p>
+			                </td>
+			
+			            </tr>
+			        </tbody>
+			    </table>
+			</div>";
+			
+		/*	$sendmailbody = stripslashes($sendname).",<br><br>";
 			$sendmailbody .= $lang['408']." ".$lang['409']."<br>";
 			$sendmailbody .= "<a href=".$config['baseurl']."/track?id=$oid>".$config['baseurl']."/track?id=$oid</a><br><br>";
-			$sendmailbody .= $lang['23'].",<br>".stripslashes($sendername);
+			$sendmailbody .= $lang['23'].",<br>".stripslashes($sendername);*/
 			mailme($sendto,$sendername,$from,$subject,$sendmailbody,$bcc="");
 		}
 	}
@@ -1662,17 +1743,17 @@ function cancel_revenue($OID)
     global $config,$conn;
 	if($OID > 0)
 	{
-		$query = "select PID from orders where OID='".mysql_real_escape_string($OID)."'"; 
+		$query = "select PID from orders where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."'"; 
 		$executequery=$conn->execute($query);
 		$PID = $executequery->fields['PID'];
 		if($PID > 0)
 		{
-			$query = "select price from posts where PID='".mysql_real_escape_string($PID)."'"; 
+			$query = "select price from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 			$executequery=$conn->execute($query);
 			$price = $executequery->fields['price'];
 			if($price > 0)
 			{
-				$query = "UPDATE posts SET rev=rev-$price WHERE PID='".mysql_real_escape_string($PID)."'"; 
+				$query = "UPDATE posts SET rev=rev-$price WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 				$executequery=$conn->execute($query);
 			}
 		}
@@ -1688,40 +1769,9 @@ function insert_get_short_url($a)
 	$SSEO = stripslashes($a['seo']);
 	$SSEO = str_replace(" ", "+", $SSEO);
 	$scriptolution_url = $config['baseurl']."/".$SSEO."/".$SPID."/".$stitle;
-	if($SPID > 0)
-	{
-		if($sshort == "")
-		{
-			$takenurl =  file_get_contents("http://www.taken.to/scriptolution.php?url=".$scriptolution_url);
-			if($takenurl != "")
-			{
-				$sshort = str_replace("http://www.taken.to/", "", $takenurl);
-				if($sshort != "")
-				{
-					$query = "UPDATE posts SET short='".mysql_real_escape_string($sshort)."' WHERE PID='".mysql_real_escape_string($SPID)."'";
-					$conn->execute($query);
-					$rme = 	"http://www.taken.to/".$sshort;
-				}
-				else
-				{
-					$rme = 	$scriptolution_url;	
-				}
-			}
-			else
-			{
-				$rme = 	$scriptolution_url;
-			}
-			
-		}
-		else
-		{
-			$rme = 	"http://www.taken.to/".$sshort;
-		}
-	}
-	else
-	{
-		$rme = 	$scriptolution_url;
-	}
+	
+	$rme = 	$scriptolution_url;
+	
 	return $rme;
 }
 
@@ -1749,7 +1799,7 @@ function insert_get_redirect2($a)
 function update_gig_rating($PID)
 {
 	global $conn;
-	$query = "select good, bad from ratings where PID='".mysql_real_escape_string($PID)."'"; 
+	$query = "select good, bad from ratings where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$t = 0;
@@ -1780,7 +1830,7 @@ function update_gig_rating($PID)
 	{
 		$gr = 0;
 	}
-	$uquery = "UPDATE posts SET rating='".$gr."', rcount=rcount+1 WHERE PID='".mysql_real_escape_string($PID)."'";
+	$uquery = "UPDATE posts SET rating='".$gr."', rcount=rcount+1 WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 	$conn->execute($uquery);
 }
 
@@ -2296,7 +2346,7 @@ function update_scriptolution_top_rated($userid, $toprated)
 	global $config, $conn;
 	$scriptolution_toprated_count = intval($config['scriptolution_toprated_count']);
 	$scriptolution_toprated_rating = intval($config['scriptolution_toprated_rating']);
-	$query = "select good, bad from ratings where USERID='".mysql_real_escape_string($userid)."'"; 
+	$query = "select good, bad from ratings where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid)."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -2324,12 +2374,12 @@ function update_scriptolution_top_rated($userid, $toprated)
 				
 		if($t >= $scriptolution_toprated_count && $r >= $scriptolution_toprated_rating)
 		{
-			$querym="UPDATE members SET toprated='1' WHERE USERID='".mysql_real_escape_string($userid)."' limit 1";
+			$querym="UPDATE members SET toprated='1' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid)."' limit 1";
 			$conn->execute($querym);
 		}
 		elseif($toprated == "1")
 		{
-			$querym="UPDATE members SET toprated='0' WHERE USERID='".mysql_real_escape_string($userid)."' limit 1";
+			$querym="UPDATE members SET toprated='0' WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid)."' limit 1";
 			$conn->execute($querym);	
 		}
 	}
@@ -2339,7 +2389,7 @@ function update_scriptolution_top_rated($userid, $toprated)
 function get_ctp($IID)
 {
 	global $config,$conn;
-	$query = "select ctp from order_items where IID='".mysql_real_escape_string($IID)."'"; 
+	$query = "select ctp from order_items where IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'"; 
 	$executequery=$conn->execute($query);
 	$rctp = $executequery->fields['ctp'];
 	return $rctp;
@@ -2348,7 +2398,7 @@ function get_ctp($IID)
 function insert_get_ctp($a)
 {
 	global $config,$conn;
-	$query = "select ctp from order_items where IID='".mysql_real_escape_string($a[IID])."'"; 
+	$query = "select ctp from order_items where IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a[IID])."'"; 
 	$executequery=$conn->execute($query);
 	$rctp = $executequery->fields['ctp'];
 	return $rctp;
@@ -2360,7 +2410,7 @@ function insert_get_scriptolution_notifications($a)
 	$UID = intval($a['USERID']);
 	if($UID > 0)
 	{
-		$query = "select * from fiverrscript_dotcom_notity where USERID='".mysql_real_escape_string($UID)."' order by NID desc limit 10"; 
+		$query = "select n.*,m.username from fiverrscript_dotcom_notity n, orders o, members m where n.scriptolution_OID = o.OID AND o.USERID = m.USERID AND n.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."' order by n.NID desc limit 10"; 
 		$results = $conn->execute($query);
 		$returnthis = $results->getrows();
 	}
@@ -2385,57 +2435,57 @@ function scriptolution_dotcom_fiverrscript_dotcom($scriptolution_doing, $UID, $O
 	{
 		if($scriptolution_doing == "scriptolution_buyer_requirements")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='scriptolution_buyer_requirements', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='scriptolution_buyer_requirements', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "fiverrscript_dotcom_neworder")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='fiverrscript_dotcom_neworder', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='fiverrscript_dotcom_neworder', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "fiverrscript_dotcom_orderdelivered")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='fiverrscript_dotcom_orderdelivered', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='fiverrscript_dotcom_orderdelivered', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "fiverrscript_dotcom_orderupdate")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='fiverrscript_dotcom_orderupdate', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='fiverrscript_dotcom_orderupdate', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "fiverrscript_dotcom_orderdeliveryreject")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='fiverrscript_dotcom_orderdeliveryreject', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='fiverrscript_dotcom_orderdeliveryreject', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "mutual_cancellation_request")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='mutual_cancellation_request', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='mutual_cancellation_request', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "scriptolution_abort_cancellation")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='scriptolution_abort_cancellation', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='scriptolution_abort_cancellation', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "scriptolution_reject_cancellation")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='scriptolution_reject_cancellation', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='scriptolution_reject_cancellation', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "scriptolution_accept_cancellation")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='scriptolution_accept_cancellation', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='scriptolution_accept_cancellation', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "seller_cancellation")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='seller_cancellation', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='seller_cancellation', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		elseif($scriptolution_doing == "fiverrscript_dotcom_orderfeedback")
 		{
-			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysql_real_escape_string($UID)."', scriptolution_type='fiverrscript_dotcom_orderfeedback', time_added='".time()."', scriptolution_OID='".mysql_real_escape_string($OID)."', scriptolution_unread='1'"; 
+			$query = "INSERT INTO fiverrscript_dotcom_notity SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."', scriptolution_type='fiverrscript_dotcom_orderfeedback', time_added='".time()."', scriptolution_OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."', scriptolution_unread='1'"; 
 			$executequery=$conn->execute($query);
 		}
 		
@@ -2482,7 +2532,7 @@ function scriptolution_banned_words_chk($phrase)
 function get_percent($scriptolutionuserid)
 {
 	global $conn;
-	$query = "select good, bad from ratings where USERID='".mysql_real_escape_string($scriptolutionuserid)."'"; 
+	$query = "select good, bad from ratings where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionuserid)."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -2557,7 +2607,7 @@ function insert_scriptolution_rating_stars($a)
 function get_percent_allusers($scriptolutionpid)
 {
 	global $conn;
-	$query = "select good, bad from ratings where PID='".mysql_real_escape_string($scriptolutionpid)."'"; 
+	$query = "select good, bad from ratings where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionpid)."'"; 
 	$results=$conn->execute($query);
 	$f = $results->getrows();
 	$grat = 0;
@@ -2633,7 +2683,7 @@ function insert_scriptolutionoffercnt($a)
 {
     global $conn;
 	$REQUESTID = intval($a['REQUESTID']);
-	$query = "select count(*) as total from offerscriptolution where REQUESTID='".mysql_real_escape_string($REQUESTID)."'"; 
+	$query = "select count(*) as total from offerscriptolution where REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."'"; 
 	$executequery=$conn->execute($query);
 	$total = $executequery->fields['total']+0;
 	return $total;
@@ -2642,7 +2692,7 @@ function insert_scriptolutionoffercnt($a)
 function insert_scriptolutionseo($a)
 {
         global $conn;
-        $query="SELECT seo FROM categories WHERE CATID='".mysql_real_escape_string($a['CATID'])."' limit 1";
+        $query="SELECT seo FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $a['CATID'])."' limit 1";
         $executequery=$conn->execute($query);
         $seo = $executequery->fields['seo'];
 		return $seo;
@@ -2653,14 +2703,14 @@ function scriptolutiondelete_request($RID)
 	$RID = intval($RID);
 	if($RID > 0)
 	{		
-		$query = "select REQUESTID from scriptolutionrequests WHERE REQUESTID='".mysql_real_escape_string($RID)."' AND USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+		$query = "select REQUESTID from scriptolutionrequests WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $RID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 		$results = $conn->execute($query);
 		$REQUESTID=$results->fields['REQUESTID'];
 		if($REQUESTID > 0)
 		{
-			$query = "DELETE FROM offerscriptolution WHERE REQUESTID='".mysql_real_escape_string($REQUESTID)."'";
+			$query = "DELETE FROM offerscriptolution WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."'";
 			$conn->Execute($query);	
-			$query = "DELETE FROM scriptolutionrequests WHERE REQUESTID='".mysql_real_escape_string($REQUESTID)."'";
+			$query = "DELETE FROM scriptolutionrequests WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."'";
 			$conn->Execute($query);		
 		}
 	}
@@ -2671,14 +2721,14 @@ function scriptolutiondelete_requestadmin6($RID)
 	$RID = intval($RID);
 	if($RID > 0)
 	{		
-		$query = "select REQUESTID from scriptolutionrequests WHERE REQUESTID='".mysql_real_escape_string($RID)."'"; 
+		$query = "select REQUESTID from scriptolutionrequests WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $RID)."'"; 
 		$results = $conn->execute($query);
 		$REQUESTID=$results->fields['REQUESTID'];
 		if($REQUESTID > 0)
 		{
-			$query = "DELETE FROM offerscriptolution WHERE REQUESTID='".mysql_real_escape_string($REQUESTID)."'";
+			$query = "DELETE FROM offerscriptolution WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."'";
 			$conn->Execute($query);	
-			$query = "DELETE FROM scriptolutionrequests WHERE REQUESTID='".mysql_real_escape_string($REQUESTID)."'";
+			$query = "DELETE FROM scriptolutionrequests WHERE REQUESTID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $REQUESTID)."'";
 			$conn->Execute($query);		
 		}
 	}

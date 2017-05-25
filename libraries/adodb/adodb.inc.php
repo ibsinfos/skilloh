@@ -25,7 +25,7 @@
 	class library to hide the differences between the different database API's (encapsulate 
 	the differences) so we can easily switch databases.
 
-	We currently support MySQL, Oracle, Microsoft SQL Server, Sybase, Sybase SQL Anywhere,
+	We currently support mysql, Oracle, Microsoft SQL Server, Sybase, Sybase SQL Anywhere,
 	Informix, PostgreSQL, FrontBase, Interbase (Firebird and Borland variants), Foxpro, Access,
 	 ADO and ODBC. We have had successful reports of connecting to Progress and DB2 via ODBC. 
 	 We hope more people will contribute drivers to support other databases.

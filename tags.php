@@ -20,7 +20,7 @@ $tag = cleanit($_REQUEST['tag']);
 if($cid != "" && $tag != "")
 {
 	STemplate::assign('tag',$tag);
-	$query="SELECT name,CATID,scriptolution_bigimage FROM categories WHERE seo='".mysql_real_escape_string($cid)."'";
+	$query="SELECT name,CATID,scriptolution_bigimage FROM categories WHERE seo='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $cid)."'";
 	$executequery=$conn->execute($query);
 	$CATID = $executequery->fields['CATID'];
 	$cname = $executequery->fields['name'];
@@ -101,14 +101,14 @@ if($cid != "" && $tag != "")
 		$p = intval(cleanit($_REQUEST['p']));
 		if($p > 0)
 		{
-			$scriptolution_addprice = " AND A.price='".mysql_real_escape_string($p)."'";
-			$scriptolution_addpriced = " AND price='".mysql_real_escape_string($p)."'";
+			$scriptolution_addprice = " AND A.price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $p)."'";
+			$scriptolution_addpriced = " AND price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $p)."'";
 			STemplate::assign('p',$p);
 			$addp = "&p=$p";
 		}
 		
-		$query1 = "SELECT count(*) as total from posts where active='1' AND category='".mysql_real_escape_string($CATID)."' AND gtags like'%".mysql_real_escape_string($tag)."%' $addsql $scriptolution_addpriced order by PID desc limit $config[maximum_results]";
-		$query2 = "SELECT A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND A.category='".mysql_real_escape_string($CATID)."' AND A.gtags like'%".mysql_real_escape_string($tag)."%' $addsqlb AND A.category=B.CATID AND A.USERID=C.USERID $scriptolution_addprice order by A.feat desc, $dby limit $pagingstart, $config[items_per_page_new]";
+		$query1 = "SELECT count(*) as total from posts where active='1' AND category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."' AND gtags like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%' $addsql $scriptolution_addpriced order by PID desc limit $config[maximum_results]";
+		$query2 = "SELECT A.*, B.seo, C.username, C.country, C.toprated from posts A, categories B, members C where A.active='1' AND A.category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."' AND A.gtags like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $tag)."%' $addsqlb AND A.category=B.CATID AND A.USERID=C.USERID $scriptolution_addprice order by A.feat desc, $dby limit $pagingstart, $config[items_per_page_new]";
 		$executequery1 = $conn->Execute($query1);
 		$scriptolution = $executequery1->fields['total'];
 		if ($scriptolution > 0)
@@ -179,7 +179,7 @@ if($cid != "" && $tag != "")
 			}
 		}
 		
-		$query="SELECT gtags FROM posts WHERE category='".mysql_real_escape_string($CATID)."' order by rand() limit 20";
+		$query="SELECT gtags FROM posts WHERE category='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $CATID)."' order by rand() limit 20";
 		$results=$conn->execute($query);
 		$gtags = $results->getrows();
 		for($i=0; $i<count($gtags);$i++)

@@ -160,5 +160,3 @@
                 </ul>
 			</div>
         </div>
-		
-        {php}global $config; echo @file_get_contents("http://www.scriptolution.com/updates/fiver/index.php?v=".$config['ver']); {/php}

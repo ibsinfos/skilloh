@@ -23,13 +23,13 @@ if($_REQUEST['acancel']=="1")
 	$DOID = intval(cleanit($_REQUEST['OID']));
 	if($DOID > 0)
 	{
-		$query = "select USERID, price from orders where OID='".mysql_real_escape_string($DOID)."'"; 
+		$query = "select USERID, price from orders where OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DOID)."'"; 
 		$executequery=$conn->execute($query);
 		$RUSERID = $executequery->fields['USERID'];
 		$rprice = $executequery->fields['price'];
 		issue_refund_admin($RUSERID,$DOID,$rprice);
 		cancel_revenue($DOID);
-		$sql="UPDATE orders SET status='7' WHERE OID='".mysql_real_escape_string($DOID)."'";
+		$sql="UPDATE orders SET status='7' WHERE OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DOID)."'";
 		$conn->Execute($sql);
 		$message = "Order Successfully Cancelled.";
 		Stemplate::assign('message',$message);
@@ -90,31 +90,31 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $gtitle
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.OID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.OID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.OID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.OID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.OID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.OID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($gtitle != "")
 	{
-		$addtosql .= "AND C.gtitle like'%".mysql_real_escape_string($gtitle)."%'";
+		$addtosql .= "AND C.gtitle like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gtitle)."%'";
 		Stemplate::assign('gtitle',$gtitle);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	if($status != "")
 	{
-		$addtosql .= "AND A.status='".mysql_real_escape_string($status)."'";
+		$addtosql .= "AND A.status='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $status)."'";
 		Stemplate::assign('status',$status);
 	}
 	Stemplate::assign('search',"1");

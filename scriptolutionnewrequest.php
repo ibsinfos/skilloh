@@ -65,7 +65,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				{
 					$active = "1";
 				}
-				$query="INSERT INTO scriptolutionrequests SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', scriptolutiondesc='".mysql_real_escape_string($gdesc)."', scriptolutiondays='".mysql_real_escape_string($gdays)."', scriptolutioncategory='".mysql_real_escape_string($gcat)."', scriptolutionprice='".mysql_real_escape_string($price)."', time_added='".time()."', pip='".$_SERVER['REMOTE_ADDR']."', active='$active'";
+				$query="INSERT INTO scriptolutionrequests SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', scriptolutiondesc='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdesc)."', scriptolutiondays='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gdays)."', scriptolutioncategory='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $gcat)."', scriptolutionprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', time_added='".time()."', pip='".$_SERVER['REMOTE_ADDR']."', active='$active'";
 				$result=$conn->execute($query);
 				
 				STemplate::assign('gdesc',"");

@@ -34,8 +34,7 @@
 span.status
 {
 	font-size: 12px;
-	padding: 5px;
-	font-family: Arial,Helvetica,sans-serif;	
+	padding: 5px;	
 }
 .flag {
     margin-top: 6px !important;
@@ -47,7 +46,6 @@ span.status
     color: #049BCF;
 }
 .whiteBox h4 {
-    font-family: Arial,Helvetica,sans-serif !important;
 	font-size: 12px;
 }
 .whiteBox h4 a {
@@ -89,7 +87,6 @@ span.status
     padding-bottom: 10px;
 }
 .conv-write, .conv-write-resolution {
-    background-color: #EEE;
     border-width: 1px 0px;
     border-style: solid none;
     border-color: #DDD -moz-use-text-color;
@@ -102,16 +99,15 @@ span.status
     position: relative;
 }
 .conv-write {
-    border: 1px solid #CCC;
-    padding: 17px 20px 20px;
+    border: 0px solid #f8f8f8;
+    padding: 0px 0px 0px;
     box-sizing: border-box;
-    border-radius: 0px 0px 5px 5px;
-    margin: 0px -1px -1px;
+    border-radius: 3px;
+    margin: -3px 0px 0px;
 }
 
-textarea, input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"] {
+textarea, input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="week"] {
     background-color: #FFF;
-    font: 400 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #777;
     border: 1px solid #B2B2B2;
     padding: 6px 7px 7px;
@@ -119,6 +115,8 @@ textarea, input[type="date"], input[type="datetime"], input[type="datetime-local
     resize: none;
     border-radius: 3px;
     box-sizing: border-box;
+	font-size: 12px;
+	font-weight :400;
 }
 .conv-write .write-wrap .write-row textarea, .conv-write-resolution .write-wrap .write-row textarea {
     background-color: #FFF;
@@ -147,17 +145,18 @@ textarea {
     width: 294px;
 }
 .conv-write .write-wrap, .conv-write-resolution .write-wrap {
-    background-color: #F4F4F4;
+    background-color: #f8f8f8;
     overflow: hidden;
-    border: 1px solid #B2B2B2;
+    border: 1px solid #f8f8f8;
     border-radius: 3px;
-    box-shadow: 2px 2px 2px #E3E3E3 inset;
+    /* box-shadow: 2px 2px 2px #E3E3E3 inset; */
 }
 
 .conv-write .write-wrap .write-controls, .conv-write-resolution .write-wrap .write-controls {
     padding: 10px;
     height: 31px;
     position: relative;
+	margin-bottom: 20px;
 }
 .conv-write .write-wrap .icn-submit, .conv-write-resolution .write-wrap .icn-submit {
     float: right;
@@ -176,17 +175,18 @@ textarea {
     background-color: #FFF;
     display: inline-block;
     letter-spacing: 0px;
-    font: 500 12px/12px "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #777;
     white-space: nowrap;
     text-transform: uppercase;
     border: 1px solid #CCC;
-    padding: 9px 9px 8px;
+    padding: 5px 9px 5px;
     margin: 0px;
     cursor: pointer;
     transition: color 0.2s ease 0s, background-color 0.2s ease 0s, box-shadow 0.2s ease 0s, border 0.2s ease 0s;
     border-radius: 3px;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);	
+	font-size: 12px;
+	font-weight :600;
 }
 .conv-write .write-wrap .attach-files, .conv-write-resolution .write-wrap .attach-files {
     float: left;
@@ -221,10 +221,13 @@ textarea {
 .sending {
 	font-size:12px;
 	color:#666;
+    line-height: 1.5;
 }
 #message_validation_error {
-	font-size:14px;
-	color:#F00;
+	font-size: 14px;
+    color: #F00;
+    line-height: 1.5;
+    margin: 10px 0;
 }
 
 .yellowbg table tbody tr {
@@ -265,10 +268,12 @@ textarea {
 }
 
 .scriptolutiondmessageme {
-  color: #fff;
-  background-color: #54BFE4;
-  padding: 8px;
-  border-radius: 5px 5px 0px 0px;
+  color: #000 !important;
+    background-color: #f8f8f8;
+    padding: 8px;
+    border-radius: 5px 5px 0px 0px;
+    font-weight: 600;
+    line-height:1.5;
 }
 
 .whitelinks a{
@@ -278,7 +283,6 @@ textarea {
 
 .action-steps h5 {
     display: inline-block;
-    font-size: 22px;
     line-height: 32px;
     font-weight: 400;
     color: #42B4DA;
@@ -287,7 +291,7 @@ textarea {
     padding-right: 2px;
     text-transform: uppercase;
     overflow: hidden;
-	font: 26px "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 26px;
 }
 
 .action-steps h5 a{

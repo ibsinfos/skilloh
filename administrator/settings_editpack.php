@@ -22,15 +22,20 @@ if($ID > 0)
 {
 	if($_POST['submitform'] == "1")
 	{
-		$pprice = cleanit($_POST['pprice']);
+		$pminprice = cleanit($_POST['pminprice']);
+		$pmaxprice = cleanit($_POST['pmaxprice']);
 		$pcom = cleanit($_POST['pcom']);
 		$l1 = intval(cleanit($_POST['l1']));
 		$l2 = intval(cleanit($_POST['l2']));
 		$l3 = intval(cleanit($_POST['l3']));
 		
-		if($pprice == "")
+		if($pminprice == "")
 		{
-			$error = "Error: Please enter a price.";
+			$error = "Error: Please enter min price.";
+		}
+		elseif($pmaxprice == "")
+		{
+			$error = "Error: Please enter max price.";
 		}
 		elseif($pcom == "")
 		{
@@ -39,7 +44,7 @@ if($ID > 0)
 		else
 		{
 	
-			$sql = "update packs set pprice='".mysql_real_escape_string($pprice)."', pcom='".mysql_real_escape_string($pcom)."', l1='".mysql_real_escape_string($l1)."', l2='".mysql_real_escape_string($l2)."', l3='".mysql_real_escape_string($l3)."' WHERE ID='".mysql_real_escape_string($ID)."'";
+			$sql = "update packs set pminprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pminprice)."', pmaxprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pmaxprice)."', pcom='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pcom)."', l1='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $l1)."', l2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $l2)."', l3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $l3)."' WHERE ID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ID)."'";
 			$conn->execute($sql);
 			$message = "Price Pack Successfully Edited.";
 			Stemplate::assign('message',$message);
@@ -47,7 +52,7 @@ if($ID > 0)
 		}
 	}
 
-	$query = $conn->execute("select * from packs where ID='".mysql_real_escape_string($ID)."' limit 1");
+	$query = $conn->execute("select * from packs where ID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ID)."' limit 1");
 	$p = $query->getrows();
 	Stemplate::assign('p', $p[0]);
 }

@@ -18,7 +18,7 @@ verify_login_admin();
 
 if($_POST['submitform1'] == "1")
 {
-	$sql = "update static set title='".mysql_real_escape_string($_POST['title1'])."', value='".mysql_real_escape_string($_POST['value1'])."' where ID='1'";
+	$sql = "update static set title='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['title1'])."', value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['value1'])."' where ID='1'";
 	$conn->execute($sql);
 	$message = "Terms Of Use Successfully Saved.";
 	Stemplate::assign('message',$message);
@@ -26,7 +26,7 @@ if($_POST['submitform1'] == "1")
 
 if($_POST['submitform2'] == "1")
 {
-	$sql = "update static set title='".mysql_real_escape_string($_POST['title2'])."', value='".mysql_real_escape_string($_POST['value2'])."' where ID='2'";
+	$sql = "update static set title='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['title2'])."', value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['value2'])."' where ID='2'";
 	$conn->execute($sql);
 	$message = "Privacy Policy Successfully Saved.";
 	Stemplate::assign('message',$message);
@@ -34,7 +34,7 @@ if($_POST['submitform2'] == "1")
 
 if($_POST['submitform3'] == "1")
 {
-	$sql = "update static set title='".mysql_real_escape_string($_POST['title3'])."', value='".mysql_real_escape_string($_POST['value3'])."' where ID='3'";
+	$sql = "update static set title='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['title3'])."', value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['value3'])."' where ID='3'";
 	$conn->execute($sql);
 	$message = "About Us Successfully Saved.";
 	Stemplate::assign('message',$message);
@@ -42,7 +42,7 @@ if($_POST['submitform3'] == "1")
 
 if($_POST['submitform4'] == "1")
 {
-	$sql = "update static set title='".mysql_real_escape_string($_POST['title4'])."', value='".mysql_real_escape_string($_POST['value4'])."' where ID='4'";
+	$sql = "update static set title='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['title4'])."', value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['value4'])."' where ID='4'";
 	$conn->execute($sql);
 	$message = "Advertising Successfully Saved.";
 	Stemplate::assign('message',$message);
@@ -50,7 +50,7 @@ if($_POST['submitform4'] == "1")
 
 if($_POST['submitform5'] == "1")
 {
-	$sql = "update static set title='".mysql_real_escape_string($_POST['title5'])."', value='".mysql_real_escape_string($_POST['value5'])."' where ID='5'";
+	$sql = "update static set title='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['title5'])."', value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['value5'])."' where ID='5'";
 	$conn->execute($sql);
 	$message = "Contact Us Successfully Saved.";
 	Stemplate::assign('message',$message);
@@ -58,7 +58,7 @@ if($_POST['submitform5'] == "1")
 
 if($_POST['submitform6'] == "1")
 {
-	$sql = "update static set title='".mysql_real_escape_string($_POST['title6'])."', value='".mysql_real_escape_string($_POST['value6'])."' where ID='6'";
+	$sql = "update static set title='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['title6'])."', value='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['value6'])."' where ID='6'";
 	$conn->execute($sql);
 	$message = "Job Levels Successfully Saved.";
 	Stemplate::assign('message',$message);

@@ -21,7 +21,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 {	
 	if($UID > 0)
 	{
-		$query="SELECT DISTINCT count(*) as total FROM members A, inbox B, members C WHERE A.USERID=B.MSGTO AND C.USERID=B.MSGFROM AND (B.MSGTO='".mysql_real_escape_string($_SESSION['USERID'])."' AND B.MSGFROM='".mysql_real_escape_string($UID)."') AND B.MID>'".mysql_real_escape_string($last_id)."'";
+		$query="SELECT DISTINCT count(*) as total FROM members A, inbox B, members C WHERE A.USERID=B.MSGTO AND C.USERID=B.MSGFROM AND (B.MSGTO='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND B.MSGFROM='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UID)."') AND B.MID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $last_id)."'";
 		$executequery=$conn->execute($query);
 		$cnt = $executequery->fields['total']+0;
 		echo $cnt;

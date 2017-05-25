@@ -25,11 +25,11 @@ if($_POST['asub']=="1")
 	$apay = cleanit($_POST['apay']);
 	if($AWID > 0 && $auid > 0 && $apay > 0)
 	{
-		$sql="UPDATE members SET afunds=afunds-$apay WHERE USERID='".mysql_real_escape_string($auid)."'";
+		$sql="UPDATE members SET afunds=afunds-$apay WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $auid)."'";
 		$conn->Execute($sql);
-		$sql="UPDATE members SET withdrawn=withdrawn+$apay WHERE USERID='".mysql_real_escape_string($auid)."'";
+		$sql="UPDATE members SET withdrawn=withdrawn+$apay WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $auid)."'";
 		$conn->Execute($sql);
-		$sql="DELETE FROM withdraw_requests WHERE WID='".mysql_real_escape_string($AWID)."'";
+		$sql="DELETE FROM withdraw_requests WHERE WID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $AWID)."'";
 		$conn->Execute($sql);
 		$message = "Withdrawal successfully processed.";
 		Stemplate::assign('message',$message);
@@ -84,31 +84,31 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $pemail
 {
 	if($fromid > 0)
 	{
-		$addtosql = "AND A.WID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.WID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "AND A.WID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "AND A.WID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND A.WID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND A.WID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($pemail != "")
 	{
-		$addtosql .= "AND B.pemail like'%".mysql_real_escape_string($pemail)."%'";
+		$addtosql .= "AND B.pemail like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $pemail)."%'";
 		Stemplate::assign('pemail',$pemail);
 	}
 	if($aemail != "")
 	{
-		$addtosql .= "AND B.aemail like'%".mysql_real_escape_string($aemail)."%'";
+		$addtosql .= "AND B.aemail like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $aemail)."%'";
 		Stemplate::assign('aemail',$aemail);
 	}
 	if($username != "")
 	{
-		$addtosql .= "AND B.username like'%".mysql_real_escape_string($username)."%'";
+		$addtosql .= "AND B.username like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $username)."%'";
 		Stemplate::assign('username',$username);
 	}
 	Stemplate::assign('search',"1");

@@ -22,7 +22,7 @@
                                     <tbody>
                                     <tr>
                                         <td class="leftitscriptolution width25">
-                                            <a href="{$baseurl}/{insert name=get_seo_profile value=a username=$m[i].mfrom|stripslashes}" title="{$m[i].mfrom|stripslashes}"><img alt="{$m[i].mfrom|stripslashes}" src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" class="scriptolutionuimage" /></a>
+                                            <a href="{$baseurl}{insert name=get_seo_profile value=a username=$m[i].mfrom|stripslashes}" title="{$m[i].mfrom|stripslashes}"><img alt="{$m[i].mfrom|stripslashes}" src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" class="scriptolutionuimage" /></a>
                                         </td>
                                         <td class="leftitscriptolution width75">                                
                                             <div class="milestone action reqbox" title="{$lang293}"> 

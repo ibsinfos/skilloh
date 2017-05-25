@@ -9,11 +9,11 @@
                             <div class="t">&nbsp;</div>
                             <div class="c">
                               <ul>
-                                <li {if $sm0 eq "1"}class="active"{/if}><a href="{$baseurl}/new">{$lang55}</a></li>
-                                <li {if $sm1 eq "1"}class="active"{/if}><a href="{$baseurl}/manage_gigs">{$lang153}</a></li>
-                                <li {if $sm2 eq "1"}class="active"{/if}><a href="{$baseurl}/manage_orders">{$lang154}</a></li>
-                                <li {if $sm3 eq "1"}class="active"{/if}><a href="{$baseurl}/balance?tab=sales">{$lang155} </a></li>
-                                <li {if $sm4 eq "1"}class="active"{/if}><a href="{$baseurl}/purchases">{$lang461} </a></li>
+                                <li {if $sm0 eq "1"}class="active"{/if}><a href="{$baseurl}new">{$lang55}</a></li>
+                                <li {if $sm1 eq "1"}class="active"{/if}><a href="{$baseurl}manage_gigs">{$lang153}</a></li>
+                                <li {if $sm2 eq "1"}class="active"{/if}><a href="{$baseurl}manage_orders">{$lang154}</a></li>
+                                <li {if $sm3 eq "1"}class="active"{/if}><a href="{$baseurl}balance?tab=sales">{$lang155} </a></li>
+                                <li {if $sm4 eq "1"}class="active"{/if}><a href="{$baseurl}purchases">{$lang461} </a></li>
                               </ul>
                             </div>
                             <div class="b">&nbsp;</div>
@@ -31,7 +31,7 @@
                                   <ul>
                                     {insert name=get_wants value=var assign=wants}
                                     {section name=i loop=$wants}
-                                    <li>{$wants[i].want|stripslashes} ({$lang414} <a href="{$baseurl}/{insert name=get_seo_profile value=a username=$wants[i].username|stripslashes}">{$wants[i].username|stripslashes}</a>)</li>
+                                    <li>{$wants[i].want|stripslashes} ({$lang414} <a href="{$baseurl}{insert name=get_seo_profile value=a username=$wants[i].username|stripslashes}">{$wants[i].username|stripslashes}</a>)</li>
                                     {/section}
                                   </ul>
                                 </div>

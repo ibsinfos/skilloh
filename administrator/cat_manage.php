@@ -23,7 +23,7 @@ if($_REQUEST['delete']=="1")
 	$DCATID = intval(cleanit($_REQUEST['CATID']));
 	if($DCATID > 0)
 	{
-		$query = "select scriptolution_catimage, scriptolution_bigimage from categories WHERE CATID='".mysql_real_escape_string($DCATID)."'"; 
+		$query = "select scriptolution_catimage, scriptolution_bigimage from categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DCATID)."'"; 
 		$results = $conn->execute($query);
 		$p1=$results->fields['scriptolution_catimage'];
 		if($p1 != "" && $p1 != "scriptolution_default_category.jpg")
@@ -58,7 +58,7 @@ if($_REQUEST['delete']=="1")
 			}
 		}
 		
-		$sql="DELETE FROM categories WHERE CATID='".mysql_real_escape_string($DCATID)."'";
+		$sql="DELETE FROM categories WHERE CATID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $DCATID)."'";
 		$conn->Execute($sql);
 		
 		$message = "Category Successfully Deleted.";
@@ -100,21 +100,21 @@ if($_POST['submitform'] == "1" || ($_REQUEST['fromid']!="" || $toid>0 || $name!=
 {
 	if($fromid > 0)
 	{
-		$addtosql = "WHERE CATID>='".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE CATID>='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 		Stemplate::assign('fromid',$fromid);
 	}
 	else
 	{
-		$addtosql = "WHERE CATID>'".mysql_real_escape_string($fromid)."'";
+		$addtosql = "WHERE CATID>'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $fromid)."'";
 	}
 	if($toid > 0)
 	{
-		$addtosql .= "AND CATID<='".mysql_real_escape_string($toid)."'";
+		$addtosql .= "AND CATID<='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $toid)."'";
 		Stemplate::assign('toid',$toid);
 	}
 	if($name != "")
 	{
-		$addtosql .= "AND name like'%".mysql_real_escape_string($name)."%'";
+		$addtosql .= "AND name like'%".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $name)."%'";
 		Stemplate::assign('name',$name);
 	}
 	Stemplate::assign('search',"1");

@@ -1,1 +1,1 @@
-<div class='scriptolution-express'>{$lang492}</div>
+	<div class='scriptolution-express'>{$lang492}</div>

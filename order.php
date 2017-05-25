@@ -24,7 +24,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$iid = intval(cleanit($_REQUEST['item']));
 	if($iid > 0)
 	{
-		$query="SELECT A.IID, A.PID, A.totalprice, A.multi, B.gtitle, B.iurl, B.ifile FROM order_items A, posts B WHERE A.IID='".mysql_real_escape_string($iid)."' AND A.USERID='".mysql_real_escape_string($_SESSION['USERID'])."' AND A.PID=B.PID";//
+		$query="SELECT A.IID, A.PID, A.totalprice, A.multi, B.gtitle, B.iurl, B.ifile FROM order_items A, posts B WHERE A.IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."' AND A.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.PID=B.PID";//
 		$results=$conn->execute($query);
 		$p = $results->getrows();
 		STemplate::assign('p',$p[0]);
@@ -35,7 +35,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		$iurl = $p[0]['iurl'];//
 		$ifile = $p[0]['ifile'];//
 		
-		$query = "select funds, afunds, email from members where USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+		$query = "select funds, afunds, email, username, phone from members where USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 		$executequery=$conn->execute($query);
 		$funds = $executequery->fields['funds'];
 		STemplate::assign('funds',$funds);
@@ -43,6 +43,24 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		STemplate::assign('afunds',$afunds);
 		$scriptolutionuemail = $executequery->fields['email']; //
 		STemplate::assign('scriptolutionuemail',$scriptolutionuemail); //
+		$username = $executequery->fields['username']; //
+		STemplate::assign('username',$username); //
+		$uemail = $executequery->fields['email'];
+		STemplate::assign('uemail',$uemail); //
+		$uphone = $executequery->fields['phone'];
+		STemplate::assign('uphone',$uphone); //
+		
+		
+		$payukey = 'sqfaiO';
+		$payusalt = 'b68bDAfB';
+		$amount = number_format($p[0]['totalprice'],2,'.','');
+		$productinfo = $p[0]['PID'].' - '.$p[0]['gtitle'];
+		$hashSequence = "$payukey|$iid|$amount|$productinfo|$username|$uemail|||||||||||$payusalt";
+		$payuhash = strtolower(hash('sha512', $hashSequence));
+		STemplate::assign('payukey',$payukey); //
+		STemplate::assign('payuhash',$payuhash); //
+		STemplate::assign('payuamount',$amount); //
+		STemplate::assign('payuproductinfo',$productinfo); //
 		
 		$scriptolutionencoded = hash('md5', $p[0]['IID'].$p[0]['PID'].$p[0]['USERID']); //
 		STemplate::assign('scriptolutionencoded',$scriptolutionencoded); //
@@ -52,26 +70,26 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$price = $p[0]['totalprice'];
 			if($funds >= $price)
 			{
-				$query1 = "UPDATE members SET funds=funds-$price WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."'"; 
+				$query1 = "UPDATE members SET funds=funds-$price WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'"; 
 				$executequery1=$conn->execute($query1);
 				
 				if($multi > 1)
 				{
-					$query = "select price from posts where PID='".mysql_real_escape_string($id)."'"; 
+					$query = "select price from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 					$executequery=$conn->execute($query);
 					$eachprice = $executequery->fields['price'];
 		
 					for ($i=1; $i<=$multi; $i++)
 					{
-						$query = "INSERT INTO orders SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($iid)."', time_added='".time()."', status='0', price='".mysql_real_escape_string($eachprice)."'"; 
+						$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."'"; 
 						$executequery=$conn->execute($query);
-						$order_id = mysql_insert_id();
+						$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 						if($order_id > 0)
 						{
-							$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', OID='".mysql_real_escape_string($order_id)."', IID='".mysql_real_escape_string($iid)."', time='".time()."', price='".mysql_real_escape_string($eachprice)."', t='1', fiverrscriptdotcom_balance='1'"; 
+							$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."', t='1', fiverrscriptdotcom_balance='1'"; 
 							$executequery=$conn->execute($query);
 							
-							$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysql_real_escape_string($id)."'"; 
+							$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 							$executequery=$conn->execute($query);	
 							
 							scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $_SESSION['USERID'], $order_id);
@@ -86,15 +104,15 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$query = "INSERT INTO orders SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($iid)."', time_added='".time()."', status='0', price='".mysql_real_escape_string($price)."'"; 
+					$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 					$executequery=$conn->execute($query);
-					$order_id = mysql_insert_id();
+					$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 					if($order_id > 0)
 					{
-						$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', OID='".mysql_real_escape_string($order_id)."', IID='".mysql_real_escape_string($iid)."', time='".time()."', price='".mysql_real_escape_string($price)."', t='1', fiverrscriptdotcom_balance='1'"; 
+						$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', t='1', fiverrscriptdotcom_balance='1'"; 
 						$executequery=$conn->execute($query);
 						
-						$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysql_real_escape_string($id)."'"; 
+						$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 						$executequery=$conn->execute($query);
 						
 						scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $_SESSION['USERID'], $order_id);
@@ -114,26 +132,26 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$price = $p[0]['totalprice'];
 			if($afunds >= $price)
 			{
-				$query1 = "UPDATE members SET afunds=afunds-$price , used=used+$price WHERE USERID='".mysql_real_escape_string($_SESSION['USERID'])."'";
+				$query1 = "UPDATE members SET afunds=afunds-$price , used=used+$price WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."'";
 				$executequery1=$conn->execute($query1);
 				
 				if($multi > 1)
 				{
-					$query = "select price from posts where PID='".mysql_real_escape_string($id)."'"; 
+					$query = "select price from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 					$executequery=$conn->execute($query);
 					$eachprice = $executequery->fields['price'];
 		
 					for ($i=1; $i<=$multi; $i++)
 					{
-						$query = "INSERT INTO orders SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($iid)."', time_added='".time()."', status='0', price='".mysql_real_escape_string($eachprice)."'"; 
+						$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."'"; 
 						$executequery=$conn->execute($query);
-						$order_id = mysql_insert_id();
+						$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 						if($order_id > 0)
 						{
-							$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', OID='".mysql_real_escape_string($order_id)."', IID='".mysql_real_escape_string($iid)."', time='".time()."', price='".mysql_real_escape_string($eachprice)."', t='1', fiverrscriptdotcom_available='1'"; 
+							$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."', t='1', fiverrscriptdotcom_available='1'"; 
 							$executequery=$conn->execute($query);
 							
-							$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysql_real_escape_string($id)."'"; 
+							$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 							$executequery=$conn->execute($query);
 							
 							scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $_SESSION['USERID'], $order_id);	
@@ -148,15 +166,15 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$query = "INSERT INTO orders SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($iid)."', time_added='".time()."', status='0', price='".mysql_real_escape_string($price)."'"; 
+					$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 					$executequery=$conn->execute($query);
-					$order_id = mysql_insert_id();
+					$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 					if($order_id > 0)
 					{
-						$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', OID='".mysql_real_escape_string($order_id)."', IID='".mysql_real_escape_string($iid)."', time='".time()."', price='".mysql_real_escape_string($price)."', t='1', fiverrscriptdotcom_available='1'"; 
+						$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', t='1', fiverrscriptdotcom_available='1'"; 
 						$executequery=$conn->execute($query);
 						
-						$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysql_real_escape_string($id)."'"; 
+						$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 						$executequery=$conn->execute($query);
 						
 						scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $_SESSION['USERID'], $order_id);
@@ -213,21 +231,21 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				
 				if($multi > 1)
 				{
-					$query = "select price from posts where PID='".mysql_real_escape_string($id)."'"; 
+					$query = "select price from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 					$executequery=$conn->execute($query);
 					$eachprice = $executequery->fields['price'];
 		
 					for ($i=1; $i<=$multi; $i++)
 					{
-						$query = "INSERT INTO orders SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($iid)."', time_added='".time()."', status='0', price='".mysql_real_escape_string($eachprice)."'"; 
+						$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."'"; 
 						$executequery=$conn->execute($query);
-						$order_id = mysql_insert_id();
+						$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 						if($order_id > 0)
 						{
-							$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', OID='".mysql_real_escape_string($order_id)."', IID='".mysql_real_escape_string($iid)."', time='".time()."', price='".mysql_real_escape_string($eachprice)."', t='1', fiverrscriptdotcom_stripe='1', fiverrscriptdotcom_stripe_user='".mysql_real_escape_string($scriptolutionstripeuserid)."'"; 
+							$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."', t='1', fiverrscriptdotcom_stripe='1', fiverrscriptdotcom_stripe_user='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionstripeuserid)."'"; 
 							$executequery=$conn->execute($query);
 							
-							$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysql_real_escape_string($id)."'"; 
+							$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 							$executequery=$conn->execute($query);
 							
 							scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $_SESSION['USERID'], $order_id);
@@ -242,15 +260,15 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				}
 				else
 				{
-					$query = "INSERT INTO orders SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', PID='".mysql_real_escape_string($id)."', IID='".mysql_real_escape_string($iid)."', time_added='".time()."', status='0', price='".mysql_real_escape_string($price)."'"; 
+					$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 					$executequery=$conn->execute($query);
-					$order_id = mysql_insert_id();
+					$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 					if($order_id > 0)
 					{
-						$query = "INSERT INTO payments SET USERID='".mysql_real_escape_string($_SESSION['USERID'])."', OID='".mysql_real_escape_string($order_id)."', IID='".mysql_real_escape_string($iid)."', time='".time()."', price='".mysql_real_escape_string($price)."', t='1', fiverrscriptdotcom_stripe='1', fiverrscriptdotcom_stripe_user='".mysql_real_escape_string($scriptolutionstripeuserid)."'"; 
+						$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $iid)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', t='1', fiverrscriptdotcom_stripe='1', fiverrscriptdotcom_stripe_user='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $scriptolutionstripeuserid)."'"; 
 						$executequery=$conn->execute($query);
 						
-						$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysql_real_escape_string($id)."'"; 
+						$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 						$executequery=$conn->execute($query);
 						
 						scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $_SESSION['USERID'], $order_id);

@@ -12,6 +12,14 @@ $(document).ready( function() {
 			updateGigTitleCharsCount();
 		});
 	};
+	
+	if ($('.extratitle').length != 0) {
+		updateExtraTitleCharsCount();
+		$('.extratitle').keyup(function(){
+			updateExtraTitleCharsCount();
+		});
+	};
+	
 	$('input[maxlength],textarea[maxlength]').keyup(function(){
 		var max = parseInt($(this).attr('maxlength'));
 		if($(this).val().length > max){
@@ -22,13 +30,34 @@ $(document).ready( function() {
 		var used = $('#gig_title').val().length;
 		$('.gigtitleused').html(used);
 	};
+	
+	function updateExtraTitleCharsCount() {
+		var used = $('#extra1').val().length;
+		$('.extra1used').html(used);
+		
+		used = $('#extra2').val().length;
+		$('.extra2used').html(used);
+		
+		used = $('#extra3').val().length;
+		$('.extra3used').html(used);
+		
+		used = $('#extra4').val().length;
+		$('.extra4used').html(used);
+		
+		used = $('#extra5').val().length;
+		$('.extra5used').html(used);
+	};
+	
 	function updateGigDescCharsCount() {
 		var used = $('#gig_description').val().length;
 		$('.gigdescused').html(used);
 	};
 	$('a.select-all').click(function() {
-		$('.checkbox').each(function(){
-			$(this).attr('checked', true);
+		$('a.select-all').addClass('selectedFilter');
+		$('a.select-active').removeClass('selectedFilter');
+		$('a.select-suspended').removeClass('selectedFilter');
+		$('.serviceRecs').each(function(){
+			$(this).show();
 		});
 		return false;
 	});
@@ -37,30 +66,36 @@ $(document).ready( function() {
 		return false;
 	});
 	$('a.select-active').click(function() {
-		unselectCheckboxes();
-		$('.checkbox.approved').each(function(){
-			$(this).attr('checked', true);
+		hideAllServices();
+		$('a.select-all').removeClass('selectedFilter');
+		$('a.select-active').addClass('selectedFilter');
+		$('a.select-suspended').removeClass('selectedFilter');
+		$('.serviceRecs.approvedRec').each(function(){
+			$(this).show();
 		});
 		return false;
 	});
 	$('a.select-suspended').click(function() {
-		unselectCheckboxes();
-		$('.checkbox.suspended').each(function(){
-			$(this).attr('checked', true);
+		$('a.select-all').removeClass('selectedFilter');
+		$('a.select-active').removeClass('selectedFilter');
+		$('a.select-suspended').addClass('selectedFilter');
+		hideAllServices();
+		$('.serviceRecs.suspendedRec').each(function(){
+			$(this).show();
 		});
 		return false;
 	});
 	$('a.select-read').click(function() {
 		unselectCheckboxes();
-		$('.checkbox.read').each(function(){
-			$(this).attr('checked', true);
+		$('.myjobcheckbox.read').each(function(){
+			$(this).prop('checked', true);
 		});
 		return false;
 	});
 	$('a.select-unread').click(function() {
 		unselectCheckboxes();
-		$('.checkbox.unread').each(function(){
-			$(this).attr('checked', true);
+		$('.myjobcheckbox.unread').each(function(){
+			$(this).prop('checked', true);
 		});
 		return false;
 	});
@@ -90,7 +125,12 @@ $(document).ready( function() {
 	});
 	function unselectCheckboxes() {
 		$('.checkbox').each(function(){
-			$(this).attr('checked', false);
+			$(this).prop('checked', false);
+		});
+	};
+	function hideAllServices() {
+		$('.serviceRecs').each(function(){
+			$(this).hide();
 		});
 	};
 	$('#conversations_quick_navigation').change(function(){

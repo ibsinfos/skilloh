@@ -38,7 +38,7 @@ if($_POST['login']!="")
 	else
 	{
 		$encodedadminpassword = md5($adminpassword);
-        $query="SELECT * FROM administrators WHERE username='".mysql_real_escape_string($adminusername)."' AND password='".mysql_real_escape_string($encodedadminpassword)."'";
+        $query="SELECT * FROM administrators WHERE username='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $adminusername)."' AND password='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $encodedadminpassword)."'";
         $executequery=$conn->execute($query);
 		$getid = $executequery->fields['ADMINID'];
         $getusername = $executequery->fields['username'];
