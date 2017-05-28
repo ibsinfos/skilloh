@@ -12,15 +12,6 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="banner1">
-        <!-- <div class="row">
-         <div class="search-slider float-center job-items-title">
-            <h2 class="banner-title">Get your stuffs done faster</h2>
-            <a href="#" class="btn-post hvr-sweep-to-left waves-effect waves-light">
-               <p class="name-button-post">Create Service</p>
-               <span class="cirlce-plus"><i class="fa fa-plus"></i></span>
-            </a>
-         </div>
-      </div> -->
         <div class="row">
             <div class="search-slider float-center job-items-title tagcloud">
                 <h2 class="banner-title">{$p.name|stripslashes}</h2>
@@ -36,9 +27,9 @@
         </div>
     </div>
     <div class="container">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t60 m-b60">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t60 m-b60 mobile_pad_0">
             <!-- Left hand side starts -->
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 mobile_pad_5">
                 <h1 class="job_detail_title">
                {$lang62}{$p.gtitle|stripslashes} 
             </h1>
@@ -99,18 +90,15 @@
                 <!-- Job image banner slider ends -->
 
                 <!-- Job description starts -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space mobile_pad_5">
                     <div class="gig-description" {if $rtl ne "1"} {/if}>
                         <p class="title">Description</p>
                         <p class="scriptolutionrtl">
                             {$p.gdesc|stripslashes|html_entity_decode:$smarty.const.ENT_QUOTES:'utf-8'}
                         </p>
                     </div>
-                    <!--<div class="gig-description" {if $rtl ne "1"} {/if}>
-                        {if $p.youtube ne ""}{include file='view_yt.tpl'}{/if}
-                    </div> -->
 
-                    <div class="gig-description col-md-12">
+                    <div class="gig-description col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_5">
                         <b>
 	                    <div class="outer-function-group">
 	                             {include file='scriptolution_order_selection.tpl'}
@@ -131,7 +119,7 @@
 
                 <!-- Service Location starts -->
                 {if $enablescriptolutionlocations eq "1"} {if $p.scriptolutionjoblocation ne ""}
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space mobile_pad_5">
                     <div class="gig-description tag_style" {if $rtl ne "1"} {/if}>
                         <p class="title">Service Location</p>
                         <div class="gig-scriptolutionlocation">
@@ -143,7 +131,7 @@
                 <!-- Service Location ends -->
 
                 <!-- Job tag starts -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_space mobile_pad_5">
                     <div class="gig-description tag_style" {if $rtl ne "1"} {/if}>
                         <p class="title">{$lang76}</p>
                         <p class="scriptolutionrtl ">
@@ -159,78 +147,22 @@
                 <!-- Job tag ends -->
 
                 <!-- Social Block starts -->
-                <!--<div class="gig-social">
-         <div class="left">
-         	<ul class="social">
-                {insert name=get_short_url value=a assign=takento PID=$p.PID seo=$p.seo short=$posts[i].short title=$title}
-         		<li><a href="https://www.facebook.com/dialog/feed?app_id={$FACEBOOK_APP_ID}&display=popup&link={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&picture={$purl}/t/{$p.p1}&name={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&redirect_uri={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}" class="facebook scriptolutionpopup"><span class="hide">Facebook</span></a></li>
-         		<li><a href="https://twitter.com/share?url={$baseurl}{$p.seo|stripslashes|replace:' ':'+'}/{$p.PID|stripslashes}/{$title}&amp;text={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="twitter scriptolutionpopup"><span class="hide">Twitter</span></a></li>
-         		<li><a href="https://pinterest.com/pin/create/button/?url={$baseurl}{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}&media={$purl}/t2/{$p.p1}&description={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" class="pinterest scriptolutionpopup"><span class="hide">Pinterest</span></a></li>
-         		<li><a href="mailto:?subject={$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}&amp;body={$baseurl}{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}" class="scriptolutionemail"><span class="hide">E-Mail</span></a></li>
-                <li><g:plusone size="medium" count="false" href="{$takento}"></g:plusone></li>
-                <li>
-                    <a class="addthis_button" addthis:url="{$baseurl}{$p.seo|stripslashes}/{$p.PID|stripslashes}/{$title}" addthis:title="{$lang62} {$p.gtitle|stripslashes} {if $scriptolution_cur_pos eq "1"}{$lang589} {$p.price|stripslashes}{$lang197}{else}{$lang63}{$p.price|stripslashes}{/if}" href="https://www.addthis.com/bookmark.php?v=250&amp;pub="><img src="https://s7.addthis.com/static/btn/sm-share-en.gif" width="83" height="16" alt="Bookmark and Share"></a>
-                    {literal}
-                    <script type="text/javascript">
-                    var addthis_config = {
-                        services_exclude: 'email, facebook, twitter, print'
-                    }
-                    </script>
-                    <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pub="></script>
-                    {/literal}
-                </li>
-            </ul>
-         </div>
-                        {if $smarty.session.USERID ne ""}                     
-                        {literal}
-                        <script language="javascript" type="text/javascript">
-                        sQuery(document).ready(function() {
-                            sQuery('#scriptolution_heart_{/literal}{$p.PID}{literal}').click(function() {
-                            	sQuery.post('{/literal}{$baseurl}bookmark?id={$p.PID|stripslashes}&do=add{literal}', sQuery(this).serialize(),function(data){
-         			sQuery('#sbookmark1').hide();
-         			sQuery('#sbookmark2').show();
-                            	});
-                            	return false;
-                            });
-
-         	sQuery('#scriptolution_unheart_{/literal}{$p.PID}{literal}').click(function() {
-                            	sQuery.post('{/literal}{$baseurl}bookmark?id={$p.PID|stripslashes}&do=rem{literal}', sQuery(this).serialize(),function(data){
-         			sQuery('#sbookmark2').hide();
-         			sQuery('#sbookmark1').show();
-                            	});
-                            	return false;
-                            });
-                        });
-                        </script>
-                        {/literal}
-                        {insert name=like_cnt value=var assign=liked pid=$p.PID}
-                        <div class="right">
-         	<dl id="bookmark" class="dropdown cleanStyle">
-         		<dt id="sbookmark1" {if $liked eq "1"}style="display:none;"{/if}><a class="tooltip" title="{$lang574}" href="javascript(void);" id="scriptolution_heart_{$p.PID}"><span><i class="icon-red-heart"></i></span></a></dt>
-                                <dt id="sbookmark2" {if $liked ne "1"}style="display:none;"{/if}><a class="tooltip" title="{$lang574}" href="javascript(void);" id="scriptolution_unheart_{$p.PID}"><span><i class="icon-white-heart"></i></span></a></dt>
-         	</dl>
-         </div>
-                        {else}
-                        <div class="right scriptolutionbookmark">
-                        	<a class="tooltip" title="{$lang574}" href="{$baseurl}login"><span><i class="icon-white-heart"></i></span></a>
-                        </div>
-                        {/if}
-         </div>-->
+                
                 <!-- Social Block ends -->
 
                 <!-- Review section starts -->
                 {if $f|@count GT 0}
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_5">
                     <p class="title"><span class="total-review">{$scriptolutiontotalvotes}</span> {$lang143} </p>
                     <div class="review-job">
                         <ul>
                             {section name=i loop=$f}
                             <li class="review-item clearfix">
-                                <div class="image-avatar">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 image-avatar mobile_pad_5">
                                     {insert name=get_member_profilepicture assign=fprofilepicture value=var USERID=$f[i].USERID}
                                     <img class="avatar" alt="" src="{$membersprofilepicurl}/thumbs/{$fprofilepicture}" />
                                 </div>
-                                <div class="profile-viewer">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  profile-viewer">
                                     <a class="name-author" href="{$baseurl}{insert name=get_seo_profile value=a username=$f[i].username|stripslashes}">{$f[i].username|stripslashes}</a>
                                     <p class="review-time">March 11, 2016</p>
                                     <div class="rate-it star" data-score="4">
@@ -257,14 +189,13 @@
             </div>
 
             <!-- Left hand side ends -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 aside-detail-bar mobile_pad_5">
                 <div class="box-aside blog-detail">
                     <div class="package-statistic">
                         <span class="price"><span title=""><sup>{$lang197}</sup>{$p.price}</span></span>
                         <div class="vote ratingvote">
                             {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$p.PID}{$scriptolutionstars}
                             <span>({$scriptolutiontotalvotes})</span>
-                            <!--<span class="total-review"></span>-->
                         </div>
                         <div class="text-content">
                             <ul>
@@ -282,7 +213,6 @@
                                 </li>
                                 <li>
                                     <span><i class="fa fa-commenting"></i>Reviews</span>
-                                    <!--<div class="total-number">{$scriptolutiontotalvotes}</div>-->
                                 </li>
                                 <li>
                                     <span><i class="fa fa-shopping-bag"></i>Sales</span>
@@ -318,7 +248,7 @@
                     </div>
                     
                     <div class="add-extra skilop-add-extra">
-                        <div class="extra-container col-md-12">
+                        <div class="extra-container col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             {if $smarty.session.USERID GT "0"  and $smarty.session.USERID ne $p.USERID}
 						    {if $p.scriptolution_add_multiple GT "0"}
 						        {if $smarty.session.USERID ne $p.USERID} 
@@ -350,13 +280,13 @@
                     </div>
                     <div class="add-extra skilop-add-extra">
                         <span class="extra">Extra Services</span>
-                        <div class="extra-container col-md-12">
+                        <div class="extra-container col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             {if $p.scriptolutionhasextras eq "1"} {insert name=get_extras value=a assign=extras PID=$p.PID} {if $extras|@count GT 0}
                             <!-- View Extra starts -->
                             {include file='view_extra.tpl'}
                             <!-- View Extra ends -->
                             {/if} {else}
-                            <p class="no-extra col-md-12">There are no extra services</p>
+                            <p class="no-extra col-lg-12 col-md-12 col-sm-12 col-xs-12">There are no extra services</p>
                             {/if}
                         </div>
                     </div>
@@ -445,7 +375,7 @@
     <!-- Related job starts -->
     {if $r|@count GT 0}
     <div class="container-fluid category_block">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_5">
             <div class="row">
                 {include file='scriptolution_bit_related.tpl'}
             </div>
@@ -465,12 +395,9 @@
                         <div id="sellermorejobs"  {if $u|@count GT 4}class="carousel slide" data-ride="carousel"{/if}>
                          {if $u|@count GT 4}
                             <div class="row">
-                                <div class="col-md-9">
-                                    <!--<h3 class="related_jobs_scroll">
-			                 {$lang137} <span>{$p.username|stripslashes}</span>
-			              </h3>-->
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="controls pull-right hidden-xs">
                                         <a class="left fa fa-chevron-left btn btn-info" href="#sellermorejobs" data-slide="prev"></a>
                                         <a class="right fa fa-chevron-right btn btn-info" href="#sellermorejobs" data-slide="next"></a>
@@ -486,7 +413,7 @@
                                         {if $count le 4} {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                                             		<ul class="vote ratingvote">
                                             	    	{insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$u[i].PID}{$scriptolutionstars}
                                             			<span>({$u[i].rcount})</span>
@@ -530,7 +457,7 @@
                                         {if $count gt 4} {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                                             		<ul class="vote ratingvote">
                                             	    	{insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$u[i].PID}{$scriptolutionstars}
                                             			<span>({$u[i].rcount})</span>

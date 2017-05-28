@@ -26,18 +26,8 @@
                         {include file="scriptolution_bit_last3_my.tpl"}
                         <div class="clear"></div>
                     </div>
-                   <!-- <div align="center">
-                        <div class="paging">
-                            <div class="p1">
-                                <ul>
-                                    {$pagelinks}
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="clear"></div>
                 </div>
-
             </div>
         </div>
     </div>

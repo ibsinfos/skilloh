@@ -7,10 +7,8 @@
     }
     
     .showmultiple {
-        /* background: white; */
         color: #464646;
         margin-top: 20px;
-        /* width: 94%; */
         padding: 10px 15px !important;
     }
     
@@ -20,7 +18,6 @@
     
     .multipleping-selection-form {
         margin-top: 5px !important;
-        /* background: white; */
     }
     
     .multipleping-settings {
@@ -36,12 +33,12 @@
 </style>
 {/literal}
 <div class="row">
-    <div class="col-lg-12 showmultiple">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 showmultiple">
         <p class="multipleoption">
             <input id="multipleme" name="multipleme" onclick="scriptolutiontoggle('multiplemore', 'multipleme')" type="checkbox" value="1" /> {$lang483}
         </p>
-        <div id="multiplemore" class="col-lg-12 ">
-            <div id="multipleping" class="multipleping-selection-form col-lg-12 ">
+        <div id="multiplemore" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div id="multipleping" class="multipleping-selection-form col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                 <div class="multipleping-settings">
                     {$lang484}
                     <select id="multiplemax" name="multiplemax" class="textthree">

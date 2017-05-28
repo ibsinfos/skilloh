@@ -5,12 +5,9 @@
       {$count=1}
       {if $r|@count GT 4}
       <div class="row">
-         <div class="col-md-9">
-            <!--<h3 class="related_jobs_scroll">
-               {$lang136}
-            </h3>-->
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
          </div>
-         <div class="col-md-3">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <div class="controls pull-right hidden-xs">
                <a class="left fa fa-chevron-left btn btn-info"  href="#relatedjobsscroll" data-slide="prev"></a>
                <a class="right fa fa-chevron-right btn btn-info" href="#relatedjobsscroll"data-slide="next"></a>          
@@ -26,7 +23,7 @@
                {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                            <ul class="vote ratingvote">
                               {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$r[i].PID}{$scriptolutionstars}
                            	  <span>({$r[i].rcount})</span>
@@ -73,7 +70,7 @@
                {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                            <ul class="vote ratingvote">
                               {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$r[i].PID}{$scriptolutionstars}
                            	  <span>({$r[i].rcount})</span>

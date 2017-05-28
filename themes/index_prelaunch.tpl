@@ -4,7 +4,6 @@
         float: left;
         width: 100%;
         font-size: 18px;
-        font-family: 'latobold', sans-serif;
         color: #424242;
         margin-bottom: 15px;
     }
@@ -55,11 +54,7 @@
                 </div>
             </div>
             <div class="clear"></div>
-            <div id="scriptolutionFormLinks">
-                <div class="scriptolutionloginsignuplink">
-                    <!-- social -->
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

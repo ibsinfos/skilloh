@@ -21,13 +21,10 @@ jQuery('.mega-dropdown').click( function(e) {
         </div>
         <div class="clear"></div>
     </div>
-    <!--<div class="scriptolutionfooterlang">
-    <center>{include file='lang.tpl'}</center>
-    </div>-->
 	<div class="copyright-engine-footer">
     	<div class="centerwrap">
-            <div class="row">
-            	<div class="col-md-7">
+            <div class="container">
+            	<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
 					<h5 class="copyright-text">
 					{include file='scriptolution_po.tpl'} 
 					</h5>

@@ -6,11 +6,13 @@
     <title>{if $mtitle ne ""}{$mtitle}{else}{if $pagetitle ne ""}{$pagetitle} - {/if}{$site_name}{/if}</title>
 	<meta name="description" content="{if $mdesc ne ""}{$mdesc}{else}{if $pagetitle ne ""}{$pagetitle} - {/if}{if $metadescription ne ""}{$metadescription} - {/if}{$site_name}{/if}">
 	<meta name="keywords" content="{if $mtags ne ""}{$mtags}{else}{if $pagetitle ne ""}{$pagetitle},{/if}{if $metakeywords ne ""}{$metakeywords},{/if}{$site_name}{/if}">   
-    <link href="{$baseurl}css/scriptolution_style_v7.css" media="screen" rel="stylesheet" type="text/css" />  
+	<link href="{$baseurl}css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" /> 
+    
     <link href="{$baseurl}css/scriptolution_countries.php" media="screen" rel="stylesheet" type="text/css" />     
-    <link href="{$baseurl}css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" /> 
     <link href="{$baseurl}css/scriptolutionresponse.css" media="screen" rel="stylesheet" type="text/css" />
 	<link href="{$baseurl}css/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="{$baseurl}css/scriptolution_style_v7.css" media="screen" rel="stylesheet" type="text/css" />  
+   
 	<script type="text/javascript">
     var base_url = "{$baseurl}";
 	</script>
@@ -69,7 +71,15 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 <div class="header">
 	<div class="container">
     	<div class="headertop">
-        	<div class="scriptolutionmenubutton"><a href="javascript:void();" onclick="scriptolution_newtoggle('scriptolutionmobilenav');"><i class="fa fa-bars"></i></a></div>
+        	<div class="scriptolutionmenubutton">
+        	<button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+    			<span class="hamb-middle"></span>
+				<span class="hamb-bottom"></span>
+            </button>
+        	<!--<a href="javascript:void();" onclick="scriptolution_newtoggle('scriptolutionmobilenav');"><i class="fa fa-bars"></i></a>-->
+        	
+        	</div>
         	<div class="logo"><a href="{$baseurl}"><img src="{$imageurl}/skillop_logo.png" alt="{$site_name}" /></a></div>
 			
             <div class="search">                
@@ -162,7 +172,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 	                			Create Service <i class="fa fa-plus"></i>
 	                		</a>
 	                	</p>
-                </div>
+                	</div>
                 {/if}
             	<div class="clear"></div>
           	</div> 
@@ -181,7 +191,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
     {include file='fiverrscript_dotcom_notifications.tpl'}
 </div>
 <!-- sign in and signup for mobile devices starts -->
-<div class="nav-scriptolution" id="scriptolutionmobilenav" style="display:none">
+<!--<div class="nav-scriptolution" id="scriptolutionmobilenav" style="display:none">
 	<div class="scriptolution-dotcom-mobile-dropdown" id="dropdown-menu">
     	<div class="scriptolutionclose-nav" onclick="scriptolution_newtoggle('scriptolutionmobilenav');">×</div>
         <div class="searchforscriptolutionmobleonly">
@@ -220,14 +230,14 @@ $(""+elementSelector+"").load(""+sourceURL+"");
         <a class="scriptolutionfiverrscriptitem" href="{$baseurl}settings">{$lang31}</a>
         <a class="scriptolutionfiverrscriptitem" href="javascript:loadContent('#loadme', '{$baseurl}log_out');">{$lang27}</a>
         {else}
-        <!--<a class="scriptolutionfiverrscriptitem" href="{$baseurl}">{$lang0}</a>-->
+        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}">{$lang0}</a>
         <hr>
         <a class="scriptolutionfiverrscriptitem" href="{$baseurl}login">{$lang2}</a>
         <hr>
         <a class="scriptolutionfiverrscriptitem join" href="{$baseurl}signup">{$lang1}</a>
         {/if}
 	</div>
-</div>
+</div>-->
 <!-- sign in and signup for mobile devices ends -->
 {if $scriptolutionhome eq "1"}
 {if $smarty.session.USERID eq ""}
@@ -263,10 +273,10 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 <!-- Home category starts -->
 <div class="container-fluid category_block {if $smarty.session.USERID GT "0"}scriptolutionpaddingtop55{/if}">
 	<div class="row">
-        <div class="container">
+        <div class="container cat_pad_25">
             <h6 class="job_cat_name">{$lang551}</h6>
             <div class="clearfix cat_block_home">
-			   <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 clearfix wow fadeIn cat_one_block">
+			   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 clearfix wow fadeIn cat_one_block">
 					<div class="inner">
 						<a href="https://microjobengine.enginethemes.com/microjobengine-diplomat/blog/mjob_category/logo-design-branding/">
 							<span class="category-overlay"></span>
@@ -275,7 +285,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 clearfix wow fadeIn cat_one_block">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 clearfix wow fadeIn cat_one_block">
 					<div class="inner">
 						<a href="https://microjobengine.enginethemes.com/microjobengine-diplomat/blog/mjob_category/graphics-design/">
 							<span class="category-overlay"></span>
@@ -284,7 +294,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 						</a>
 					</div>
 				</div>
-			   <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 clearfix wow fadeIn cat_one_block" >
+			   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 clearfix wow fadeIn cat_one_block" >
 					<div class="inner">
 						<a href="https://microjobengine.enginethemes.com/microjobengine-diplomat/blog/mjob_category/copywriting/">
 							<span class="category-overlay"></span>
@@ -293,7 +303,7 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 clearfix wow fadeIn cat_one_block">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 clearfix wow fadeIn cat_one_block">
 					<div class="inner">
 						<a href="https://microjobengine.enginethemes.com/microjobengine-diplomat/blog/mjob_category/translation/">
 							<span class="category-overlay"></span>
@@ -308,23 +318,6 @@ $(""+elementSelector+"").load(""+sourceURL+"");
         </div>
 	</div>
 </div>		
-		<div class="scriptolutionmobilecats">
-		    <div class="btn-list-space">
-		        <select class="btn outline-only white" onchange="javascript:location.href = this.value;">
-		            <option value="">{$lang524}</option>
-		            {insert name=get_categories assign=c}
-		            {section name=i loop=$c}
-		            <option value="{$baseurl}categories/{$c[i].seo|stripslashes}">{$c[i].name|stripslashes}</option>
-		            {insert name=get_subcategories assign=subcat value=var parent=$c[i].CATID}
-		            {if $subcat|@count GT "0"}
-		                {section name=sc loop=$subcat}
-		                <option value="{$baseurl}categories/{$subcat[sc].seo|stripslashes}">- {$subcat[sc].name|stripslashes}</option>
-		                {/section}
-		            {/if}
-		            {/section}
-		        </select>
-		    </div>
-		</div>
 		
 	</div>
 </div>
@@ -360,9 +353,47 @@ $(""+elementSelector+"").load(""+sourceURL+"");
                        Skilop
                     </a>
                 </li>
-                <li>
-                	<a href="">Dashboard</a>
-                </li>
+                
+                {if $smarty.session.USERID eq ""}
+                	<!-- login and sign for tab starts -->   
+	                <li class="visible-sm-block">
+	                	<a href="{$baseurl}login">{$lang2}</a>
+	                </li>                
+	                <li class="visible-sm-block">
+	                	<a href="{$baseurl}signup">{$lang1}</a>
+	                </li>
+	                <!-- login and sign for tab ends -->
+	                
+	                <!-- login and sign for mobile starts -->
+	                <li class="visible-xs-block">
+	                	<a href="{$baseurl}login">{$lang2}</a>
+	                </li>                
+	                <li class="visible-xs-block">
+	                	<a href="{$baseurl}signup">{$lang1}</a>
+	                </li>
+	                <!-- login and sign for mobile ends -->
+                {/if}
+                
+                {if $smarty.session.USERID ne ""}
+	                <!-- inbox and notification for tab starts -->   
+	                <li class="visible-sm-block">
+	                	<a href="{$baseurl}inbox">{$lang28} <span class="alert_count">{$msgc}</span></a>
+	                </li>                
+	                <li class="visible-sm-block">
+	                	<a href="{$baseurl}notifications">{$lang544}{if $snctr GT "0"} <span class="alert_count">{$snctr}</span>{/if}</a>
+	                </li>
+	                <!-- inbox and notification for tab ends -->
+	                
+	                <!-- for mobile starts -->
+	                <li class="visible-xs-block">
+	                	<a href="{$baseurl}inbox">{$lang28} <span class="alert_count">{$msgc}</span></a>
+	                </li>                
+	                <li class="visible-xs-block">
+	                	<a href="{$baseurl}notifications">{$lang544}{if $snctr GT "0"} <span class="alert_count">{$snctr}</span>{/if}</a>
+	                </li>
+	                <!-- for mobile ends -->
+                {/if}
+                
                	<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{$lang156} <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -385,20 +416,37 @@ $(""+elementSelector+"").load(""+sourceURL+"");
                     <li class="last_submenu"><a href="{$baseurl}balance">{$lang653}</a></li>                    
                   </ul>
                 </li>
-                {if $enable_ref eq "1"}
-            	<li>
-            		<a href="{$baseurl}myreferrals">{$lang512}</a>
-            	</li>
-            	{/if}
-                <li>
-                	<a href="{$baseurl}bookmarks">{$lang30}</a>
-                </li>
-                <li>
-               		<a href="{$baseurl}settings">{$lang31}</a>
-               	</li>
-                <li>
-                	<a href="javascript:loadContent('#loadme', '{$baseurl}log_out');">{$lang27}</a>
-                </li>
+                
+                
+                {if $smarty.session.USERID ne ""}
+	                <!-- profile for tab starts -->   
+	                <li class="visible-sm-block">
+	                	<a href="{$baseurl}{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}">{$lang29}</a>
+	                </li>
+	                <!-- profile for tab ends -->
+	                
+	                <!-- profile for mobile starts -->
+	                <li class="visible-xs-block">
+	                	<a href="{$baseurl}{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}">{$lang29}</a>
+	                </li>
+	                <!-- profile for mobile ends -->
+	                
+	                {if $enable_ref eq "1"}
+		            	<li>
+		            		<a href="{$baseurl}myreferrals">{$lang512}</a>
+		            	</li>
+	            	{/if}
+	                
+	                <li>
+	                	<a href="{$baseurl}bookmarks">{$lang30}</a>
+	                </li>
+	                <li>
+	               		<a href="{$baseurl}settings">{$lang31}</a>
+	               	</li>
+	                <li>
+	                	<a href="javascript:loadContent('#loadme', '{$baseurl}log_out');">{$lang27}</a>
+	                </li>
+                {/if}
             </ul>
         </nav>
         <!-- /#sidebar-wrapper -->

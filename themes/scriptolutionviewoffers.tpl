@@ -20,7 +20,7 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
 			<div class="clear"></div>
 			<!-- {include file='scriptolution_newside.tpl'} --> 
-	         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 aside-detail-bar">
+	         <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
 	         	{if $role eq "buyer"}
 	            <div class="box-aside">
 	               <div class="personal-profile">
@@ -52,7 +52,7 @@
 	            {/if}
 	         </div>
 			
-			<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+			<div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
 					<h1 class="myshoppingheading">{$lang641} ({$offers|@count} {if $offers|@count eq "1"}{$lang640}{else}{$lang631}{/if})</h1>
                     
@@ -135,7 +135,7 @@
                                  		</p>
                               	</div>
                               </div>
-                              <div class="col-lg-12" style="height:15px;"></div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:15px;"></div>
                               {if $role eq "buyer"}
                               <div class="group-function col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                  <div class="row">

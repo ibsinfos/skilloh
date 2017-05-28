@@ -7,10 +7,8 @@
     }
     
     .showship {
-        /* background: white; */
         color: #464646;
         margin-top: 20px;
-        /* width: 94%; */
         padding: 10px 15px !important;
     }
     
@@ -27,7 +25,6 @@
     
     .shipping-selection-form {
         margin-top: 20px !important;
-        /* background: white; */
     }
     
     .shipping-settings {

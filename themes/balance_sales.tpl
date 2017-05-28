@@ -39,10 +39,10 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+            <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_sellmenu.tpl'}
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang155}</h1>
                     <h4 class="myshoppingheading2">{$lang206}</h4> 
@@ -308,7 +308,7 @@
                     </style>
                     {/literal}
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 info2">
-                        <div class="info col-md-4 pull-right">
+                        <div class="info col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-right">
                             <span class="{if $afunds eq "0" OR $wreqnt GT "0"}disabled{/if} right">
                      	<strong>
                      		<a href="#" {if $afunds ne "0"} onclick="toggle('wdsection');"{/if}>
@@ -321,7 +321,7 @@
                      	</strong>
                      </span>
                         </div>
-                        <div class="info2 col-md-8" id="wdsection" style="display:none;">
+                        <div class="info2 col-lg-8 col-md-8 col-sm-8 col-xs-12" id="wdsection" style="display:none;">
                             {if $scriptolution_local eq "1"}
                             <span class="{if $afunds eq "0" OR $wreqnt GT "0"}disabled{/if} right3">
                      		<strong>
@@ -498,103 +498,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            <!--<li class="clearfix">
-
-                           <div class="image-avatar col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                              <a href="{$baseurl}track?id={$p[i].OID}" >
-                              		<img class="img-responsive" src="{$purl}/t3/{$p[i].p1}" alt="{$p[i].gtitle|stripslashes}"/>	
-                              </a>	                    	
-                           </div>
-                           <div class="info-items col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                              <div class="col-lg-12">
-                                 <div class="row">              
-                                 	{if $p[i].status eq "5"}
-			                           {insert name=get_days_withdraw value=a assign=wd t=$p[i].cltime}
-			                           {if $wd GT "0"}                           
-			                              	<span class="status buyer_cancelled clearing &nbsp;<u>{$wd}</u>" title="{$wd} {$lang391}">{$lang392} &nbsp;<u>{$wd}</u></span>                           
-				                       {else}
-			                           {if $p[i].wd eq "1"}                           
-			                              	<span class="status withdrawn" title="{$lang397}">{$lang397}</span>                           
-			                           {else}
-			                           		<span class="status cleared" title="{$lang393}">{$lang393}</span>                           
-			                           {/if}
-			                           {/if}
-			                           {elseif $p[i].status eq "2" OR $p[i].status eq "3" OR $p[i].status eq "7"}
-			                           		<span class="status cancelled " title="{$lang390}">{$lang203}</span>                           
-				                       {elseif $p[i].status eq "4"}
-			                           		<span class="status delivered" title="{$lang140}">{$lang201}</span>                           
-				                       {else}
-		                           		<span class="status withdrawal " title="{$lang362}">{$lang362}</span>
-			                           {/if}
-                                 </div>
-                                 <div class="row ">
-                                 	<h2 class=""> 
-                                 		<a href="{$baseurl}track?id={$p[i].OID}" >{if $gtitle eq ""}{$lang384}{else}{$gtitle|stripslashes}{/if}</a>
-                                 	</h2>
-                                 	<p class="newclass">
-                             			<span>{$lang360} 
-                             				<strong>
-                             					{insert name=get_time_to_days_ago value=a time=$p[i].time}
-                             				</strong>
-                              	 			<span class="vline_seperator"> | </span>
-                              	 		</span>
-                              	 		{if $p[i].status eq "5"}
-				                           {insert name=get_days_withdraw value=a assign=wd t=$p[i].cltime}
-				                           {if $wd GT "0"}                           
-				                              <span>
-				                              		
-				                              		{if $scriptolution_cur_pos eq "1"}
-				                              			<strong> {$yprice}<sup>{$lang197}</sup></strong>
-				                              		{else}
-				                              			<strong><sup>{$lang197}</sup>{$yprice}</strong>
-				                              		{/if}
-				                              </span>
-				                           {else}
-					                           <span>
-					                           		 
-					                           		{if $scriptolution_cur_pos eq "1"}
-					                           			<strong>{$yprice}<sup>{$lang197}</sup></strong>
-					                           		{else}
-					                           			<strong><sup>{$lang197}</sup>{$yprice}</strong>
-					                           		{/if}
-					                           	</span>
-				                           {/if}
-				                           {elseif $p[i].status eq "2" OR $p[i].status eq "3" OR $p[i].status eq "7"}
-				                           		<span>
-				                           			 
-				                           			{if $scriptolution_cur_pos eq "1"}
-				                           				<strong>0<sup>{$lang197}</sup></strong>
-				                           			{else}
-				                           				<strong><sup>{$lang197}</sup>0</strong>
-				                           			{/if}
-				                           		</span>
-				                           {elseif $p[i].status eq "4"}
-				                           		<span>
-				                           			 
-				                           			{if $scriptolution_cur_pos eq "1"}
-				                           				<strong>{$yprice}<sup>{$lang197}</sup></strong>
-				                           			{else}
-				                           				<strong><sup>{$lang197}</sup>{$yprice}</strong>
-				                           			{/if}
-				                           		</span>
-				                           {else}
-			                           		<span>
-			                           			 
-			                           			{if $scriptolution_cur_pos eq "1"}
-			                           				<strong>{$yprice}<sup>{$lang197}</sup></strong>
-			                           			{else}
-			                           				<strong><sup>{$lang197}</sup>{$yprice}</strong>
-			                           			{/if}
-			                           		</span>
-			                           {/if}                              	 		
-	                              	 	<span class="total-review right_orders pull-right black_order_right" title="Order No.">
-	                                       	Order #{$p[i].OID}              			                                 	
-		                               </span>
-                             		</p>
-                              	</div>
-                              </div>
-                        	</li>-->
                             {/if}
                         </div>
                     </div>

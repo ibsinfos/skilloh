@@ -20,7 +20,7 @@
                 </div>
                 <div class="message-form-control">
                     <div class="write-controls cf">
-                        <div class="send-button col-md-12 tracking_submit">
+                        <div class="send-button tracking_submit col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="icn-submit">
                                 <input class="btn-standard btn-send-message send-small" name="commit" value="{$lang46}" type="submit">
                             </div>
@@ -28,17 +28,6 @@
                                 <span class="sending">{$lang120}</span>
                             </div>
                         </div>
-                        <!--
-                    <div class="attach-files">
-                        <div class="attach-inner">
-                            <div id="toggle-attach">
-                                <input id="message_message_attachment_id" name="message_message_attachment_id" type="hidden" />
-                                <input id="fileInput" name="fileInput" type="file" />                                             
-                            </div>
-                        </div>
-                        <small class="attach-limit"></small>
-                    </div>
-                    -->
                     </div>
                 </div>
             </div>

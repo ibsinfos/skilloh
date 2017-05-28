@@ -1,26 +1,11 @@
 <link rel="stylesheet" href="{$cssurl}/scriptolution_style_v7_user.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<!--<div class="userbanner">
-    <div class="centerwrap relative">
-    	<div class="userbannertext">
-        	<h3>{$uname|stripslashes}</h3>
-            <h2>{$scriptolutionuserslogan|stripslashes}</h2>
-            <div class="find-userrating">                
-                {insert name=scriptolution_userrating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$USERID}{$scriptolutionstars}
-                <div class="clear"></div>
-            </div>
-            <div class="usertopnavbg"></div>
-        </div>
-    </div>
-</div>-->
-
 <div class="bodybg topspace">
     <div class="container skilop-profile-page skilop-author-page">
         <div class="title-top-pages">
             <p class="username-title">{if $smarty.session.USERID eq $USERID} MY {else}{$uname|stripslashes}'s {/if} profile</p>
         </div>
         <div class="row user_profile user-public-profile">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-sx-12 block-items-detail profile">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 block-items-detail profile">
                 <div class="box-aside">
                     <div class="personal-profile">
                         <div class="float-center">
@@ -45,15 +30,6 @@
                                     <span class="countryflag"><span class="country {$ucountry}"></span></span>
                                 </div>
                             </li>
-                            <!-- <li class="language clearfix">
-		                  <div class="pull-left">
-		                     <span> <i class="fa fa-globe"></i>Languages </span>
-		                  </div>
-		                  <div class="pull-right">
-		                     <p class="lang-item">English</p>
-		                     <p class="lang-item">Spanish</p>
-		                  </div>
-		               </li> -->
                             <li class="location clearfix">
                                 <div class="pull-left">
                                     <span> <i class="fa fa-calendar"></i>{$lang572} </span>
@@ -121,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-sx-12">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile">
                     <div class="list-job row">
                         <ul>
@@ -208,11 +184,11 @@
                 <ul>
                     {section name=i loop=$f}
                     <li class="review-item clearfix">
-                        <div class="image-avatar">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 image-avatar img_pad_space">
                             {insert name=get_member_profilepicture assign=fprofilepicture value=var USERID=$f[i].USERID}
                             <img class="avatar" alt="" src="{$membersprofilepicurl}/thumbs/{$fprofilepicture}" />
                         </div>
-                        <div class="profile-viewer">
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-10  profile-viewer">
                             <a class="name-author" href="{$baseurl}{insert name=get_seo_profile value=a username=$f[i].username|stripslashes}">{$f[i].username|stripslashes}</a>
                             <p class="review-time">{$f[i].time_added|date_format}</p>
                             <div class="rate-it star" data-score="4">

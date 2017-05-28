@@ -49,11 +49,6 @@
                     <h4 class="myshoppingheading2">{$lang227}</h4>
                 		
                 	<div class="table-title">
-                        <!--<div class="left">
-                            <a href="{$baseurl}inbox?o={$o}&a={$a}" class=" whiteBtn {if $s eq "all" OR $s eq ""}selected{/if}">{$lang187}{$s}</a>
-                            <a href="{$baseurl}inbox?s=unread&o={$o}&a={$a}" class=" whiteBtn {if $s eq "unread"}selected{/if}">{$lang228}</a>
-                            <a href="{$baseurl}inbox?s=archived&o={$o}&a={$a}" class=" whiteBtn {if $s eq "archived"}selected{/if}">{$lang229}</a>
-                        </div> -->
                         <div class="right">
                             <select id="conversations_quick_navigation">
                                 {if $u GT "0"}
@@ -75,11 +70,11 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="text-left colorblack col-md-3">
+                                    <th class="text-left colorblack col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                         <a href="{$baseurl}inbox?o=name&s={$s}{if $a eq " 1 "}&a=0{else}&a=1{/if}" {if $o eq "name"}class="{if $a eq " 1 "}descending{else}ascending{/if}"{/if}>{if $o eq "name"}{if $a eq "1"}&#9650;{else}&#9660;{/if}{/if}&nbsp;{$lang231}</a>
                                     </th>
                                     <th class="text-left col-md-7">{$lang664}</th>
-                                    <th class="text-left colorblack col-md-2">
+                                    <th class="text-left colorblack col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                         <a href="{$baseurl}inbox?o=time&s={$s}{if $a eq " 1 "}&a=0{else}&a=1{/if}" {if $o eq "time"}class="{if $a eq " 1 "}descending{else}ascending{/if}"{/if}>{if $o eq "time"}{if $a eq "1"}&#9650;{else}&#9660;{/if}{/if}&nbsp;{$lang232}</a>
                                     </th>
                                 </tr>
@@ -191,51 +186,8 @@
                         </table>
                     </div>
                     
-                    
-                    
                 </div>
             </div>
 		</div>
 	</div>
 </div>
-
-<!--
-<div class="bodybg topspace">
-    {include file="scriptolution_error7.tpl"}
-    <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 ">
-            <div class="clear"></div>
-            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
-                    <h1 class="myshoppingheading">{$lang226}</h1>
-                    <h4 class="myshoppingheading2">{$lang227}</h4>
-
-                    <div class="table-title">
-                        <div class="left">
-                            <a href="{$baseurl}inbox?o={$o}&a={$a}" class=" whiteBtn {if $s eq "all" OR $s eq ""}selected{/if}">{$lang187}</a>
-                            <a href="{$baseurl}inbox?s=unread&o={$o}&a={$a}" class=" whiteBtn {if $s eq "unread"}selected{/if}">{$lang228}</a>
-                            <a href="{$baseurl}inbox?s=archived&o={$o}&a={$a}" class=" whiteBtn {if $s eq "archived"}selected{/if}">{$lang229}</a>
-                        </div>
-                        <div class="right">
-                            <select id="conversations_quick_navigation">
-                                {if $u GT "0"}
-                                <option value="o={$o}&a={$a}&s={$s}">{$lang230}</option>
-                                {section name=i loop=$m}
-                                <option style="font-weight: bold;" value="o={$o}&a={$a}&s={$s}&u={$m[i].USERID|stripslashes}" selected="selected">{$m[i].username|stripslashes}</option>
-                                {/section} {else}
-                                <option>{$lang230}</option>
-                                {section name=i loop=$m}
-                                <option style="font-weight: bold;" value="o={$o}&a={$a}&s={$s}&u={$m[i].USERID|stripslashes}">{$m[i].username|stripslashes}</option>
-                                {/section} {/if}
-                            </select>
-                        </div>
-                    </div>
-
-                    
-                    <div class="clear"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div> -->

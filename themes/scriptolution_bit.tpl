@@ -2,7 +2,7 @@
                         {insert name=seo_clean_titles assign=title value=a title=$posts[i].gtitle}
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock{if $smarty.section.i.iteration % 4 == 0}last{/if}">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
 	                            	
 	                            	<ul class="vote ratingvote">
 	                                   {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$posts[i].PID}{$scriptolutionstars}
@@ -29,9 +29,6 @@
                             			<img src="{$purl}/t3/{$posts[i].p1}" alt="{$posts[i].gtitle|stripslashes}" class="img-responsive" />
                             		</a>
                              	</div>
-                             <!--<div class="price">
-                             		{if $scriptolution_cur_pos eq "1"}{$posts[i].price|stripslashes}{$lang197}{else}{$lang197}{$posts[i].price|stripslashes}{/if}
-                             </div>-->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 name_job">	
 	                            <p>
 	                            	<a href="{$baseurl}{$posts[i].seo|stripslashes}/{$posts[i].PID|stripslashes}/{$title}">{$lang62} {$posts[i].gtitle|stripslashes|mb_truncate:90:"...":'UTF-8'}

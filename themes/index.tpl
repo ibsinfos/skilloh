@@ -9,7 +9,7 @@
         <div class="container {if $smarty.session.USERID GT "0"}{/if}">
             <h6 class="job_cat_name">Latest Services</h6>
             <div class="cusongs">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cusongtitle">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cusongtitle hide_in_mobile">
 
                     <h3>{$lang109}:</h3>
                     <p>
@@ -69,23 +69,23 @@
 <!-- Home Recently added jobs  ends -->
 {if $smarty.session.USERID eq ""}
 <!-- Home why work with skilop starts -->
-<div class="container-fluid block-intro-why home-about-us">
+<div class="container-fluid category_block home-about-us">
 	<div class="row">
         <div class="container">
             <h2 class="name">Why works with <p class="website_name"><strong> Skilop</strong>?</p></h2>
 			<div class="bg-customize line-text"></div>
 			<div class="row why_skilop">
-				<div class="why-item-1 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="why_work col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<img src="https://microjobengine.enginethemes.com/microjobengine-diplomat/wp-content/themes/microjobengine/skins/diplomat/assets/img/why-icon-1.png" alt="">
 					<p class="title">Top Safe</p>
-					<p class="content">MicrojobEngine is a community that values your trust &amp; safety with the trustful review system.</p>
+					<p class="content">Skilop is a community that values your trust &amp; safety with the trustful review system.</p>
 				</div>
-				<div class="why-item-2 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="why_work col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<img src="https://microjobengine.enginethemes.com/microjobengine-diplomat/wp-content/themes/microjobengine/skins/diplomat/assets/img/why-icon-2.png" alt="">
 					<p class="title">Secure Transaction</p>
 					<p class="content">All transactions are synced with the virtual currency system. Everything is under admin control.</p>
 				</div>
-				<div class="why-item-3 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="why_work col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<img src="https://microjobengine.enginethemes.com/microjobengine-diplomat/wp-content/themes/microjobengine/skins/diplomat/assets/img/why-icon-3.png" alt="">
 					<p class="title">Sellers Community</p>
 					<p class="content">Join our micro job marketplace to order gigs with the high quality from top sellers.</p>
@@ -99,20 +99,20 @@
 <div class="container-fluid block-intro-why home-about-us">
 	<div class="row">
         <div class="container">
-            <h2 class="name">How <p class="website_name"><strong> Skilop</strong>Works?</p></h2>
+            <h2 class="name">How <p class="website_name"><strong> Skilop </strong> Works?</p></h2>
 			<div class="bg-customize line-text"></div>
 			<div class="row why_skilop">
-				<div class="why-item-1 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="why_work col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<img src="https://microjobengine.enginethemes.com/microjobengine-diplomat/wp-content/themes/microjobengine/skins/diplomat/assets/img/why-icon-1.png" alt="">
 					<p class="title">Top Safe</p>
 					<p class="content">MicrojobEngine is a community that values your trust &amp; safety with the trustful review system.</p>
 				</div>
-				<div class="why-item-2 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="why_work col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<img src="https://microjobengine.enginethemes.com/microjobengine-diplomat/wp-content/themes/microjobengine/skins/diplomat/assets/img/why-icon-2.png" alt="">
 					<p class="title">Secure Transaction</p>
 					<p class="content">All transactions are synced with the virtual currency system. Everything is under admin control.</p>
 				</div>
-				<div class="why-item-3 col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="why_work col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<img src="https://microjobengine.enginethemes.com/microjobengine-diplomat/wp-content/themes/microjobengine/skins/diplomat/assets/img/why-icon-3.png" alt="">
 					<p class="title">Sellers Community</p>
 					<p class="content">Join our micro job marketplace to order gigs with the high quality from top sellers.</p>
@@ -129,7 +129,7 @@
 		<div class="non-login">
 			<p class="main-title">Join Now</p>
 			<p class="sub-title">Thank you for showing an interest in Skilop</p>
-			<a href="https://microjobengine.enginethemes.com/microjobengine-diplomat/sign-in/#register" class="btn-diplomat btn-link-site waves-effect waves-light"><span class="text">BE A MEMBER TODAY</span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+			<a href="{$baseurl}signup" class="btn-diplomat btn-link-site waves-effect waves-light">BE A MEMBER TODAY</a>
 		</div>
 	</div>
 </div>
@@ -145,13 +145,11 @@
         <header class="carousel slide">
             <div id="relatedjobsscroll" {if $scriptolutionrand|@count GT 4}class="carousel slide" data-ride="carousel"{/if} >
                {if $scriptolutionrand|@count GT 4}
-                <div class="col-md-12">
-                    <div class="col-md-9">
-                        <!--<h3 class="related_jobs_scroll">
-				               {$lang529}
-				            </h3>-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_0">
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <div class="controls pull-right hidden-xs">
                             <a class="left fa fa-chevron-left btn btn-info" href="#relatedjobsscroll" data-slide="prev"></a>
                             <a class="right fa fa-chevron-right btn btn-info" href="#relatedjobsscroll" data-slide="next"></a>
@@ -162,11 +160,11 @@
                 {$count=1}
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <div class="col-md-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_0">
                             {section name=i loop=$scriptolutionrand} {if $count le 4} {insert name=seo_clean_titles assign=title value=a title=$scriptolutionrand[i].gtitle}
                             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                                         <ul class="vote ratingvote">
                                             {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$scriptolutionrand[i].PID}{$scriptolutionstars}
                                         	<span>({$scriptolutionrand[i].rcount})</span>
@@ -207,12 +205,12 @@
                     </div>
                     {$count=1}
                     <div class="item">
-                        <div class="col-md-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_0">
                             {section name=i loop=$scriptolutionrand} {if $count gt 4} {insert name=seo_clean_titles assign=title value=a title=$scriptolutionrand[i].gtitle}
 
-                            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 wow fadeInUp minblock">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                                         <ul class="vote ratingvote">
                                             {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$scriptolutionrand[i].PID}{$scriptolutionstars}
                                             <span>({$scriptolutionrand[i].rcount})</span>
@@ -256,19 +254,17 @@
     </div>
     <!-- Home RANDOM jobs ends  -->
     <!-- Home Top Rated jobs starts -->
-    <div class="container-fluid">
-        <div class="container margin30">
+    <div class="container-fluid mobile_pad_0">
+        <div class="container">
             <h6 class="job_cat_name">{$lang530}</h6>
             <header class="carousel slide">
                 <div id="sellermorejobs" {if $scriptolutionrating|@count GT 4}class="carousel slide" data-ride="carousel"{/if}>
                 {if $scriptolutionrating|@count GT 4}
-                    <div class="col-md-12">
-                        <div class="col-md-9">
-                            <!--<h3 class="related_jobs_scroll">
-				               {$lang530}
-				            </h3>-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_0">
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <div class="controls pull-right hidden-xs">
                                 <a class="left fa fa-chevron-left btn btn-info" href="#sellermorejobs" data-slide="prev"></a>
                                 <a class="right fa fa-chevron-right btn btn-info" href="#sellermorejobs" data-slide="next"></a>
@@ -279,12 +275,12 @@
                     {$count=1}
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <div class="col-md-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobile_pad_0">
                                 {section name=i loop=$scriptolutionrating} {if $count le 4} {insert name=seo_clean_titles assign=title value=a title=$scriptolutionrating[i].gtitle}
 
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                                             <ul class="vote ratingvote">
                                                 {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$scriptolutionrating[i].PID}{$scriptolutionstars}
                                             	<span>({$scriptolutionrating[i].rcount})</span>
@@ -324,12 +320,12 @@
                         </div>
                         {$count=1}
                         <div class="item">
-                            <div class="col-md-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 {section name=i loop=$scriptolutionrating} {if $count gt 4} {insert name=seo_clean_titles assign=title value=a title=$scriptolutionrating[i].gtitle}
 
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 wow fadeInUp minblock">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
                                             <ul class="vote ratingvote">
                                             {insert name=scriptolution_rating_stars_big assign=scriptolutionstars value=a scriptolutionpid=$scriptolutionrating[i].PID}{$scriptolutionstars}
                                             <span>({$scriptolutionrating[i].rcount})</span>
@@ -383,7 +379,7 @@
             pause: true,
             interval: false
         });
-		$(".col-md-3 ").mouseenter(function() {
+		$(".col-md-3").mouseenter(function() {
 			$(this).find(".col-img-responsive02").show(200);
 		});
 		$(".col-md-3").mouseleave(function() {

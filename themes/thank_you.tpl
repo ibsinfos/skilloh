@@ -1,10 +1,10 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
-    <div class="container scriptolutionpaddingtop30">
+    <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
             <div class="clear"></div>
             
-            <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2  col-sm-8 col-sm-offset-2 col-xs-12 col-sm-offset-0">
+            <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2  col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                 	<h1 class="myshoppingheading">{$lang380}</h1>
                 	{if $OID GT "0"}

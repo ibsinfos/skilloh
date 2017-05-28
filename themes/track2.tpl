@@ -9,10 +9,11 @@
 <script src="{$baseurl}js/jquery.hint.js" type="text/javascript"></script>
 <script src="{$baseurl}js/orders.php" type="text/javascript"></script>
 <link href="{$baseurl}css/scriptolutionorders.css" media="screen" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<div class="bodybg topspace">
 <div id="action-bar" class="mp-box action-bar-orders scriptolutiontrackingpage">
-    <div class="box-row">
-        <div class="action-steps cf">
+    <div class="box-row container">
+        <div class="action-steps cf container">
             <div class="step-end">
                 <h5>
                 <b>
@@ -30,7 +31,7 @@
                 </b>
                 </h5>
             </div>
-            <div class="step">
+            <!--<div class="step">
                 <div class="order-meta">
                     {if $o.status eq "1"}
                     <h3 class="flag"><span class="status in-progress" title="{$lang279}">{$lang140} #{$o.OID}: {$lang279}</span></h3> {elseif $o.status eq "2" OR $o.status eq "3" OR $o.status eq "7"}
@@ -39,13 +40,12 @@
                     <h3 class="flag"><span class="status order-completed" title="{$lang202}">{$lang140} #{$o.OID}: {$lang202}</span></h3> {elseif $o.status eq "6"}
                     <h3 class="flag"><span class="status order-rejected" title="{$lang321}">{$lang140} #{$o.OID}: {$lang320}</span></h3> {/if}
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
-<div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
-    <div class="container scriptolutionpaddingtop30">
+    <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
             <div class="clear"></div>
             <!--{include file='scriptolution_newside.tpl'} -->
@@ -53,20 +53,20 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading p-15">Track Order placed by buyer</h1>
                     
-					<div class="col-xs-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="invoice-title">
-							<h2>Invoice</h2><h3 class="pull-right">Order # 12345</h3>
+							<h2>Invoice</h2><h3 class="pull-right">{$lang140} #{$o.OID}</h3>
 						</div>
 						<hr>
 						<!-- order by detail starts-->
 						<div class="row">
-							<div class="col-xs-6">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 								<address>
 								<strong>{$lang264}:</strong><br>
 									<a href="{$baseurl}{insert name=get_seo_profile value=a username=$o.buyer|stripslashes}">{$o.buyer|stripslashes}</a>
 								</address>
 							</div>
-							<div class="col-xs-6 text-right">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
 								<address>
 									<strong>Order Date:</strong><br>
 									{$o.time_added|date_format:"%B %e %Y"}<br>
@@ -76,8 +76,9 @@
 						</div>
 					</div>
 					<!-- order by detail ends-->
-	
-					<div class="col-md-12">
+					
+					<!-- invoice details starts  -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title"><strong>Order summary</strong></h3>
@@ -96,40 +97,29 @@
 										<tbody>
 											<!-- foreach ($order->lineItems as $line) or some such thing here -->
 											<tr>
-												<td>BS-200</td>
-												<td class="text-center">$10.99</td>
+												<td>{$o.gtitle|stripslashes}</td>
+												<td class="text-center">Rs.{$o.price} </td>
+												{if $o.multi>0}
+													<td class="text-center">{$o.multi}</td>
+													<td class="text-right">Rs.{$o.price * $o.multi}</td>
+												{else}
+													<td class="text-center">1</td>
+													<td class="text-right">Rs.{$o.price}</td>
+												{/if}
+											</tr>
+											{section name=i loop=$extra}
+											<tr>
+												<td>{$extra[i].name}</td>
+												<td class="text-center">Rs.{$extra[i].price}</td>
 												<td class="text-center">1</td>
-												<td class="text-right">$10.99</td>
+												<td class="text-right">Rs.{$extra[i].price}</td>
 											</tr>
-											<tr>
-												<td>BS-400</td>
-												<td class="text-center">$20.00</td>
-												<td class="text-center">3</td>
-												<td class="text-right">$60.00</td>
-											</tr>
-											<tr>
-												<td>BS-1000</td>
-												<td class="text-center">$600.00</td>
-												<td class="text-center">1</td>
-												<td class="text-right">$600.00</td>
-											</tr>
-											<tr>
-												<td class="thick-line"></td>
-												<td class="thick-line"></td>
-												<td class="thick-line text-center"><strong>Subtotal</strong></td>
-												<td class="thick-line text-right">$670.99</td>
-											</tr>
-											<tr>
-												<td class="no-line"></td>
-												<td class="no-line"></td>
-												<td class="no-line text-center"><strong>Shipping</strong></td>
-												<td class="no-line text-right">$15</td>
-											</tr>
+											{/section}
 											<tr>
 												<td class="no-line"></td>
 												<td class="no-line"></td>
 												<td class="no-line text-center"><strong>Total</strong></td>
-												<td class="no-line text-right">$685.99</td>
+												<td class="no-line text-right">Rs.{$o.totalprice}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -137,6 +127,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- invoice details ends  -->
 					
 					<!-- product detail starts-->
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 track_space">
@@ -473,12 +464,12 @@
 			                <ul class="list-group" title="{$lang293}">
 			                    <li class="list-group-item">
 			                        <div class="row">
-			                            <div class="col-xs-2 col-md-1">
+			                            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
 			                                <a href="{$baseurl}{insert name=get_seo_profile value=a username=$m[i].mfrom|stripslashes}" title="{$m[i].mfrom|stripslashes}">
                                             	<img alt="{$m[i].mfrom|stripslashes}" src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" class="scriptolutionuimage" />
                                             </a>
 			                             </div>   
-			                            <div class="col-xs-10 col-md-11">
+			                            <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10 left_tab">
 			                                <div class="chat_name">
 			                                	<h4>{$m[i].mfrom|stripslashes}
 				                                	<span class="mic-info pull-right">

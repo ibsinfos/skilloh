@@ -115,24 +115,6 @@
                              		</p>
                               	</div>
                               </div>
-                              <!--<div class="group-function col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                 <div class="vote row">
-                                    <p class="rate-it star" title="date">
-                                       <span class="total-review"><strong>{$lang623}:</strong> {$posts[i].scriptolutiondays} {$lang131}</span>
-                                       <span class="total-review right_orders pull-right" title="{$lang631}">
-                                       {insert name=scriptolutionoffercnt value=a assign=socnt REQUESTID=$posts[i].REQUESTID}{$socnt} {if $socnt eq "1"}{$lang640}{else}{$lang631}{/if}	                                 	
-		                               </span>												                               	
-                                    </p>
-                                 </div>                                   
-                              </div>-->
-                              <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	                              <div class="row">              
-                                 	<span  style="visibility:hidden;" class="status withdrawal " title="{$lang634}"><a class="" href="{$baseurl}sendoffer?REQID={$posts[i].REQUESTID}">{$lang634}</a></span>
-		                           	<span class="revenue_netprice">
-		                           		{$lang625} {if $scriptolution_cur_pos ne "1"}<sup>{$lang197}</sup>{/if}{$posts[i].scriptolutionprice}{if $scriptolution_cur_pos eq "1"}<sup>{$lang197}</sup>{/if}
-		                           </span>
-                              </div>
-                           </div>-->
                         </li>
                      </ul>
                    </div>

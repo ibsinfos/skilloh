@@ -192,16 +192,6 @@
 	.subnav {
 		display:none !important
 	}
-	.scriptolutionmobilecats {
-		display:block;
-	}
-	.banner {
-		min-width: 751px;
-	}
-	/* 1106px */
-	.bannertext {
-		padding-top:58px;
-	}
 	.footer {
 		min-width: 751px;
 	}
@@ -216,9 +206,7 @@
 			.headeright {
 		display:none !important
 	}
-	.logoutheader {
-		display:none !important
-	}
+	
 	.scriptolutionsmain2 {
 		 padding-right:0px !important;
 		 padding-left:calc((100% - 606px)/2) !important;
@@ -260,9 +248,9 @@
 	.tagcloud {
 		width:100%;
 	}
-	.cusongtitle p {
-		display:none;
-	}
+	/* .cusongtitle p { */
+		/* display:none; */
+	/* } */
 	.cuscriptolutionongtitle {
 		display:block;
 	}
@@ -415,10 +403,7 @@
 	ul.order-extras-list li {
 		font-size:18px !important
 	}
-		.scriptolutiontrackingpage .action-steps .step-end {
-		display:none
-	}
-		.scriptolutionbookmarks .songslist {
+	.scriptolutionbookmarks .songslist {
 		 width:99% !important;
 	}
 	.scriptolutionbookmarks .left-side {
@@ -455,32 +440,6 @@
 	/* 1106px */
 	.subnav {
 		display:none !important
-	}
-	.scriptolutionmobilecats {
-		display:block;
-	}
-	.banner {
-		min-width: 300px;
-	}
-	/* 1106px */
-	.find-service {
-		width: 302px;
-	}
-	/* 502px */
-	.findbox {
-		width: 160px;
-	}
-	/* 335 */
-	.findbtn {
-		width:115px;
-		font-size: 15px;
-	}
-	/* 142 */
-	.bannertext {
-		padding-top:28px;
-	}
-	.bannertext h2,.bannertext h3 {
-		 font-size:30px;
 	}
 	.footer {
 		min-width: 300px;
@@ -557,10 +516,6 @@
 	.tagcloud {
 		width: 100%;
 	}
-	/* 1010 */
-	.cusongtitle p {
-		display:none;
-	}
 	.cuscriptolutionongtitle {
 		display:block;
 	}
@@ -586,10 +541,6 @@
 		left:0%;
 		margin-left:0px;
 		display: none !important
-	}
-	/* 1010 */
-	.scriptolution-response-sidebar {
-		display:block;
 	}
 	.whitebox {
 		width:93%;
@@ -675,11 +626,8 @@
 			.scriptolutioneditpages #scriptolutionPostForm .column-r {
 		 width:100% !important;
 	}
-		.scriptolutioneditpages .spartfour  {
+	.scriptolutioneditpages .spartfour  {
 			 clear:both;
-	}
-	.scriptolutioneditpages #scriptolutionPostForm .textb {
-			width:90%;
 	}
 	.whitelinks a {
 		 font-size:12px !important;

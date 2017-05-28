@@ -392,12 +392,12 @@
 										<ul class="list-group" title="{$lang293}">
 											<li class="list-group-item">
 												<div class="row">
-													<div class="col-xs-2 col-md-1">
+													<div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
 														<a href="{$baseurl}{insert name=get_seo_profile value=a username=$m[i].mfrom|stripslashes}" title="{$m[i].mfrom|stripslashes}">
 															<img alt="{$m[i].mfrom|stripslashes}" src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" class="scriptolutionuimage" />
 														</a>
 													 </div>   
-													<div class="col-xs-10 col-md-11">
+													<div class="col-lg-11 col-md-11 col-sm-10 col-xs-10 left_tab">
 														<div class="chat_name">
 															<h4>{$m[i].mfrom|stripslashes}
 																<span class="mic-info pull-right">

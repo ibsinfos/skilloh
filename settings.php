@@ -277,8 +277,83 @@ if ($SID != "" && $SID >= 0 && is_numeric($SID))
 		}
 		//
 	}
+	if($_POST['subbank'] == "1"){
+		$infoid = $_POST['INFOID'];
+		$userid = $_POST['USERID'];
+		$payee_name = cleanit($_REQUEST['payee_name']);
+		$account_no = cleanit($_REQUEST['account_no']);
+		$confirm_acc_no = cleanit($_REQUEST['confirm_acc_no']);
+		$ifsc_Code = cleanit($_REQUEST['ifsc_Code']);
+		$bank_name = cleanit($_REQUEST['bank_name']);
+		$bank_branch = cleanit($_REQUEST['bank_branch']);
+		$bank_city = cleanit($_REQUEST['bank_city']);
+		$bank_state = cleanit($_REQUEST['bank_state']);
+		$UPI = cleanit($_REQUEST['UPI']);
+		if($UPI == ""){
+			if($payee_name == "")
+			{
+				$error .= "<li>Payee Name is mandatory</li>";
+			}
+			if($account_no == "")
+			{
+				$error .= "<li>Account No is mandatory</li>";
+			}
+			if($confirm_acc_no == "")
+			{
+				$error .= "<li>Confirm Account No is mandatory</li>";
+			}
+			if($ifsc_Code == "")
+			{
+				$error .= "<li>IFSC Code is mandatory</li>";
+			}
+			if($bank_name == "")
+			{
+				$error .= "<li>Bank Name is mandatory</li>";
+			}
+			if($bank_branch == "")
+			{
+				$error .= "<li>Bank Branch is mandatory</li>";
+			}
+			if($bank_city == "")
+			{
+				$error .= "<li>Bank City is mandatory</li>";
+			}
+			if($bank_state == "")
+			{
+				$error .= "<li>Bank State is mandatory</li>";
+			}
+		}
+		if($error == ""){
+			if($account_no === $confirm_acc_no){
+				if($infoid>0){
+					//update bank info
+					$query = "UPDATE member_bank_info SET payee_name='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $payee_name).
+					"',account_no='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $account_no)."',ifsc_Code='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ifsc_Code).
+					"',bank_name='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_name)."',bank_branch='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_branch).
+					"',bank_city='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_city)."',bank_state='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_state).
+					"',UPI='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UPI)."' WHERE INFOID = ".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $infoid);
+					$conn->execute($query);
+					$message ="Bank details updated successfully";
+				}
+				else{
+					//insert bank info
+					$query = "INSERT INTO member_bank_info( USERID, payee_name, account_no, ifsc_Code, bank_name, bank_branch, bank_city, bank_state, UPI) VALUES (
+							".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $userid).",'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $payee_name).
+					"','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $account_no)."','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $ifsc_Code).
+					"','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_name)."','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_branch).
+					"','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_city)."','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $bank_state).
+					"','".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $UPI)."')";
+					$conn->execute($query);
+					$message = "Bank details added successfully";
+				}
+			}
+			else{
+				$error .= "<li>Account Number not matching</li>";
+			}
+		}
+	}
 	STemplate::assign('pagetitle',$lang['31']);
-	$query="SELECT * FROM members WHERE USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND status='1'";
+	$query="SELECT M.*,B.INFOID,B.payee_name,B.account_no,B.ifsc_Code,B.bank_name,B.bank_branch,B.bank_city,B.bank_state, B.UPI FROM members M LEFT JOIN member_bank_info B ON M.USERID=B.USERID WHERE M.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $SID)."' AND M.status='1'";
 	$results=$conn->execute($query);
 	$p = $results->getrows();
 	STemplate::assign('p',$p[0]);

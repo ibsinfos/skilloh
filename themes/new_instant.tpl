@@ -1,15 +1,14 @@
-<div class="form-group col-lg-6" id="showdays">
+<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12" id="showdays">
     <label for="gig_expected_duration">{$lang79}</label>
     <input class="text min_height" id="gig_expected_duration" name="gdays" size="2" type="text" value="{$gdays|stripslashes}" placeholder=""/>
     <div class="space_topping">{$lang80}</div>
     <div style="clear:both">
-       <!-- <a style="text-decoration:none; font-size:16px" href="#options" onclick="$('#showdays').hide();$('#showinstant').show();">{$langi1}</a> -->
     </div>
 </div>
 
-<div class="form-group col-lg-6" id="showinstant" style="display:none;">
+<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12" id="showinstant" style="display:none;">
     <label for="gig_instant_delivery">{$langi3}</label>
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <label>{$langi4}:</label>
         <input type="text" id="instanturl" size="50" name="instanturl" class="text min_height" />
         <label>{$langi5}:</label>

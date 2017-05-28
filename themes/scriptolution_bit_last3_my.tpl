@@ -22,7 +22,7 @@ sQuery(document).ready(function() {
 
 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 songperson z_padding0">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 product_top_rate hide_in_mobile">
     		<ul class="vote ratingvote">
             	{insert name=scriptolution_rating_stars assign=scriptolutionstars value=a scriptolutionuserid=$posts[i].USERID}{$scriptolutionstars}
             </ul>

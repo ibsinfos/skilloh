@@ -105,7 +105,17 @@
                                         <td align="center">{$results[i].WID}</td>
                                         <td align="center">{if $results[i].ap eq "0"}<b>{$results[i].pemail|stripslashes}</b>{else}{$results[i].pemail|stripslashes}{/if}</td>
                                         <td align="center">{if $results[i].ap eq "1"}<b>{$results[i].aemail|stripslashes}</b>{else}{$results[i].aemail|stripslashes}{/if}</td>
-                                        <td align="center">{$results[i].scriptolutionbankinfo|nl2br|stripslashes}</td>
+                                        <td align="left">
+                                        	<strong>Payee Name:</strong> {$results[i].payee_name|stripslashes}<br/>
+                                        	<strong>Account No:</strong> {$results[i].account_no|stripslashes}<br/>
+                                        	<strong>IFSC Code:</strong> {$results[i].ifsc_Code|stripslashes}<br/>
+                                        	<strong>Bank Name:</strong> {$results[i].bank_name|stripslashes}<br/>
+                                        	<strong>Bank Branch:</strong> {$results[i].bank_branch|stripslashes}<br/>
+                                        	<strong>Bank City:</strong> {$results[i].bank_city|stripslashes}<br/>
+                                        	<strong>Bank State:</strong> {$results[i].bank_state|stripslashes}<br/><br/>
+                                        	
+                                        	<strong>UPI:</strong> {$results[i].UPI|stripslashes}<br/>
+                                        </td>
                                         <td align="center">{$results[i].username|stripslashes}</td>
                                         <td align="center">${$results[i].afunds|stripslashes}</td>
                                         <td class=" last">

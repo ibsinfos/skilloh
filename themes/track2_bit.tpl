@@ -76,17 +76,6 @@
                                     <span class="sending">{$lang120}</span>
                                 </div>
                             </div>
-                            <!--
-                        <div class="attach-files">
-                            <div class="attach-inner">
-                                <div id="toggle-attach">
-                                    <input id="message_message_attachment_id" name="message_message_attachment_id" type="hidden" />
-                                    <input id="fileInput" name="fileInput" type="file" />                                             
-                                </div>
-                            </div>
-                            <small class="attach-limit"></small>
-                        </div>
-                        -->
                         </div>
                     </div>
                 </div>

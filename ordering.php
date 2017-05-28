@@ -29,9 +29,9 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$query = "select price, ctp from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
 			$executequery=$conn->execute($query);
 			$price = $executequery->fields['price'];
-			$ctp = $executequery->fields['ctp'];
+			//$ctp = $executequery->fields['ctp'];
 			$total = $price;
-			$totacom = $ctp;
+			//$totacom = $ctp;
 				
 			if($multi > 1)
 			{
@@ -39,6 +39,12 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 				//$totacom = $ctp * $multi;
 				$addmulti = ", multi='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $multi)."'";
 			}
+			$query = "select pcom from packs where pminprice<'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $total)."' and pmaxprice >='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $total)."'";
+			$executequery=$conn->execute($query);
+			$comper = intval(cleanit($executequery->fields['pcom']));
+			$count1 = $comper / 100;
+			$count2 = $count1 * $total;
+			$totacom = number_format($count2, 2, '.', '');
 				
 			$query="UPDATE order_items SET totalprice='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $total)."', ctp='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $totacom)."' $addmulti WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 			$result=$conn->execute($query);

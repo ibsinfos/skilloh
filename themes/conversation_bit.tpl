@@ -15,9 +15,6 @@
         <div style="clear:both !important;"></div>
         <div class="conv-write">
             <div id="message_form_wrapper">
-                <!--<header class="cf">
-                    <label class="js-message-label" style="color:#049BCF">{$lang439}</label>
-                </header>-->
                 <div class="msg-error">
                     <p id="message_validation_error"></p>
                 </div>
@@ -36,17 +33,6 @@
                                     <span class="sending">{$lang120}</span>
                                 </div>
                             </div>
-                            <!--
-                        <div class="attach-files">
-                            <div class="attach-inner">
-                                <div id="toggle-attach">
-                                    <input id="message_message_attachment_id" name="message_message_attachment_id" type="hidden" />
-                                    <input id="fileInput" name="fileInput" type="file" />                                             
-                                </div>
-                            </div>
-                            <small class="attach-limit"></small>
-                        </div>
-                        -->
                         </div>
                     </div>
                 </div>

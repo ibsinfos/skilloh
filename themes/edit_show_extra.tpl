@@ -1,16 +1,13 @@
 {insert name=get_extras value=a assign=extras PID=$g.PID} {if $extras|@count GT 0} {literal}
 <style>
     .showextras {
-        /* background: white; */
         color: #464646;
         margin-top: 20px;
-        /* width: 94%; */
         padding: 10px 15px !important;
     }
     
     .extrasping-selection-form {
         margin-top: 5px!important;
-        /* background: white; */
     }
     
     .extrasping-settings {

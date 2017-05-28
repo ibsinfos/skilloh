@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=8" />
@@ -21,26 +21,26 @@
     <script type="text/javascript">
         var base_url = "{$baseurl}";
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-    <script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" >
         sQuery = jQuery.noConflict(true);
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/ie-hover-pack.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/main.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/topmenu.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/jquery.cookie.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/facebook_share.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/jquery.tools.min.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/jquery.uploadify.v2.1.0.min.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/swfobject.js" type="text/javascript"></script>
-    <script src="{$baseurl}js/jquery.corner.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/ie-hover-pack.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/main.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/topmenu.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/facebook_share.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/jquery.uploadify.v2.1.0.min.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/swfobject.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/jquery.corner.js" ></script>
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-    <script src="{$baseurl}js/jquery.customSelect.js"></script>
-    <script src="{$baseurl}js/scriptolution.js"></script>
-    <script src="{$baseurl}js/scriptolution_notifications.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/jquery.customSelect.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/scriptolution.js"></script>
+    <script type="text/javascript" src="{$baseurl}js/scriptolution_notifications.js"></script>
 
     {if $rtl eq "1"}{include file='scriptolution_rtl2.tpl'}{/if}
 </head>

@@ -12,10 +12,10 @@
 	<div class="container scriptolutionpaddingtop30">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
 			<div class="clear"></div>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+			<div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
 	            {include file='skilop_sellmenu.tpl'}            
 	         </div>
-			<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+			<div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">                   
                     <div id="scriptolutionOrderingForm" class=""> 
                         <h1 class="myshoppingheading">{$langcus8}</h1>

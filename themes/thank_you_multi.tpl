@@ -1,7 +1,7 @@
 
 <div class="bodybg topspace scriptolutionopages">
 {include file="scriptolution_error7.tpl"}
-    <div class="whitebody scriptolutionpaddingtop30 scriptolutionwidth842 gray">
+    <div class="whitebody scriptolutionwidth842 gray">
         <div class="inner-wrapper scriptolutionwidth842">
             <div class="left-side scriptolutionwidth842">
                 <div class="whiteBox twoHalfs padding0 scriptolutionwidth800">

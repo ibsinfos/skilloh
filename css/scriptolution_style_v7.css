@@ -133,6 +133,56 @@
 }
 
 /* For the "inset" look only */
+/*Custom Css starts*/
+
+.z-padding-topbottom-3 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+.z_padding0 {
+    padding: 0px !important;
+}
+.p-0 {
+	padding:0;
+}
+.p-15{
+	padding:15px;
+	
+}
+.filterbyselect {
+    font-size: 13px;
+    margin-top: 1px;
+    margin-left: 2px;
+    border: 1px;
+    padding: 3px;
+    color: #000;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+.product_top_rate {
+    padding: 15px 10px 25px;
+}
+.product_top_rate ul li {
+    float: left;
+}
+.name_job p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 0px;
+    overflow: hidden;
+    white-space: pre-line;
+    text-transform: capitalize;
+    color: #000;
+    font-weight: 600;
+}
+.name_job p a {
+    color: #000;
+}
+.name_job p a:hover {
+    color: #10a2ef;
+}
+/*Custom Css ends */
+
 
 /* Let's get this party started */
 ::-webkit-scrollbar, 
@@ -201,7 +251,7 @@ input {
     display: none !important;
 }
 .centerwrap {
-    width: 1010px;
+    width: 100%;
     margin: auto;
 }
 .clear {
@@ -214,7 +264,7 @@ input {
     background: #fff;
     background-color: #fff;
     height: 75px;
-    min-width: 1106px;
+    min-width: 100%;
     position: fixed;
     border-bottom: 1px solid rgba(188, 207, 219, 0);
     z-index: 20000;
@@ -411,9 +461,10 @@ input {
     -webkit-border-radius: 2px 0 2px 2px;
 }
 .banner {
-    background: url(../images/scriptolution_banner.jpg) no-repeat center top;
+    background: url(../images/scriptolution_banner.jpg) no-repeat center center;
     height: 450px;
     margin-top: 5%;
+    background-size: cover;
 }
 .bannertext {
     padding-top: 88px;
@@ -515,7 +566,7 @@ input {
     color: #10a2ef;
 }
 .whitebody {
-    width: 1010px;
+    width: 100%;
     margin: auto;
     background-color: #fff;
     position: relative
@@ -595,6 +646,7 @@ input {
     color: #fff;
     float: left;
     padding-top: 12px;
+	padding-bottom: 12px;
     margin-bottom: 0px;
     line-height: 1.5;
 }
@@ -664,7 +716,7 @@ input {
     margin-top: 0px;
     white-space: pre-line;
     text-transform: capitalize;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 .username span {
     font-size: 13px;
@@ -1020,7 +1072,7 @@ span.rated {
     margin-left: -505px;
     position: absolute;
     top: -7px;
-    width: 1010px;
+    width: 100%;
 }
 .footertop {
     padding-top: 60px;
@@ -1530,7 +1582,7 @@ span.rated {
     border: 1px solid #000;
 }
 .topspace {
-    padding-top: 1px;
+    padding-top: 0px;
     margin-top: 5.5%;
 }
 .inshadow {
@@ -4492,27 +4544,6 @@ div.social-wrap {
     width: 100%;
     min-height: 50px;
 }
-@media (min-width: 992px) {
-    .col-md-6 {
-        width: 50%;
-    }
-}
-@media (min-width: 992px) {
-    .col-md-1,
-    .col-md-2,
-    .col-md-3,
-    .col-md-4,
-    .col-md-5,
-    .col-md-6,
-    .col-md-7,
-    .col-md-8,
-    .col-md-9,
-    .col-md-10,
-    .col-md-11,
-    .col-md-12 {
-        float: left;
-    }
-}
 .col-xs-1,
 .col-sm-1,
 .col-md-1,
@@ -4574,7 +4605,6 @@ div.social-wrap {
     letter-spacing: 1px;
     margin: 0;
     line-height: 50px;
-    font-family: "proxima-nova", sans-serif;
 }
 ul.socials-link {
     text-align: right;
@@ -4712,7 +4742,7 @@ h1,
 }
 .scriptolution-h-header {
     font-size: 22px;
-    line-height: 33px;
+    line-height: 1.5;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
@@ -4747,7 +4777,8 @@ h1,
     box-shadow: 1px 0px 5px #d2d2d2;
 }
 .myshoppingheading {
-    padding-bottom: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     font-size: 16px;
     text-align: left;
     text-transform: capitalize;
@@ -4820,6 +4851,7 @@ h1,
     font-size: 14px;
     color: #555;
     line-height: 1.5;
+	padding: 10px;
 }
 .joinedsince {
     background: #f1f5f7;
@@ -4867,7 +4899,7 @@ h1,
     background: #fff;
     box-shadow: 1px 0px 5px #d2d2d2;
     height: auto;
-    width: 100%;
+    /* width: 100%; */
     padding: 15px;
 }
 .bank_info {
@@ -4989,7 +5021,7 @@ h1,
     margin: 20px 0;
     border-top: 1px solid #ebebe8;
     border-bottom: 1px solid #ebebe8;
-    padding: 20px;
+    padding: 20px 0;
 }
 .desc_space {
     margin-bottom: 20px;
@@ -5484,7 +5516,8 @@ textarea:focus {
     line-height: 1.5;
 }
 .sidebar-nav .dropdown-menu {
-    position: relative;
+    /* position: relative; */
+    position: initial;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -5706,7 +5739,7 @@ textarea:focus {
     -o-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     color: #fff;
-    width: 47%;
+    width: 75%;
 }
 .search-slider {
     z-index: 1;
@@ -6247,18 +6280,15 @@ sup {
     padding-bottom: 15px;
 }
 .review-job ul li .image-avatar {
-    float: left;
-    width: 10%;
+   
 }
 .review-job ul li .image-avatar img {
-    width: 65px;
-    height: 65px;
+    width: 100%;
+    height: auto;
     border-radius: 50%;
     max-width: 100%;
 }
 .review-job ul li .profile-viewer {
-    float: right;
-    width: 85%;
     position: relative;
 }
 .review-job ul li .profile-viewer .name-author {
@@ -6268,7 +6298,8 @@ sup {
 .review-job ul li .profile-viewer .review-time {
     color: #c1c2c7;
     font-size: 12px;
-    padding-top: 7px;
+   padding-bottom: 7px;
+   line-height:1.5;
 }
 .review-job ul li .profile-viewer .rate-it {
     position: absolute;
@@ -6336,7 +6367,7 @@ sup {
     border-radius: 0;
 }
 .panel-heading {
-    padding: 0px;
+    padding: 10px 15px;
     position: relative;
 }
 .panel-heading img {
@@ -6753,7 +6784,7 @@ option {
     position: relative;
 }
 .footer_join_now .background-opacity {
-    background: rgba(17, 44, 28, 0.58);
+    background: rgba(17, 44, 28, 0.7);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -6778,11 +6809,16 @@ option {
     font-weight: 200;
     margin-bottom: 50px;
 }
-.footer_join_now .inner .btn-link-site {
+.footer_join_now .inner .btn-link-site,
+.footer_join_now .inner .btn-link-site:hover,
+.footer_join_now .inner .btn-link-site:focus {
     padding: 18px 25px;
-    font-size: 14px;
+    font-size: 16px;
 	background: #27ae60;
-	border: 1px solid #27ae60
+	border: 1px solid #27ae60;
+	color: #fff;
+	font-weight:bold;
+	box-shadow: 1px 0px 5px rgba(46, 173, 115, 0.7); 
 }
 /* Home join now ends */
 
@@ -6796,14 +6832,14 @@ option {
 }
 #extform .gig-extras-list {} .tag_style span.label {
     font-size: 13px;
-    line-height: 1.5;
+    line-height: 3;
     background: #eee;
     border: 1px solid #eee;
     color: #6c6b6b;
     font-weight: 400;
 }
 .gig-description.tag_style {
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 .sharing {
     text-align: right;
@@ -7046,11 +7082,6 @@ h3.search_name span{
     padding: 10px 4px;
     min-height: 90px;
 }
-@media (max-width: 768px) {
-    .chat_list .list-group-item {
-        min-height: inherit;
-    }
-}
 .noti_link {
     color: #000;
 }
@@ -7248,31 +7279,7 @@ h3.search_name span{
     transition: all 1s ease;
     border: 1px solid #f8f8f8;
 }
-@media (max-width: 767px) {
-  #cat_side_filter .nav-side-menu {
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  #cat_side_filter .nav-side-menu .toggle-btn {
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 10 !important;
-    padding: 3px;
-    background-color: #ffffff;
-    color: #000;
-    width: 40px;
-    text-align: center;
-  }
-}
-@media (min-width: 767px) {
-  #cat_side_filter .nav-side-menu .menu-list .menu-content {
-    display: block;
-  }
-}
+
 .center_img{
 	margin-left:auto;
 	margin-right:auto;
@@ -7418,6 +7425,8 @@ h3.search_name span{
 }
 .invoice-title h2, .invoice-title h3 {
     display: inline-block;
+	font-size: 20px;
+    font-weight: 400;
 }
 
 .table > tbody > tr > .no-line {
@@ -7432,6 +7441,508 @@ h3.search_name span{
     border-top: 2px solid;
 }
 /* Homepage category starts */
-
+.header .container {
+	/* margin:0; */
+}
 
 /* Homepage category ends */
+.sidebar-nav .dropdown-menu li {
+	margin-top:10px;
+}
+.alert_count {
+	float: right;
+    background: #000;
+    padding: 2px 7px;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+
+
+
+@media (max-width: 767px) {
+	body,
+	html {
+		font-size:13px; 
+		line-height:1.5;
+	}
+	#cat_side_filter .nav-side-menu {
+		position: relative;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	#cat_side_filter .nav-side-menu .toggle-btn {
+		display: block;
+		cursor: pointer;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		z-index: 10 !important;
+		padding: 3px;
+		background-color: #ffffff;
+		color: #000;
+		width: 40px;
+		text-align: center;
+	}
+	.dropdown.textdropdown.sublinks.main_menu {
+		display:none;
+	}
+	.headertop {
+		padding-top: 2px
+	}
+	.topspace {
+		margin-top: 18.5%;
+	}
+	.logoutheader {
+		display:none !important
+	}
+	.hamburger.is-closed, .hamburger.is-open {
+		margin-left:0;
+		top: 15px;
+	}
+	.findbtn,
+	.findbox {
+		width: 100%;
+	}
+	.find-service{
+		width:90%;
+	}
+	.bannertext h3 {
+		font-size: 22px;
+	}
+	.bannertext h2 {
+		font-size: 18px;
+	}
+	.bannertext h4 {
+		font: 500 16px/27px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.cusongtitle h3 {
+		font-size: 16px;
+	}
+	.why_work {
+		margin-bottom: 25px;
+	}
+	#relatedjobsscroll, #sellermorejobs {
+		margin: 10px 0 40px 0;
+	}
+	.cusongs {
+		margin: 0px 0 10px 0;
+	}
+	.songperson {
+		margin-top: 10px;
+		margin-bottom: 0px;
+	}
+	.job-items-title {
+		width:100%;
+	}
+	.job_cat_name {
+		margin-top: 40px;
+		padding-bottom: 0;
+	}
+	.title {
+		font-size: 14px;
+		margin: 10px 0 7px;
+	}
+	.footer_join_now .inner .main-title {
+		font-size: 24px;
+	}
+	.footer_join_now .inner .btn-link-site, 
+	.footer_join_now .inner .btn-link-site:hover, 
+	.footer_join_now .inner .btn-link-site:focus {
+		padding: 18px 18px;
+		font-size: 14px;
+	}
+	.minblock {
+		padding: 5px;
+	}
+	.name_job p {
+		font-size: 12px;
+		font-weight: normal;
+	}
+	.username {
+		font-size: 12px;
+	}
+	.col-xs-12.name_job,
+	.col-xs-12.userdata {
+		padding:0 6px;
+	}
+	.col-xs-12.product_top_rate{
+		padding: 20px 6px;		
+	}
+	.hide_in_mobile {
+		display:none;
+	}
+	.songperson a img.img-responsive {
+		max-height: 100%;
+		min-height: 100%;
+		width: 100%;
+	}
+	.vote.ratingvote img,
+	.vote.ratingvote span {
+		width: 10px;
+	}
+	.cusongslist {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.container  {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.banner1 {
+		min-height: auto;
+	}
+	.banner {
+		height: 100%;
+		margin-top: 8.5%;
+	}
+	
+	.bannertext {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+	.gig-meta {
+		font-size: 11px;
+	}
+	.home-about-us .name,
+	.home-about-us .website_name {
+		font-size:20px;
+	}
+	.home-about-us .about_para {
+		font-size: 13px;
+		text-align: justify;
+		padding: 0 15px;
+	}
+	.cat_block_home .cat_one_block .name-categories {
+		font-size:16px;
+	}
+	.cat_block_home .cat_one_block {
+		text-align: center;
+		display: block;
+		margin-bottom: 20px;
+		padding: 5px;
+	}
+	.cusongtitle h3 {
+		padding-right: 10px;
+	}
+	.cusongtitle.tabtest p {
+		font-size: 13px;
+		padding-top: 14px;
+		padding-bottom: 0px;
+		float: none;
+	}
+	.cusongtitle.tabtest p a {
+		padding: 0px 8px 14px;
+		margin-right: 0px;
+	}
+	.banner1 .header-images img{
+		min-height:160px;
+	}
+	.tagcloud {
+		height: auto;
+	}
+	.tagcloud h2 {
+		padding-top: 0px;
+		padding-bottom: 15px;
+		font-size: 30px
+	}
+	.tagcloud ul {
+		display:none;
+	}
+	.mobile_pad_5 {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.mobile_pad_0,
+	.padding0 	{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.job_cat_name {
+		font-size: 18px;
+	}
+	.m-t60 {
+		margin-top: 30px;
+	}
+	.text-content ul li,
+	.profile .location, .profile .language, .profile .timezone, .bio,
+	.personal-profile ul li .content-bio,
+	.extra_gig_name	{
+		font-size:12px;
+	}
+	.bodybg.topspace .container{
+		padding:5px;
+	}
+	.job_detail_title,
+	.desc_space .title	{
+		font-size:14px;
+	}
+	.package-statistic,
+	.custom-order-link	{
+		padding: 30px 20px 0 20px;
+	}
+	.personal-profile	{
+		padding: 30px 20px 30px 20px;
+	}
+	.action .btn-diplomat,
+	ul.gig-extras-list li span.pricing,
+	.btn-submit-price-plan p	{
+		font-size: 14px;
+	}
+	.outer-function-group .btn-order {
+		top:0;
+		font-size: 14px;
+	}
+	.review-job ul {
+		padding: 0 0px;
+	}
+	.m-b60 {
+		margin-bottom: 0px;
+	}
+	.slide_video {
+		height: 245px;
+	}
+	.outer-payment-items {
+		padding: 40px 10px;
+	}
+	.action-steps h5 {
+		font-size: 18px;
+	}
+	.left_tab {
+		padding-left:0;
+	}
+	.hide_tab_mob {
+		display:none
+	}
+	.img_pad_space {
+		padding:0;
+	}
+	.scriptolution-h-header {
+		font-size: 18px;
+	}
+	.scriptolution-s-small {
+		font-size: 13px; 
+	}
+	#scriptolutionPostForm {
+		padding: 0 5px;
+	}
+	.postgigbottom{
+		padding: 15px 0;
+	}
+	.pad_mob_30 {
+		padding-bottom:30px;
+	}
+	.form-control{
+		font-size:12px;
+	}
+	.top_pad_15{
+		padding-top:15px;
+	}
+	.pad_rl_30 {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	.img_padding {
+		padding: 0;
+		margin-bottom: 20px;
+	}
+	.edit_extra_service {
+		font-size: 16px;
+	}
+	.extrasping-settings {
+		font-size: 13px !important;
+		line-height: 24px !important;
+		padding: 0 20px !important;
+	}
+	.postgigbottom .extrasping-settings  a {
+		float: right;
+	}
+	.post_job_title {
+		font-size: 16px;
+	}
+	.extra_edit_back, .extra_edit_back:hover, .extra_edit_back:focus, .extra_edit_back:visited, .extra_edit_back:active {
+		font-size: 11px;
+	}
+	.bodybg.container-fluid.topspace,
+	.container-fluid.category_block	{
+		padding: 0;
+	}
+	.cat_pad_25 {
+		padding-right: 25px;
+		padding-left: 25px;
+	}
+	
+  
+}
+@media (min-width: 767px) {
+  #cat_side_filter .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	.topspace {
+		margin-top: 7.5%;
+	}
+	.slide_video {
+		width: 100%;
+		height: 350px;
+	}
+	.aside-detail-bar {
+		padding:0px;
+	}
+	.textdropdown.main_menu {
+		margin-left: 0px;
+	}
+	.todo {
+		padding: 0 10px;
+	}
+	.todo p, .massage p {
+		font-size: 14px;
+	}
+	.info span.right.disabled a {
+		font-size:13px;
+	}
+	.outer-payment-items {
+		padding: 40px 0px;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px){ 
+	.topspace {
+		margin-top: 8.5%;
+	}
+	.logoutheader {
+		display:none !important
+	}
+	.hamburger.is-closed, .hamburger.is-open {
+		margin-left:0;
+	}
+	.cusongtitle h3 {
+		font-size: 16px;
+	}
+	#relatedjobsscroll, #sellermorejobs {
+		margin: 10px 0 40px 0;
+	}
+	.cusongs {
+		margin: 50px 0 10px 0;
+	}
+	.job_cat_name {
+		margin-top: 40px;
+		padding-bottom: 0;
+	}
+	.title {
+		font-size: 16px;
+	}
+	.banner {
+		height: 100%;
+		margin-top: 8.5%;
+	}
+	.bannertext {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+	.bannertext h3 {
+		font-size: 30px;
+	}
+	.bannertext h2 {
+		font-size: 28px;
+	}
+	.bannertext h4 {
+		font: 500 18px/27px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	.home-about-us .name,
+	.home-about-us .website_name {
+		font-size:24px;
+	}
+	.cat_block_home .cat_one_block .name-categories {
+		font-size:20px;
+	}	
+	.cusongtitle h3 {
+		padding-right: 10px;
+	}
+	.cusongtitle.tabtest p {
+		font-size: 13px;
+		padding-top: 14px;
+		padding-bottom: 0px;
+		float: none;
+	}
+	.cusongtitle.tabtest p a {
+		padding: 0px 8px 14px;
+		margin-right: 0px;
+	}
+	.banner1 .header-images img{
+		min-height:260px;
+	}
+	.tagcloud h2 {
+		padding-top: 60px;
+	}
+	.text-content ul li,
+	.profile .location, .profile .language, .profile .timezone, .bio,
+	.personal-profile ul li .content-bio,
+	.extra_gig_name	{
+		font-size:12px;
+	}
+	.bodybg.topspace .container{
+		padding:5px;
+	}
+	.job_detail_title,
+	.desc_space .title	{
+		font-size:16px;
+	}
+	.action .btn-diplomat,
+	ul.gig-extras-list li span.pricing,
+	.btn-submit-price-plan p	{
+		font-size: 14px;
+	}
+	.outer-function-group .btn-order {
+		top:0;
+	}
+	.review-job ul {
+		padding: 0 0px;
+	}
+	.m-b60 {
+		margin-bottom: 0px;
+	}
+	.slide_video {
+		height: 245px;
+	}
+	.outer-payment-items {
+		padding: 40px 10px;
+	}
+	.action-steps h5 {
+		font-size: 18px;
+	}
+	.left_tab {
+		padding-left:0;
+	}
+	.hide_tab_mob {
+		display:none
+	}
+	.img_pad_space {
+		padding:0;
+	}
+	
+}
+@media (min-width: 1200px) { 
+	
+}
+@media (min-width: 1600px) { 
+	.topspace {
+		margin-top: 5%;
+	}
+}
+@media (min-width: 1900px) { 
+	.topspace {
+		margin-top: 4%;
+	}
+}
+.action-steps.cf.container, 
+.box-row.container {
+	padding: 0 !important;
+}
+.cat_block_home .cat_one_block .name-categories {
+	line-height:1.5;
+}
+
+
+
+

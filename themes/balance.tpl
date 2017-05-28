@@ -25,11 +25,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 aside-detail-bar">
+            <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_buymenu.tpl'}
             </div>
 
-            <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang33}</h1>
                     <h4 class="myshoppingheading2">{$lang206}</h4>
@@ -62,7 +62,7 @@
                                         </a>
                                     </div>
                                     <div class="info-items col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="row">
                                                 {if $o[i].t eq "1"}
                                                 <span class="status withdrawal" title="{$lang385}: {if $scriptolution_cur_pos eq " 1 "}{$o[i].price}{$lang197}{else}{$lang197}{$o[i].price}{/if}">{$lang387}</span> {else}
@@ -100,15 +100,6 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <!--<div class="group-function col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                 <div class="vote row">
-                                    <p class="rate-it star" title="Status and price">
-		                              	<a class="" href="{$baseurl}track?id={$o[i].OID}">
-		                              		<span class="status delivered feature" title="Track Payment">Track Status</span>
-		                              	</a>					                               	
-                                    </p>
-                                 </div>                                  
-                              </div>-->
                                     </div>
                                 </li>
                                 {/section} {/if}

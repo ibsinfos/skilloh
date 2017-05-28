@@ -30,9 +30,8 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$P1 = 0;
 			$P2 = 0;
 			$P3 = 0;
-			$C1 = 0;
-			$C2 = 0;
-			$C3 = 0;
+			$P4 = 0;
+			$P5 = 0;
 			
 			
 			
@@ -45,27 +44,38 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 							{
 								if($cur == 0)
 								{
-									$query = "select eprice, ctp from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
+									$query = "select eprice from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 									$executequery=$conn->execute($query);
 									$P1 = $executequery->fields['eprice'];
-									$C1 = $executequery->fields['ctp'];
 									$query="UPDATE order_items SET EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 								}
 								elseif($cur == 1)
 								{
-									$query = "select eprice, ctp from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
+									$query = "select eprice from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 									$executequery=$conn->execute($query);
 									$P2 = $executequery->fields['eprice'];
-									$C2 = $executequery->fields['ctp'];
 									$query="UPDATE order_items SET EID2='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 								}
 								elseif($cur == 2)
 								{
-									$query = "select eprice, ctp from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
+									$query = "select eprice from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 									$executequery=$conn->execute($query);
 									$P3 = $executequery->fields['eprice'];
-									$C3 = $executequery->fields['ctp'];
 									$query="UPDATE order_items SET EID3='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
+								}
+								elseif($cur == 3)
+								{
+									$query = "select eprice from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
+									$executequery=$conn->execute($query);
+									$P4 = $executequery->fields['eprice'];
+									$query="UPDATE order_items SET EID4='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
+								}
+								elseif($cur == 4)
+								{
+									$query = "select eprice from extras where EID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' AND PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'";
+									$executequery=$conn->execute($query);
+									$P5 = $executequery->fields['eprice'];
+									$query="UPDATE order_items SET EID5='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $EID)."' WHERE IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID)."'";
 								}
 								$result=$conn->execute($query);
 								$cur++;
@@ -80,7 +90,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			$executequery=$conn->execute($query);
 			$price = $executequery->fields['price'];
 			$ctp = $executequery->fields['ctp'];
-			$total = $price + $P1 + $P2 + $P3;
+			$total = $price + $P1 + $P2 + $P3 + $P4 + $P5;
 			//$totacom = $ctp + $C1 + $C2 + $C3;
 			
 			$query = "select pcom from packs where pminprice<'".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $total)."' and pmaxprice >='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $total)."'";

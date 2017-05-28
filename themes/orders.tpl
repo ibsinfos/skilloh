@@ -25,11 +25,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 aside-detail-bar">
+            <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_buymenu.tpl'}
             </div>
 
-            <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang157} </h1>
                     <h4 class="myshoppingheading2">{$lang223}</h4>
@@ -100,7 +100,6 @@
                                  		<a href="{$baseurl}track?id={$o[i].OID}"  class="title_limit" title="{$o[i].gtitle|stripslashes}" rel="tooltip"  >{$o[i].gtitle|stripslashes}</a>
                                  	</h2>
                                                 <p class="newclass">
-                                                    <!--<span>{$lang360} <strong>{insert name=get_time_to_days_ago value=a time=$o[i].time_added}</strong> </span>-->
                                                     <span title="{$o[i].username}" rel="tooltip">Seller: 
                              				<strong class="buyer_name_limit">{$o[i].username}</strong>
                               	 			<span class="vline_seperator"> | </span>

@@ -23,10 +23,12 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		STemplate::assign('pagetitle',$pagetitle);
 		
 		//
-		$querycus = "select A.scriptolutioncustomorder from posts A, orders B where B.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND A.PID=B.PID limit 1"; 
+		$querycus = "select A.scriptolutioncustomorder, A.scriptolutionhasextras from posts A, orders B where B.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND A.PID=B.PID limit 1"; 
 		$executequerycus=$conn->execute($querycus);
 		$scriptolutioncustomorder = $executequerycus->fields['scriptolutioncustomorder'];
+		$scriptolutionhasextras = $executequerycus->fields['scriptolutionhasextras'];
 		STemplate::assign('scriptolutioncustomorder',$scriptolutioncustomorder);
+		STemplate::assign('scriptolutionhasextras',$scriptolutionhasextras);
 		//
 		
 		if($scriptolutioncustomorder == "1")
@@ -35,19 +37,59 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		}
 		else
 		{
-			$query="SELECT A.*, B.gtitle, B.p1, B.price, B.price2, B.price3, B.USERID AS owner, B.days, B.ginst, C.username, D.seo, E.username as buyer, F.username as ownerName FROM orders A, posts B, members C, categories D, members E, members F WHERE C.USERID=B.USERID AND B.category=D.CATID AND E.USERID=A.USERID AND F.USERID=B.USERID AND A.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND B.PID=A.PID limit 1";
+			$query="SELECT A.*, O.multi, O.totalprice,B.gtitle, B.p1, B.price as price, B.price2, B.price3, B.USERID AS owner, B.days, B.ginst, C.username, D.seo, E.username as buyer, F.username as ownerName FROM orders A, order_items O, posts B, members C, categories D, members E, members F WHERE A.IID = O.IID AND C.USERID=B.USERID AND B.category=D.CATID AND E.USERID=A.USERID AND F.USERID=B.USERID AND A.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND B.PID=A.PID limit 1";
 		}
+		
 		
 		$results=$conn->execute($query);
 		$o = $results->getrows();
 		STemplate::assign('o',$o[0]);
 		$owner = $o[0]['owner'];
+		$IID = $o[0]['IID'];
 		$buyer = $o[0]['USERID'];
 		$buyerUsername = $o[0]['buyer'];
 		$ownerName = $o[0]['ownerName'];
 		$me = $_SESSION['USERID'];
 		$PID = $o[0]['PID'];
 		$rprice = $o[0]['price'];
+
+		if($scriptolutionhasextras == "1"){
+				$query = "SELECT (SELECT E.etitle from extras E where O.EID = E.EID) as extraName1,
+					(SELECT E.eprice from extras E where O.EID = E.EID) as extraPrice1,
+					(SELECT E.etitle from extras E where O.EID2 = E.EID) as extraName2,
+					(SELECT E.eprice from extras E where O.EID2 = E.EID) as extraPrice2,
+					(SELECT E.etitle from extras E where O.EID3 = E.EID) as extraName3,
+					(SELECT E.eprice from extras E where O.EID3 = E.EID) as extraPrice3,
+					(SELECT E.etitle from extras E where O.EID4 = E.EID) as extraName4,
+					(SELECT E.eprice from extras E where O.EID4 = E.EID) as extraPrice4,
+					(SELECT E.etitle from extras E where O.EID5 = E.EID) as extraName5,
+					(SELECT E.eprice from extras E where O.EID5 = E.EID) as extraPrice5
+					FROM order_items O where O.IID = ".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $IID);
+				$results=$conn->execute($query);
+				$extras = $results->getrows();
+				$extra = array();
+				if($extras[0]['extraPrice1']!=NULL){
+					$e1 = array("name"=>$extras[0]['extraName1'],"price"=>$extras[0]['extraPrice1']);
+					array_push($extra, $e1);
+				}
+				if($extras[0]['extraPrice2']!=NULL){
+					$e1 = array("name"=>$extras[0]['extraName2'],"price"=>$extras[0]['extraPrice2']);
+					array_push($extra, $e1);
+				}
+				if($extras[0]['extraPrice3']!=NULL){
+					$e1 = array("name"=>$extras[0]['extraName3'],"price"=>$extras[0]['extraPrice3']);
+					array_push($extra, $e1);
+				}
+				if($extras[0]['extraPrice4']!=NULL){
+					$e1 = array("name"=>$extras[0]['extraName4'],"price"=>$extras[0]['extraPrice4']);
+					array_push($extra, $e1);
+				}
+				if($extras[0]['extraPrice5']!=NULL){
+					$e1 = array("name"=>$extras[0]['extraName5'],"price"=>$extras[0]['extraPrice5']);
+					array_push($extra, $e1);
+				}
+				STemplate::assign('extra',$extra);
+		}
 		
 		if($owner == $me)
 		{

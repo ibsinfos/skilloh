@@ -442,88 +442,100 @@
 										
 										<div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="pass">Payee Name</label>
+											  <label class="editgigformtitle" for="payee_name">Payee Name</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass" name="pass" size="30" type="text" />
+											  <input class="text" id="payee_name" name="payee_name" value="{$p.payee_name|stripslashes}" size="30" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Payee Account #</label>
+											  <label class="editgigformtitle" for="account_no">Payee Account #</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="account_no" name="account_no" size="30" value="{$p.account_no|stripslashes}" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Confirm Payee Account #</label>
+											  <label class="editgigformtitle" for="confirm_acc_no">Confirm Payee Account #</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="confirm_acc_no" name="confirm_acc_no" size="30" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Payee Bank IFSC Code</label>
+											  <label class="editgigformtitle" for="ifsc_Code">Payee Bank IFSC Code</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="ifsc_Code" name="ifsc_Code" size="30" value="{$p.ifsc_Code|stripslashes}" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Payee Bank Name</label>
+											  <label class="editgigformtitle" for="bank_name">Payee Bank Name</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="bank_name" name="bank_name" size="30" value="{$p.bank_name|stripslashes}" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Payee Branch Name</label>
+											  <label class="editgigformtitle" for="bank_branch">Payee Branch Name</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="bank_branch" name="bank_branch" size="30" value="{$p.bank_branch|stripslashes}" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Payee Bank State</label>
+											  <label class="editgigformtitle" for="bank_state">Payee Bank State</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="bank_state" name="bank_state" size="30" value="{$p.bank_state|stripslashes}" type="text" />
 											</div>
 										  </div>
 										  <div class="scriptolutionclear"></div>
 										  
 										  <div class="form-entry">
 											<div class="column-l">
-											  <label class="editgigformtitle" for="password">Payee Bank City</label>
+											  <label class="editgigformtitle" for="bank_city">Payee Bank City</label>
 											</div>
 											<div class="column-r">
-											  <input class="text" id="pass2" name="pass2" size="30" type="text" />
+											  <input class="text" id="bank_city" name="bank_city" size="30" value="{$p.bank_city|stripslashes}" type="text" />
 											</div>
 										  </div>
+										  
+										   <div class="form-entry">
+											<div class="column-l">
+											  <label class="editgigformtitle" for="upi">UPI</label>
+											</div>
+											<div class="column-r">
+											  <input class="text" id="UPI" name="UPI" size="30" value="{$p.UPI|stripslashes}" type="text" />
+											</div>
+										  </div>
+										  
 										  <div class="scriptolutionclear"></div>
 									
 										<div class="row form-entry" align="center">
 											<input type="submit" value="{$lang168}" class="scriptolutionbluebutton" />
 										</div>
-										<input type="hidden" name="subpass" value="1" />
+										<input type="hidden" name="subbank" value="1" />
+										<input type="hidden" name="INFOID" value="{$p.INFOID}" />
+										<input type="hidden" name="USERID" value="{$p.USERID}" />
 										<input type="hidden" name="scriptolutiontoken" value="{$scriptolutiontoken}" />
 									</form>
 								</div>

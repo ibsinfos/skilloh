@@ -1,7 +1,7 @@
 #action-bar {
     z-index: 21;
     left: 0px;
-    background-color: #FFF;
+    background-color: #eee;
     border-bottom: 1px solid #DDD;
     height: 75px;
     width: 100%;
@@ -15,10 +15,10 @@
     position: relative;
 }
 .action-bar-orders > .box-row {
-    padding-right: 199px;
+    /* padding-right: 199px; */
 }
 .mp-box .box-row {
-    width: 988px;
+    /* width: 100%; */
     margin: 0px auto;
     position: relative;
     box-sizing: border-box;
@@ -28,8 +28,7 @@
 }
 .action-steps .step {
     float: left;
-    height: 32px;
-    padding: 14px 19px 14px 0px;
+    padding: 20px;
 }
 span.status
 {
@@ -266,7 +265,9 @@ textarea {
 .delivery-footer {
 	font-size:12px;
 }
-
+.list-group-item .scriptolutionuimage {
+	width: 50px;
+}
 .scriptolutionuimage {
 	border-radius: 50%;
 }
@@ -331,8 +332,7 @@ span.instructions {
 
 .action-steps .step-end {
     float: right;
-    height: 32px;
-    padding: 14px 0px 14px 14px;
+    padding: 20px;
 }
 
 .action-steps .step-end h5 {
@@ -342,15 +342,13 @@ span.instructions {
 .action-steps h5 {
     display: inline-block;
     font-size: 22px;
-    line-height: 32px;
+    line-height: 1.5;
     font-weight: 400;
     color: #555;
     vertical-align: top;
-    height: 32px;
     padding-right: 2px;
     text-transform: uppercase;
     overflow: hidden;
-	font-size: 26px;
 }
 .conv-write .cf .js-message-label {
 	font-size: 16px;

@@ -1,6 +1,6 @@
 <div class="bodybg topspace">
 	{include file="scriptolution_error7.tpl"}	
-    <div class="search_hint col-md-12 p-0" >
+    <div class="search_hint col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0" >
 	    <div class="container">
 			<h3 class="search_name">{$lang124}: <span>{$tag|stripslashes}</span></h3>
 		</div>
@@ -10,11 +10,6 @@
         
 	<div class="bodyshadow inshadow " style="padding:0 0 40px 0px">
 	<div class="container scriptolutionpaddingtop30">
-		<!-- <div class="row">
-	    	<div class="customsongs" style="padding: 25px 0 0;">
-	            <h3 class="search_name"><span>{$lang124}:</span> {$tag|stripslashes}</h3>
-	        </div>
-	    </div> -->
 		<div class="row">
         	
             {include file="cat_scriptolution_responsive.tpl"}
@@ -56,30 +51,7 @@
      </div>
 </div>
 </div>
-                </div>
-                
-                <!--{if $enablescriptolutionlocations eq "1"}
-                 <div class="border"></div>
-                <div class="options left_filter">
-                    <h3>{$lang617}</h3>
-                    <div class="thescriptolutionlocation">
-                    <form method="get" action="{$baseurl}search?s={$s}&query={$tag}&search_in={$search_in}&c={$c}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}">
-                    <input type="text" id="scriptolutionjoblocation" name="scriptolutionlocation" class="scriptolutionlocatio" value="{$scriptolutionlocation}" />
-                    <input type="submit"  class="scriptolutionapplylocation"value="{$lang620}" />
-                    <input type="hidden" name="s" value="{$s}" />
-                    <input type="hidden" name="query" value="{$tag}" />
-                    <input type="hidden" name="search_in" value="{$search_in}" />
-                    <input type="hidden" name="c" value="{$c}" />
-                    <input type="hidden" name="sdeliverytime" value="{$sdeliverytime}" />
-                    <input type="hidden" name="stoprated" value="{$stoprated}" />
-                    {if $sdisplay eq "list"}
-                    <input type="hidden" name="sdisplay" value="list" />
-                    {/if}
-                    </form>
-                    </div>
-                </div>
-                {/if} -->
-                
+                </div>                
                 
                 <div class="border"></div>
                 <div class="options left_filter">

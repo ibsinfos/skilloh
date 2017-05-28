@@ -75,12 +75,12 @@
 				                <ul class="list-group">
 				                    <li class="list-group-item">
 				                        <div class="row">
-				                            <div class="col-xs-2 col-md-1">
+				                            <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
 				                                <a href="{$baseurl}{insert name=get_seo_profile value=a username=$m[i].mfrom|stripslashes}" title="{$m[i].mfrom|stripslashes}">
 				                                	<img alt="{$m[i].mfrom|stripslashes}" src="{$membersprofilepicurl}/thumbs/{$profilepicture}?{$smarty.now}" class="img-circle user_inbox_pimg" />
 				                                </a>
 				                             </div>   
-				                            <div class="col-xs-10 col-md-11">
+				                            <div class="col-xs-10 col-sm-11 col-md-11 col-lg-11">
 				                                <div class="chat_name">
 				                                	{if $m[i].MSGFROM eq $smarty.session.USERID}
 				                                		<h4>Me</h4> 

@@ -132,7 +132,7 @@ else
 }
 
 $queryselected = "select A.WID,B.username from withdraw_requests A, members B WHERE A.USERID=B.USERID $addtosql $sort $sorthow limit $config[maximum_results]";
-$query2 = "select A.*,B.username, B.afunds, B.pemail, B.aemail, B.scriptolutionbankinfo from withdraw_requests A, members B WHERE A.USERID=B.USERID $addtosql $sort $sorthow limit $pagingstart, $config[items_per_page]";
+$query2 = "select A.*,B.username, B.afunds, B.pemail, B.aemail, B.scriptolutionbankinfo,I.payee_name,I.account_no,I.ifsc_Code,I.bank_name,I.bank_branch,I.bank_city,I.bank_state, I.UPI from withdraw_requests A, members B LEFT JOIN member_bank_info I ON B.USERID=I.USERID WHERE A.USERID=B.USERID $addtosql $sort $sorthow limit $pagingstart, $config[items_per_page]";
 $executequeryselected = $conn->Execute($queryselected);
 $totalvideos = $executequeryselected->rowcount();	
 if ($totalvideos > 0)
