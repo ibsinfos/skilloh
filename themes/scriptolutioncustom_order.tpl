@@ -9,14 +9,14 @@
 <div class="bodybg topspace">
 {include file="scriptolution_error7.tpl"}
 	<div class="container scriptolutionpaddingtop30">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
 			<div class="clear"></div>
 			<!-- {include file='scriptolution_newside.tpl'} --> 
          <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
             {include file='skilop_sellmenu.tpl'}            
          </div>
-			<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
+			<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 mobpad_00">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow mobpad_00">
                     <div id="scriptolutionPostForm"> 
                         
                             <h1 class="myshoppingheading">{$langcus1}</h1>

@@ -1,95 +1,59 @@
 {literal}
 <style>
-    .whiteBox h1 {
-        font-size: 35px !important;
-    }
-    
-    .whiteBox h4 {
-        float: left;
-        width: 100%;
-        font-size: 18px;
-        color: #424242;
-        margin-bottom: 15px;
-    }
-    
-    .launchfooter p {
-        font-family: 'latoregular';
-        font-size: 14px;
-        color: #A39E9E;
-        text-align: center;
-        padding-top: 24px;
-    }
-    
-    .launchfooter p a {
-        color: #38b0d9;
-    }
-    
-    .launchfooter p a:hover {
-        color: #666;
-    }
-    
     #scriptolutionForm label {
         color: #38b0d9 !important;
     }
 </style>
 {/literal} 
-<div class="bodybg topspace scriptolutionloginpage">
+<div class="bodybg topspace">
 {include file="scriptolution_error7.tpl"}
-    <div class="whitebody scriptolutionpaddingtop30 scriptolutionwidth482">
-        <div class="inner-wrapper scriptolutionwidth442">
-            <div class="left-side scriptolutionwidth442">
-                <div class="whiteBox twoHalfs padding15 scriptolutionwidth400">
-                    <h1>{$lang596}</h1>
-                    <h4>{$lang606}</h4>
-                    <div class="scriptolutionpaddingtop15"></div>
-                    <div id="scriptolutionForm">
-                        <form action="{$baseurl}index.php" method="post">
-                            <div class="form-entry">
-                                <label for="l_username">* {$lang607}</label>
-                                <input class="text" name="scriptolutionemail" size="16" tabindex="1" type="text" value="" placeholder="{$lang601}" />
-                            </div>
-                            <div class="row">
-                                <input type="submit" value="{$lang608}" class="scriptolutionbluebutton" />
-                                <input type="hidden" name="jscriptolution" id="jscriptolution" value="1" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <div class="clear"></div>
+
+<div class="container-fluid home-about-us">
+	<div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+            <h2 class="name">{$lang596}</h2>
+            <div class="bg-customize line-text"></div>
+			<div class="col-lg-10 col-lg-offset-1">
+				<p class="about_para">{$lang606}</p>
+			</div>
+			<div id="scriptolutionForm" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<form action="{$baseurl}index.php" method="post">
+					<div class="form-entry">
+						<label for="l_username" style="float:left;">* {$lang607}</label>
+						<input class="text" name="scriptolutionemail" size="16" tabindex="1" type="text" value="" placeholder="{$lang601}" />
+					</div>
+					<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+						<input type="submit" value="{$lang608}" class="scriptolutionbluebutton" />
+						<input type="hidden" name="jscriptolution" id="jscriptolution" value="1" />
+					</div>
+				</form>
+			</div>
         </div>
+		<div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+			<h2 class="name">{$lang609} {$lang40}</h2>
+			<div class="bg-customize line-text"></div>
+			<p class="about_para"></p>
+			<div id="scriptolutionForm">
+				<form action="{$baseurl}index.php" method="post">
+					<div class="form-entry">
+						<label for="l_username" style="float:left;">{$lang36}</label>
+						<input class="text" id="l_username" maxlength="16" name="l_username" size="16" tabindex="1" type="text" value="{$user_username}" />
+					</div>
+					<div class="form-entry">
+						<div class="form-label">
+							<label for="l_password" style="float:left;">{$lang37}</label>
+						</div>
+						<input class="text" id="l_password" name="l_password" size="30" tabindex="2" type="password" />
+					</div>
+					<div class="col-lg-12">
+						<input type="submit" value="{$lang2}" class="scriptolutionbluebutton" />
+						<input type="hidden" name="jlog" id="jlog" value="1" />
+					</div>
+				</form>
+			</div>
+			<div class="clear"></div>
+         </div>
     </div>
 </div>
 
-<div class="bodybg scriptolutionpaddingtop15 scriptolutionloginpage">
-    <div class="whitebody scriptolutionpaddingtop30 scriptolutionwidth482">
-        <div class="inner-wrapper scriptolutionwidth442">
-            <div class="left-side scriptolutionwidth442">
-                <div class="whiteBox twoHalfs padding15 scriptolutionwidth400">
-                    <h1>{$lang609} {$lang40}</h1>
-                    <div id="scriptolutionForm">
-                        <form action="{$baseurl}index.php" method="post">
-                            <div class="form-entry">
-                                <label for="l_username">{$lang36}</label>
-                                <input class="text" id="l_username" maxlength="16" name="l_username" size="16" tabindex="1" type="text" value="{$user_username}" />
-                            </div>
-                            <div class="form-entry">
-                                <div class="form-label">
-                                    <label for="l_password">{$lang37}</label>
-                                </div>
-                                <input class="text" id="l_password" name="l_password" size="30" tabindex="2" type="password" />
-                            </div>
-                            <div class="row">
-                                <input type="submit" value="{$lang2}" class="scriptolutionbluebutton" />
-                                <input type="hidden" name="jlog" id="jlog" value="1" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
 </div>

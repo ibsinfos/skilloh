@@ -157,6 +157,7 @@
 		                                            <li>{$lang84}</li>
 		                                            <li>{$lang85}</li>
 		                                            <li>{$lang86}</li>
+		                                            <li>Stamp your name or copyright notice as watermark for all photo uploads.</li>
 		                                        </ul>
 		                                    </div>
 		                                </div>
@@ -222,9 +223,9 @@
                     {include file='new_extras.tpl'}
                     <!-- {include file='new_ship.tpl'} -->
 
-                    <div class="row" align="center">
-                        <div class="form-entry scriptolutionpadding20" align="center">
-                            <input type="submit" value="{$lang46}" class="scriptolutionbluebutton" />
+                    <div class="container">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-entry scriptolutionpadding20 ">
+                            <input type="submit" value="{$lang46}" class="scriptolutionbluebutton pull-right" />
                             <input type="hidden" name="subform" value="1" />
                         </div>
                     </div>
@@ -245,9 +246,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         sQuery('#gig_description').trumbowyg({
-            fullscreenable: false,
+            fullscreenable: true,
             closable: false,
-            btns: ['bold', '|', 'italic', '|', 'foreColor', '|', 'backColor', '|', 'orderedList']
+            btns: [
+					['bold', '|', 'italic', '|', 'foreColor', '|', 'backColor'],				
+					['formatting'],
+					['subscript'],
+					['link'],
+					['insertImage'],
+					'btnGrp-justify',
+					'btnGrp-lists',
+					['horizontalRule'],
+					['removeformat'],
+					['fullscreen'],
+					['viewHTML']
+				]
         });
     });
 </script>

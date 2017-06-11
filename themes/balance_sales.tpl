@@ -36,13 +36,13 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
             <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_sellmenu.tpl'}
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 mobpad_00">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang155}</h1>
                     <h4 class="myshoppingheading2">{$lang206}</h4> 
@@ -359,8 +359,8 @@
                         </div>
                     </div>
                     <div class="sales_space20"></div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <ul class="row orderstat">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                        <ul class="row orderstat min_h_mob">
                             <li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <p class="cate">{$lang213}</p>
                                 <p class="currency">{if $scriptolution_cur_pos eq "1"}{$afunds}<sup>{$lang197}</sup>{else}<sup>{$lang197}</sup>{$afunds}{/if}</p>
@@ -378,8 +378,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <ul class="row orderstat">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                        <ul class="row orderstat min_h_mob">
                             <li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <p class="cate">{$lang217}</p>
                                 <p class="currency">{if $scriptolution_cur_pos eq "1"}{$upcoming}<sup>{$lang197}</sup>{else}<sup>{$lang197}</sup>{$upcoming}{/if}</p>
@@ -399,7 +399,7 @@
                     </div>
                     <div class="sales_space20"></div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 joinedsince">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 joinedsince mobpad_00">
                         <h5 class="sincejoined">{$lang207} 
 					{if $scriptolution_cur_pos eq "1"}
 					<strong>{$overall} <sup>{$lang197}</sup></strong>
@@ -409,7 +409,7 @@
                     </div>
                     <div class="sales_space20"></div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile mobpad_00">
                         <div class="list-job row">
                             <ul>
                                 {if $p|@count eq "0"}
@@ -422,7 +422,7 @@
                                 </li>
                             </ul>
                             {else}
-                            <div class="table-container">
+                            <div class="table-container table-responsive">
                                 <table class="table table-filter">
                                     <thead>
                                         <tr>

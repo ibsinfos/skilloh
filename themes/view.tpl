@@ -387,7 +387,7 @@
     <!-- Other similar products of the same seller starts-->
     {if $u|@count GT 0}
     <div class="container-fluid">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobpad_00">
             <div class="row">
                 <div class="container">
                     <h6 class="job_cat_name">{$lang137} <span> {if $smarty.session.USERID eq $p.USERID}  You {else} {$p.username|stripslashes} {/if}</span></h6>
@@ -408,7 +408,7 @@
                             {$count=1}
                             <div class="carousel-inner" role="listbox">
                                 <div class="item active">
-                                    <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobpad_00">
                                         {section name=i loop=$u} 
                                         {if $count le 4} {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
@@ -452,7 +452,7 @@
                                 </div>
                                 {$count=1}
                                 <div class="item">
-                                    <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobpad_00">
                                         {section name=i loop=$u} 
                                         {if $count gt 4} {insert name=seo_clean_titles assign=title value=a title=$r[i].gtitle}
                                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 wow fadeInUp minblock">
@@ -506,3 +506,8 @@
     </div>
 </div>
 </div>
+<style>
+.image-avatar.mobile_pad_5 img.avatar{
+	width:50px;
+}
+</style>

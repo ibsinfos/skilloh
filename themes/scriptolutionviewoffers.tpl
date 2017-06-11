@@ -17,7 +17,7 @@
 <div class="bodybg topspace">
 {include file="scriptolution_error7.tpl"}
 	<div class="container scriptolutionpaddingtop30">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
 			<div class="clear"></div>
 			<!-- {include file='scriptolution_newside.tpl'} --> 
 	         <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
@@ -52,13 +52,13 @@
 	            {/if}
 	         </div>
 			
-			<div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+			<div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 mobpad_00">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
 					<h1 class="myshoppingheading">{$lang641} ({$offers|@count} {if $offers|@count eq "1"}{$lang640}{else}{$lang631}{/if})</h1>
                     
                     <div class="clear"></div>
                     {section name=i loop=$scriptolutionz}
-	                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 myreqinfo rightsideborder">
+	                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 myreqinfo rightsideborder mobpad_00">
 	                    	<h2 class="myrequest_title">{if $role eq "buyer"}{$lang642}{else}Request{/if}</h2>
 	                    	<p class="myreqinfopp">
 	                        	{$scriptolutionz[i].scriptolutiondesc|stripslashes}
@@ -74,8 +74,8 @@
                     {/section}
                     <div class="clear"></div>
                                                 					
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 db-main-table myrequests ">
-                    	<div class="list-job row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 db-main-table myrequests mobpad_00">
+                    	<div class="list-job row p000">
                      <ul>
                         {if $offers|@count gt "0"}
                     	{section name=i loop=$offers}

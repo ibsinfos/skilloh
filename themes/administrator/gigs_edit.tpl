@@ -10,10 +10,22 @@
 <script type="text/javascript">                        
   sQuery(document).ready(function(){
 	sQuery('#gdesc').trumbowyg({
-		fullscreenable: false,
+		fullscreenable: true,
 		closable: false,
-		btns: ['bold', '|', 'italic', '|', 'foreColor', '|', 'backColor', '|', 'orderedList']
-	});
+		btns: [
+				['bold', '|', 'italic', '|', 'foreColor', '|', 'backColor'],				
+				['formatting'],
+				['subscript'],
+				['link'],
+				['insertImage'],
+				'btnGrp-justify',
+				'btnGrp-lists',
+				['horizontalRule'],
+				['removeformat'],
+				['fullscreen'],
+				['viewHTML']
+			]
+        });
   });
 </script>
 {/literal}

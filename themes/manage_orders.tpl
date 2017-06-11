@@ -20,37 +20,37 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
             <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_sellmenu.tpl'}
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 mobpad_00">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang154}</h1>
                     <h4 class="myshoppingheading2">{$lang199}</h4>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mob_top_s">
                         <ul class="row orderstat">
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <a href="{$baseurl}manage_orders?s=active&b={$b}&a={$a}">
                                     <p class="cate">{$lang200}</p>
                                     <p class="currency">{$countd}</p>
                                 </a>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6 mob_border">
                                 <a href="{$baseurl}manage_orders?s=delivered&b={$b}&a={$a}">
                                     <p class="cate">{$lang201}</p>
                                     <p class="currency available-text">{$countc}</p>
                                 </a>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <a href="{$baseurl}manage_orders?s=completed&b={$b}&a={$a}">
                                     <p class="cate">{$lang202}</p>
                                     <p class="currency freezable-text">{$countb}</p>
                                 </a>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6 mob_border">
                                 <a href="{$baseurl}manage_orders?s=cancelled&b={$b}&a={$a}">
                                     <p class="cate">{$lang203}</p>
                                     <p class="currency freezable-text">{$counta}</p>
@@ -58,15 +58,13 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile">
-                        <div class="list-job row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile mobpad_00">
+                        <div class="list-job row ">
                             <ul>
                                 {if $o|@count eq "0"}
-                                <li class="clearfix">
+                                <li class="clearfix no_service">
                                     <div class="info-items text-center nojobsavbl">
-                                        <h2 class="no_service_msg">
-                                 {$lang204}
-                              </h2>
+                                        <h2 class="no_service_msg ">{$lang204}</h2>
                                     </div>
                                 </li>
                                 {else} {section name=i loop=$o}

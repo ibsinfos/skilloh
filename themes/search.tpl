@@ -2,7 +2,7 @@
 	{include file="scriptolution_error7.tpl"}	
     <div class="search_hint col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0" >
 	    <div class="container">
-			<h3 class="search_name">{$lang124}: <span>{$tag|stripslashes}</span></h3>
+			<h3 class="search_name">Services found matching your query <strong>"{$tag|stripslashes}"</strong></h3>
 		</div>
 	</div>
 	
@@ -18,39 +18,39 @@
                 <div class="allmusic left_filter">
                     <h3 class="">{$lang66}</h3>
 						<div id="cat_side_filter">
-<div class="nav-side-menu">
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+							<div class="nav-side-menu">
+								<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
   
-        <div class="menu-list">
+								<div class="menu-list">
   
-            <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                    	<a href="{$baseurl}search?query={$tag}&search_in=scriptolution_all{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $c[i].name}<font color="#10a2ef">{$lang522}</font>{else}{$lang522}{/if}</a>
-                 </li> 
-                 {insert name=get_categories assign=scriptolutionc}
-                 {section name=i loop=$scriptolutionc}
-                 	{insert name=get_subcategories assign=subcat value=var parent=$scriptolutionc[i].CATID}
-                    {if $subcat|@count GT "0"}
-	                 	<li data-toggle="collapse" data-target="#{$scriptolutionc[i].CATID}" {if $cname eq $scriptolutionc[i].name} class="active" {else} class="collapsed" {/if}>
-	                        <a href="{$baseurl}search?query={$tag}&search_in=scriptolution_category&c={$scriptolutionc[i].CATID}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $scriptolutionc[i].name}<font color="#10a2ef">{$scriptolutionc[i].name|stripslashes}</font>{else}{$scriptolutionc[i].name|stripslashes}{/if}</a><span class="arrow"></span>
-	                    <ul class="sub-menu collapse {if $cname eq $scriptolutionc[i].name || $parentname eq $scriptolutionc[i].name}in{/if}" id="{$scriptolutionc[i].CATID}">
-                            {section name=sc loop=$subcat}
-                            <li>
-                            <a href="{$baseurl}search?query={$tag}&search_in=scriptolution_category&c={$subcat[sc].CATID}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $subcat[sc].name}<font color="#10a2ef">{$subcat[sc].name|stripslashes}</font>{else}{$subcat[sc].name|stripslashes}{/if}</a>
-                            </li>
-                            {/section}
-                         </ul>
-                         </li>
-                    {else}
-                    	 <li>
-                  			 <a href="{$baseurl}search?query={$tag}&search_in=scriptolution_category&c={$scriptolutionc[i].CATID}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $scriptolutionc[i].name}<font color="#689c2c">{$scriptolutionc[i].name|stripslashes}</font>{else}{$scriptolutionc[i].name|stripslashes}{/if}</a>
-	                   	 </li>
-                    {/if}
-                 {/section}
-            </ul>
-     </div>
-</div>
-</div>
+									<ul id="menu-content" class="menu-content collapse out">
+										<li>
+											<a href="{$baseurl}search?query={$tag}&search_in=scriptolution_all{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $c[i].name}<font color="#10a2ef">{$lang522}</font>{else}{$lang522}{/if}</a>
+										 </li> 
+										 {insert name=get_categories assign=scriptolutionc}
+										 {section name=i loop=$scriptolutionc}
+											{insert name=get_subcategories assign=subcat value=var parent=$scriptolutionc[i].CATID}
+											{if $subcat|@count GT "0"}
+												<li data-toggle="collapse" data-target="#{$scriptolutionc[i].CATID}" {if $cname eq $scriptolutionc[i].name} class="active" {else} class="collapsed" {/if}>
+													<a href="{$baseurl}search?query={$tag}&search_in=scriptolution_category&c={$scriptolutionc[i].CATID}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $scriptolutionc[i].name}<font color="#10a2ef">{$scriptolutionc[i].name|stripslashes}</font>{else}{$scriptolutionc[i].name|stripslashes}{/if}</a><span class="arrow"></span>
+												<ul class="sub-menu collapse {if $cname eq $scriptolutionc[i].name || $parentname eq $scriptolutionc[i].name}in{/if}" id="{$scriptolutionc[i].CATID}">
+													{section name=sc loop=$subcat}
+													<li>
+													<a href="{$baseurl}search?query={$tag}&search_in=scriptolution_category&c={$subcat[sc].CATID}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $subcat[sc].name}<font color="#10a2ef">{$subcat[sc].name|stripslashes}</font>{else}{$subcat[sc].name|stripslashes}{/if}</a>
+													</li>
+													{/section}
+												 </ul>
+											</li>
+										{else}
+									<li>
+										<a href="{$baseurl}search?query={$tag}&search_in=scriptolution_category&c={$scriptolutionc[i].CATID}{$adds}{if $sdisplay eq "list"}&sdisplay=list{/if}&sdeliverytime={$sdeliverytime}&stoprated={$stoprated}{$scriptolutionlocstring}">{if $cname eq $scriptolutionc[i].name}<font color="#689c2c">{$scriptolutionc[i].name|stripslashes}</font>{else}{$scriptolutionc[i].name|stripslashes}{/if}</a>
+									</li>
+								{/if}
+							 {/section}
+						</ul>
+				 </div>
+			</div>
+		</div>
                 </div>                
                 
                 <div class="border"></div>

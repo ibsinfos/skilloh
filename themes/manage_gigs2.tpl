@@ -31,14 +31,14 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
             <div class="col-lg-4 col-md-4 col-sm-0 col-xs-0 aside-detail-bar hide_tab_mob">
                 {include file='skilop_sellmenu.tpl'}
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 mobpad_00">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow mobpad_00">
                     <h1 class="myshoppingheading">{$lang153}</h1>
                     <!--<h4 class="myshoppingheading2" style="visibility:hidden;">{$lang153}</h4>-->
 
@@ -54,7 +54,7 @@
 		                            </h3>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right p20t">
                                 <h3 class="pull-right select_action_myjob">
 		                            <a class="btn-suspend suspend_button" href="#"><span>{$lang183}</span></a>
                             <a class="btn-activate activate_button" href="#"><span>{$lang184}</span></a>

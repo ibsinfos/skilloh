@@ -225,9 +225,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         sQuery('#gig_description').trumbowyg({
-            fullscreenable: false,
+            fullscreenable: true,
             closable: false,
-            btns: ['bold', '|', 'italic', '|', 'foreColor', '|', 'backColor', '|', 'orderedList']
+            btns: [
+					['bold', '|', 'italic', '|', 'foreColor', '|', 'backColor'],				
+					['formatting'],
+					['subscript'],
+					['link'],
+					['insertImage'],
+					'btnGrp-justify',
+					'btnGrp-lists',
+					['horizontalRule'],
+					['removeformat'],
+					['fullscreen'],
+					['viewHTML']
+				]
         });
     });
 </script>

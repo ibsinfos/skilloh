@@ -8,8 +8,7 @@
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
         text-decoration: none;
-    }
-    
+    }    
     .status.delivered {
         background: #35b982;
     }
@@ -17,31 +16,29 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
             <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_sellmenu.tpl'}
             </div>
-            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 mobpad_00">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang461}</h1>
                     <h4 class="myshoppingheading2" style="visibility:hidden;">{$lang462}</h4>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile mobpad_00">
 
                         <div class="list-job row">
                             <ul>
                                 {if $o|@count eq "0"}
-                                <li class="clearfix">
+                                <li class="clearfix no_service">
                                     <div class="info-items text-center nojobsavbl">
-                                        <h2 class="no_service_msg">
-                                 {$lang210} <a href="{$baseurl}">{$lang211}</a>
-                              </h2>
+                                        <h2 class="no_service_msg">{$lang210} <a href="{$baseurl}">{$lang211}</a></h2>
                                     </div>
                                 </li>
                                 {else} {section name=i loop=$o} {insert name=get_gtitle value=a assign=gtitle oid=$o[i].OID}
-                                <li class="clearfix">
+                                <li class="clearfix ">
 
                                     <div class="image-avatar col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                         <a href="{$baseurl}{$o[i].seo|stripslashes}/{$o[i].PID|stripslashes}/{$o[i].gtitle}">

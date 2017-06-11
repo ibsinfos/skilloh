@@ -32,21 +32,6 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	
 	if($PID > 0)
 	{
-		if($multi > 1)
-		{
-			$query = "select OID from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' order by OID desc limit $multi"; 
-			$results = $conn->execute($query);
-			$returnthis = $results->getrows();
-			STemplate::assign('OID',$returnthis);
-			$templateselect = "thank_you_multi.tpl";
-			
-			if($returnthis > "0")
-			{
-				include("thank_you_customorder.php");
-			}
-		}
-		else
-		{
 			$query = "select OID from orders where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."' AND USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' order by OID desc limit 1"; 
 			$executequery=$conn->execute($query);
 			$OID = $executequery->fields['OID'];
@@ -57,7 +42,6 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 			{
 				include("thank_you_customorder.php");
 			}
-		}
 	}
 	else
 	{

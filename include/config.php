@@ -24,7 +24,7 @@ $default_language = "english"; //Valid choices are english, spanish,  french, po
 // End Configuration
 
 session_start();
-date_default_timezone_set('America/New_York');
+date_default_timezone_set('Asia/Calcutta');
 
 $config['adminurl']      =  $config['baseurl'].'/administrator';
 $config['cssurl']      =  $config['baseurl'].'/css';

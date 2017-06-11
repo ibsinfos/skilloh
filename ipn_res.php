@@ -103,20 +103,15 @@ switch( $paypal_ipn->get_payment_status() )
 					{
 						if($multi > 1)
 						{
-							$query = "select price from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
-							$executequery=$conn->execute($query);
-							$eachprice = $executequery->fields['price'];
-							for ($i=1; $i<=$multi; $i++)
-							{
-								$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_id)."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $item_number)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."'"; 
+							$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_id)."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $item_number)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $totalprice)."'"; 
 								$executequery=$conn->execute($query);
 								$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 								if($order_id > 0)
 								{
-									$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_id)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."', t='1', PAYPAL='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $transid)."'"; 
+									$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $user_id)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $totalprice)."', t='1', PAYPAL='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $transid)."'"; 
 									$executequery=$conn->execute($query);
 									
-									$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
+									$query = "UPDATE posts SET rev=rev+$totalprice WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $PID)."'"; 
 									$executequery=$conn->execute($query);
 									
 									scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $user_id, $order_id);
@@ -133,7 +128,6 @@ switch( $paypal_ipn->get_payment_status() )
 									}
 									//
 								}
-							}
 						}
 						else
 						{

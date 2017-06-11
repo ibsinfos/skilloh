@@ -298,7 +298,13 @@ else
 	STemplate::assign('scriptolutionhome',"1");
 	STemplate::assign('pagetitle',stripslashes($config['site_slogan']));
 	STemplate::assign('posts',$posts);
-	STemplate::display('scriptolution_header.tpl');
+	if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSION['USERID']))
+	{
+		STemplate::display('scriptolution_header.tpl');
+	}
+	else{
+		STemplate::display('scriptolution_header-homepage.tpl');
+	}
 	STemplate::display($templateselect);
 	STemplate::display('scriptolution_footer.tpl');
 	//TEMPLATES END

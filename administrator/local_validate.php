@@ -37,19 +37,14 @@ if($_POST['asub']=="1")
 		$catseo = $p[0]['seo'];
 		if($multi > 1)
 		{
-			$query = "select price from posts where PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
-			$executequery=$conn->execute($query);
-			$eachprice = $executequery->fields['price'];
-			for ($i=1; $i<=$multi; $i++)
-			{
-				$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BUSERID)."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BIID)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."'"; 
+			$query = "INSERT INTO orders SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BUSERID)."', PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BIID)."', time_added='".time()."', status='0', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."'"; 
 				$executequery=$conn->execute($query);
 				$order_id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 				if($order_id > 0)
 				{
-					$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BUSERID)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BIID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $eachprice)."', t='1', fiverrscriptdotcom_local='1'"; 
+					$query = "INSERT INTO payments SET USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BUSERID)."', OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $order_id)."', IID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BIID)."', time='".time()."', price='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $price)."', t='1', fiverrscriptdotcom_local='1'"; 
 					$executequery=$conn->execute($query);
-					$query = "UPDATE posts SET rev=rev+$eachprice WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
+					$query = "UPDATE posts SET rev=rev+$price WHERE PID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $id)."'"; 
 					$executequery=$conn->execute($query);
 					if($iurl != "" || $ifile > 0)//
 					{
@@ -60,7 +55,6 @@ if($_POST['asub']=="1")
 						scriptolution_dotcom_fiverrscript_dotcom("scriptolution_buyer_requirements", $BUSERID, $order_id);	
 					}					
 				}
-			}
 			
 			$cquery="UPDATE scriptolution_local SET processed='1' WHERE BID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $BID)."'";
 			$conn->execute($cquery);

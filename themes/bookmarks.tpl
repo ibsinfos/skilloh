@@ -17,9 +17,9 @@
 <div class="bodybg topspace scriptolutionbookmarks">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobpad_00">
                 <h1 class="bookmark_title">{$lang30}</h1>
                 <div class="songslist">
                     <div class="cusongslist">

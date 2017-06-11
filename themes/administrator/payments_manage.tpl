@@ -111,6 +111,8 @@
                                             	Local Bank Payment
                                             {elseif $results[i].fiverrscriptdotcom_available eq "1"}
                                             	Available Balance
+                                            	{elseif $results[i].payu eq "1"}
+                                            	Payu Payment
                                             {else}
                                                 {if $results[i].PAYPAL GT "0"}
                                                 {insert name=get_trans_id value=a assign=pa id=$results[i].PAYPAL}

@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="https://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
+<!DOCTYPE html >
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />    
@@ -46,6 +46,7 @@
     
 </head>
 <body>
+
 <div id="loadme"></div>
 {if $enable_fc eq "1"}
 <div id="fb-root"></div>
@@ -190,55 +191,6 @@ $(""+elementSelector+"").load(""+sourceURL+"");
     </div>
     {include file='fiverrscript_dotcom_notifications.tpl'}
 </div>
-<!-- sign in and signup for mobile devices starts -->
-<!--<div class="nav-scriptolution" id="scriptolutionmobilenav" style="display:none">
-	<div class="scriptolution-dotcom-mobile-dropdown" id="dropdown-menu">
-    	<div class="scriptolutionclose-nav" onclick="scriptolution_newtoggle('scriptolutionmobilenav');">×</div>
-        <div class="searchforscriptolutionmobleonly">
-        	<form action="{$baseurl}search" method="get">
-            <input name="query" type="text" class="textbox scriptolutiontextbox18 scriptolutionwidth80"/>
-            <input type="submit" value="{$lang504}" class="ascriptolutiongreenbutton" style="border: 0px;" />
-            </form>
-            <hr>
-        </div>
-        {if $smarty.session.USERID ne ""}
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}inbox">{$lang28} <span>{$msgc}</span></a>
-        <hr>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}notifications">{$lang544}{if $snctr GT "0"} <span>{$snctr}</span>{/if}</a>
-        <hr>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}balance">{$lang158}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}newrequest">{$lang621}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}myrequests">{$lang629}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}orders">{$lang157}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}balance">{$lang159}</a>
-        {include file='scriptolution_co_bit2_responsive.tpl'}
-        <hr>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}manage_gigs">{$lang156}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}new">{$lang55}</a></li>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}manage_gigs">{$lang153}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}purchases">{$lang461}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}customorder">{$langcus5}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}mycustomorders">{$langcus4}</a> 
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}manage_orders">{$lang154}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}balance?tab=sales">{$lang155}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}requests">{$lang632}</a>
-        
-        <hr>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}">{$lang29}</a>
-        {if $enable_ref eq "1"}<a class="scriptolutionfiverrscriptitem" href="{$baseurl}myreferrals">{$lang512}</a>{/if}
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}bookmarks">{$lang30}</a>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}settings">{$lang31}</a>
-        <a class="scriptolutionfiverrscriptitem" href="javascript:loadContent('#loadme', '{$baseurl}log_out');">{$lang27}</a>
-        {else}
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}">{$lang0}</a>
-        <hr>
-        <a class="scriptolutionfiverrscriptitem" href="{$baseurl}login">{$lang2}</a>
-        <hr>
-        <a class="scriptolutionfiverrscriptitem join" href="{$baseurl}signup">{$lang1}</a>
-        {/if}
-	</div>
-</div>-->
-<!-- sign in and signup for mobile devices ends -->
 {if $scriptolutionhome eq "1"}
 {if $smarty.session.USERID eq ""}
 <div class="banner">
@@ -384,41 +336,42 @@ $(""+elementSelector+"").load(""+sourceURL+"");
 	                </li>
 	                <!-- inbox and notification for tab ends -->
 	                
-	                <!-- for mobile starts -->
+	                <!-- inbox and notification for mobile starts -->
 	                <li class="visible-xs-block">
 	                	<a href="{$baseurl}inbox">{$lang28} <span class="alert_count">{$msgc}</span></a>
 	                </li>                
 	                <li class="visible-xs-block">
 	                	<a href="{$baseurl}notifications">{$lang544}{if $snctr GT "0"} <span class="alert_count">{$snctr}</span>{/if}</a>
 	                </li>
-	                <!-- for mobile ends -->
-                {/if}
+	                <!-- inbox and notification for mobile ends -->
                 
-               	<li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{$lang156} <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li> <a href="{$baseurl}new">{$lang55}</a></li>
-                    <li><a href="{$baseurl}manage_gigs">{$lang153}</a></li>
-                    <li><a href="{$baseurl}purchases">{$lang461}</a></li>
-                    <li><a href="{$baseurl}customorder">{$langcus5}</a></li>
-                    <li><a href="{$baseurl}mycustomorders">{$langcus4}</a></li>                    
-                    <li><a href="{$baseurl}manage_orders">{$lang154}</a></li>                    
-                    <li><a href="{$baseurl}balance?tab=sales">{$lang155}</a> </li>                    
-                    <li class="last_submenu"><a href="{$baseurl}requests">{$lang632}</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{$lang158} <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{$baseurl}newrequest">{$lang621}</a></li>
-                	<li><a href="{$baseurl}myrequests">{$lang629}</a></li>
-                	<li><a href="{$baseurl}orders">{$lang157}</a></li>
-                    <li class="last_submenu"><a href="{$baseurl}balance">{$lang653}</a></li>                    
-                  </ul>
-                </li>
+                	<!-- Seller starts -->
+	               	<li class="dropdown">
+	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{$lang156} <span class="caret"></span></a>
+	                  <ul class="dropdown-menu" role="menu">
+	                    <li> <a href="{$baseurl}new">{$lang55}</a></li>
+	                    <li><a href="{$baseurl}manage_gigs">{$lang153}</a></li>
+	                    <li><a href="{$baseurl}purchases">{$lang461}</a></li>
+	                    <li><a href="{$baseurl}customorder">{$langcus5}</a></li>
+	                    <li><a href="{$baseurl}mycustomorders">{$langcus4}</a></li>                    
+	                    <li><a href="{$baseurl}manage_orders">{$lang154}</a></li>                    
+	                    <li><a href="{$baseurl}balance?tab=sales">{$lang155}</a> </li>                    
+	                    <li class="last_submenu"><a href="{$baseurl}requests">{$lang632}</a></li>
+	                  </ul>
+	                </li>
+	                <!-- Seller ends -->
+	                <!-- buyer starts -->
+	                <li class="dropdown">
+	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">{$lang158} <span class="caret"></span></a>
+	                  <ul class="dropdown-menu" role="menu">
+	                    <li><a href="{$baseurl}newrequest">{$lang621}</a></li>
+	                	<li><a href="{$baseurl}myrequests">{$lang629}</a></li>
+	                	<li><a href="{$baseurl}orders">{$lang157}</a></li>
+	                    <li class="last_submenu"><a href="{$baseurl}balance">{$lang653}</a></li>                    
+	                  </ul>
+	                </li>
+                	<!-- buyer ends -->
                 
-                
-                {if $smarty.session.USERID ne ""}
 	                <!-- profile for tab starts -->   
 	                <li class="visible-sm-block">
 	                	<a href="{$baseurl}{insert name=get_seo_profile value=a username=$smarty.session.USERNAME|stripslashes}">{$lang29}</a>

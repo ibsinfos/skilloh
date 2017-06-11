@@ -22,38 +22,38 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
             <div class="col-lg-4 col-md-4 col-sm-0 col-xs-12 aside-detail-bar hide_tab_mob">
                 {include file='skilop_buymenu.tpl'}
             </div>
 
-            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 mobpad_00">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading">{$lang157} </h1>
                     <h4 class="myshoppingheading2">{$lang223}</h4>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mob_top_s">
                         <ul class="row orderstat">
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <a href="{$baseurl}orders?s=active&b={$b}&a={$a}">
                                     <p class="cate">{$lang190}</p>
                                     <p class="currency">{$countd}</p>
                                 </a>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6 mob_border">
                                 <a href="{$baseurl}orders?s=review&b={$b}&a={$a}">
                                     <p class="cate">{$lang224}</p>
                                     <p class="currency available-text">{$countc}</p>
                                 </a>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <a href="{$baseurl}orders?s=completed&b={$b}&a={$a}">
                                     <p class="cate">{$lang202}</p>
                                     <p class="currency freezable-text">{$countb}</p>
                                 </a>
                             </li>
-                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <li class="col-lg-3 col-md-3 col-sm-3 col-xs-6 mob_border">
                                 <a href="{$baseurl}orders?s=cancelled&b={$b}&a={$a}">
                                     <p class="cate">{$lang203}</p>
                                     <p class="currency freezable-text">{$counta}</p>
@@ -61,11 +61,11 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 seller_morders user_profile user-public-profile mobpad_00">
                         <div class="list-job row">
                             <ul>
                                 {if $o|@count eq "0"}
-                                <li class="clearfix">
+                                <li class="clearfix no_service">
                                     <div class="info-items text-center nojobsavbl">
                                         <h2>
                                  {$lang225}

@@ -7,12 +7,12 @@
         {include file='scriptolution_po.tpl'}
         <div class="bottomlink">
             <ul>
-                <li><a href="{$baseurl}terms_of_service">{$lang253}</a></li>
+                <li><a href="{$baseurl}terms_of_service">here {$lang253}</a></li>
                 <li><a href="{$baseurl}privacy_policy">{$lang415}</a></li>
                 <li><a href="{$baseurl}contact">{$lang417}</a></li>
             </ul>
             <ul>
-                <li><a href="{$baseurl}about">{$lang416}</a></li>
+                <li><a href="{$baseurl}about">{$lang416} here</a></li>
                 <li><a href="{$baseurl}advertising">{$lang418}</a></li>
                 {if $enable_levels eq "1" AND $price_mode eq "3"}
                 <li><a href="{$baseurl}levels">{$lang500}</a></li>{/if}

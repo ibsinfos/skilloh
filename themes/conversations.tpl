@@ -31,13 +31,13 @@
 <div class="bodybg topspace">
     {include file="scriptolution_error7.tpl"}
     <div class="container scriptolutionpaddingtop30">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin30 mobpad_00">
             <div class="clear"></div>
             <!-- {include file='scriptolution_newside.tpl'} -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 aside-detail-bar mobpad_00">
                 {include file='skilop_inbox_menu.tpl'}
             </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">            
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 mobpad_08">            
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     {if $m|@count GT "0"}
                     	<h1 class="myshoppingheading">Recent {$lang235} <a href="{$baseurl}{insert name=get_seo_profile value=a username=$u.username|stripslashes}">{$u.username|stripslashes}</a>
@@ -60,7 +60,7 @@
                       {/if}
 					<h4 class="myshoppingheading2" style="visibility:hidden;">{$lang153}</h4>
                 	
-                    <div id="msgresults" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                   	
+                    <div id="msgresults" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mobpad_00">                   	
 
 				        <div id="message_{$m[i].MID}" class="panel panel-default widget detail_msg_height">
 				            {insert name=last_delivery value=a assign=lasdel oid=$o.OID}

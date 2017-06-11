@@ -3,9 +3,9 @@
 {section name=x loop=$fd}
 {insert name=gfs value=a assign=afs fid=$fd[x].FID}
 <div class="padding5"></div>
-<div class="files">
+<div class="files fspace">
   <ul>
-    <li><a href="{$baseurl}files/{$fd[x].FID|md5}{$fd[x].s}/{$fd[x].fname}" target="_blank">{$fd[x].fname} <b>[{$afs}]</b></a></li>
+    <li><a href="{$baseurl}files/{$fd[x].FID|md5}{$fd[x].s}/{$fd[x].fname}" target="_blank"><i class="fa fa-download download_attach_file"></i> {$fd[x].fname}  <b>[{$afs}]</b></a></li>
   </ul>
 </div>
 {/section}

@@ -53,38 +53,77 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxshadow">
                     <h1 class="myshoppingheading p-15">Track Order placed by buyer</h1>
                     
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="invoice-title">
-							<h2>Invoice</h2><h3 class="pull-right">{$lang140} #{$o.OID}</h3>
-						</div>
-						<hr>
-						<!-- order by detail starts-->
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<address>
-								<strong>{$lang264}:</strong><br>
-									<a href="{$baseurl}{insert name=get_seo_profile value=a username=$o.buyer|stripslashes}">{$o.buyer|stripslashes}</a>
-								</address>
-							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
-								<address>
-									<strong>Order Date:</strong><br>
-									{$o.time_added|date_format:"%B %e %Y"}<br>
-									{$o.time_added|date_format:"%A, %I:%M %p"}<br><br>
-								</address>
-							</div>
-						</div>
-					</div>
-					<!-- order by detail ends-->
-					
 					<!-- invoice details starts  -->
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><strong>Order summary</strong></h3>
+								<h3 class="panel-title"><strong>Order summary</strong> <span class="pull-right">{$lang140} #{$o.OID}</span></h3>
 							</div>
-							<div class="panel-body">
-								<div class="table-responsive">
+							<div class="panel-body">								
+								<!-- product detail starts -->
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 track_space">
+									{if $scriptolutioncustomorder ne "1"}
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 colorder-image">
+										<img class="img-responsive center_img" src="{$purl}/t2/{$o.p1}?{$smarty.now}" />
+									</div>
+									{/if}
+									<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+										{if $scriptolutioncustomorder eq "1"}
+										<h1 class="order_track_info">
+											<!--<a href="{$baseurl}{insert name=get_seo_profile value=a username=$o.username|stripslashes}">
+												{$o.username|stripslashes}
+											</a> 
+											{$lang262}  -->
+											{insert name=seo_clean_titles assign=title value=a title=$o.gtitle}
+											{$o.gtitle|stripslashes} 
+											 <!--{if $scriptolution_cur_pos eq "1"}
+												{$lang589} 
+												{$o.price|stripslashes}
+												{$lang197}
+											{else}
+												{$lang63}
+												{$o.price|stripslashes}
+											{/if} -->
+										</h1> {else}
+										<h1 class="order_track_info">
+											<!--<a href="{$baseurl}{insert name=get_seo_profile value=a username=$o.username|stripslashes}">
+												{$o.username|stripslashes}
+											</a> 
+												{$lang262} -->
+											{insert name=seo_clean_titles assign=title value=a title=$o.gtitle}
+											<a href="{$baseurl}{$o.seo|stripslashes}/{$o.PID|stripslashes}/{$title}">
+												{$o.gtitle|stripslashes}
+											</a> 
+											<!--{if $scriptolution_cur_pos eq "1"}
+												{$lang589} 
+												{$o.price|stripslashes}
+												{$lang197}
+											{else}
+												{$lang63}
+												{$o.price|stripslashes}
+											{/if}-->
+											</h1> {/if}
+										<div style="clear:both; padding-bottom:5px;"></div>
+										<h4 class="btn_track">
+											<a class="sendascriptolutionoffer" href="{$baseurl}{insert name=get_seo_convo value=a assign=cvseo username=$o.username|stripslashes}">
+												{$lang235} {$o.username|stripslashes}
+											</a>	                    	
+										</h4>
+									</div>
+								</div>
+								<!-- product detail ends-->
+								
+								<!-- order by detail starts-->
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 track_space">
+									<div class="text-center whiteBox inside">
+										{$lang263}
+										<a href="{$baseurl}{insert name=get_seo_profile value=a username=$o.buyer|stripslashes}">{$o.buyer|stripslashes}</a>
+										on {$o.time_added|date_format:"%A, %B %e %Y"} {$lang265} {$o.time_added|date_format:"%I:%M %p"}
+									</div>
+								</div>
+								<!-- order by detail ends-->
+					
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
 									<table class="table table-condensed">
 										<thead>
 											<tr>
@@ -128,53 +167,6 @@
 						</div>
 					</div>
 					<!-- invoice details ends  -->
-					
-					<!-- product detail starts-->
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 track_space">
-                        {if $scriptolutioncustomorder ne "1"}
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 colorder-image">
-                            <img class="img-responsive center_img" src="{$purl}/t2/{$o.p1}?{$smarty.now}" />
-                        </div>
-                        {/if}
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                            {if $scriptolutioncustomorder eq "1"}
-                            <h1 class="order_track_info">
-	                    		{$lang62} 
-	                    		{insert name=seo_clean_titles assign=title value=a title=$o.gtitle}
-	                    		{$o.gtitle|stripslashes} 
-	                    			{if $scriptolution_cur_pos eq "1"}
-		                    			{$lang589} 
-		                    			{$o.price|stripslashes}
-		                    			{$lang197}
-		                    		{else}
-		                    			{$lang63}
-		                    			{$o.price|stripslashes}
-		                    		{/if}
-	                    	</h1> {else}
-                            <h1 class="order_track_info">
-								{$lang62} 
-								{insert name=seo_clean_titles assign=title value=a title=$o.gtitle}
-								<a href="{$baseurl}{$o.seo|stripslashes}/{$o.PID|stripslashes}/{$title}">
-								{$o.gtitle|stripslashes}</a> 
-									{if $scriptolution_cur_pos eq "1"}
-										{$lang589} 
-										{$o.price|stripslashes}
-										{$lang197}
-									{else}
-										{$lang63}
-										{$o.price|stripslashes}
-									{/if}
-							</h1> {/if}
-                            <div style="clear:both; padding-bottom:5px;"></div>
-                            <h4 class="btn_track">
-                    	<a class="sendascriptolutionoffer" href="{$baseurl}{insert name=get_seo_convo value=a assign=cvseo username=$o.buyer|stripslashes}">
-                    		{$lang235} {$o.buyer|stripslashes}
-                    	</a>
-                    </h4>
-                        </div>
-                    </div>
-					<!-- product detail ends-->
-					
 					
 					
 					<!-- service created detail starts-->

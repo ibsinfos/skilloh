@@ -37,7 +37,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 		}
 		else
 		{
-			$query="SELECT A.*, O.multi, O.totalprice,B.gtitle, B.p1, B.price as price, B.price2, B.price3, B.USERID AS owner, B.days, B.ginst, C.username, D.seo, E.username as buyer, F.username as ownerName FROM orders A, order_items O, posts B, members C, categories D, members E, members F WHERE A.IID = O.IID AND C.USERID=B.USERID AND B.category=D.CATID AND E.USERID=A.USERID AND F.USERID=B.USERID AND A.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND B.PID=A.PID limit 1";
+			$query="SELECT A.*, O.multi, O.totalprice,B.gtitle, B.p1, B.price, B.price2, B.price3, B.USERID AS owner, B.days, B.ginst, C.username, D.seo, E.username as buyer, F.username as ownerName FROM orders A, order_items O, posts B, members C, categories D, members E, members F WHERE A.IID = O.IID AND C.USERID=B.USERID AND B.category=D.CATID AND E.USERID=A.USERID AND F.USERID=B.USERID AND A.OID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $OID)."' AND B.PID=A.PID limit 1";
 		}
 		
 		

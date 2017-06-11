@@ -87,7 +87,7 @@ if ($_SESSION['USERID'] != "" && $_SESSION['USERID'] >= 0 && is_numeric($_SESSIO
 	$used = $executequery->fields['used'];
 	STemplate::assign('used',$used);
 	
-	$query="SELECT A.OID, A.time, A.price, A.t, A.cancel, A.wd, B.status, B.cltime, B.IID, C.p1, C.ctp, (SELECT O.IID FROM order_items O WHERE O.PID=C.PID AND O.USERID=B.USERID AND O.totalprice=B.price order by O.IID DESC LIMIT 1) FROM payments A, orders B, posts C WHERE A.OID=B.OID AND B.PID=C.PID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.t='1' AND B.status>'0' order by A.ID desc";
+	$query="SELECT A.OID, A.time, A.price, A.t, A.cancel, A.wd, B.status, B.cltime, B.IID, C.p1, C.ctp, B.IID FROM payments A, orders B, posts C WHERE A.OID=B.OID AND B.PID=C.PID AND C.USERID='".mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_SESSION['USERID'])."' AND A.t='1' AND B.status>'0' order by A.ID desc";
 	$results=$conn->execute($query);
 	$p = $results->getrows();
 	STemplate::assign('p',$p);
